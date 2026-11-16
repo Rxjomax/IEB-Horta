@@ -34,7 +34,7 @@ export function AboutSection() {
                   )}
                 </div>
                 <figcaption className="mt-2.5 text-xs leading-snug text-[#46585E] sm:text-sm">
-                  Nossa família reunida na Horta.
+                  A nossa família reunida na Horta.
                 </figcaption>
               </figure>
 
@@ -65,7 +65,7 @@ export function AboutSection() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-                  Nossa Essência
+                  A Nossa Essência
                 </p>
                 <h2
                   id="essencia-heading"
@@ -91,8 +91,8 @@ export function AboutSection() {
               </p>
               <p className="max-w-[60ch]">
                 Cremos que a fé cristã se expressa tanto na reverência da
-                adoração dominical quanto no cuidado prático durante a semana —
-                apoiando famílias, formando discípulos e servindo a nossa
+                adoração dominical como no cuidado prático durante a semana —
+                a apoiar famílias, a formar discípulos e a servir a nossa
                 comunidade com generosidade.
               </p>
             </div>
@@ -100,8 +100,8 @@ export function AboutSection() {
             {/* Citação Editorial dos 51 Anos (divisórias 1px, sem barra lateral) */}
             <blockquote className="mt-6 border-y border-[#DDD7CE] py-4">
               <p className="font-display text-base font-medium leading-relaxed text-[#172226] sm:text-lg">
-                “Mas Deus prova o seu amor para conosco, em que Cristo morreu por
-                nós, sendo nós ainda pecadores.”
+                “Mas Deus prova o seu amor para connosco, em que Cristo morreu
+                por nós, sendo nós ainda pecadores.”
               </p>
               <footer className="mt-1.5 text-xs font-medium tracking-wide text-[#46585E]">
                 Romanos 5:8 · Lema dos 51 Anos · {CHURCH_INFO.pastor}
@@ -114,7 +114,7 @@ export function AboutSection() {
         <Reveal delayMs={120} className="mt-14 lg:mt-16">
           <div className="mb-4 flex items-center justify-between md:hidden">
             <span className="text-xs font-semibold tracking-wide text-[#46585E]">
-              Nossos Pilares
+              Os Nossos Pilares
             </span>
             <span className="text-xs text-[#46585E]">
               Deslize para o lado →

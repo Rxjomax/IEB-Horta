@@ -3,10 +3,10 @@ import { CHURCH_INFO } from '../data/churchConfig';
 
 const FOOTER_LINKS = [
   { label: 'Horários de Cultos', href: '#horarios' },
-  { label: 'Nossa Essência', href: '#essencia' },
+  { label: 'A Nossa Essência', href: '#essencia' },
   { label: 'Ministérios', href: '#ministerios' },
   { label: 'Comunidade @iebhorta', href: '#comunidade' },
-  { label: 'Planeje sua Visita', href: '#visita' },
+  { label: 'Planeie a sua Visita', href: '#visita' },
 ];
 
 export function Footer() {
@@ -33,9 +33,8 @@ export function Footer() {
               />
             </a>
             <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-[#46585E] sm:text-base">
-              Há 51 anos na Ilha do Faial, uma comunidade cristã comprometida em
-              amar a Deus, servir pessoas e anunciar o Evangelho com
-              simplicidade.
+              Há 51 anos na Ilha do Faial, uma comunidade cristã dedicada a amar
+              a Deus, servir as pessoas e anunciar o Evangelho com simplicidade.
             </p>
             <div className="mt-4 space-y-1 text-sm">
               <p className="font-medium text-[#195963]">
@@ -76,7 +75,7 @@ export function Footer() {
           {/* Canais Oficiais */}
           <div className="md:col-span-3">
             <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
-              Acompanhe e Fale Conosco
+              Siga e Fale Connosco
             </h2>
             <div className="mt-4 flex flex-col gap-2.5">
               <a

@@ -67,7 +67,7 @@ function formatIcsLocalDate(date: Date): string {
 }
 
 /**
- * Gera e baixa um arquivo .ics válido para o próximo Culto de Celebração dominical.
+ * Gera e descarrega um ficheiro .ics válido para o próximo Culto de Celebração dominical.
  */
 export function downloadSundayWorshipIcs(): void {
   const info = getNextSundayInfo();

@@ -2,7 +2,7 @@ import { Calendar, MapPin, MessageCircle } from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
 
 /**
- * Barra de ação rápida fixa apenas para telas mobile (altura 48px),
+ * Barra de ação rápida fixa apenas para ecrãs móveis (altura 48px),
  * oferecendo acesso imediato com o polegar para Rotas, Horários e WhatsApp.
  */
 export function MobileQuickBar() {
@@ -12,7 +12,7 @@ export function MobileQuickBar() {
 
   return (
     <div
-      aria-label="Ações rápidas de navegação e contato"
+      aria-label="Ações rápidas de navegação e contacto"
       className="fixed bottom-0 left-0 right-0 z-30 border-t border-[#DDD7CE] bg-[#FAF8F4]/95 backdrop-blur-md md:hidden"
     >
       <div className="grid h-12 grid-cols-3 divide-x divide-[#DDD7CE]">

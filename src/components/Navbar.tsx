@@ -197,7 +197,7 @@ export function Navbar() {
         </div>
 
         <div className="flex flex-1 flex-col justify-between overflow-y-auto px-5 py-6">
-          <nav aria-label="Menu mobile" className="flex flex-col divide-y divide-[#DDD7CE]">
+          <nav aria-label="Menu telemóvel" className="flex flex-col divide-y divide-[#DDD7CE]">
             {NAV_LINKS.map((link, index) => (
               <a
                 key={link.href}
@@ -236,7 +236,7 @@ export function Navbar() {
                 onClick={handleNavClick}
                 className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-[#803320]"
               >
-                Planeje sua Primeira Visita
+                Planeie a sua Primeira Visita
               </a>
               <div className="grid grid-cols-2 gap-3">
                 <a

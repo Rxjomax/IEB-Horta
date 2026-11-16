@@ -63,9 +63,9 @@ export function ScheduleSection() {
                 Horários para nos reunirmos em família
               </h2>
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-[#46585E]">
-                Aos domingos nos reunimos para estudar as Escrituras na Escola
-                Bíblica Dominical e celebrar juntos no culto da manhã. Se for
-                sua primeira visita, será muito bem-vindo.
+                Aos domingos reunimo-nos para estudar as Escrituras na Escola
+                Bíblica Dominical e celebrar juntos no culto da manhã. Caso seja
+                a sua primeira visita, será muito bem-vindo.
               </p>
 
               {/* Filtro interativo por momento */}
@@ -107,7 +107,7 @@ export function ScheduleSection() {
                   {calendarSaved ? (
                     <>
                       <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
-                      <span>Evento salvo (.ics)</span>
+                      <span>Evento guardado (.ics)</span>
                     </>
                   ) : (
                     <>
@@ -115,7 +115,7 @@ export function ScheduleSection() {
                         className="h-4 w-4 shrink-0"
                         aria-hidden="true"
                       />
-                      <span>Salvar culto no calendário</span>
+                      <span>Guardar culto no calendário</span>
                     </>
                   )}
                 </button>

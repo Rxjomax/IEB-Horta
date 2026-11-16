@@ -23,7 +23,7 @@ interface VisitLocationSectionProps {
 
 const VISITOR_NOTES = [
   'Localização central junto à baía da Horta na Av. Marginal, nº 17.',
-  'Venha como você está — nosso ambiente é acolhedor e familiar.',
+  'Venha tal como está — o nosso ambiente é acolhedor e familiar.',
   'Salas da Escola Bíblica Dominical para adultos, adolescentes e crianças.',
 ];
 
@@ -77,12 +77,12 @@ export function VisitLocationSection({
     const digitsOnly = whatsapp.replace(/\D/g, '');
 
     if (cleanName.length < 2) {
-      setErrorMsg('Por favor, informe seu nome para prepararmos sua recepção.');
+      setErrorMsg('Por favor, indique o seu nome para prepararmos a sua receção.');
       return;
     }
 
     if (digitsOnly.length < 8) {
-      setErrorMsg('Informe um número de contacto ou WhatsApp válido.');
+      setErrorMsg('Indique um número de contacto ou WhatsApp válido.');
       return;
     }
 
@@ -109,7 +109,7 @@ export function VisitLocationSection({
     fullSummaryMessage
   )}`;
   const confirmMailtoUrl = `mailto:${CHURCH_INFO.email}?subject=${encodeURIComponent(
-    `Planejamento de Visita — ${name.trim()}`
+    `Planeamento de Visita — ${name.trim()}`
   )}&body=${encodeURIComponent(
     `${fullSummaryMessage}\nContacto: ${whatsapp.trim()}`
   )}`;
@@ -129,12 +129,11 @@ export function VisitLocationSection({
             id="visita-heading"
             className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
           >
-            Planeje sua primeira visita
+            Planeie a sua primeira visita
           </h2>
           <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
-            Será uma alegria receber você pessoalmente na Horta. Confira os
-            nossos espaços e avise qual dia pretende vir para aguardarmos por
-            você.
+            Será uma alegria recebê-lo pessoalmente na Horta. Confira os nossos
+            espaços e avise-nos em que dia pretende vir para aguardarmos por si.
           </p>
         </Reveal>
 
@@ -275,11 +274,11 @@ export function VisitLocationSection({
                 <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   <div>
                     <h3 className="font-display text-xl font-semibold text-[#172226]">
-                      Avise que você vem
+                      Avise-nos quando vem
                     </h3>
                     <p className="mt-1 text-sm text-[#46585E]">
-                      Leva menos de um minuto. Assim nossa equipe de recepção
-                      pode dar as boas-vindas para você e sua família.
+                      Demora menos de um minuto. Assim a nossa equipa de receção
+                      pode dar as boas-vindas a si e à sua família.
                     </p>
                   </div>
 
@@ -289,7 +288,7 @@ export function VisitLocationSection({
                         htmlFor="visitor-name"
                         className="block text-sm font-medium text-[#172226]"
                       >
-                        Seu nome
+                        O seu nome
                       </label>
                       <input
                         id="visitor-name"
@@ -299,7 +298,7 @@ export function VisitLocationSection({
                         autoComplete="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Ex: Maria Clara"
+                        placeholder="Ex.: Maria Clara"
                         className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2.5 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
                       />
                     </div>
@@ -330,7 +329,7 @@ export function VisitLocationSection({
 
                   <div>
                     <span className="block text-sm font-medium text-[#172226]">
-                      Qual dia pretende nos visitar?
+                      Em que dia pretende visitar-nos?
                     </span>
                     <div
                       role="radiogroup"
@@ -362,7 +361,7 @@ export function VisitLocationSection({
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <span className="block text-sm font-medium text-[#172226]">
-                        Quem vem com você?
+                        Quantas pessoas vêm?
                       </span>
                       <div
                         role="radiogroup"
@@ -404,7 +403,7 @@ export function VisitLocationSection({
                         type="text"
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
-                        placeholder="Ex: Vamos com 2 crianças"
+                        placeholder="Ex.: Vamos com 2 crianças"
                         className="mt-2 block min-h-[44px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
                       />
                     </div>
@@ -441,7 +440,7 @@ export function VisitLocationSection({
                     type="submit"
                     className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A] focus-visible:ring-offset-2"
                   >
-                    Confirmar Planejamento de Visita
+                    Confirmar Planeamento de Visita
                   </button>
                 </form>
               ) : (
@@ -452,16 +451,16 @@ export function VisitLocationSection({
                   </div>
 
                   <h3 className="mt-4 font-display text-2xl font-semibold text-[#172226]">
-                    Estaremos esperando por você, {name.trim()}!
+                    Estaremos à sua espera, {name.trim()}!
                   </h3>
                   <p className="mt-2 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
-                    Registramos sua intenção de visita ({groupSize}) para{' '}
+                    Registámos a sua intenção de visita ({groupSize}) para{' '}
                     <strong className="font-semibold text-[#172226]">
                       {visitDay}
                     </strong>
                     {interest ? ` com interesse em ${interest}` : ''}. Caso
-                    queira enviar o aviso diretamente à igreja, escolha um canal
-                    abaixo:
+                    pretenda enviar o aviso diretamente à igreja, escolha um dos
+                    canais abaixo:
                   </p>
 
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -489,7 +488,7 @@ export function VisitLocationSection({
                       className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-5 py-3 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
                     >
                       <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                      <span>Novo registro</span>
+                      <span>Novo registo</span>
                     </button>
                   </div>
                 </div>

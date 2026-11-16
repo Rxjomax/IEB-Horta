@@ -66,13 +66,13 @@ export function InstagramGallery() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-                Direto do Instagram · {CHURCH_INFO.handle}
+                Diretamente do Instagram · {CHURCH_INFO.handle}
               </p>
               <h2
                 id="comunidade-heading"
                 className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
               >
-                Acompanhe o dia a dia da nossa família
+                Siga o dia a dia da nossa família
               </h2>
             </div>
 
@@ -155,7 +155,7 @@ export function InstagramGallery() {
                 <button
                   type="button"
                   onClick={() => setSelectedPost(post)}
-                  aria-label={`Abrir detalhes: ${post.category}`}
+                  aria-label={`Ver detalhes: ${post.category}`}
                   className="absolute inset-0 flex flex-col justify-between p-3 text-left transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white sm:p-4 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100"
                 >
                   <div
@@ -182,7 +182,7 @@ export function InstagramGallery() {
         </div>
 
         <p className="mt-4 text-xs text-[#46585E]">
-          Toque em qualquer publicação para abrir a legenda completa.
+          Toque numa publicação para ler a legenda completa.
         </p>
       </div>
 

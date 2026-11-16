@@ -70,7 +70,7 @@ export const CHURCH_INFO = {
   youtubeUrl: 'https://www.youtube.com/@iebhorta',
   whatsappNumber: '351925670000', // Substituir pelo número completo de WhatsApp da igreja
   whatsappMessage:
-    'Olá! Gostaria de saber mais sobre os cultos da Igreja Evangélica Baptista da Horta e planejar uma visita.',
+    'Olá! Gostava de saber mais sobre os cultos da Igreja Evangélica Baptista da Horta e planear a minha visita.',
 
   // Morada principal e coordenadas oficiais (Av. Marginal, nº 17, Horta)
   address: 'Av. Marginal, nº 17, 9900-114 Horta',
@@ -101,7 +101,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     title: 'Culto de Celebração & EBD (10h00)',
     address: 'Av. Marginal, nº 17, 9900-114 Horta',
     region: 'Matriz · Ilha do Faial, Açores, Portugal',
-    note: 'Em frente à baía da Horta, com acesso fácil e recepção acolhedora.',
+    note: 'Em frente à baía da Horta, com acesso fácil e receção acolhedora.',
     googleMapsUrl:
       'https://www.google.com/maps/search/?api=1&query=38.540579,-28.6253875',
     wazeUrl: 'https://waze.com/ul?ll=38.540579,-28.6253875&navigate=yes',
@@ -132,7 +132,7 @@ export const WEEKLY_SCHEDULE: ScheduleItem[] = [
     times: ['11h15'],
     location: 'Av. Marginal, nº 17 — Horta',
     description:
-      'Culto dominical de louvor, comunhão e exposição bíblica. Nos meses de verão (julho e agosto), inicia às 11h00.',
+      'Culto dominical de louvor, comunhão e exposição bíblica. Nos meses de verão (julho e agosto), tem início às 11h00.',
     icon: 'sun',
   },
   {
@@ -154,7 +154,7 @@ export const WEEKLY_SCHEDULE: ScheduleItem[] = [
     times: ['Agenda @iebhorta'],
     location: 'Templo e lares no Faial',
     description:
-      'Encontros semanais de oração, leitura das Escrituras e comunhão nos lares. Confirme os horários atualizados conosco.',
+      'Encontros semanais de oração, leitura das Escrituras e comunhão nos lares. Confirme os horários atualizados connosco.',
     icon: 'home',
   },
   {
@@ -184,7 +184,7 @@ export const ESSENCE_PILLARS: EssencePillar[] = [
     number: '02',
     title: 'Comunhão',
     description:
-      'Somos uma família intergeracional na Ilha do Faial — crianças, jovens, adultos e idosos caminhando juntos e cuidando uns dos outros.',
+      'Somos uma família intergeracional na Ilha do Faial — crianças, jovens, adultos e seniores a caminhar juntos e a cuidar uns dos outros.',
   },
   {
     number: '03',
@@ -206,7 +206,7 @@ export const MINISTRIES: MinistryItem[] = [
     schedule: 'Domingos na EBD · Encontros semanais',
     audience: 'Adolescentes e jovens adultos',
     description:
-      'Espaço para construir amizades verdadeiras, conversar abertamente sobre fé e cotidiano e servir juntos na comunidade.',
+      'Espaço para construir amizades verdadeiras, conversar abertamente sobre fé e o dia a dia e servir em conjunto na comunidade.',
     image: '/assets/instagram/oracao_primeiro_lugar.jpg',
     imageAlt: 'Mãos em oração em encontro de fé e reflexão da IEB Horta',
   },
@@ -215,12 +215,12 @@ export const MINISTRIES: MinistryItem[] = [
     number: '02',
     title: 'Famílias & Mulheres',
     summary: 'Dia da Família, oficinas e encontros Plenas em Cristo.',
-    schedule: 'Programações periódicas e retiros',
+    schedule: 'Encontros periódicos e retiros',
     audience: 'Famílias, casais e mulheres',
     description:
       'Iniciativas como o Dia da Família no Parque da Salgueirinha, oficinas com crianças e o encontro de mulheres Plenas em Cristo.',
     image: '/assets/instagram/plenas_em_cristo_clean.jpg',
-    imageAlt: 'Mulheres reunidas cantando com violão durante encontro Plenas em Cristo',
+    imageAlt: 'Mulheres reunidas a cantar com viola durante o encontro Plenas em Cristo',
   },
   {
     id: 'acao-social',
@@ -232,7 +232,7 @@ export const MINISTRIES: MinistryItem[] = [
     description:
       'Mobilização de membros e amigos para recolher alimentos e apoiar famílias em necessidade na cidade da Horta.',
     image: '/assets/instagram/acao_social_alimentos.jpg',
-    imageAlt: 'Compras solidárias e alimentos arrecadados pela Ação Social da IEB Horta',
+    imageAlt: 'Compras solidárias e alimentos recolhidos pela Ação Social da IEB Horta',
   },
   {
     id: 'batismo-discipulado',
@@ -242,9 +242,9 @@ export const MINISTRIES: MinistryItem[] = [
     schedule: 'Acompanhamento com o Pr. Luíz Eduardo Júnior',
     audience: 'Visitantes e novos membros',
     description:
-      'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, tirar dúvidas, preparar para o batismo e integrar a igreja.',
+      'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, esclarecer dúvidas, preparar para o batismo e integrar a igreja.',
     image: '/assets/instagram/pr_luiz_pregacao.jpg',
-    imageAlt: 'Pr. Luíz Eduardo Júnior ministrando as Escrituras no templo',
+    imageAlt: 'Pr. Luíz Eduardo Júnior a ministrar as Escrituras no templo',
   },
 ];
 
@@ -256,18 +256,18 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     id: 'post-preaching',
     filterGroup: 'cultos',
     image: '/assets/instagram/pr_luiz_pregacao.jpg',
-    alt: 'Pr. Luíz Eduardo Júnior ministrando a Palavra no templo da IEB Horta',
+    alt: 'Pr. Luíz Eduardo Júnior a ministrar a Palavra no templo da IEB Horta',
     category: 'Momento da Palavra',
     dateLabel: '1 Cor 10:31',
     caption:
-      'Pr. Luíz Eduardo compartilhando as Escrituras no templo: “Quer comais, quer bebais ou façais outra qualquer coisa, fazei tudo para a glória de Deus.”',
+      'Pr. Luíz Eduardo a partilhar as Escrituras no templo: “Quer comais, quer bebais ou façais outra qualquer coisa, fazei tudo para a glória de Deus.”',
     scripture: '1 Coríntios 10:31',
   },
   {
     id: 'post-schedule',
     filterGroup: 'cultos',
     image: '/assets/instagram/horarios_ebd_celebracao.jpg',
-    alt: 'Arte oficial de horários do @iebhorta: 10h00 Escola Bíblica Dominical e 11h15 Celebração na Av. Marginal, 17',
+    alt: 'Publicação oficial de horários do @iebhorta: 10h00 Escola Bíblica Dominical e 11h15 Celebração na Av. Marginal, 17',
     category: 'Domingos',
     dateLabel: '10h00 & 11h15',
     caption:
@@ -277,7 +277,7 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     id: 'post-social',
     filterGroup: 'acao-social',
     image: '/assets/instagram/acao_social_alimentos.jpg',
-    alt: 'Mala de veículo repleta de sacolas de compras e leite arrecadados pela ação social da IEB Horta',
+    alt: 'Bagageira de viatura repleta de sacos de compras e leite recolhidos pela ação social da IEB Horta',
     category: 'Ação Social',
     dateLabel: 'Serviço',
     caption:
@@ -291,7 +291,7 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     category: '51 Anos',
     dateLabel: 'Aniversário',
     caption:
-      'Celebrando 51 anos de fidelidade na cidade da Horta — Sustentados pelo Amor de Deus, servindo gerações na ilha.',
+      'A celebrar 51 anos de fidelidade na cidade da Horta — Sustentados pelo Amor de Deus, a servir gerações na ilha.',
     scripture: 'Romanos 5:8',
   },
   {
@@ -302,13 +302,13 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     category: 'Dia da Família',
     dateLabel: 'Feteira',
     caption:
-      'Tempo de culto ao ar livre, convívio e almoço comunitário no Parque da Salgueirinha (Feteira) reunindo toda a igreja.',
+      'Tempo de culto ao ar livre, convívio e almoço comunitário no Parque da Salgueirinha (Feteira) a reunir toda a igreja.',
   },
   {
     id: 'post-dai-gracas',
     filterGroup: 'cultos',
     image: '/assets/instagram/dai_gracas_acores.jpg',
-    alt: 'Arte de Ação de Graças do @iebhorta com versículo de 1 Tessalonicenses 5:18',
+    alt: 'Publicação de Ação de Graças do @iebhorta com versículo de 1 Tessalonicenses 5:18',
     category: 'Ação de Graças',
     dateLabel: '1 Ts 5:18',
     caption:
@@ -321,7 +321,7 @@ export const VISIT_DAY_OPTIONS = [
   'Domingo · 10h00 (Escola Bíblica)',
   'Domingo · 11h15 (Culto de Celebração)',
   'Domingo · 16h00 (EBD R. do Pasteleiro)',
-  'Quero confirmar horários da semana',
+  'Confirmar os horários da semana',
 ];
 
-export const GROUP_SIZE_OPTIONS = ['Só eu', '2 pessoas', 'Família'];
+export const GROUP_SIZE_OPTIONS = ['Apenas eu', '2 pessoas', 'Família'];

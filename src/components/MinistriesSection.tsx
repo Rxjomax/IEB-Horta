@@ -27,7 +27,7 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
           <Reveal className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
               <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-                Conecte-se
+                Envolva-se
               </p>
               <h2
                 id="ministerios-heading"
@@ -36,9 +36,8 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
                 Ministérios para caminhar juntos
               </h2>
               <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-[#46585E]">
-                Há sempre um lugar preparado para a sua fase de vida. Toque em
-                um ministério para ver os encontros, fotos reais e se conectar
-                com a equipe.
+                Há sempre um lugar para a sua fase de vida. Toque num ministério
+                para ver os horários, fotografias reais e contactar a equipa.
               </p>
             </div>
           </Reveal>
