@@ -1,20 +1,31 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, Instagram, Menu, MessageCircle, X } from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
+import { useLanguage } from '../i18n/LanguageContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
-const NAV_LINKS = [
-  { id: 'horarios', label: 'Horários', href: '#horarios' },
-  { id: 'essencia', label: 'Essência', href: '#essencia' },
-  { id: 'ministerios', label: 'Ministérios', href: '#ministerios' },
-  { id: 'comunidade', label: 'Comunidade', href: '#comunidade' },
-  { id: 'visita', label: 'Visite-nos', href: '#visita' },
-];
+const NAV_IDS = [
+  'horarios',
+  'essencia',
+  'ministerios',
+  'comunidade',
+  'visita',
+] as const;
 
 export function Navbar() {
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState<string>('');
+
+  const navLinks = [
+    { id: 'horarios', label: t.nav.links.schedule, href: '#horarios' },
+    { id: 'essencia', label: t.nav.links.essence, href: '#essencia' },
+    { id: 'ministerios', label: t.nav.links.ministries, href: '#ministerios' },
+    { id: 'comunidade', label: t.nav.links.community, href: '#comunidade' },
+    { id: 'visita', label: t.nav.links.visit, href: '#visita' },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -32,10 +43,9 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map((l) => l.id);
     const observers: IntersectionObserver[] = [];
 
-    sectionIds.forEach((id) => {
+    NAV_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
@@ -79,7 +89,7 @@ export function Navbar() {
   };
 
   const whatsappUrl = `https://wa.me/${CHURCH_INFO.whatsappNumber}?text=${encodeURIComponent(
-    CHURCH_INFO.whatsappMessage
+    t.hero.whatsappMessage
   )}`;
 
   return (
@@ -87,11 +97,11 @@ export function Navbar() {
       <header
         className={`sticky top-0 z-40 w-full transition-colors duration-200 ${
           scrolled
-            ? 'bg-[#FAF8F4]/95 backdrop-blur-md border-b border-[#DDD7CE]'
-            : 'bg-[#FAF8F4] border-b border-[#DDD7CE]/80'
+            ? 'border-b border-[#DDD7CE] bg-[#FAF8F4]/95 backdrop-blur-md'
+            : 'border-b border-[#DDD7CE]/80 bg-[#FAF8F4]'
         }`}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 md:h-18 lg:gap-8 lg:px-8">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-18 lg:gap-6 lg:px-8">
           {/* Zona 1: Marca Oficial */}
           <a
             href="#inicio"
@@ -101,16 +111,16 @@ export function Navbar() {
             <img
               src={CHURCH_INFO.logos.horizontal}
               alt={CHURCH_INFO.fullName}
-              className="h-8 w-auto object-contain mix-blend-multiply sm:h-9"
+              className="h-7 w-auto object-contain mix-blend-multiply sm:h-9"
             />
           </a>
 
           {/* Zona 2: Links de Navegação Desktop com Scroll-Spy */}
           <nav
-            aria-label="Navegação principal"
-            className="hidden items-center gap-6 lg:flex xl:gap-8"
+            aria-label={t.nav.ariaMain}
+            className="hidden items-center gap-5 lg:flex xl:gap-7"
           >
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
@@ -129,22 +139,24 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Zona 3: Ação Primária + Menu Hambúrguer Mobile */}
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          {/* Zona 3: Ação Primária + Seletor de Idioma + Menu Hambúrguer Mobile */}
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
             <a
               href="#visita"
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#195963] px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] sm:px-5 sm:text-sm"
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#195963] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] sm:px-5 sm:text-sm"
             >
-              Quero Visitar
+              {t.nav.ctaVisit}
             </a>
+
+            <LanguageSwitcher compact />
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
-              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-              className="inline-flex h-12 w-12 items-center justify-center rounded-lg text-[#172226] transition-colors hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] lg:hidden"
+              aria-label={mobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-[#172226] transition-colors hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] lg:hidden"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
@@ -169,8 +181,8 @@ export function Navbar() {
         aria-hidden={!mobileMenuOpen}
         className={`fixed inset-0 z-50 flex flex-col bg-[#FAF8F4] transition-all duration-300 lg:hidden ${
           mobileMenuOpen
-            ? 'pointer-events-auto opacity-100 translate-y-0'
-            : 'pointer-events-none opacity-0 -translate-y-2'
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
         <div className="flex h-14 items-center justify-between border-b border-[#DDD7CE] px-4 sm:px-6">
@@ -189,7 +201,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(false)}
-            aria-label="Fechar menu de navegação"
+            aria-label={t.nav.closeNavDrawer}
             className="inline-flex h-12 w-12 items-center justify-center rounded-lg text-[#172226] hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
           >
             <X className="h-6 w-6" aria-hidden="true" />
@@ -197,8 +209,11 @@ export function Navbar() {
         </div>
 
         <div className="flex flex-1 flex-col justify-between overflow-y-auto px-5 py-6">
-          <nav aria-label="Menu telemóvel" className="flex flex-col divide-y divide-[#DDD7CE]">
-            {NAV_LINKS.map((link, index) => (
+          <nav
+            aria-label={t.nav.ariaMobile}
+            className="flex flex-col divide-y divide-[#DDD7CE]"
+          >
+            {navLinks.map((link, index) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -217,7 +232,7 @@ export function Navbar() {
             <div className="flex items-center gap-4">
               <img
                 src={CHURCH_INFO.logos.circularSeal}
-                alt={`Selo ${CHURCH_INFO.fullName}`}
+                alt={t.about.sealAlt}
                 className="h-14 w-14 shrink-0 object-contain mix-blend-multiply"
               />
               <div>
@@ -225,7 +240,7 @@ export function Navbar() {
                   {CHURCH_INFO.fullName}
                 </p>
                 <p className="text-sm text-[#46585E]">
-                  Domingos às 10h00 (EBD) e 11h15 (Celebração).
+                  {t.nav.drawerSummary}
                 </p>
               </div>
             </div>
@@ -236,7 +251,7 @@ export function Navbar() {
                 onClick={handleNavClick}
                 className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-[#803320]"
               >
-                Planeie a sua Primeira Visita
+                {t.nav.ctaVisitDrawer}
               </a>
               <div className="grid grid-cols-2 gap-3">
                 <a
@@ -245,9 +260,15 @@ export function Navbar() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
                 >
-                  <Instagram className="h-4 w-4 text-[#195963]" aria-hidden="true" />
+                  <Instagram
+                    className="h-4 w-4 text-[#195963]"
+                    aria-hidden="true"
+                  />
                   <span>@iebhorta</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#46585E]" aria-hidden="true" />
+                  <ArrowUpRight
+                    className="h-3.5 w-3.5 text-[#46585E]"
+                    aria-hidden="true"
+                  />
                 </a>
                 <a
                   href={whatsappUrl}
@@ -255,8 +276,11 @@ export function Navbar() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
                 >
-                  <MessageCircle className="h-4 w-4 text-[#195963]" aria-hidden="true" />
-                  <span>WhatsApp</span>
+                  <MessageCircle
+                    className="h-4 w-4 text-[#195963]"
+                    aria-hidden="true"
+                  />
+                  <span>{t.nav.whatsapp}</span>
                 </a>
               </div>
             </div>

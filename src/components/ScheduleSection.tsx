@@ -9,6 +9,7 @@ import {
   Sun,
 } from 'lucide-react';
 import { WEEKLY_SCHEDULE, type ScheduleItem } from '../data/churchConfig';
+import { useLanguage } from '../i18n/LanguageContext';
 import { downloadSundayWorshipIcs } from '../utils/calendar';
 import { Reveal } from './Reveal';
 
@@ -29,6 +30,7 @@ function renderScheduleIcon(icon: ScheduleItem['icon']) {
 }
 
 export function ScheduleSection() {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState<ScheduleFilter>('todos');
   const [calendarSaved, setCalendarSaved] = useState(false);
 
@@ -37,7 +39,7 @@ export function ScheduleSection() {
   );
 
   const handleSaveCalendar = () => {
-    downloadSundayWorshipIcs();
+    downloadSundayWorshipIcs(t.calendarIcs);
     setCalendarSaved(true);
     window.setTimeout(() => setCalendarSaved(false), 3000);
   };
@@ -54,30 +56,28 @@ export function ScheduleSection() {
           <Reveal className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
               <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-                Programação Semanal
+                {t.schedule.kicker}
               </p>
               <h2
                 id="horarios-heading"
                 className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
               >
-                Horários para nos reunirmos em família
+                {t.schedule.heading}
               </h2>
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-[#46585E]">
-                Aos domingos reunimo-nos para estudar as Escrituras na Escola
-                Bíblica Dominical e celebrar juntos no culto da manhã. Caso seja
-                a sua primeira visita, será muito bem-vindo.
+                {t.schedule.intro}
               </p>
 
               {/* Filtro interativo por momento */}
               <div
                 role="group"
-                aria-label="Filtrar programação"
+                aria-label={t.schedule.filterAria}
                 className="mt-6 inline-flex flex-wrap gap-1.5 rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1"
               >
                 {[
-                  { id: 'todos' as const, label: 'Toda a agenda' },
-                  { id: 'domingo' as const, label: 'Domingos' },
-                  { id: 'semana' as const, label: 'Semana & Famílias' },
+                  { id: 'todos' as const, label: t.schedule.filters.all },
+                  { id: 'domingo' as const, label: t.schedule.filters.sunday },
+                  { id: 'semana' as const, label: t.schedule.filters.week },
                 ].map((tab) => {
                   const active = filter === tab.id;
                   return (
@@ -107,7 +107,7 @@ export function ScheduleSection() {
                   {calendarSaved ? (
                     <>
                       <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
-                      <span>Evento guardado (.ics)</span>
+                      <span>{t.schedule.calendarSaved}</span>
                     </>
                   ) : (
                     <>
@@ -115,7 +115,7 @@ export function ScheduleSection() {
                         className="h-4 w-4 shrink-0"
                         aria-hidden="true"
                       />
-                      <span>Guardar culto no calendário</span>
+                      <span>{t.schedule.calendarSave}</span>
                     </>
                   )}
                 </button>
@@ -124,7 +124,7 @@ export function ScheduleSection() {
                   href="#visita"
                   className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#9C412A] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A]"
                 >
-                  <span>Confirmar visita</span>
+                  <span>{t.schedule.confirmVisit}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
@@ -134,42 +134,45 @@ export function ScheduleSection() {
           {/* Coluna Direita: Lista Editorial Estruturada */}
           <div className="lg:col-span-7">
             <div className="divide-y divide-[#DDD7CE] overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white">
-              {visibleItems.map((item) => (
-                <article
-                  key={item.id}
-                  className="flex flex-col gap-4 p-5 transition-colors hover:bg-[#FAF8F4]/60 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#DDD7CE] bg-[#FAF8F4]">
-                      {renderScheduleIcon(item.icon)}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-[#46585E]">
-                        <span>{item.day}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{item.location}</span>
+              {visibleItems.map((item) => {
+                const localized = t.schedule.items[item.id];
+                return (
+                  <article
+                    key={item.id}
+                    className="flex flex-col gap-4 p-5 transition-colors hover:bg-[#FAF8F4]/60 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#DDD7CE] bg-[#FAF8F4]">
+                        {renderScheduleIcon(item.icon)}
                       </div>
-                      <h3 className="mt-1 font-display text-lg font-semibold text-[#172226] sm:text-xl">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
-                        {item.description}
-                      </p>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-[#46585E]">
+                          <span>{localized.day}</span>
+                          <span aria-hidden="true">·</span>
+                          <span>{localized.location}</span>
+                        </div>
+                        <h3 className="mt-1 font-display text-lg font-semibold text-[#172226] sm:text-xl">
+                          {localized.title}
+                        </h3>
+                        <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
+                          {localized.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex shrink-0 items-center gap-3 pl-15 sm:flex-col sm:items-end sm:gap-1 sm:pl-0">
-                    {item.times.map((time) => (
-                      <span
-                        key={time}
-                        className="font-display text-lg font-semibold tabular-nums text-[#195963] sm:text-xl"
-                      >
-                        {time}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
+                    <div className="flex shrink-0 items-center gap-3 pl-15 sm:flex-col sm:items-end sm:gap-1 sm:pl-0">
+                      {localized.times.map((time) => (
+                        <span
+                          key={time}
+                          className="font-display text-lg font-semibold tabular-nums text-[#195963] sm:text-xl"
+                        >
+                          {time}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>

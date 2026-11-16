@@ -7,18 +7,20 @@ import {
   MapPin,
 } from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   downloadSundayWorshipIcs,
   getNextSundayInfo,
 } from '../utils/calendar';
 
 export function Hero() {
+  const { languageOption, t } = useLanguage();
   const [imgFailed, setImgFailed] = useState(false);
   const [calendarSaved, setCalendarSaved] = useState(false);
-  const nextSunday = getNextSundayInfo();
+  const nextSunday = getNextSundayInfo(languageOption.intlLocale);
 
   const handleCalendarDownload = () => {
-    downloadSundayWorshipIcs();
+    downloadSundayWorshipIcs(t.calendarIcs);
     setCalendarSaved(true);
     window.setTimeout(() => setCalendarSaved(false), 3000);
   };
@@ -33,7 +35,7 @@ export function Hero() {
         {!imgFailed ? (
           <img
             src={CHURCH_INFO.images.hero}
-            alt="Interior iluminado da igreja com luz natural da manhã e comunidade reunida"
+            alt={t.hero.imageAlt}
             referrerPolicy="no-referrer"
             onError={() => setImgFailed(true)}
             className="h-full w-full object-cover object-center"
@@ -60,7 +62,7 @@ export function Hero() {
               <span aria-hidden="true" className="mx-2 text-[#E07A5F]">
                 ·
               </span>
-              <span>51 Anos na Horta, Açores</span>
+              <span>{t.hero.kickerYears}</span>
             </p>
 
             <h1
@@ -70,100 +72,100 @@ export function Hero() {
                 lineHeight: 1.07,
               }}
             >
-              Um lugar de fé, família e novos começos.
+              {t.hero.headline}
             </h1>
 
-          <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-[#FAF8F4]/95 sm:text-lg">
-            Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de
-            portas abertas para caminhar consigo e com a sua família na Palavra
-            e na comunhão.
-          </p>
+            <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-[#FAF8F4]/95 sm:text-lg">
+              {t.hero.subheadline}
+            </p>
 
-          {/* CTAs empilhados no telemóvel, lado a lado no computador (mínimo 48px altura) */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <a
-              href="#visita"
-              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#9C412A] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#195963] sm:w-auto"
-            >
-              <span>Planeie a sua Visita</span>
-              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-            </a>
+            {/* CTAs empilhados no telemóvel, lado a lado no computador (mínimo 48px altura) */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <a
+                href="#visita"
+                className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#9C412A] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#195963] sm:w-auto"
+              >
+                <span>{t.hero.ctaVisit}</span>
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </a>
 
-            <a
-              href={CHURCH_INFO.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/55 bg-white/10 px-6 py-3 text-base font-semibold text-white backdrop-blur-xs transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#195963] sm:w-auto"
-            >
-              <Instagram className="h-5 w-5 shrink-0" aria-hidden="true" />
-              <span>Siga @iebhorta</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Cartão Editorial do Próximo Culto Dominical */}
-        <aside
-          aria-label="Próximo encontro dominical"
-          className="rounded-2xl border border-white/20 bg-[#0D3238]/88 p-5 sm:p-6 lg:col-span-5 xl:col-span-4"
-        >
-          <p className="text-xs font-semibold tracking-wide text-[#E7A693]">
-            {nextSunday.isToday ? 'Neste Domingo (Hoje)' : 'Próximo Domingo'}
-            <span aria-hidden="true" className="mx-1.5 text-white/40">
-              ·
-            </span>
-            <span>{nextSunday.formattedDate}</span>
-          </p>
-
-          <div className="mt-4 divide-y divide-white/15 border-y border-white/15">
-            <div className="flex items-baseline justify-between gap-4 py-3">
-              <span className="text-sm text-[#FAF8F4]/90">
-                Escola Bíblica Dominical
-              </span>
-              <span className="font-display text-lg font-semibold tabular-nums text-white">
-                {nextSunday.ebdTime}
-              </span>
-            </div>
-            <div className="flex items-baseline justify-between gap-4 py-3">
-              <span className="text-sm text-[#FAF8F4]/90">
-                Culto de Celebração
-              </span>
-              <span className="font-display text-lg font-semibold tabular-nums text-white">
-                {nextSunday.celebrationTime}
-              </span>
+              <a
+                href={CHURCH_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/55 bg-white/10 px-6 py-3 text-base font-semibold text-white backdrop-blur-xs transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#195963] sm:w-auto"
+              >
+                <Instagram className="h-5 w-5 shrink-0" aria-hidden="true" />
+                <span>{t.hero.ctaInstagram}</span>
+              </a>
             </div>
           </div>
 
-          <div className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-[#FAF8F4]/85">
-            <MapPin
-              className="mt-0.5 h-4 w-4 shrink-0 text-[#E7A693]"
-              aria-hidden="true"
-            />
-            <span>
-              {CHURCH_INFO.address} · Portas abertas a toda a família.
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleCalendarDownload}
-            className="mt-4 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          {/* Cartão Editorial do Próximo Culto Dominical */}
+          <aside
+            aria-label={t.hero.nextSundayAria}
+            className="rounded-2xl border border-white/20 bg-[#0D3238]/88 p-5 sm:p-6 lg:col-span-5 xl:col-span-4"
           >
-            {calendarSaved ? (
-              <>
-                <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
-                <span>Convite (.ics) guardado</span>
-              </>
-            ) : (
-              <>
-                <CalendarPlus
-                  className="h-4 w-4 shrink-0"
-                  aria-hidden="true"
-                />
-                <span>Adicionar domingo à agenda</span>
-              </>
-            )}
-          </button>
-        </aside>
+            <p className="text-xs font-semibold tracking-wide text-[#E7A693]">
+              {nextSunday.isToday
+                ? t.hero.thisSundayToday
+                : t.hero.nextSundayLabel}
+              <span aria-hidden="true" className="mx-1.5 text-white/40">
+                ·
+              </span>
+              <span>{nextSunday.formattedDate}</span>
+            </p>
+
+            <div className="mt-4 divide-y divide-white/15 border-y border-white/15">
+              <div className="flex items-baseline justify-between gap-4 py-3">
+                <span className="text-sm text-[#FAF8F4]/90">
+                  {t.hero.ebdTitle}
+                </span>
+                <span className="font-display text-lg font-semibold tabular-nums text-white">
+                  {nextSunday.ebdTime}
+                </span>
+              </div>
+              <div className="flex items-baseline justify-between gap-4 py-3">
+                <span className="text-sm text-[#FAF8F4]/90">
+                  {t.hero.celebrationTitle}
+                </span>
+                <span className="font-display text-lg font-semibold tabular-nums text-white">
+                  {nextSunday.celebrationTime}
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-[#FAF8F4]/85">
+              <MapPin
+                className="mt-0.5 h-4 w-4 shrink-0 text-[#E7A693]"
+                aria-hidden="true"
+              />
+              <span>
+                {CHURCH_INFO.address} · {t.hero.doorsOpenNote}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCalendarDownload}
+              className="mt-4 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              {calendarSaved ? (
+                <>
+                  <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span>{t.hero.calendarSaved}</span>
+                </>
+              ) : (
+                <>
+                  <CalendarPlus
+                    className="h-4 w-4 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{t.hero.calendarSave}</span>
+                </>
+              )}
+            </button>
+          </aside>
         </div>
 
         {/* Faixa Operacional Discreta */}
@@ -174,16 +176,21 @@ export function Hero() {
               /
             </span>
             <p>
-              EBD às{' '}
-              <span className="tabular-nums font-semibold text-white">
-                16h00
+              {t.hero.ebdStripTextBefore}{' '}
+              <span className="font-semibold tabular-nums text-white">
+                {languageOption.intlLocale.startsWith('pt') ||
+                languageOption.intlLocale.startsWith('fr')
+                  ? '16h00'
+                  : '16:00'}
               </span>{' '}
-              na Rua do Pasteleiro, nº 12-D (Angústias)
+              {t.hero.ebdStripTextAfter}
             </p>
             <span aria-hidden="true" className="hidden text-white/40 sm:inline">
               /
             </span>
-            <p>Pastorado: {CHURCH_INFO.pastor}</p>
+            <p>
+              {t.hero.pastorLabel} {CHURCH_INFO.pastor}
+            </p>
           </div>
         </div>
       </div>

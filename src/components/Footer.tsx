@@ -1,19 +1,21 @@
 import { Facebook, Instagram, Mail, MessageCircle, Youtube } from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
-
-const FOOTER_LINKS = [
-  { label: 'Horários de Cultos', href: '#horarios' },
-  { label: 'A Nossa Essência', href: '#essencia' },
-  { label: 'Ministérios', href: '#ministerios' },
-  { label: 'Comunidade @iebhorta', href: '#comunidade' },
-  { label: 'Planeie a sua Visita', href: '#visita' },
-];
+import { useLanguage } from '../i18n/LanguageContext';
 
 export function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   const whatsappUrl = `https://wa.me/${CHURCH_INFO.whatsappNumber}?text=${encodeURIComponent(
-    CHURCH_INFO.whatsappMessage
+    t.hero.whatsappMessage
   )}`;
+
+  const footerLinks = [
+    { label: t.nav.links.schedule, href: '#horarios' },
+    { label: t.about.kicker, href: '#essencia' },
+    { label: t.nav.links.ministries, href: '#ministerios' },
+    { label: `${t.nav.links.community} @iebhorta`, href: '#comunidade' },
+    { label: t.hero.ctaVisit, href: '#visita' },
+  ];
 
   return (
     <footer className="border-t border-[#DDD7CE] bg-[#EFECE5] pb-16 text-[#172226] md:pb-0">
@@ -33,14 +35,15 @@ export function Footer() {
               />
             </a>
             <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-[#46585E] sm:text-base">
-              Há 51 anos na Ilha do Faial, uma comunidade cristã dedicada a amar
-              a Deus, servir as pessoas e anunciar o Evangelho com simplicidade.
+              {t.footer.summary}
             </p>
             <div className="mt-4 space-y-1 text-sm">
               <p className="font-medium text-[#195963]">
-                {CHURCH_INFO.address} · {CHURCH_INFO.addressRegion}
+                {CHURCH_INFO.address} · {t.visit.locations.templo.region}
               </p>
-              <p className="text-[#46585E]">{CHURCH_INFO.ebdTempAddress}</p>
+              <p className="text-[#46585E]">
+                {t.visit.locations.ebd.title} — Rua do Pasteleiro, n.º 12-D
+              </p>
               <p className="pt-1">
                 <a
                   href={`mailto:${CHURCH_INFO.email}`}
@@ -56,10 +59,10 @@ export function Footer() {
           {/* Links Rápidos */}
           <div className="md:col-span-4">
             <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
-              Navegação
+              {t.footer.navigationTitle}
             </h2>
             <ul className="mt-3 space-y-1">
-              {FOOTER_LINKS.map((link) => (
+              {footerLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -75,7 +78,7 @@ export function Footer() {
           {/* Canais Oficiais */}
           <div className="md:col-span-3">
             <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
-              Siga e Fale Connosco
+              {t.footer.channelsTitle}
             </h2>
             <div className="mt-4 flex flex-col gap-2.5">
               <a
@@ -84,8 +87,11 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
               >
-                <Instagram className="h-4 w-4 shrink-0 text-[#195963]" aria-hidden="true" />
-                <span>Instagram @iebhorta</span>
+                <Instagram
+                  className="h-4 w-4 shrink-0 text-[#195963]"
+                  aria-hidden="true"
+                />
+                <span>{t.footer.instagramLabel}</span>
               </a>
 
               <a
@@ -94,8 +100,11 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
               >
-                <Facebook className="h-4 w-4 shrink-0 text-[#195963]" aria-hidden="true" />
-                <span>Facebook IEB Horta</span>
+                <Facebook
+                  className="h-4 w-4 shrink-0 text-[#195963]"
+                  aria-hidden="true"
+                />
+                <span>{t.footer.facebookLabel}</span>
               </a>
 
               <a
@@ -104,8 +113,11 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
               >
-                <Youtube className="h-4 w-4 shrink-0 text-[#195963]" aria-hidden="true" />
-                <span>YouTube IEB Horta</span>
+                <Youtube
+                  className="h-4 w-4 shrink-0 text-[#195963]"
+                  aria-hidden="true"
+                />
+                <span>{t.footer.youtubeLabel}</span>
               </a>
 
               <a
@@ -114,8 +126,11 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-sm font-semibold text-[#172226] transition-colors hover:border-[#9C412A] hover:text-[#9C412A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A]"
               >
-                <MessageCircle className="h-4 w-4 shrink-0 text-[#9C412A]" aria-hidden="true" />
-                <span>WhatsApp da Igreja</span>
+                <MessageCircle
+                  className="h-4 w-4 shrink-0 text-[#9C412A]"
+                  aria-hidden="true"
+                />
+                <span>{t.footer.whatsappLabel}</span>
               </a>
             </div>
           </div>
@@ -124,7 +139,7 @@ export function Footer() {
         {/* Linha Final de Direitos */}
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[#DDD7CE] pt-6 text-xs text-[#46585E] sm:flex-row sm:items-center sm:text-sm">
           <p>
-            © {currentYear} {CHURCH_INFO.fullName}. Todos os direitos reservados.
+            © {currentYear} {CHURCH_INFO.fullName}. {t.footer.rightsReserved}
           </p>
           <div className="flex items-center gap-3">
             <img
@@ -133,7 +148,7 @@ export function Footer() {
               aria-hidden="true"
               className="h-7 w-7 object-contain mix-blend-multiply opacity-85"
             />
-            <span>Domingos · 10h00 Escola Bíblica · 11h15 Celebração</span>
+            <span>{t.footer.sundayLine}</span>
           </div>
         </div>
       </div>

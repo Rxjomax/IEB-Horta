@@ -25,19 +25,29 @@ export function getNextSundayDate(referenceDate = new Date()): Date {
   return date;
 }
 
-export function getNextSundayInfo(): NextSundayInfo {
+export function getNextSundayInfo(intlLocale = 'pt-PT'): NextSundayInfo {
   const now = new Date();
   const nextSunday = getNextSundayDate(now);
   const month = nextSunday.getMonth(); // 0-indexed (6 = Julho, 7 = Agosto)
   const isSummerSchedule = month === 6 || month === 7;
-  const celebrationTime = isSummerSchedule ? '11h00' : '11h15';
+  const usesHNotation =
+    intlLocale.startsWith('pt') || intlLocale.startsWith('fr');
+
+  const celebrationTime = isSummerSchedule
+    ? usesHNotation
+      ? '11h00'
+      : '11:00'
+    : usesHNotation
+      ? '11h15'
+      : '11:15';
+  const ebdTime = usesHNotation ? '10h00' : '10:00';
 
   const isToday =
     now.getFullYear() === nextSunday.getFullYear() &&
     now.getMonth() === nextSunday.getMonth() &&
     now.getDate() === nextSunday.getDate();
 
-  const formattedDate = new Intl.DateTimeFormat('pt-PT', {
+  const formattedDate = new Intl.DateTimeFormat(intlLocale, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -50,7 +60,7 @@ export function getNextSundayInfo(): NextSundayInfo {
     formattedDate: capitalized,
     isToday,
     celebrationTime,
-    ebdTime: '10h00',
+    ebdTime,
     isSummerSchedule,
   };
 }
@@ -66,10 +76,27 @@ function formatIcsLocalDate(date: Date): string {
   );
 }
 
+export interface CalendarIcsTexts {
+  prodId: string;
+  summary: string;
+  description: string;
+  fileName: string;
+}
+
+const DEFAULT_ICS_TEXTS: CalendarIcsTexts = {
+  prodId: '-//IEB Horta//Agenda Dominical//PT',
+  summary: 'Culto de Celebração — IEB Horta',
+  description:
+    'Escola Bíblica Dominical às 10h00 e Culto de Celebração na Igreja Evangélica Baptista da Horta. Portas abertas!',
+  fileName: 'culto-ieb-horta.ics',
+};
+
 /**
  * Gera e descarrega um ficheiro .ics válido para o próximo Culto de Celebração dominical.
  */
-export function downloadSundayWorshipIcs(): void {
+export function downloadSundayWorshipIcs(
+  icsTexts: CalendarIcsTexts = DEFAULT_ICS_TEXTS
+): void {
   const info = getNextSundayInfo();
   const start = getNextSundayDate();
   if (info.isSummerSchedule) {
@@ -84,16 +111,16 @@ export function downloadSundayWorshipIcs(): void {
   const icsContent = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//IEB Horta//Agenda Dominical//PT',
+    `PRODID:${icsTexts.prodId}`,
     'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
     `UID:culto-domingo-${start.getTime()}@iebhorta.pt`,
     `DTSTAMP:${dtStamp}`,
     `DTSTART:${formatIcsLocalDate(start)}`,
     `DTEND:${formatIcsLocalDate(end)}`,
-    'SUMMARY:Culto de Celebração — IEB Horta',
-    'DESCRIPTION:Escola Bíblica Dominical às 10h00 e Culto de Celebração na Igreja Evangélica Baptista da Horta. Portas abertas!',
-    'LOCATION:Av. Marginal\\, nº 17\\, 9900-114 Horta\\, Açores\\, Portugal',
+    `SUMMARY:${icsTexts.summary}`,
+    `DESCRIPTION:${icsTexts.description}`,
+    'LOCATION:Av. Marginal\\, n.º 17\\, 9900-114 Horta\\, Açores\\, Portugal',
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
@@ -102,7 +129,7 @@ export function downloadSundayWorshipIcs(): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'culto-ieb-horta.ics';
+  link.download = icsTexts.fileName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

@@ -9,27 +9,20 @@ import {
   Navigation,
   RotateCcw,
 } from 'lucide-react';
-import {
-  CHURCH_INFO,
-  CHURCH_LOCATIONS,
-  GROUP_SIZE_OPTIONS,
-  VISIT_DAY_OPTIONS,
-} from '../data/churchConfig';
+import { CHURCH_INFO, CHURCH_LOCATIONS } from '../data/churchConfig';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Reveal } from './Reveal';
 
 interface VisitLocationSectionProps {
-  selectedMinistry: string;
+  selectedMinistryId: string;
+  onClearMinistry: () => void;
 }
 
-const VISITOR_NOTES = [
-  'Localização central junto à baía da Horta na Av. Marginal, nº 17.',
-  'Venha tal como está — o nosso ambiente é acolhedor e familiar.',
-  'Salas da Escola Bíblica Dominical para adultos, adolescentes e crianças.',
-];
-
 export function VisitLocationSection({
-  selectedMinistry,
+  selectedMinistryId,
+  onClearMinistry,
 }: VisitLocationSectionProps) {
+  const { t } = useLanguage();
   const [activeLocationId, setActiveLocationId] = useState<'templo' | 'ebd'>(
     'templo'
   );
@@ -37,23 +30,37 @@ export function VisitLocationSection({
 
   const [name, setName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
-  const [visitDay, setVisitDay] = useState(VISIT_DAY_OPTIONS[0]);
-  const [groupSize, setGroupSize] = useState(GROUP_SIZE_OPTIONS[0]);
+  const [visitDayIndex, setVisitDayIndex] = useState(0);
+  const [groupSizeIndex, setGroupSizeIndex] = useState(0);
   const [note, setNote] = useState('');
-  const [interest, setInterest] = useState(selectedMinistry);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorType, setErrorType] = useState<'' | 'name' | 'phone'>('');
   const [submitted, setSubmitted] = useState(false);
 
   const activeLocation =
     CHURCH_LOCATIONS.find((l) => l.id === activeLocationId) ??
     CHURCH_LOCATIONS[0];
+  const localizedLocation = t.visit.locations[activeLocation.id];
+
+  const visitDay =
+    t.visit.dayOptions[visitDayIndex] ?? t.visit.dayOptions[0];
+  const groupSize =
+    t.visit.groupSizeOptions[groupSizeIndex] ?? t.visit.groupSizeOptions[0];
+  const interestLabel = selectedMinistryId
+    ? (t.ministries.items[selectedMinistryId]?.title ?? '')
+    : '';
+
+  const errorMsg =
+    errorType === 'name'
+      ? t.visit.errorName
+      : errorType === 'phone'
+        ? t.visit.errorPhone
+        : '';
 
   useEffect(() => {
-    if (selectedMinistry) {
-      setInterest(selectedMinistry);
+    if (selectedMinistryId) {
       setSubmitted(false);
     }
-  }, [selectedMinistry]);
+  }, [selectedMinistryId]);
 
   const formatPhoneInput = (value: string) => {
     return value.replace(/[^\d+\s()-]/g, '').slice(0, 20);
@@ -62,7 +69,7 @@ export function VisitLocationSection({
   const handleCopyAddress = async () => {
     try {
       await navigator.clipboard.writeText(
-        `${activeLocation.address}, ${activeLocation.region}`
+        `${activeLocation.address}, ${localizedLocation.region}`
       );
       setCopiedAddress(true);
       window.setTimeout(() => setCopiedAddress(false), 2500);
@@ -77,16 +84,16 @@ export function VisitLocationSection({
     const digitsOnly = whatsapp.replace(/\D/g, '');
 
     if (cleanName.length < 2) {
-      setErrorMsg('Por favor, indique o seu nome para prepararmos a sua receção.');
+      setErrorType('name');
       return;
     }
 
     if (digitsOnly.length < 8) {
-      setErrorMsg('Indique um número de contacto ou WhatsApp válido.');
+      setErrorType('phone');
       return;
     }
 
-    setErrorMsg('');
+    setErrorType('');
     setSubmitted(true);
   };
 
@@ -94,24 +101,24 @@ export function VisitLocationSection({
     setSubmitted(false);
     setName('');
     setWhatsapp('');
-    setVisitDay(VISIT_DAY_OPTIONS[0]);
-    setGroupSize(GROUP_SIZE_OPTIONS[0]);
+    setVisitDayIndex(0);
+    setGroupSizeIndex(0);
     setNote('');
-    setInterest('');
-    setErrorMsg('');
+    onClearMinistry();
+    setErrorType('');
   };
 
-  const fullSummaryMessage = `Olá! Sou ${name.trim()} (${groupSize}) e pretendo visitar a IEB Horta (${visitDay})${
-    interest ? ` — interesse em ${interest}` : ''
-  }${note.trim() ? `. Observação: ${note.trim()}` : '.'}`;
+  const fullSummaryMessage = `${t.visit.summaryGreeting} ${name.trim()} (${groupSize}) — ${CHURCH_INFO.shortName} (${visitDay})${
+    interestLabel ? ` · ${t.visit.summaryInterestPrefix} ${interestLabel}` : ''
+  }${note.trim() ? `. ${t.visit.summaryNotePrefix} ${note.trim()}` : '.'}`;
 
   const confirmWhatsAppUrl = `https://wa.me/${CHURCH_INFO.whatsappNumber}?text=${encodeURIComponent(
     fullSummaryMessage
   )}`;
   const confirmMailtoUrl = `mailto:${CHURCH_INFO.email}?subject=${encodeURIComponent(
-    `Planeamento de Visita — ${name.trim()}`
+    `${t.visit.mailSubjectPrefix} — ${name.trim()}`
   )}&body=${encodeURIComponent(
-    `${fullSummaryMessage}\nContacto: ${whatsapp.trim()}`
+    `${fullSummaryMessage}\n${t.visit.contactLabel} ${whatsapp.trim()}`
   )}`;
 
   return (
@@ -123,17 +130,16 @@ export function VisitLocationSection({
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-            Localização &amp; Primeira Visita
+            {t.visit.kicker}
           </p>
           <h2
             id="visita-heading"
             className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
           >
-            Planeie a sua primeira visita
+            {t.visit.heading}
           </h2>
           <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
-            Será uma alegria recebê-lo pessoalmente na Horta. Confira os nossos
-            espaços e avise-nos em que dia pretende vir para aguardarmos por si.
+            {t.visit.intro}
           </p>
         </Reveal>
 
@@ -145,7 +151,7 @@ export function VisitLocationSection({
                 {/* Seletor entre Templo Principal e Salas da EBD 16h */}
                 <div
                   role="tablist"
-                  aria-label="Selecionar espaço da igreja"
+                  aria-label={t.visit.spaceTabsAria}
                   className="grid grid-cols-2 gap-1.5 rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1"
                 >
                   {CHURCH_LOCATIONS.map((loc) => {
@@ -163,7 +169,7 @@ export function VisitLocationSection({
                             : 'text-[#46585E] hover:text-[#172226]'
                         }`}
                       >
-                        {loc.label}
+                        {t.visit.locations[loc.id].label}
                       </button>
                     );
                   })}
@@ -178,16 +184,16 @@ export function VisitLocationSection({
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="font-display text-lg font-semibold text-[#172226]">
-                      {activeLocation.title}
+                      {localizedLocation.title}
                     </h3>
                     <p className="mt-1 text-base font-medium text-[#195963]">
                       {activeLocation.address}
                     </p>
                     <p className="mt-0.5 text-sm text-[#46585E]">
-                      {activeLocation.region}
+                      {localizedLocation.region}
                     </p>
                     <p className="mt-2 text-xs leading-relaxed text-[#46585E]">
-                      {activeLocation.note}
+                      {localizedLocation.note}
                     </p>
 
                     <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -202,12 +208,12 @@ export function VisitLocationSection({
                               className="h-3.5 w-3.5 text-[#195963]"
                               aria-hidden="true"
                             />
-                            <span>Morada copiada</span>
+                            <span>{t.visit.copiedAddress}</span>
                           </>
                         ) : (
                           <>
                             <Copy className="h-3.5 w-3.5" aria-hidden="true" />
-                            <span>Copiar morada</span>
+                            <span>{t.visit.copyAddress}</span>
                           </>
                         )}
                       </button>
@@ -225,7 +231,7 @@ export function VisitLocationSection({
 
                 {/* Lista de hospitalidade separada por hairlines */}
                 <ul className="mt-6 divide-y divide-[#DDD7CE] border-t border-[#DDD7CE]">
-                  {VISITOR_NOTES.map((item) => (
+                  {t.visit.visitorNotes.map((item) => (
                     <li
                       key={item}
                       className="flex items-start gap-3 py-3 text-sm leading-relaxed text-[#172226]/85"
@@ -249,7 +255,7 @@ export function VisitLocationSection({
                   className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
                 >
                   <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>Google Maps</span>
+                  <span>{t.visit.googleMaps}</span>
                 </a>
                 <a
                   href={activeLocation.wazeUrl}
@@ -261,7 +267,7 @@ export function VisitLocationSection({
                     className="h-4 w-4 shrink-0 text-[#195963]"
                     aria-hidden="true"
                   />
-                  <span>Abrir no Waze</span>
+                  <span>{t.visit.openWaze}</span>
                 </a>
               </div>
             </div>
@@ -274,11 +280,10 @@ export function VisitLocationSection({
                 <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   <div>
                     <h3 className="font-display text-xl font-semibold text-[#172226]">
-                      Avise-nos quando vem
+                      {t.visit.formTitle}
                     </h3>
                     <p className="mt-1 text-sm text-[#46585E]">
-                      Demora menos de um minuto. Assim a nossa equipa de receção
-                      pode dar as boas-vindas a si e à sua família.
+                      {t.visit.formSubtitle}
                     </p>
                   </div>
 
@@ -288,7 +293,7 @@ export function VisitLocationSection({
                         htmlFor="visitor-name"
                         className="block text-sm font-medium text-[#172226]"
                       >
-                        O seu nome
+                        {t.visit.nameLabel}
                       </label>
                       <input
                         id="visitor-name"
@@ -298,7 +303,7 @@ export function VisitLocationSection({
                         autoComplete="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Ex.: Maria Clara"
+                        placeholder={t.visit.namePlaceholder}
                         className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2.5 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
                       />
                     </div>
@@ -308,7 +313,7 @@ export function VisitLocationSection({
                         htmlFor="visitor-whatsapp"
                         className="block text-sm font-medium text-[#172226]"
                       >
-                        WhatsApp / Telemóvel
+                        {t.visit.phoneLabel}
                       </label>
                       <input
                         id="visitor-whatsapp"
@@ -321,7 +326,7 @@ export function VisitLocationSection({
                         onChange={(e) =>
                           setWhatsapp(formatPhoneInput(e.target.value))
                         }
-                        placeholder="+351 9XX XXX XXX"
+                        placeholder={t.visit.phonePlaceholder}
                         className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2.5 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
                       />
                     </div>
@@ -329,22 +334,22 @@ export function VisitLocationSection({
 
                   <div>
                     <span className="block text-sm font-medium text-[#172226]">
-                      Em que dia pretende visitar-nos?
+                      {t.visit.dayQuestion}
                     </span>
                     <div
                       role="radiogroup"
-                      aria-label="Dia pretendido para a visita"
+                      aria-label={t.visit.dayAria}
                       className="mt-2 grid grid-cols-1 gap-2.5 sm:grid-cols-2"
                     >
-                      {VISIT_DAY_OPTIONS.map((option) => {
-                        const selected = visitDay === option;
+                      {t.visit.dayOptions.map((option, index) => {
+                        const selected = visitDayIndex === index;
                         return (
                           <button
-                            key={option}
+                            key={index}
                             type="button"
                             role="radio"
                             aria-checked={selected}
-                            onClick={() => setVisitDay(option)}
+                            onClick={() => setVisitDayIndex(index)}
                             className={`flex min-h-[48px] items-center justify-start rounded-xl border px-4 py-2.5 text-left text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] ${
                               selected
                                 ? 'border-[#195963] bg-[#195963] text-white'
@@ -361,22 +366,22 @@ export function VisitLocationSection({
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <span className="block text-sm font-medium text-[#172226]">
-                        Quantas pessoas vêm?
+                        {t.visit.groupQuestion}
                       </span>
                       <div
                         role="radiogroup"
-                        aria-label="Quantidade de visitantes"
+                        aria-label={t.visit.groupAria}
                         className="mt-2 grid grid-cols-3 gap-2"
                       >
-                        {GROUP_SIZE_OPTIONS.map((opt) => {
-                          const active = groupSize === opt;
+                        {t.visit.groupSizeOptions.map((opt, index) => {
+                          const active = groupSizeIndex === index;
                           return (
                             <button
-                              key={opt}
+                              key={index}
                               type="button"
                               role="radio"
                               aria-checked={active}
-                              onClick={() => setGroupSize(opt)}
+                              onClick={() => setGroupSizeIndex(index)}
                               className={`min-h-[44px] rounded-xl border px-2.5 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                                 active
                                   ? 'border-[#195963] bg-[#195963] text-white'
@@ -395,7 +400,7 @@ export function VisitLocationSection({
                         htmlFor="visitor-note"
                         className="block text-sm font-medium text-[#172226]"
                       >
-                        Observação ou pedido de oração (opcional)
+                        {t.visit.noteLabel}
                       </label>
                       <input
                         id="visitor-note"
@@ -403,26 +408,26 @@ export function VisitLocationSection({
                         type="text"
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
-                        placeholder="Ex.: Vamos com 2 crianças"
+                        placeholder={t.visit.notePlaceholder}
                         className="mt-2 block min-h-[44px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
                       />
                     </div>
                   </div>
 
-                  {interest && (
+                  {interestLabel && (
                     <div className="flex items-center justify-between gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-3 text-sm">
                       <span>
-                        Interesse selecionado:{' '}
+                        {t.visit.interestSelected}{' '}
                         <strong className="font-semibold text-[#195963]">
-                          {interest}
+                          {interestLabel}
                         </strong>
                       </span>
                       <button
                         type="button"
-                        onClick={() => setInterest('')}
+                        onClick={onClearMinistry}
                         className="min-h-[36px] shrink-0 text-xs font-semibold text-[#46585E] underline hover:text-[#172226]"
                       >
-                        Remover
+                        {t.visit.removeInterest}
                       </button>
                     </div>
                   )}
@@ -440,7 +445,7 @@ export function VisitLocationSection({
                     type="submit"
                     className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A] focus-visible:ring-offset-2"
                   >
-                    Confirmar Planeamento de Visita
+                    {t.visit.submitCta}
                   </button>
                 </form>
               ) : (
@@ -451,16 +456,20 @@ export function VisitLocationSection({
                   </div>
 
                   <h3 className="mt-4 font-display text-2xl font-semibold text-[#172226]">
-                    Estaremos à sua espera, {name.trim()}!
+                    {t.visit.successTitlePrefix}
+                    {name.trim()}
+                    {t.visit.successTitleSuffix}
                   </h3>
                   <p className="mt-2 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
-                    Registámos a sua intenção de visita ({groupSize}) para{' '}
+                    {t.visit.successBodyPrefix} ({groupSize}){' '}
+                    {t.visit.successBodyFor}{' '}
                     <strong className="font-semibold text-[#172226]">
                       {visitDay}
                     </strong>
-                    {interest ? ` com interesse em ${interest}` : ''}. Caso
-                    pretenda enviar o aviso diretamente à igreja, escolha um dos
-                    canais abaixo:
+                    {interestLabel
+                      ? ` ${t.visit.successBodyWithInterest} ${interestLabel}`
+                      : ''}
+                    {t.visit.successBodySuffix}
                   </p>
 
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -469,7 +478,7 @@ export function VisitLocationSection({
                       className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#195963] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B]"
                     >
                       <Mail className="h-4 w-4" aria-hidden="true" />
-                      <span>Enviar por E-mail</span>
+                      <span>{t.visit.sendEmail}</span>
                     </a>
 
                     <a
@@ -479,7 +488,7 @@ export function VisitLocationSection({
                       className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#195963] bg-white px-5 py-3 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#FAF8F4]"
                     >
                       <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                      <span>Enviar no WhatsApp</span>
+                      <span>{t.visit.sendWhatsApp}</span>
                     </a>
 
                     <button
@@ -488,7 +497,7 @@ export function VisitLocationSection({
                       className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-5 py-3 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
                     >
                       <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                      <span>Novo registo</span>
+                      <span>{t.visit.newRegistration}</span>
                     </button>
                   </div>
                 </div>

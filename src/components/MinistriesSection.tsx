@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { MINISTRIES } from '../data/churchConfig';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Reveal } from './Reveal';
 
 interface MinistriesSectionProps {
-  onSelectMinistry: (ministryTitle: string) => void;
+  onSelectMinistry: (ministryId: string) => void;
 }
 
 export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) {
+  const { t } = useLanguage();
   const [openId, setOpenId] = useState<string>(MINISTRIES[0].id);
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
@@ -27,17 +29,16 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
           <Reveal className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
               <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
-                Envolva-se
+                {t.ministries.kicker}
               </p>
               <h2
                 id="ministerios-heading"
                 className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
               >
-                Ministérios para caminhar juntos
+                {t.ministries.heading}
               </h2>
               <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-[#46585E]">
-                Há sempre um lugar para a sua fase de vida. Toque num ministério
-                para ver os horários, fotografias reais e contactar a equipa.
+                {t.ministries.intro}
               </p>
             </div>
           </Reveal>
@@ -50,6 +51,7 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
                 const panelId = `ministry-panel-${ministry.id}`;
                 const triggerId = `ministry-trigger-${ministry.id}`;
                 const hasFailed = failedImages[ministry.id];
+                const localized = t.ministries.items[ministry.id];
 
                 return (
                   <div key={ministry.id} className="bg-transparent">
@@ -68,10 +70,10 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
                           </span>
                           <div>
                             <span className="block font-display text-xl font-semibold text-[#172226] sm:text-2xl">
-                              {ministry.title}
+                              {localized.title}
                             </span>
                             <span className="mt-1 block text-sm font-normal text-[#46585E]">
-                              {ministry.summary}
+                              {localized.summary}
                             </span>
                           </div>
                         </div>
@@ -101,7 +103,7 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
                           <div className="aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg border border-[#DDD7CE] bg-[#EFECE5] sm:aspect-[4/5] sm:w-36">
                             <img
                               src={ministry.image}
-                              alt={ministry.imageAlt}
+                              alt={localized.imageAlt}
                               referrerPolicy="no-referrer"
                               onError={() =>
                                 setFailedImages((prev) => ({
@@ -117,23 +119,23 @@ export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) 
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#46585E]">
                             <span className="font-semibold text-[#195963]">
-                              {ministry.schedule}
+                              {localized.schedule}
                             </span>
                             <span aria-hidden="true">·</span>
-                            <span>{ministry.audience}</span>
+                            <span>{localized.audience}</span>
                           </div>
 
                           <p className="mt-2.5 max-w-[54ch] text-base leading-relaxed text-[#172226]/85">
-                            {ministry.description}
+                            {localized.description}
                           </p>
 
                           <div className="mt-5">
                             <a
                               href="#visita"
-                              onClick={() => onSelectMinistry(ministry.title)}
+                              onClick={() => onSelectMinistry(ministry.id)}
                               className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[#195963] px-4 py-2 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
                             >
-                              <span>Quero participar</span>
+                              <span>{t.ministries.ctaJoin}</span>
                               <ArrowRight
                                 className="h-4 w-4"
                                 aria-hidden="true"

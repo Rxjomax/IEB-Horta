@@ -3,7 +3,7 @@
  * CONFIGURAÇÃO CENTRAL DA IEB HORTA
  * ----------------------------------------------------------------------------
  * Informações e imagens reais do Instagram @iebhorta e dos registos oficiais
- * da Igreja Evangélica Baptista da Horta (Av. Marginal, nº 17, Ilha do Faial).
+ * da Igreja Evangélica Baptista da Horta (Av. Marginal, n.º 17, Ilha do Faial).
  * ============================================================================
  */
 
@@ -62,7 +62,7 @@ export const CHURCH_INFO = {
   shortName: 'IEB Horta',
   fullName: 'Igreja Evangélica Baptista da Horta',
   affiliation: 'Convenção Baptista Portuguesa · 51 Anos no Faial',
-  pastor: 'Pr. Luíz Eduardo Júnior',
+  pastor: 'Pr. Luiz Eduardo Júnior',
   email: 'iebhorta@gmail.com',
   handle: '@iebhorta',
   instagramUrl: 'https://www.instagram.com/iebhorta/',
@@ -72,10 +72,10 @@ export const CHURCH_INFO = {
   whatsappMessage:
     'Olá! Gostava de saber mais sobre os cultos da Igreja Evangélica Baptista da Horta e planear a minha visita.',
 
-  // Morada principal e coordenadas oficiais (Av. Marginal, nº 17, Horta)
-  address: 'Av. Marginal, nº 17, 9900-114 Horta',
+  // Morada principal e coordenadas oficiais (Av. Marginal, n.º 17, Horta)
+  address: 'Av. Marginal, n.º 17, 9900-114 Horta',
   addressRegion: 'Matriz · Ilha do Faial, Açores, Portugal',
-  ebdTempAddress: 'Rua do Pasteleiro, nº 12-D — Angústias (Salas da EBD 16h)',
+  ebdTempAddress: 'Rua do Pasteleiro, n.º 12-D — Angústias (Salas da EBD 16h)',
   googleMapsUrl:
     'https://www.google.com/maps/search/?api=1&query=38.540579,-28.6253875',
   wazeUrl: 'https://waze.com/ul?ll=38.540579,-28.6253875&navigate=yes',
@@ -99,7 +99,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     id: 'templo',
     label: 'Templo Principal',
     title: 'Culto de Celebração & EBD (10h00)',
-    address: 'Av. Marginal, nº 17, 9900-114 Horta',
+    address: 'Av. Marginal, n.º 17, 9900-114 Horta',
     region: 'Matriz · Ilha do Faial, Açores, Portugal',
     note: 'Em frente à baía da Horta, com acesso fácil e receção acolhedora.',
     googleMapsUrl:
@@ -110,7 +110,7 @@ export const CHURCH_LOCATIONS: ChurchLocation[] = [
     id: 'ebd',
     label: 'Salas EBD (16h00)',
     title: 'Escola Bíblica Dominical (Domingo 16h00)',
-    address: 'Rua do Pasteleiro, nº 12-D, Angústias',
+    address: 'Rua do Pasteleiro, n.º 12-D, Angústias',
     region: '9900 Horta · Ilha do Faial, Açores',
     note: 'Espaço temporário com salas separadas para Adultos, Adolescentes e Crianças.',
     googleMapsUrl:
@@ -130,7 +130,7 @@ export const WEEKLY_SCHEDULE: ScheduleItem[] = [
     title: 'Culto de Celebração',
     day: 'Domingos',
     times: ['11h15'],
-    location: 'Av. Marginal, nº 17 — Horta',
+    location: 'Av. Marginal, n.º 17 — Horta',
     description:
       'Culto dominical de louvor, comunhão e exposição bíblica. Nos meses de verão (julho e agosto), tem início às 11h00.',
     icon: 'sun',
@@ -143,7 +143,7 @@ export const WEEKLY_SCHEDULE: ScheduleItem[] = [
     times: ['10h00', '16h00'],
     location: 'Adultos, Adolescentes e Crianças',
     description:
-      'Estudo bíblico por idades às 10h00 na Av. Marginal, nº 17, ou às 16h00 na Rua do Pasteleiro, nº 12-D (Angústias).',
+      'Estudo bíblico por idades às 10h00 na Av. Marginal, n.º 17, ou às 16h00 na Rua do Pasteleiro, n.º 12-D (Angústias).',
     icon: 'book',
   },
   {
@@ -239,12 +239,12 @@ export const MINISTRIES: MinistryItem[] = [
     number: '04',
     title: 'Batismo & Discipulado',
     summary: 'Primeiros passos na fé cristã e acompanhamento pastoral.',
-    schedule: 'Acompanhamento com o Pr. Luíz Eduardo Júnior',
+    schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior',
     audience: 'Visitantes e novos membros',
     description:
       'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, esclarecer dúvidas, preparar para o batismo e integrar a igreja.',
     image: '/assets/instagram/pr_luiz_pregacao.jpg',
-    imageAlt: 'Pr. Luíz Eduardo Júnior a ministrar as Escrituras no templo',
+    imageAlt: 'Pr. Luiz Eduardo Júnior a ministrar as Escrituras no templo',
   },
 ];
 
@@ -256,11 +256,11 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     id: 'post-preaching',
     filterGroup: 'cultos',
     image: '/assets/instagram/pr_luiz_pregacao.jpg',
-    alt: 'Pr. Luíz Eduardo Júnior a ministrar a Palavra no templo da IEB Horta',
+    alt: 'Pr. Luiz Eduardo Júnior a ministrar a Palavra no templo da IEB Horta',
     category: 'Momento da Palavra',
     dateLabel: '1 Cor 10:31',
     caption:
-      'Pr. Luíz Eduardo a partilhar as Escrituras no templo: “Quer comais, quer bebais ou façais outra qualquer coisa, fazei tudo para a glória de Deus.”',
+      'Pr. Luiz Eduardo a partilhar as Escrituras no templo: “Quer comais, quer bebais ou façais outra qualquer coisa, fazei tudo para a glória de Deus.”',
     scripture: '1 Coríntios 10:31',
   },
   {
@@ -271,7 +271,7 @@ export const INSTAGRAM_POSTS: GalleryPost[] = [
     category: 'Domingos',
     dateLabel: '10h00 & 11h15',
     caption:
-      'Todos os domingos na Av. Marginal, nº 17 — Horta: às 10h00 Escola Bíblica Dominical e às 11h15 Culto de Celebração.',
+      'Todos os domingos na Av. Marginal, n.º 17 — Horta: às 10h00 Escola Bíblica Dominical e às 11h15 Culto de Celebração.',
   },
   {
     id: 'post-social',
