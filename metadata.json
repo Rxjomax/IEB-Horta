@@ -1,0 +1,8 @@
+{
+  "name": "IEB Horta — Igreja Evangélica Batista da Horta",
+  "description": "Um lugar de fé, família e novos começos. Horários de cultos, ministérios, comunidade @iebhorta e planeje sua visita à Igreja Evangélica Batista da Horta.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
