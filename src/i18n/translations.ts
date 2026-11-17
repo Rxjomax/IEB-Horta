@@ -230,6 +230,15 @@ export interface SiteTranslations {
     heading: string;
     intro: string;
     downloadPdf: string;
+    printModal: {
+      previewTitle: string;
+      printNow: string;
+      downloadHtml: string;
+      close: string;
+      venueHeader: string;
+      hqHeader: string;
+      savedNotice: string;
+    };
     tabsAria: string;
     tabs: {
       agenda: string;
@@ -438,6 +447,34 @@ export interface SiteTranslations {
     schedule: string;
     whatsapp: string;
   };
+  search: {
+    buttonAria: string;
+    buttonLabel: string;
+    drawerButtonLabel: string;
+    footerLinkLabel: string;
+    modalTitle: string;
+    inputPlaceholder: string;
+    clearInput: string;
+    closeModal: string;
+    filterAria: string;
+    categories: {
+      all: string;
+      bulletin: string;
+      schedule: string;
+      essence: string;
+      ministries: string;
+      community: string;
+      visit: string;
+    };
+    suggestionsTitle: string;
+    suggestions: string[];
+    resultsCountSingular: string;
+    resultsCountPlural: string;
+    emptyTitle: string;
+    emptyHint: string;
+    keyboardHint: string;
+    openResult: string;
+  };
 }
 
 export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
@@ -600,6 +637,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       intro:
         'Acompanhe a agenda oficial do mês de novembro, a transição para as instalações da Assembleia de Deus do Faial, os motivos de oração da nossa comunidade e o momento de gratidão.',
       downloadPdf: 'Imprimir Boletim',
+      printModal: {
+        previewTitle: 'Folha de Impressão · Boletim de Novembro 2026',
+        printNow: 'Imprimir / Guardar PDF',
+        downloadHtml: 'Descarregar Ficha',
+        close: 'Fechar',
+        venueHeader:
+          'Cultos (desde 08/11): Instalações da Assembleia de Deus do Faial',
+        hqHeader: 'Sede Oficial: Av. Marginal, n.º 17 · 9900-121 Horta',
+        savedNotice: 'Ficha de impressão descarregada',
+      },
       tabsAria: 'Selecionar secção do Boletim de Novembro',
       tabs: {
         agenda: 'Agenda do Mês',
@@ -1184,6 +1231,44 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       schedule: 'Horários',
       whatsapp: 'WhatsApp',
     },
+    search: {
+      buttonAria: 'Pesquisar conteúdo no site',
+      buttonLabel: 'Pesquisar',
+      drawerButtonLabel: 'Pesquisar no site...',
+      footerLinkLabel: 'Pesquisar no site',
+      modalTitle: 'Pesquisar no site da IEB Horta',
+      inputPlaceholder: 'Pesquisar horários, agenda de novembro, local, oração, ministérios...',
+      clearInput: 'Limpar texto da pesquisa',
+      closeModal: 'Fechar pesquisa',
+      filterAria: 'Filtrar resultados por secção',
+      categories: {
+        all: 'Tudo',
+        bulletin: 'Agenda Novembro',
+        schedule: 'Horários',
+        essence: 'Sobre & Fé',
+        ministries: 'Ministérios',
+        community: 'Conteúdos',
+        visit: 'Local & Visita',
+      },
+      suggestionsTitle: 'Pesquisas frequentes',
+      suggestions: [
+        '16h00',
+        'Assembleia de Deus',
+        'Jantar de Ação de Graças',
+        'Oração',
+        'Celeiro',
+        'Batismo',
+        'Av. Marginal',
+        'Jovens',
+      ],
+      resultsCountSingular: 'resultado encontrado',
+      resultsCountPlural: 'resultados encontrados',
+      emptyTitle: 'Nenhum resultado encontrado',
+      emptyHint:
+        'Experimente procurar por «16h00», «Assembleia de Deus», «Oração», «Jantar», «Celeiro» ou «Batismo».',
+      keyboardHint: 'ESC para fechar · Setas para navegar · Enter para abrir',
+      openResult: 'Abrir secção',
+    },
   },
 
   'pt-BR': {
@@ -1345,6 +1430,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       intro:
         'Acompanhe a agenda oficial do mês de novembro, a transição para as instalações da Assembleia de Deus do Faial, os motivos de oração da comunidade e o momento de gratidão.',
       downloadPdf: 'Imprimir Boletim',
+      printModal: {
+        previewTitle: 'Folha de Impressão · Boletim de Novembro 2026',
+        printNow: 'Imprimir / Salvar PDF',
+        downloadHtml: 'Baixar Ficha',
+        close: 'Fechar',
+        venueHeader:
+          'Cultos (desde 08/11): Instalações da Assembleia de Deus do Faial',
+        hqHeader: 'Sede Oficial: Av. Marginal, n.º 17 · 9900-121 Horta',
+        savedNotice: 'Ficha de impressão baixada',
+      },
       tabsAria: 'Selecionar seção do Boletim de Novembro',
       tabs: {
         agenda: 'Agenda do Mês',
@@ -1929,6 +2024,44 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       schedule: 'Horários',
       whatsapp: 'WhatsApp',
     },
+    search: {
+      buttonAria: 'Pesquisar conteúdo no site',
+      buttonLabel: 'Pesquisar',
+      drawerButtonLabel: 'Pesquisar no site...',
+      footerLinkLabel: 'Pesquisar no site',
+      modalTitle: 'Pesquisar no site da IEB Horta',
+      inputPlaceholder: 'Pesquisar horários, agenda de novembro, local, oração, ministérios...',
+      clearInput: 'Limpar texto da pesquisa',
+      closeModal: 'Fechar pesquisa',
+      filterAria: 'Filtrar resultados por seção',
+      categories: {
+        all: 'Tudo',
+        bulletin: 'Agenda Novembro',
+        schedule: 'Horários',
+        essence: 'Sobre & Fé',
+        ministries: 'Ministérios',
+        community: 'Conteúdos',
+        visit: 'Local & Visita',
+      },
+      suggestionsTitle: 'Pesquisas frequentes',
+      suggestions: [
+        '16h00',
+        'Assembleia de Deus',
+        'Jantar de Ação de Graças',
+        'Oração',
+        'Celeiro',
+        'Batismo',
+        'Av. Marginal',
+        'Jovens',
+      ],
+      resultsCountSingular: 'resultado encontrado',
+      resultsCountPlural: 'resultados encontrados',
+      emptyTitle: 'Nenhum resultado encontrado',
+      emptyHint:
+        'Tente buscar por «16h00», «Assembleia de Deus», «Oração», «Jantar», «Celeiro» ou «Batismo».',
+      keyboardHint: 'ESC para fechar · Setas para navegar · Enter para abrir',
+      openResult: 'Abrir seção',
+    },
   },
 
   en: {
@@ -2089,6 +2222,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       intro:
         'Follow our official November 2026 church calendar, transition to the Assembleia de Deus do Faial facilities, community prayer requests, and family gratitude.',
       downloadPdf: 'Print Bulletin',
+      printModal: {
+        previewTitle: 'Print Sheet · November 2026 Bulletin',
+        printNow: 'Print / Save PDF',
+        downloadHtml: 'Download Sheet',
+        close: 'Close',
+        venueHeader:
+          'Services (since 08/11): Assembleia de Deus do Faial facilities',
+        hqHeader: 'Official HQ: Av. Marginal, n.º 17 · 9900-121 Horta',
+        savedNotice: 'Printable bulletin downloaded',
+      },
       tabsAria: 'Select November Bulletin section',
       tabs: {
         agenda: 'Monthly Agenda',
@@ -2664,6 +2807,44 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       schedule: 'Services',
       whatsapp: 'WhatsApp',
     },
+    search: {
+      buttonAria: 'Search website content',
+      buttonLabel: 'Search',
+      drawerButtonLabel: 'Search website...',
+      footerLinkLabel: 'Search website',
+      modalTitle: 'Search IEB Horta',
+      inputPlaceholder: 'Search schedules, November agenda, location, prayer, ministries...',
+      clearInput: 'Clear search text',
+      closeModal: 'Close search',
+      filterAria: 'Filter results by section',
+      categories: {
+        all: 'All',
+        bulletin: 'November Agenda',
+        schedule: 'Schedule',
+        essence: 'About & Beliefs',
+        ministries: 'Ministries',
+        community: 'Media & Giving',
+        visit: 'Location & Visit',
+      },
+      suggestionsTitle: 'Quick searches',
+      suggestions: [
+        '16:00',
+        'Assembleia de Deus',
+        'Thanksgiving',
+        'Prayer',
+        'Celeiro',
+        'Baptism',
+        'Av. Marginal',
+        'Youth',
+      ],
+      resultsCountSingular: 'result found',
+      resultsCountPlural: 'results found',
+      emptyTitle: 'No matching content found',
+      emptyHint:
+        'Try searching for “16:00”, “Assembleia de Deus”, “Prayer”, “Thanksgiving”, “Celeiro”, or “Baptism”.',
+      keyboardHint: 'ESC to close · Arrow keys to navigate · Enter to open',
+      openResult: 'Go to section',
+    },
   },
 
   fr: {
@@ -2824,6 +3005,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       intro:
         'Retrouvez le calendrier officiel de novembre 2026, le passage aux locaux de l’Assembleia de Deus do Faial, les sujets de prière et le témoignage de reconnaissance.',
       downloadPdf: 'Imprimer le Bulletin',
+      printModal: {
+        previewTitle: 'Feuille d’Impression · Bulletin de Novembre 2026',
+        printNow: 'Imprimer / Enregistrer PDF',
+        downloadHtml: 'Télécharger la Fiche',
+        close: 'Fermer',
+        venueHeader:
+          'Cultes (dès le 08/11) : Locaux de l’Assembleia de Deus do Faial',
+        hqHeader: 'Siège officiel : Av. Marginal, n.º 17 · 9900-121 Horta',
+        savedNotice: 'Fiche imprimable téléchargée',
+      },
       tabsAria: 'Choisir une section du Bulletin de Novembre',
       tabs: {
         agenda: 'Agenda du Mois',
@@ -3416,6 +3607,44 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       schedule: 'Horaires',
       whatsapp: 'WhatsApp',
     },
+    search: {
+      buttonAria: 'Rechercher sur le site',
+      buttonLabel: 'Rechercher',
+      drawerButtonLabel: 'Rechercher sur le site...',
+      footerLinkLabel: 'Rechercher sur le site',
+      modalTitle: 'Rechercher sur le site de l’IEB Horta',
+      inputPlaceholder: 'Rechercher horaires, agenda de novembre, lieu, prière, ministères...',
+      clearInput: 'Effacer la recherche',
+      closeModal: 'Fermer la recherche',
+      filterAria: 'Filtrer les résultats par section',
+      categories: {
+        all: 'Tout',
+        bulletin: 'Agenda Novembre',
+        schedule: 'Horaires',
+        essence: 'À propos & Foi',
+        ministries: 'Ministères',
+        community: 'Contenus',
+        visit: 'Lieu & Visite',
+      },
+      suggestionsTitle: 'Recherches fréquentes',
+      suggestions: [
+        '16h00',
+        'Assembleia de Deus',
+        'Action de Grâce',
+        'Prière',
+        'Celeiro',
+        'Baptême',
+        'Av. Marginal',
+        'Jeunes',
+      ],
+      resultsCountSingular: 'résultat trouvé',
+      resultsCountPlural: 'résultats trouvés',
+      emptyTitle: 'Aucun contenu trouvé',
+      emptyHint:
+        'Essayez « 16h00 », « Assembleia de Deus », « Prière », « Action de Grâce », « Celeiro » ou « Baptême ».',
+      keyboardHint: 'ESC pour fermer · Flèches pour naviguer · Entrée pour ouvrir',
+      openResult: 'Ouvrir la section',
+    },
   },
 
   es: {
@@ -3576,6 +3805,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       intro:
         'Consulta la agenda oficial de noviembre, el traslado de cultos a las instalaciones de la Assembleia de Deus do Faial, los motivos de oración y el testimonio de gratitud.',
       downloadPdf: 'Imprimir Boletín',
+      printModal: {
+        previewTitle: 'Hoja de Impresión · Boletín de Noviembre 2026',
+        printNow: 'Imprimir / Guardar PDF',
+        downloadHtml: 'Descargar Hoja',
+        close: 'Cerrar',
+        venueHeader:
+          'Cultos (desde 08/11): Instalaciones de Assembleia de Deus do Faial',
+        hqHeader: 'Sede oficial: Av. Marginal, n.º 17 · 9900-121 Horta',
+        savedNotice: 'Hoja imprimible descargada',
+      },
       tabsAria: 'Seleccionar sección del Boletín de Noviembre',
       tabs: {
         agenda: 'Agenda del Mes',
@@ -4166,6 +4405,44 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       map: 'Mapa',
       schedule: 'Horarios',
       whatsapp: 'WhatsApp',
+    },
+    search: {
+      buttonAria: 'Buscar contenido en el sitio',
+      buttonLabel: 'Buscar',
+      drawerButtonLabel: 'Buscar en el sitio...',
+      footerLinkLabel: 'Buscar en el sitio',
+      modalTitle: 'Buscar en el sitio de IEB Horta',
+      inputPlaceholder: 'Buscar horarios, agenda de noviembre, ubicación, oración, ministerios...',
+      clearInput: 'Limpiar búsqueda',
+      closeModal: 'Cerrar búsqueda',
+      filterAria: 'Filtrar resultados por sección',
+      categories: {
+        all: 'Todo',
+        bulletin: 'Agenda Noviembre',
+        schedule: 'Horarios',
+        essence: 'Sobre & Fe',
+        ministries: 'Ministerios',
+        community: 'Contenidos',
+        visit: 'Ubicación & Visita',
+      },
+      suggestionsTitle: 'Búsquedas frecuentes',
+      suggestions: [
+        '16:00',
+        'Assembleia de Deus',
+        'Acción de Gracias',
+        'Oración',
+        'Celeiro',
+        'Bautismo',
+        'Av. Marginal',
+        'Jóvenes',
+      ],
+      resultsCountSingular: 'resultado encontrado',
+      resultsCountPlural: 'resultados encontrados',
+      emptyTitle: 'No se encontró contenido',
+      emptyHint:
+        'Prueba con «16:00», «Assembleia de Deus», «Oración», «Acción de Gracias», «Celeiro» o «Bautismo».',
+      keyboardHint: 'ESC para cerrar · Flechas para navegar · Enter para abrir',
+      openResult: 'Ir a la sección',
     },
   },
 };

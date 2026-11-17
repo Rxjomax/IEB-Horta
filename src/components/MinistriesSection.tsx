@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { MINISTRIES } from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -6,15 +6,27 @@ import { Reveal } from './Reveal';
 
 interface MinistriesSectionProps {
   onSelectMinistry: (ministryId: string) => void;
+  focusedMinistryId?: string;
 }
 
-export function MinistriesSection({ onSelectMinistry }: MinistriesSectionProps) {
+export function MinistriesSection({
+  onSelectMinistry,
+  focusedMinistryId,
+}: MinistriesSectionProps) {
   const { t } = useLanguage();
   const [activeDesktopId, setActiveDesktopId] = useState<string>(
     MINISTRIES[0].id
   );
   const [openMobileId, setOpenMobileId] = useState<string>(MINISTRIES[0].id);
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    if (!focusedMinistryId) return;
+    if (MINISTRIES.some((m) => m.id === focusedMinistryId)) {
+      setActiveDesktopId(focusedMinistryId);
+      setOpenMobileId(focusedMinistryId);
+    }
+  }, [focusedMinistryId]);
 
   const activeMinistry =
     MINISTRIES.find((m) => m.id === activeDesktopId) ?? MINISTRIES[0];

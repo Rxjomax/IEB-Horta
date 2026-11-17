@@ -5,6 +5,7 @@ import {
   Mail,
   MessageCircle,
   Phone,
+  Search,
   Youtube,
 } from 'lucide-react';
 import { CHURCH_INFO, COOPERATION_PARTNERS } from '../data/churchConfig';
@@ -17,12 +18,14 @@ interface FooterProps {
   onSelectBulletinTab: (tab: BulletinTabId) => void;
   onSelectAboutTab: (tab: AboutTabId) => void;
   onSelectCommunityTab: (tab: CommunityTabId) => void;
+  onOpenSearch: () => void;
 }
 
 export function Footer({
   onSelectBulletinTab,
   onSelectAboutTab,
   onSelectCommunityTab,
+  onOpenSearch,
 }: FooterProps) {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
@@ -129,6 +132,16 @@ export function Footer({
               {t.footer.navigationTitle}
             </h2>
             <ul className="mt-3 space-y-0.5">
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenSearch}
+                  className="inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-[#195963] transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                >
+                  <Search className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span>{t.search.footerLinkLabel}</span>
+                </button>
+              </li>
               {footerLinks.map((link) => (
                 <li key={link.label}>
                   <a

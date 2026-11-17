@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ArrowRight,
   Cake,
@@ -17,6 +18,7 @@ import {
 import { useLanguage } from '../i18n/LanguageContext';
 import { Reveal } from './Reveal';
 import type { CommunityTabId } from './InstagramGallery';
+import { PrintableBulletinModal } from './PrintableBulletinSheet';
 
 export type BulletinTabId = 'agenda' | 'anuncios' | 'oracao' | 'gratidao';
 
@@ -32,6 +34,18 @@ export function NovemberBulletinSection({
   onSelectCommunityTab,
 }: NovemberBulletinSectionProps) {
   const { t } = useLanguage();
+  const [printPreviewOpen, setPrintPreviewOpen] = useState(false);
+
+  const handleOpenPrint = () => {
+    setPrintPreviewOpen(true);
+    window.setTimeout(() => {
+      try {
+        window.print();
+      } catch {
+        // Fallback tratado pelo modal de impressão e download HTML
+      }
+    }, 150);
+  };
 
   const tabs: Array<{ id: BulletinTabId; label: string }> = [
     { id: 'agenda', label: t.bulletin.tabs.agenda },
@@ -76,7 +90,7 @@ export function NovemberBulletinSection({
 
             <button
               type="button"
-              onClick={() => window.print()}
+              onClick={handleOpenPrint}
               className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-xl border border-[#DDD7CE] bg-white px-5 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] lg:self-auto print:hidden"
             >
               <Printer className="h-4 w-4 text-[#195963]" aria-hidden="true" />
@@ -507,6 +521,11 @@ export function NovemberBulletinSection({
           </div>
         )}
       </div>
+
+      <PrintableBulletinModal
+        open={printPreviewOpen}
+        onClose={() => setPrintPreviewOpen(false)}
+      />
     </section>
   );
 }

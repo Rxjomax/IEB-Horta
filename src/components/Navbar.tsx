@@ -5,6 +5,7 @@ import {
   Instagram,
   Menu,
   MessageCircle,
+  Search,
   X,
 } from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
@@ -27,12 +28,14 @@ interface NavbarProps {
   onSelectBulletinTab: (tab: BulletinTabId) => void;
   onSelectAboutTab: (tab: AboutTabId) => void;
   onSelectCommunityTab: (tab: CommunityTabId) => void;
+  onOpenSearch: () => void;
 }
 
 export function Navbar({
   onSelectBulletinTab,
   onSelectAboutTab,
   onSelectCommunityTab,
+  onOpenSearch,
 }: NavbarProps) {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -151,7 +154,7 @@ export function Navbar({
             : 'border-b border-[#DDD7CE]/80 bg-[#FAF8F4]'
         }`}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-4 lg:px-8 xl:gap-8">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-1.5 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-4 lg:px-8 xl:gap-8">
           {/* Zona 1: Marca Oficial */}
           <a
             href="#inicio"
@@ -161,7 +164,7 @@ export function Navbar({
             <img
               src={CHURCH_INFO.logos.horizontal}
               alt={CHURCH_INFO.fullName}
-              className="h-7 w-auto object-contain mix-blend-multiply sm:h-9"
+              className="h-6 w-auto object-contain mix-blend-multiply sm:h-9"
             />
           </a>
 
@@ -287,11 +290,21 @@ export function Navbar({
             })}
           </nav>
 
-          {/* Zona 3: Ação Primária + Seletor de Idioma + Menu Mobile */}
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
+          {/* Zona 3: Pesquisa (Lupa) + Ação Primária + Seletor de Idioma + Menu Mobile */}
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              aria-label={t.search.buttonAria}
+              title={t.search.buttonAria}
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#DDD7CE] bg-white text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4]"
+            >
+              <Search className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </button>
+
             <a
               href="#visita"
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#195963] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] sm:px-5 sm:text-sm"
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#195963] px-2.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] sm:px-5 sm:text-sm"
             >
               {t.nav.ctaVisit}
             </a>
@@ -357,10 +370,27 @@ export function Navbar({
         </div>
 
         <div className="flex flex-1 flex-col justify-between overflow-y-auto px-5 py-6">
-          <nav
-            aria-label={t.nav.ariaMobile}
-            className="flex flex-col divide-y divide-[#DDD7CE]"
-          >
+          <div>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenSearch();
+              }}
+              aria-label={t.search.buttonAria}
+              className="mb-4 flex min-h-[48px] w-full items-center gap-3 rounded-xl border border-[#DDD7CE] bg-white px-4 py-3 text-left text-base text-[#46585E] transition-colors hover:border-[#195963] hover:text-[#172226] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+            >
+              <Search
+                className="h-5 w-5 shrink-0 text-[#195963]"
+                aria-hidden="true"
+              />
+              <span>{t.search.drawerButtonLabel}</span>
+            </button>
+
+            <nav
+              aria-label={t.nav.ariaMobile}
+              className="flex flex-col divide-y divide-[#DDD7CE]"
+            >
             {navLinks.map((link, index) => (
               <div key={link.href} className="py-1">
                 <a
@@ -430,6 +460,7 @@ export function Navbar({
               </div>
             ))}
           </nav>
+          </div>
 
           <div className="mt-8 space-y-4 border-t border-[#DDD7CE] pt-6">
             <div className="flex items-center gap-4">
