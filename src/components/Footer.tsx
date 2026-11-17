@@ -1,19 +1,58 @@
-import { Facebook, Instagram, Mail, MessageCircle, Youtube } from 'lucide-react';
-import { CHURCH_INFO } from '../data/churchConfig';
+import {
+  ArrowUpRight,
+  Facebook,
+  Instagram,
+  Mail,
+  MessageCircle,
+  Youtube,
+} from 'lucide-react';
+import { CHURCH_INFO, COOPERATION_PARTNERS } from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
+import type { AboutTabId } from './AboutSection';
+import type { CommunityTabId } from './InstagramGallery';
 
-export function Footer() {
+interface FooterProps {
+  onSelectAboutTab: (tab: AboutTabId) => void;
+  onSelectCommunityTab: (tab: CommunityTabId) => void;
+}
+
+export function Footer({
+  onSelectAboutTab,
+  onSelectCommunityTab,
+}: FooterProps) {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   const whatsappUrl = `https://wa.me/${CHURCH_INFO.whatsappNumber}?text=${encodeURIComponent(
     t.hero.whatsappMessage
   )}`;
 
-  const footerLinks = [
+  const footerLinks: Array<{
+    label: string;
+    href: string;
+    onClick?: () => void;
+  }> = [
     { label: t.nav.links.schedule, href: '#horarios' },
-    { label: t.about.kicker, href: '#essencia' },
+    {
+      label: t.nav.subLinks.churchHistory,
+      href: '#essencia',
+      onClick: () => onSelectAboutTab('historia'),
+    },
+    {
+      label: t.nav.subLinks.whatWeBelieve,
+      href: '#essencia',
+      onClick: () => onSelectAboutTab('cremos'),
+    },
     { label: t.nav.links.ministries, href: '#ministerios' },
-    { label: `${t.nav.links.community} @iebhorta`, href: '#comunidade' },
+    {
+      label: t.nav.subLinks.archivesEvents,
+      href: '#comunidade',
+      onClick: () => onSelectCommunityTab('arquivos'),
+    },
+    {
+      label: t.nav.subLinks.offeringsMission,
+      href: '#comunidade',
+      onClick: () => onSelectCommunityTab('ofertas'),
+    },
     { label: t.hero.ctaVisit, href: '#visita' },
   ];
 
@@ -21,8 +60,8 @@ export function Footer() {
     <footer className="border-t border-[#DDD7CE] bg-[#EFECE5] pb-16 text-[#172226] md:pb-0">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          {/* Marca e Resumo Institucional */}
-          <div className="md:col-span-5">
+          {/* Coluna 1: Marca e Moradas */}
+          <div className="md:col-span-4">
             <a
               href="#inicio"
               aria-label={CHURCH_INFO.fullName}
@@ -34,7 +73,7 @@ export function Footer() {
                 className="h-10 w-auto object-contain mix-blend-multiply"
               />
             </a>
-            <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-[#46585E] sm:text-base">
+            <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-[#46585E]">
               {t.footer.summary}
             </p>
             <div className="mt-4 space-y-1 text-sm">
@@ -56,17 +95,18 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Rápidos */}
-          <div className="md:col-span-4">
+          {/* Coluna 2: Navegação & Abas */}
+          <div className="md:col-span-3">
             <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
               {t.footer.navigationTitle}
             </h2>
-            <ul className="mt-3 space-y-1">
+            <ul className="mt-3 space-y-0.5">
               {footerLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <a
                     href={link.href}
-                    className="inline-flex min-h-[44px] items-center text-sm text-[#46585E] transition-colors hover:text-[#195963] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] sm:text-base"
+                    onClick={link.onClick}
+                    className="inline-flex min-h-[44px] items-center text-sm text-[#46585E] transition-colors hover:text-[#195963] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
                   >
                     {link.label}
                   </a>
@@ -75,7 +115,35 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Canais Oficiais */}
+          {/* Coluna 3: Cooperação Baptista (inspirada na IEBC) */}
+          <div className="md:col-span-2">
+            <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
+              {t.footer.cooperationTitle}
+            </h2>
+            <ul className="mt-3 space-y-0.5">
+              {COOPERATION_PARTNERS.map((partner) => {
+                const localized = t.about.cooperationItems[partner.id];
+                return (
+                  <li key={partner.id}>
+                    <a
+                      href={partner.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] items-center gap-1 text-sm text-[#46585E] transition-colors hover:text-[#195963] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                    >
+                      <span>{localized.name}</span>
+                      <ArrowUpRight
+                        className="h-3 w-3 shrink-0 opacity-65"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Coluna 4: Canais Oficiais */}
           <div className="md:col-span-3">
             <h2 className="font-display text-sm font-semibold tracking-wide text-[#172226]">
               {t.footer.channelsTitle}

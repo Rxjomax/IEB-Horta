@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Instagram, Menu, MessageCircle, X } from 'lucide-react';
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Instagram,
+  Menu,
+  MessageCircle,
+  X,
+} from 'lucide-react';
 import { CHURCH_INFO } from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
+import type { AboutTabId } from './AboutSection';
+import type { CommunityTabId } from './InstagramGallery';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const NAV_IDS = [
@@ -12,9 +21,20 @@ const NAV_IDS = [
   'visita',
 ] as const;
 
-export function Navbar() {
+interface NavbarProps {
+  onSelectAboutTab: (tab: AboutTabId) => void;
+  onSelectCommunityTab: (tab: CommunityTabId) => void;
+}
+
+export function Navbar({
+  onSelectAboutTab,
+  onSelectCommunityTab,
+}: NavbarProps) {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<
+    null | 'essencia' | 'comunidade'
+  >(null);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState<string>('');
@@ -25,6 +45,18 @@ export function Navbar() {
     { id: 'ministerios', label: t.nav.links.ministries, href: '#ministerios' },
     { id: 'comunidade', label: t.nav.links.community, href: '#comunidade' },
     { id: 'visita', label: t.nav.links.visit, href: '#visita' },
+  ];
+
+  const aboutSubLinks: Array<{ label: string; tab: AboutTabId }> = [
+    { label: t.nav.subLinks.churchHistory, tab: 'historia' },
+    { label: t.nav.subLinks.whatWeBelieve, tab: 'cremos' },
+    { label: t.nav.subLinks.cooperation, tab: 'cooperacao' },
+  ];
+
+  const communitySubLinks: Array<{ label: string; tab: CommunityTabId }> = [
+    { label: t.nav.subLinks.instagramFeed, tab: 'fotos' },
+    { label: t.nav.subLinks.archivesEvents, tab: 'arquivos' },
+    { label: t.nav.subLinks.offeringsMission, tab: 'ofertas' },
   ];
 
   useEffect(() => {
@@ -76,16 +108,18 @@ export function Navbar() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false);
+      if (event.key === 'Escape') {
+        if (mobileMenuOpen) setMobileMenuOpen(false);
+        if (openDropdown) setOpenDropdown(null);
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, openDropdown]);
 
   const handleNavClick = () => {
     setMobileMenuOpen(false);
+    setOpenDropdown(null);
   };
 
   const whatsappUrl = `https://wa.me/${CHURCH_INFO.whatsappNumber}?text=${encodeURIComponent(
@@ -95,13 +129,13 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-colors duration-200 ${
+        className={`sticky top-0 z-40 w-full border-t-[3px] border-t-[#195963] transition-colors duration-200 ${
           scrolled
             ? 'border-b border-[#DDD7CE] bg-[#FAF8F4]/95 backdrop-blur-md'
             : 'border-b border-[#DDD7CE]/80 bg-[#FAF8F4]'
         }`}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-18 lg:gap-6 lg:px-8">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-8 lg:px-8">
           {/* Zona 1: Marca Oficial */}
           <a
             href="#inicio"
@@ -115,31 +149,108 @@ export function Navbar() {
             />
           </a>
 
-          {/* Zona 2: Links de Navegação Desktop com Scroll-Spy */}
+          {/* Zona 2: Links de Navegação Desktop com Sub-abas Dropdown (inspiração IEBC) */}
           <nav
             aria-label={t.nav.ariaMain}
-            className="hidden items-center gap-5 lg:flex xl:gap-7"
+            className="hidden items-center gap-5 lg:flex xl:gap-6"
           >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
+              const hasSubmenu =
+                link.id === 'essencia' || link.id === 'comunidade';
+
+              if (!hasSubmenu) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    aria-current={isActive ? 'location' : undefined}
+                    className={`relative shrink-0 whitespace-nowrap py-2 text-sm font-medium transition-colors after:absolute after:bottom-1 after:left-0 after:h-[1.5px] after:bg-[#195963] after:transition-all after:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
+                      isActive
+                        ? 'text-[#195963] after:w-full'
+                        : 'text-[#172226]/85 hover:text-[#195963] after:w-0 hover:after:w-full'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+
+              const isDropdownOpen = openDropdown === link.id;
               return (
-                <a
+                <div
                   key={link.href}
-                  href={link.href}
-                  aria-current={isActive ? 'location' : undefined}
-                  className={`relative shrink-0 whitespace-nowrap py-2 text-sm font-medium transition-colors after:absolute after:bottom-1 after:left-0 after:h-[1.5px] after:bg-[#195963] after:transition-all after:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
-                    isActive
-                      ? 'text-[#195963] after:w-full'
-                      : 'text-[#172226]/80 hover:text-[#195963] after:w-0 hover:after:w-full'
-                  }`}
+                  className="relative"
+                  onMouseEnter={() =>
+                    setOpenDropdown(link.id as 'essencia' | 'comunidade')
+                  }
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  {link.label}
-                </a>
+                  <button
+                    type="button"
+                    aria-expanded={isDropdownOpen}
+                    onClick={() =>
+                      setOpenDropdown((prev) =>
+                        prev === link.id
+                          ? null
+                          : (link.id as 'essencia' | 'comunidade')
+                      )
+                    }
+                    className={`relative inline-flex shrink-0 items-center gap-1 whitespace-nowrap py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
+                      isActive
+                        ? 'text-[#195963]'
+                        : 'text-[#172226]/85 hover:text-[#195963]'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform duration-150 ${
+                        isDropdownOpen ? 'rotate-180 text-[#195963]' : ''
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </button>
+
+                  {isDropdownOpen && (
+                    <div className="absolute left-0 top-full z-50 w-56 pt-1">
+                      <div className="overflow-hidden rounded-xl border border-[#DDD7CE] bg-white py-1.5 shadow-lg">
+                        {link.id === 'essencia' &&
+                          aboutSubLinks.map((sub) => (
+                            <a
+                              key={sub.tab}
+                              href="#essencia"
+                              onClick={() => {
+                                onSelectAboutTab(sub.tab);
+                                setOpenDropdown(null);
+                              }}
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                            >
+                              {sub.label}
+                            </a>
+                          ))}
+                        {link.id === 'comunidade' &&
+                          communitySubLinks.map((sub) => (
+                            <a
+                              key={sub.tab}
+                              href="#comunidade"
+                              onClick={() => {
+                                onSelectCommunityTab(sub.tab);
+                                setOpenDropdown(null);
+                              }}
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                            >
+                              {sub.label}
+                            </a>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
 
-          {/* Zona 3: Ação Primária + Seletor de Idioma + Menu Hambúrguer Mobile */}
+          {/* Zona 3: Ação Primária + Seletor de Idioma + Menu Mobile */}
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
             <a
               href="#visita"
@@ -167,7 +278,7 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Barra de progresso de leitura discreta (compositor-only scaleX) */}
+        {/* Barra de progresso de leitura discreta */}
         <div
           aria-hidden="true"
           className="h-[2px] w-full origin-left bg-[#9C412A]/85 transition-transform duration-100"
@@ -175,7 +286,7 @@ export function Navbar() {
         />
       </header>
 
-      {/* Gaveta de Navegação Mobile em Tela Cheia */}
+      {/* Gaveta de Navegação Mobile em Tela Cheia com Sub-abas */}
       <div
         id="mobile-navigation-drawer"
         aria-hidden={!mobileMenuOpen}
@@ -185,7 +296,7 @@ export function Navbar() {
             : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
-        <div className="flex h-14 items-center justify-between border-b border-[#DDD7CE] px-4 sm:px-6">
+        <div className="flex h-14 items-center justify-between border-b border-[#DDD7CE] border-t-[3px] border-t-[#195963] px-4 sm:px-6">
           <a
             href="#inicio"
             onClick={handleNavClick}
@@ -214,17 +325,54 @@ export function Navbar() {
             className="flex flex-col divide-y divide-[#DDD7CE]"
           >
             {navLinks.map((link, index) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={handleNavClick}
-                className="flex min-h-[56px] items-center justify-between py-3 font-display text-xl font-semibold text-[#172226] transition-colors hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
-              >
-                <span>{link.label}</span>
-                <span className="text-xs font-medium tabular-nums text-[#46585E]">
-                  0{index + 1}
-                </span>
-              </a>
+              <div key={link.href} className="py-1">
+                <a
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className="flex min-h-[52px] items-center justify-between py-2 font-display text-xl font-semibold text-[#172226] transition-colors hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                >
+                  <span>{link.label}</span>
+                  <span className="text-xs font-medium tabular-nums text-[#46585E]">
+                    0{index + 1}
+                  </span>
+                </a>
+
+                {link.id === 'essencia' && (
+                  <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 pl-1">
+                    {aboutSubLinks.map((sub) => (
+                      <a
+                        key={sub.tab}
+                        href="#essencia"
+                        onClick={() => {
+                          onSelectAboutTab(sub.tab);
+                          handleNavClick();
+                        }}
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {link.id === 'comunidade' && (
+                  <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 pl-1">
+                    {communitySubLinks.map((sub) => (
+                      <a
+                        key={sub.tab}
+                        href="#comunidade"
+                        onClick={() => {
+                          onSelectCommunityTab(sub.tab);
+                          handleNavClick();
+                        }}
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 

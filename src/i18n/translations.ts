@@ -1,7 +1,11 @@
 import type {
+  ArchiveFeatureItem,
+  BeliefArticle,
   ChurchLocation,
+  CooperationPartner,
   EssencePillar,
   GalleryPost,
+  HeroSlide,
   MinistryItem,
   ScheduleItem,
 } from '../data/churchConfig';
@@ -60,6 +64,14 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
   },
 ];
 
+export interface LocalizedHeroSlideText {
+  kicker: string;
+  headline: string;
+  subheadline: string;
+  ctaLabel: string;
+  imageAlt: string;
+}
+
 export interface LocalizedScheduleText {
   title: string;
   day: string;
@@ -70,6 +82,17 @@ export interface LocalizedScheduleText {
 
 export interface LocalizedPillarText {
   title: string;
+  description: string;
+}
+
+export interface LocalizedBeliefText {
+  title: string;
+  summary: string;
+}
+
+export interface LocalizedCooperationText {
+  name: string;
+  scope: string;
   description: string;
 }
 
@@ -88,6 +111,15 @@ export interface LocalizedGalleryText {
   dateLabel: string;
   caption: string;
   scripture?: string;
+}
+
+export interface LocalizedArchiveItemText {
+  category: string;
+  dateLabel: string;
+  title: string;
+  summary: string;
+  actionLabel: string;
+  imageAlt: string;
 }
 
 export interface LocalizedLocationText {
@@ -115,6 +147,14 @@ export interface SiteTranslations {
       community: string;
       visit: string;
     };
+    subLinks: {
+      churchHistory: string;
+      whatWeBelieve: string;
+      cooperation: string;
+      instagramFeed: string;
+      archivesEvents: string;
+      offeringsMission: string;
+    };
     ctaVisit: string;
     ctaVisitDrawer: string;
     openMenu: string;
@@ -130,6 +170,11 @@ export interface SiteTranslations {
     subheadline: string;
     ctaVisit: string;
     ctaInstagram: string;
+    watchYouTube: string;
+    prevSlide: string;
+    nextSlide: string;
+    slideLabelPrefix: string;
+    slides: Record<HeroSlide['id'], LocalizedHeroSlideText>;
     nextSundayAria: string;
     thisSundayToday: string;
     nextSundayLabel: string;
@@ -161,6 +206,7 @@ export interface SiteTranslations {
     };
     calendarSaved: string;
     calendarSave: string;
+    watchYouTube: string;
     confirmVisit: string;
     items: Record<ScheduleItem['id'], LocalizedScheduleText>;
   };
@@ -174,6 +220,12 @@ export interface SiteTranslations {
     kicker: string;
     heading: string;
     sealAlt: string;
+    tabsAria: string;
+    tabs: {
+      history: string;
+      beliefs: string;
+      cooperation: string;
+    };
     paragraph1: string;
     paragraph2: string;
     quote: string;
@@ -181,18 +233,31 @@ export interface SiteTranslations {
     pillarsLabel: string;
     swipeHint: string;
     pillars: Record<EssencePillar['number'], LocalizedPillarText>;
+    beliefsIntro: string;
+    beliefsItems: Record<BeliefArticle['id'], LocalizedBeliefText>;
+    cooperationIntro: string;
+    cooperationVisitLink: string;
+    cooperationItems: Record<CooperationPartner['id'], LocalizedCooperationText>;
   };
   ministries: {
     kicker: string;
     heading: string;
     intro: string;
     ctaJoin: string;
+    scheduleLabel: string;
+    audienceLabel: string;
     items: Record<MinistryItem['id'], LocalizedMinistryText>;
   };
   gallery: {
     kickerPrefix: string;
     heading: string;
     followCta: string;
+    tabsAria: string;
+    tabs: {
+      photos: string;
+      archives: string;
+      giving: string;
+    };
     filterAria: string;
     filters: {
       allPrefix: string;
@@ -208,6 +273,20 @@ export interface SiteTranslations {
     nextPost: string;
     viewOnInstagram: string;
     posts: Record<GalleryPost['id'], LocalizedGalleryText>;
+    archivesIntro: string;
+    archivesYouTubeCta: string;
+    archivesItems: Record<ArchiveFeatureItem['id'], LocalizedArchiveItemText>;
+    giving: {
+      kicker: string;
+      heading: string;
+      paragraph1: string;
+      paragraph2: string;
+      pillars: Array<{ title: string; text: string }>;
+      ctaWhatsApp: string;
+      ctaEmail: string;
+      whatsappMessage: string;
+      mailSubject: string;
+    };
   };
   visit: {
     kicker: string;
@@ -257,6 +336,7 @@ export interface SiteTranslations {
   footer: {
     summary: string;
     navigationTitle: string;
+    cooperationTitle: string;
     channelsTitle: string;
     instagramLabel: string;
     facebookLabel: string;
@@ -278,7 +358,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Igreja Evangélica Baptista da Horta',
       description:
-        'Um lugar de fé, família e novos começos na Ilha do Faial. Horários de cultos, ministérios, comunidade @iebhorta e planeie a sua visita à Igreja Evangélica Baptista da Horta.',
+        'Um lugar de fé, família e novos começos na Ilha do Faial. Horários de cultos, confissão de fé, ministérios, comunidade @iebhorta e planeie a sua visita à Igreja Evangélica Baptista da Horta.',
       skipToContent: 'Saltar para o conteúdo principal',
     },
     nav: {
@@ -287,11 +367,19 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       ariaLanguage: 'Alterar idioma do site',
       languageMenuTitle: 'Idioma',
       links: {
-        schedule: 'Horários',
-        essence: 'Essência',
+        schedule: 'Programação',
+        essence: 'Sobre',
         ministries: 'Ministérios',
-        community: 'Comunidade',
-        visit: 'Visite-nos',
+        community: 'Conteúdos',
+        visit: 'Contactos',
+      },
+      subLinks: {
+        churchHistory: 'A Igreja (51 Anos)',
+        whatWeBelieve: 'Em Que Cremos',
+        cooperation: 'Cooperação Baptista',
+        instagramFeed: 'Momentos @iebhorta',
+        archivesEvents: 'Arquivos & Eventos',
+        offeringsMission: 'Ofertas & Missão',
       },
       ctaVisit: 'Quero Visitar',
       ctaVisitDrawer: 'Planeie a sua Primeira Visita',
@@ -310,6 +398,39 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar consigo e com a sua família na Palavra e na comunhão.',
       ctaVisit: 'Planeie a sua Visita',
       ctaInstagram: 'Siga @iebhorta',
+      watchYouTube: 'Cultos no YouTube',
+      prevSlide: 'Destaque anterior',
+      nextSlide: 'Próximo destaque',
+      slideLabelPrefix: 'Destaque',
+      slides: {
+        welcome: {
+          kicker: '51 Anos na Horta, Açores',
+          headline: 'Um lugar de fé, família e novos começos.',
+          subheadline:
+            'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar consigo e com a sua família na Palavra e na comunhão.',
+          ctaLabel: 'Planeie a sua Visita',
+          imageAlt:
+            'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
+        },
+        'sunday-worship': {
+          kicker: 'Av. Marginal, n.º 17 · Todos os Domingos',
+          headline: 'Adoração, ensino bíblico e comunhão no coração da Horta.',
+          subheadline:
+            'Reunimo-nos aos domingos às 10h00 na Escola Bíblica Dominical (ou às 16h00 nas Angústias) e às 11h15 no Culto de Celebração.',
+          ctaLabel: 'Ver Programação',
+          imageAlt:
+            'Interior do templo da Igreja Evangélica Baptista da Horta na Avenida Marginal',
+        },
+        'church-family': {
+          kicker: 'Filiada à Convenção Baptista Portuguesa',
+          headline: 'Uma família espiritual para todas as gerações no Faial.',
+          subheadline:
+            'Crianças, jovens, casais e seniores unidos pelo Evangelho de Jesus Cristo, a servir a nossa cidade com esperança e simplicidade.',
+          ctaLabel: 'Conhecer a Igreja',
+          imageAlt:
+            'Membros e crianças da Igreja Evangélica Baptista da Horta reunidos em família',
+        },
+      },
       nextSundayAria: 'Próximo encontro dominical',
       thisSundayToday: 'Neste Domingo (Hoje)',
       nextSundayLabel: 'Próximo Domingo',
@@ -344,6 +465,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
       calendarSaved: 'Evento guardado (.ics)',
       calendarSave: 'Guardar culto no calendário',
+      watchYouTube: 'Ver no YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
         celebracao: {
@@ -389,9 +511,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Interior do templo da IEB Horta na Avenida Marginal com bancos de madeira e cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
       sanctuaryCaption: 'Culto no templo · Av. Marginal, 17.',
-      kicker: 'A Nossa Essência',
+      kicker: 'Sobre a Igreja',
       heading: 'Amar a Deus, servir pessoas e viver o Evangelho na ilha.',
       sealAlt: 'Selo oficial Igreja Evangélica Baptista da Horta',
+      tabsAria: 'Explorar história, fé e cooperação',
+      tabs: {
+        history: 'A Igreja',
+        beliefs: 'Em Que Cremos',
+        cooperation: 'Cooperação',
+      },
       paragraph1:
         'Há 51 anos na Ilha do Faial, a Igreja Evangélica Baptista da Horta, filiada à Convenção Baptista Portuguesa, caminha como uma família espiritual onde cada pessoa é acolhida pelo nome e encorajada a crescer na fé em Jesus Cristo.',
       paragraph2:
@@ -418,13 +546,90 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Vivemos o Evangelho além das paredes do templo através de campanhas solidárias, apoio alimentar e acolhimento próximo.',
         },
       },
+      beliefsIntro:
+        'Guiamo-nos pela Bíblia Sagrada e pelos princípios históricos da fé baptista: a autoridade das Escrituras, a salvação pela graça mediante a fé em Cristo, a autonomia da igreja local e a vivência comunitária do Evangelho.',
+      beliefsItems: {
+        scriptures: {
+          title: 'As Escrituras Sagradas',
+          summary:
+            'Cremos que a Bíblia é a Palavra inspirada por Deus, fidedigna e regra suprema de fé, doutrina e conduta para toda a vida cristã.',
+        },
+        'triune-god': {
+          title: 'Deus Pai, Filho e Espírito Santo',
+          summary:
+            'Cremos num só Deus vivo e verdadeiro, eternamente subsistente em três pessoas: o Pai criador, o Filho Jesus Cristo, nosso Salvador e Senhor, e o Espírito Santo consolador.',
+        },
+        salvation: {
+          title: 'A Salvação pela Graça',
+          summary:
+            'A salvação é dom gratuito de Deus oferecido a todos por meio do arrependimento e da fé pessoal em Jesus Cristo, que morreu na cruz e ressuscitou.',
+        },
+        'local-church': {
+          title: 'A Igreja Local',
+          summary:
+            'A igreja é uma comunidade de crentes batizados unidos na comunhão do Evangelho, governada sob a soberania de Cristo para adorar, edificar e testemunhar.',
+        },
+        ordinances: {
+          title: 'Batismo e Ceia do Senhor',
+          summary:
+            'Observamos o batismo por imersão como testemunho público de nova vida em Cristo e a Ceia do Senhor como memorial da Sua entrega e esperança da Sua volta.',
+        },
+        'kingdom-mission': {
+          title: 'Missão, Serviço e Esperança',
+          summary:
+            'Cada cristão é chamado a amar o próximo, anunciar as boas-novas nos Açores e no mundo e aguardar com esperança a consumação do Reino de Deus.',
+        },
+      },
+      cooperationIntro:
+        'A Igreja Evangélica Baptista da Horta caminha em comunhão e cooperação missionária, teológica e social com igrejas irmãs nos Açores, em Portugal continental e na família baptista mundial.',
+      cooperationVisitLink: 'Visitar página',
+      cooperationItems: {
+        cbp: {
+          name: 'Convenção Baptista Portuguesa',
+          scope: 'Âmbito Nacional',
+          description:
+            'Filiação e cooperação fraterna com as igrejas baptistas em todo o território português para evangelização e serviço.',
+        },
+        aba: {
+          name: 'Associação Baptista Açoreana',
+          scope: 'Arquipélago dos Açores',
+          description:
+            'Comunhão regional entre as igrejas baptistas das ilhas dos Açores em assembleias, acampamentos e missão local.',
+        },
+        aep: {
+          name: 'Aliança Evangélica Portuguesa',
+          scope: 'Representação Evangélica',
+          description:
+            'Cooperação interdenominacional em torno do Evangelho, liberdade religiosa e testemunho cristão em Portugal.',
+        },
+        stb: {
+          name: 'Seminário Teológico Baptista',
+          scope: 'Formação & Ensino',
+          description:
+            'Apoio à formação bíblica, pastoral e ministerial de obreiros e líderes ao serviço das igrejas em Portugal.',
+        },
+        ebf: {
+          name: 'Federação Baptista Europeia',
+          scope: 'Rede Europeia',
+          description:
+            'Ligação solidária e missionária com as convenções e igrejas baptistas em toda a Europa e Médio Oriente.',
+        },
+        bwa: {
+          name: 'Aliança Baptista Mundial',
+          scope: 'Família Global',
+          description:
+            'Partilha de oração, missão e ajuda humanitária com milhões de irmãos baptistas em todo o mundo.',
+        },
+      },
     },
     ministries: {
       kicker: 'Envolva-se',
       heading: 'Ministérios para caminhar juntos',
       intro:
-        'Há sempre um lugar para a sua fase de vida. Toque num ministério para ver os horários, fotografias reais e contactar a equipa.',
+        'Tal como uma família de famílias, cada fase de vida encontra espaço para servir e crescer. Escolha uma área para conhecer os horários e falar connosco.',
       ctaJoin: 'Quero participar',
+      scheduleLabel: 'Horário',
+      audienceLabel: 'Público',
       items: {
         jovens: {
           title: 'Jovens & Adolescentes',
@@ -444,6 +649,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Iniciativas como o Dia da Família no Parque da Salgueirinha, oficinas com crianças e o encontro de mulheres Plenas em Cristo.',
           imageAlt:
             'Mulheres reunidas a cantar com viola durante o encontro Plenas em Cristo',
+        },
+        'infantil-ebd': {
+          title: 'Escola Bíblica & Infantil',
+          summary: 'Salas separadas para crianças, adolescentes e adultos.',
+          schedule: 'Domingos às 10h00 e às 16h00',
+          audience: 'Todas as idades',
+          description:
+            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além de oficinas criativas em família.',
+          imageAlt:
+            'Bíblia aberta sobre mesa com horários da Escola Bíblica Dominical da IEB Horta',
         },
         'acao-social': {
           title: 'Ação Social',
@@ -467,9 +682,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
     },
     gallery: {
-      kickerPrefix: 'Diretamente do Instagram',
-      heading: 'Siga o dia a dia da nossa família',
+      kickerPrefix: 'Conteúdos & Comunidade',
+      heading: 'Vida comunitária, arquivos e missão',
       followCta: 'Seguir @iebhorta no Instagram',
+      tabsAria: 'Selecionar secção de conteúdos',
+      tabs: {
+        photos: 'Momentos @iebhorta',
+        archives: 'Arquivos & Eventos',
+        giving: 'Ofertas & Missão',
+      },
       filterAria: 'Filtrar publicações da comunidade',
       filters: {
         allPrefix: 'Todas',
@@ -531,9 +752,77 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Tessalonicenses 5:18',
         },
       },
+      archivesIntro:
+        'Conteúdos que edificam a sua vida espiritual: pregações da Palavra, marcos dos 51 anos no Faial e encontros especiais abertos à cidade.',
+      archivesYouTubeCta: 'Abrir canal no YouTube',
+      archivesItems: {
+        'archive-palavra': {
+          category: 'Pregação & Palavra',
+          dateLabel: '1 Coríntios 10:31',
+          title: 'Momento da Palavra · Pr. Luiz Eduardo Júnior',
+          summary:
+            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens no templo e no nosso YouTube.',
+          actionLabel: 'Assistir no YouTube',
+          imageAlt: 'Pr. Luiz Eduardo Júnior a pregar no púlpito da IEB Horta',
+        },
+        'archive-51anos': {
+          category: 'Marco Histórico',
+          dateLabel: '51 Anos · Romanos 5:8',
+          title: 'Aniversário IEB Horta — Sustentados pelo Amor de Deus',
+          summary:
+            'Mais de meio século de testemunho evangélico baptista na cidade da Horta, reunindo gerações em gratidão pela fidelidade de Deus.',
+          actionLabel: 'Ver registos no @iebhorta',
+          imageAlt: 'Cartaz dos 51 anos da Igreja Evangélica Baptista da Horta',
+        },
+        'archive-familia': {
+          category: 'Evento Comunitário',
+          dateLabel: 'Parque da Salgueirinha',
+          title: 'Dia da Família ao ar livre na Feteira',
+          summary:
+            'Encontro anual com tempo de culto, almoço comunitário e convívio fraterno para membros, crianças e amigos visitantes na ilha.',
+          actionLabel: 'Confirmar presença no próximo',
+          imageAlt: 'Cartaz oficial do Dia da Família no Parque da Salgueirinha',
+        },
+        'archive-gracas': {
+          category: 'Celebração Especial',
+          dateLabel: '1 Tessalonicenses 5:18',
+          title: 'Fim de Semana de Ação de Graças nos Açores',
+          summary:
+            'Momentos dedicados a louvar a Deus em unidade, partilhar testemunhos e agradecer pelas bênçãos recebidas ao longo do ano.',
+          actionLabel: 'Explorar no Instagram',
+          imageAlt: 'Publicação de Fim de Semana de Ação de Graças da IEB Horta',
+        },
+      },
+      giving: {
+        kicker: 'Sustento & Generosidade',
+        heading: 'Contribua para a missão e a ação local no Faial',
+        paragraph1:
+          'A Igreja Evangélica Baptista da Horta mantém a sua obra espiritual e social exclusivamente através das ofertas e dízimos voluntários dos seus membros, congregados e simpatizantes.',
+        paragraph2:
+          'Cada contributo apoia a manutenção dos espaços de culto e EBD, o ensino bíblico para crianças e jovens, a cooperação missionária e as campanhas de apoio alimentar a famílias no Faial.',
+        pillars: [
+          {
+            title: 'Ensino & Culto Público',
+            text: 'Sustento das salas da Escola Bíblica Dominical, receção a visitantes e transmissão da Palavra.',
+          },
+          {
+            title: 'Ação Social Local',
+            text: 'Recolha contínua de alimentos e apoio direto a lares carenciados na Ilha do Faial.',
+          },
+          {
+            title: 'Missão nos Açores',
+            text: 'Cooperação com a Associação Baptista Açoreana e projetos de evangelização e discipulado.',
+          },
+        ],
+        ctaWhatsApp: 'Pedir dados via WhatsApp',
+        ctaEmail: 'Contactar por e-mail',
+        whatsappMessage:
+          'Olá! Gostava de receber informações sobre como contribuir com ofertas para a Igreja Evangélica Baptista da Horta.',
+        mailSubject: 'Informações sobre Ofertas e Contribuições — IEB Horta',
+      },
     },
     visit: {
-      kicker: 'Localização & Primeira Visita',
+      kicker: 'Contactos & Primeira Visita',
       heading: 'Planeie a sua primeira visita',
       intro:
         'Será uma alegria recebê-lo pessoalmente na Horta. Confira os nossos espaços e avise-nos em que dia pretende vir para aguardarmos por si.',
@@ -605,7 +894,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     footer: {
       summary:
         'Há 51 anos na Ilha do Faial, uma comunidade cristã dedicada a amar a Deus, servir as pessoas e anunciar o Evangelho com simplicidade.',
-      navigationTitle: 'Navegação',
+      navigationTitle: 'Navegação & Abas',
+      cooperationTitle: 'Cooperação Baptista',
       channelsTitle: 'Siga e Fale Connosco',
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
@@ -626,7 +916,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Igreja Evangélica Baptista da Horta',
       description:
-        'Um lugar de fé, família e novos começos na Ilha do Faial, Açores. Horários de cultos, ministérios, comunidade @iebhorta e planeje sua visita à Igreja Evangélica Baptista da Horta.',
+        'Um lugar de fé, família e novos começos na Ilha do Faial, Açores. Horários de cultos, confissão de fé, ministérios, comunidade @iebhorta e planeje sua visita à Igreja Evangélica Baptista da Horta.',
       skipToContent: 'Pular para o conteúdo principal',
     },
     nav: {
@@ -635,11 +925,19 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       ariaLanguage: 'Alterar idioma do site',
       languageMenuTitle: 'Idioma',
       links: {
-        schedule: 'Horários',
-        essence: 'Essência',
+        schedule: 'Programação',
+        essence: 'Sobre',
         ministries: 'Ministérios',
-        community: 'Comunidade',
-        visit: 'Visite-nos',
+        community: 'Conteúdos',
+        visit: 'Contatos',
+      },
+      subLinks: {
+        churchHistory: 'A Igreja (51 Anos)',
+        whatWeBelieve: 'Em Que Cremos',
+        cooperation: 'Cooperação Batista',
+        instagramFeed: 'Momentos @iebhorta',
+        archivesEvents: 'Arquivos & Eventos',
+        offeringsMission: 'Ofertas & Missão',
       },
       ctaVisit: 'Quero Visitar',
       ctaVisitDrawer: 'Planeje sua Primeira Visita',
@@ -658,6 +956,39 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar com você e sua família na Palavra e na comunhão.',
       ctaVisit: 'Planeje sua Visita',
       ctaInstagram: 'Acompanhe @iebhorta',
+      watchYouTube: 'Cultos no YouTube',
+      prevSlide: 'Destaque anterior',
+      nextSlide: 'Próximo destaque',
+      slideLabelPrefix: 'Destaque',
+      slides: {
+        welcome: {
+          kicker: '51 Anos na Horta, Açores',
+          headline: 'Um lugar de fé, família e novos começos.',
+          subheadline:
+            'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar com você e sua família na Palavra e na comunhão.',
+          ctaLabel: 'Planeje sua Visita',
+          imageAlt:
+            'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
+        },
+        'sunday-worship': {
+          kicker: 'Av. Marginal, n.º 17 · Todos os Domingos',
+          headline: 'Adoração, ensino bíblico e comunhão no coração da Horta.',
+          subheadline:
+            'Nos reunimos aos domingos às 10h00 na Escola Bíblica Dominical (ou às 16h00 nas Angústias) e às 11h15 no Culto de Celebração.',
+          ctaLabel: 'Ver Programação',
+          imageAlt:
+            'Interior do templo da Igreja Evangélica Baptista da Horta na Avenida Marginal',
+        },
+        'church-family': {
+          kicker: 'Filiada à Convenção Baptista Portuguesa',
+          headline: 'Uma família espiritual para todas as gerações no Faial.',
+          subheadline:
+            'Crianças, jovens, casais e idosos unidos pelo Evangelho de Jesus Cristo, servindo nossa cidade com esperança e simplicidade.',
+          ctaLabel: 'Conhecer a Igreja',
+          imageAlt:
+            'Membros e crianças da Igreja Evangélica Baptista da Horta reunidos em família',
+        },
+      },
       nextSundayAria: 'Próximo encontro dominical',
       thisSundayToday: 'Neste Domingo (Hoje)',
       nextSundayLabel: 'Próximo Domingo',
@@ -692,6 +1023,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
       calendarSaved: 'Evento salvo (.ics)',
       calendarSave: 'Salvar culto no calendário',
+      watchYouTube: 'Assistir no YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
         celebracao: {
@@ -737,9 +1069,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Interior do templo da IEB Horta na Avenida Marginal com bancos de madeira e cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
       sanctuaryCaption: 'Culto no templo · Av. Marginal, 17.',
-      kicker: 'Nossa Essência',
+      kicker: 'Sobre a Igreja',
       heading: 'Amar a Deus, servir pessoas e viver o Evangelho na ilha.',
       sealAlt: 'Selo oficial Igreja Evangélica Baptista da Horta',
+      tabsAria: 'Explorar história, fé e cooperação',
+      tabs: {
+        history: 'A Igreja',
+        beliefs: 'Em Que Cremos',
+        cooperation: 'Cooperação',
+      },
       paragraph1:
         'Há 51 anos na Ilha do Faial, a Igreja Evangélica Baptista da Horta, filiada à Convenção Baptista Portuguesa, caminha como uma família espiritual onde cada pessoa é acolhida pelo nome e encorajada a crescer na fé em Jesus Cristo.',
       paragraph2:
@@ -766,13 +1104,90 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Vivemos o Evangelho além das paredes do templo por meio de campanhas solidárias, apoio alimentar e acolhimento próximo.',
         },
       },
+      beliefsIntro:
+        'Somos guiados pela Bíblia Sagrada e pelos princípios históricos da fé batista: a autoridade das Escrituras, a salvação pela graça mediante a fé em Cristo, a autonomia da igreja local e a vivência comunitária do Evangelho.',
+      beliefsItems: {
+        scriptures: {
+          title: 'As Escrituras Sagradas',
+          summary:
+            'Cremos que a Bíblia é a Palavra inspirada por Deus, fidedigna e regra suprema de fé, doutrina e conduta para toda a vida cristã.',
+        },
+        'triune-god': {
+          title: 'Deus Pai, Filho e Espírito Santo',
+          summary:
+            'Cremos em um só Deus vivo e verdadeiro, eternamente subsistente em três pessoas: o Pai criador, o Filho Jesus Cristo, nosso Salvador e Senhor, e o Espírito Santo consolador.',
+        },
+        salvation: {
+          title: 'A Salvação pela Graça',
+          summary:
+            'A salvação é dom gratuito de Deus oferecido a todos por meio do arrependimento e da fé pessoal em Jesus Cristo, que morreu na cruz e ressuscitou.',
+        },
+        'local-church': {
+          title: 'A Igreja Local',
+          summary:
+            'A igreja é uma comunidade de crentes batizados unidos na comunhão do Evangelho, governada sob a soberania de Cristo para adorar, edificar e testemunhar.',
+        },
+        ordinances: {
+          title: 'Batismo e Ceia do Senhor',
+          summary:
+            'Observamos o batismo por imersão como testemunho público de nova vida em Cristo e a Ceia do Senhor como memorial da Sua entrega e esperança da Sua volta.',
+        },
+        'kingdom-mission': {
+          title: 'Missão, Serviço e Esperança',
+          summary:
+            'Cada cristão é chamado a amar o próximo, anunciar as boas-novas nos Açores e no mundo e aguardar com esperança a consumação do Reino de Deus.',
+        },
+      },
+      cooperationIntro:
+        'A Igreja Evangélica Baptista da Horta caminha em comunhão e cooperação missionária, teológica e social com igrejas irmãs nos Açores, em Portugal continental e na família batista mundial.',
+      cooperationVisitLink: 'Visitar página',
+      cooperationItems: {
+        cbp: {
+          name: 'Convenção Baptista Portuguesa',
+          scope: 'Âmbito Nacional',
+          description:
+            'Filiação e cooperação fraterna com as igrejas batistas em todo o território português para evangelização e serviço.',
+        },
+        aba: {
+          name: 'Associação Baptista Açoreana',
+          scope: 'Arquipélago dos Açores',
+          description:
+            'Comunhão regional entre as igrejas batistas das ilhas dos Açores em assembleias, acampamentos e missão local.',
+        },
+        aep: {
+          name: 'Aliança Evangélica Portuguesa',
+          scope: 'Representação Evangélica',
+          description:
+            'Cooperação interdenominacional em torno do Evangelho, liberdade religiosa e testemunho cristão em Portugal.',
+        },
+        stb: {
+          name: 'Seminário Teológico Baptista',
+          scope: 'Formação & Ensino',
+          description:
+            'Apoio à formação bíblica, pastoral e ministerial de obreiros e líderes a serviço das igrejas em Portugal.',
+        },
+        ebf: {
+          name: 'Federação Baptista Europeia',
+          scope: 'Rede Europeia',
+          description:
+            'Ligação solidária e missionária com as convenções e igrejas batistas em toda a Europa e Oriente Médio.',
+        },
+        bwa: {
+          name: 'Aliança Batista Mundial',
+          scope: 'Família Global',
+          description:
+            'Partilha de oração, missão e ajuda humanitária com milhões de irmãos batistas em todo o mundo.',
+        },
+      },
     },
     ministries: {
       kicker: 'Conecte-se',
       heading: 'Ministérios para caminhar juntos',
       intro:
-        'Há sempre um lugar preparado para a sua fase de vida. Toque em um ministério para ver os encontros, fotos reais e falar com a equipe.',
+        'Há sempre um lugar preparado para a sua fase de vida. Escolha uma área para conferir horários, fotos reais e falar com nossa equipe.',
       ctaJoin: 'Quero participar',
+      scheduleLabel: 'Horário',
+      audienceLabel: 'Público',
       items: {
         jovens: {
           title: 'Jovens & Adolescentes',
@@ -792,6 +1207,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Iniciativas como o Dia da Família no Parque da Salgueirinha, oficinas com crianças e o encontro de mulheres Plenas em Cristo.',
           imageAlt:
             'Mulheres reunidas cantando com violão durante o encontro Plenas em Cristo',
+        },
+        'infantil-ebd': {
+          title: 'Escola Bíblica & Infantil',
+          summary: 'Salas separadas para crianças, adolescentes e adultos.',
+          schedule: 'Domingos às 10h00 e às 16h00',
+          audience: 'Todas as idades',
+          description:
+            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além de oficinas criativas em família.',
+          imageAlt:
+            'Bíblia aberta sobre mesa com horários da Escola Bíblica Dominical da IEB Horta',
         },
         'acao-social': {
           title: 'Ação Social',
@@ -815,9 +1240,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
     },
     gallery: {
-      kickerPrefix: 'Direto do Instagram',
-      heading: 'Acompanhe o dia a dia da nossa família',
+      kickerPrefix: 'Conteúdos & Comunidade',
+      heading: 'Vida comunitária, arquivos e missão',
       followCta: 'Seguir @iebhorta no Instagram',
+      tabsAria: 'Selecionar seção de conteúdos',
+      tabs: {
+        photos: 'Momentos @iebhorta',
+        archives: 'Arquivos & Eventos',
+        giving: 'Ofertas & Missão',
+      },
       filterAria: 'Filtrar publicações da comunidade',
       filters: {
         allPrefix: 'Todas',
@@ -879,9 +1310,77 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Tessalonicenses 5:18',
         },
       },
+      archivesIntro:
+        'Conteúdos que edificam sua vida espiritual: pregações da Palavra, marcos dos 51 anos no Faial e encontros especiais abertos à cidade.',
+      archivesYouTubeCta: 'Abrir canal no YouTube',
+      archivesItems: {
+        'archive-palavra': {
+          category: 'Pregação & Palavra',
+          dateLabel: '1 Coríntios 10:31',
+          title: 'Momento da Palavra · Pr. Luiz Eduardo Júnior',
+          summary:
+            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens no templo e no nosso YouTube.',
+          actionLabel: 'Assistir no YouTube',
+          imageAlt: 'Pr. Luiz Eduardo Júnior pregando no púlpito da IEB Horta',
+        },
+        'archive-51anos': {
+          category: 'Marco Histórico',
+          dateLabel: '51 Anos · Romanos 5:8',
+          title: 'Aniversário IEB Horta — Sustentados pelo Amor de Deus',
+          summary:
+            'Mais de meio século de testemunho evangélico batista na cidade da Horta, reunindo gerações em gratidão pela fidelidade de Deus.',
+          actionLabel: 'Ver registros no @iebhorta',
+          imageAlt: 'Cartaz dos 51 anos da Igreja Evangélica Baptista da Horta',
+        },
+        'archive-familia': {
+          category: 'Evento Comunitário',
+          dateLabel: 'Parque da Salgueirinha',
+          title: 'Dia da Família ao ar livre na Feteira',
+          summary:
+            'Encontro anual com tempo de culto, almoço comunitário e comunhão fraterna para membros, crianças e amigos visitantes na ilha.',
+          actionLabel: 'Confirmar presença no próximo',
+          imageAlt: 'Cartaz oficial do Dia da Família no Parque da Salgueirinha',
+        },
+        'archive-gracas': {
+          category: 'Celebração Especial',
+          dateLabel: '1 Tessalonicenses 5:18',
+          title: 'Fim de Semana de Ação de Graças nos Açores',
+          summary:
+            'Momentos dedicados a louvar a Deus em unidade, compartilhar testemunhos e agradecer pelas bênçãos recebidas ao longo do ano.',
+          actionLabel: 'Explorar no Instagram',
+          imageAlt: 'Publicação de Fim de Semana de Ação de Graças da IEB Horta',
+        },
+      },
+      giving: {
+        kicker: 'Sustento & Generosidade',
+        heading: 'Contribua para a missão e a ação local no Faial',
+        paragraph1:
+          'A Igreja Evangélica Baptista da Horta mantém sua obra espiritual e social exclusivamente por meio das ofertas e dízimos voluntários de seus membros, congregados e simpatizantes.',
+        paragraph2:
+          'Cada contribuição apoia a manutenção dos espaços de culto e EBD, o ensino bíblico para crianças e jovens, a cooperação missionária e as campanhas de apoio alimentar a famílias no Faial.',
+        pillars: [
+          {
+            title: 'Ensino & Culto Público',
+            text: 'Sustento das salas da Escola Bíblica Dominical, recepção de visitantes e transmissão da Palavra.',
+          },
+          {
+            title: 'Ação Social Local',
+            text: 'Arrecadação contínua de alimentos e apoio direto a lares necessitados na Ilha do Faial.',
+          },
+          {
+            title: 'Missão nos Açores',
+            text: 'Cooperação com a Associação Baptista Açoreana e projetos de evangelização e discipulado.',
+          },
+        ],
+        ctaWhatsApp: 'Pedir dados via WhatsApp',
+        ctaEmail: 'Contatar por e-mail',
+        whatsappMessage:
+          'Olá! Gostaria de receber informações sobre como contribuir com ofertas para a Igreja Evangélica Baptista da Horta.',
+        mailSubject: 'Informações sobre Ofertas e Contribuições — IEB Horta',
+      },
     },
     visit: {
-      kicker: 'Localização & Primeira Visita',
+      kicker: 'Contatos & Primeira Visita',
       heading: 'Planeje sua primeira visita',
       intro:
         'Será uma alegria receber você pessoalmente na Horta. Confira nossos espaços e avise em que dia pretende vir para aguardarmos por você.',
@@ -953,7 +1452,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     footer: {
       summary:
         'Há 51 anos na Ilha do Faial, uma comunidade cristã comprometida em amar a Deus, servir pessoas e anunciar o Evangelho com simplicidade.',
-      navigationTitle: 'Navegação',
+      navigationTitle: 'Navegação & Abas',
+      cooperationTitle: 'Cooperação Batista',
       channelsTitle: 'Acompanhe e Fale Conosco',
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
@@ -974,7 +1474,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Evangelical Baptist Church of Horta',
       description:
-        'A place of faith, family, and new beginnings on Faial Island, Azores. Service times, ministries, @iebhorta community, and plan your visit to Igreja Evangélica Baptista da Horta.',
+        'A place of faith, family, and new beginnings on Faial Island, Azores. Service times, statement of faith, ministries, @iebhorta community, and plan your visit to Igreja Evangélica Baptista da Horta.',
       skipToContent: 'Skip to main content',
     },
     nav: {
@@ -983,11 +1483,19 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       ariaLanguage: 'Change website language',
       languageMenuTitle: 'Language',
       links: {
-        schedule: 'Services',
-        essence: 'About Us',
+        schedule: 'Schedule',
+        essence: 'About',
         ministries: 'Ministries',
-        community: 'Community',
-        visit: 'Visit Us',
+        community: 'Resources',
+        visit: 'Contact',
+      },
+      subLinks: {
+        churchHistory: 'The Church (51 Years)',
+        whatWeBelieve: 'What We Believe',
+        cooperation: 'Baptist Cooperation',
+        instagramFeed: 'Moments @iebhorta',
+        archivesEvents: 'Archives & Events',
+        offeringsMission: 'Giving & Mission',
       },
       ctaVisit: 'Plan a Visit',
       ctaVisitDrawer: 'Plan Your First Visit',
@@ -1006,6 +1514,39 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Sustained by the love of God on Faial Island. An open-door Christian church walking alongside you and your family in Scripture and fellowship.',
       ctaVisit: 'Plan Your Visit',
       ctaInstagram: 'Follow @iebhorta',
+      watchYouTube: 'Watch on YouTube',
+      prevSlide: 'Previous highlight',
+      nextSlide: 'Next highlight',
+      slideLabelPrefix: 'Highlight',
+      slides: {
+        welcome: {
+          kicker: '51 Years in Horta, Azores',
+          headline: 'A place of faith, family, and new beginnings.',
+          subheadline:
+            'Sustained by the love of God on Faial Island. An open-door Christian church walking alongside you and your family in Scripture and fellowship.',
+          ctaLabel: 'Plan Your Visit',
+          imageAlt:
+            'Sunlit sanctuary interior with morning light and gathered congregation',
+        },
+        'sunday-worship': {
+          kicker: 'Av. Marginal, 17 · Every Sunday',
+          headline: 'Worship, biblical teaching, and fellowship in central Horta.',
+          subheadline:
+            'Join us on Sundays at 10:00 for Sunday Bible School (or 16:00 in Angústias) and at 11:15 for our Celebration Service.',
+          ctaLabel: 'See Schedule',
+          imageAlt:
+            'Sanctuary interior of Igreja Evangélica Baptista da Horta on Avenida Marginal',
+        },
+        'church-family': {
+          kicker: 'Affiliated with the Portuguese Baptist Convention',
+          headline: 'A spiritual family across every generation on Faial.',
+          subheadline:
+            'Children, teens, couples, and seniors united in Jesus Christ, serving our city with warmth and simplicity.',
+          ctaLabel: 'About Our Church',
+          imageAlt:
+            'Members and children of Igreja Evangélica Baptista da Horta gathered together',
+        },
+      },
       nextSundayAria: 'Next Sunday gathering',
       thisSundayToday: 'This Sunday (Today)',
       nextSundayLabel: 'Next Sunday',
@@ -1040,6 +1581,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
       calendarSaved: 'Event saved (.ics)',
       calendarSave: 'Save service to calendar',
+      watchYouTube: 'Watch on YouTube',
       confirmVisit: 'Confirm visit',
       items: {
         celebracao: {
@@ -1078,16 +1620,22 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     },
     about: {
       familyAlt:
-        'Members and children of Igreja Evangélica Baptista da Horta gathered together',
+        'Members and children of Igreja Evangélica Baptista da Horta gathered as a church family',
       familyFallback: 'IEB Horta Family',
       familyCaption: 'Our church family gathered in Horta.',
       sanctuaryAlt:
         'Sanctuary interior of IEB Horta on Avenida Marginal with wooden pews and cross',
       sanctuaryFallback: 'Sanctuary Av. Marginal, 17',
       sanctuaryCaption: 'Sanctuary worship · Av. Marginal, 17.',
-      kicker: 'Our Essence',
+      kicker: 'About Our Church',
       heading: 'Loving God, serving people, and living the Gospel on the island.',
       sealAlt: 'Official seal of Igreja Evangélica Baptista da Horta',
+      tabsAria: 'Explore church history, beliefs, and cooperation',
+      tabs: {
+        history: 'The Church',
+        beliefs: 'What We Believe',
+        cooperation: 'Cooperation',
+      },
       paragraph1:
         'For 51 years on Faial Island, Igreja Evangélica Baptista da Horta—affiliated with the Portuguese Baptist Convention—has walked together as a spiritual family where every person is welcomed by name and encouraged to grow in faith in Jesus Christ.',
       paragraph2:
@@ -1114,13 +1662,90 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'We live out the Gospel beyond the sanctuary walls through food drives, practical aid, and warm hospitality.',
         },
       },
+      beliefsIntro:
+        'We are guided by the Holy Bible and historic Baptist principles: the authority of Scripture, salvation by grace through faith in Christ, local church autonomy, and loving witness.',
+      beliefsItems: {
+        scriptures: {
+          title: 'The Holy Scriptures',
+          summary:
+            'We believe the Bible is the inspired Word of God, trustworthy and the supreme authority for Christian faith, doctrine, and daily life.',
+        },
+        'triune-god': {
+          title: 'God: Father, Son & Holy Spirit',
+          summary:
+            'We believe in one living and true God, eternally existing in three persons: God the Father, Jesus Christ His eternal Son and Savior, and the Holy Spirit.',
+        },
+        salvation: {
+          title: 'Salvation by Grace',
+          summary:
+            'Salvation is God’s free gift offered to everyone through repentance and personal faith in Jesus Christ, who died on the cross and rose again.',
+        },
+        'local-church': {
+          title: 'The Local Church',
+          summary:
+            'A church is a local fellowship of baptized believers united under the Lordship of Christ for worship, discipleship, and Gospel mission.',
+        },
+        ordinances: {
+          title: 'Baptism & the Lord’s Supper',
+          summary:
+            'We practice believer’s baptism by immersion as a public testimony of new life in Christ and celebrate the Lord’s Supper in remembrance of Him.',
+        },
+        'kingdom-mission': {
+          title: 'Mission, Service & Hope',
+          summary:
+            'Every believer is called to love neighbors, share the good news across the Azores and the world, and await Christ’s return in hope.',
+        },
+      },
+      cooperationIntro:
+        'Igreja Evangélica Baptista da Horta serves in fellowship and mission alongside sister Baptist churches in the Azores, mainland Portugal, and around the world.',
+      cooperationVisitLink: 'Visit website',
+      cooperationItems: {
+        cbp: {
+          name: 'Portuguese Baptist Convention',
+          scope: 'National Fellowship',
+          description:
+            'Affiliation and fraternal cooperation with Baptist churches across Portugal for evangelism and pastoral ministry.',
+        },
+        aba: {
+          name: 'Azorean Baptist Association',
+          scope: 'Azores Archipelago',
+          description:
+            'Regional fellowship uniting Baptist congregations across the Azorean islands through assemblies and camps.',
+        },
+        aep: {
+          name: 'Portuguese Evangelical Alliance',
+          scope: 'Evangelical Unity',
+          description:
+            'Cooperation across evangelical churches promoting Christian witness and religious freedom in Portugal.',
+        },
+        stb: {
+          name: 'Portuguese Baptist Seminary',
+          scope: 'Theological Training',
+          description:
+            'Supporting biblical and ministerial education for pastors, teachers, and church leaders in Portugal.',
+        },
+        ebf: {
+          name: 'European Baptist Federation',
+          scope: 'European Network',
+          description:
+            'Mission and solidarity linking Baptist unions and churches across Europe and the Middle East.',
+        },
+        bwa: {
+          name: 'Baptist World Alliance',
+          scope: 'Global Family',
+          description:
+            'Prayer, mission, and humanitarian partnership uniting millions of Baptist believers worldwide.',
+        },
+      },
     },
     ministries: {
       kicker: 'Get Involved',
       heading: 'Ministries to walk together',
       intro:
-        'There is always a place for your stage of life. Tap any ministry to view meeting details, real photos, and connect with our team.',
+        'There is always a place for your stage of life. Choose a ministry to view schedules, real photos, and connect with our team.',
       ctaJoin: 'I want to join',
+      scheduleLabel: 'Schedule',
+      audienceLabel: 'Who it’s for',
       items: {
         jovens: {
           title: 'Youth & Teens',
@@ -1140,6 +1765,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Gatherings such as Family Day at Parque da Salgueirinha, parent-child workshops, and the Plenas em Cristo women’s fellowship.',
           imageAlt:
             'Women gathered singing with acoustic guitar during Plenas em Cristo',
+        },
+        'infantil-ebd': {
+          title: 'Sunday School & Children',
+          summary: 'Age-grouped rooms for children, teens, and adults.',
+          schedule: 'Sundays at 10:00 & 16:00',
+          audience: 'All ages',
+          description:
+            'Engaging biblical teaching tailored to every age group—with dedicated classrooms for kids, teens, and adults, plus creative family activities.',
+          imageAlt:
+            'Open Bible with Sunday Bible School times for IEB Horta',
         },
         'acao-social': {
           title: 'Social Outreach',
@@ -1163,9 +1798,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
     },
     gallery: {
-      kickerPrefix: 'Straight from Instagram',
-      heading: 'Follow the daily life of our church family',
+      kickerPrefix: 'Content & Community',
+      heading: 'Church life, archives, and mission',
       followCta: 'Follow @iebhorta on Instagram',
+      tabsAria: 'Select community section',
+      tabs: {
+        photos: 'Moments @iebhorta',
+        archives: 'Archives & Events',
+        giving: 'Giving & Mission',
+      },
       filterAria: 'Filter community posts',
       filters: {
         allPrefix: 'All',
@@ -1227,9 +1868,77 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Thessalonians 5:18',
         },
       },
+      archivesIntro:
+        'Resources to encourage your faith: Scripture preaching, 51st anniversary highlights on Faial Island, and special community gatherings.',
+      archivesYouTubeCta: 'Open YouTube Channel',
+      archivesItems: {
+        'archive-palavra': {
+          category: 'Preaching & Word',
+          dateLabel: '1 Corinthians 10:31',
+          title: 'Moment in the Word · Pr. Luiz Eduardo Júnior',
+          summary:
+            'Faithful Scripture teaching applying the Gospel to family, work, and daily life. Watch services in person or on our YouTube channel.',
+          actionLabel: 'Watch on YouTube',
+          imageAlt: 'Pr. Luiz Eduardo Júnior preaching in the IEB Horta sanctuary',
+        },
+        'archive-51anos': {
+          category: 'Church Milestone',
+          dateLabel: '51 Years · Romans 5:8',
+          title: '51st Anniversary — Sustained by God’s Love',
+          summary:
+            'Over half a century of Baptist witness in Horta, gathering generations in gratitude for God’s faithfulness.',
+          actionLabel: 'See highlights on @iebhorta',
+          imageAlt: '51st anniversary poster for Igreja Evangélica Baptista da Horta',
+        },
+        'archive-familia': {
+          category: 'Community Event',
+          dateLabel: 'Parque da Salgueirinha',
+          title: 'Outdoor Family Day in Feteira',
+          summary:
+            'Annual outdoor gathering with worship, community lunch, and fellowship for members, children, and visiting friends.',
+          actionLabel: 'Join us next time',
+          imageAlt: 'Official poster for Family Day at Parque da Salgueirinha',
+        },
+        'archive-gracas': {
+          category: 'Special Service',
+          dateLabel: '1 Thessalonians 5:18',
+          title: 'Thanksgiving Weekend in the Azores',
+          summary:
+            'Times dedicated to praising God together, sharing testimonies, and giving thanks for His provision throughout the year.',
+          actionLabel: 'Explore on Instagram',
+          imageAlt: 'Thanksgiving Weekend announcement by IEB Horta',
+        },
+      },
+      giving: {
+        kicker: 'Stewardship & Generosity',
+        heading: 'Support the mission and local outreach on Faial',
+        paragraph1:
+          'Igreja Evangélica Baptista da Horta sustains its spiritual and community work solely through the voluntary offerings and tithes of its members and friends.',
+        paragraph2:
+          'Every gift supports our worship sanctuary and Sunday School classrooms, children and youth teaching, regional mission, and food relief for families in Horta.',
+        pillars: [
+          {
+            title: 'Teaching & Public Worship',
+            text: 'Maintaining our sanctuary, Sunday School classes, hospitality, and Gospel preaching.',
+          },
+          {
+            title: 'Local Social Outreach',
+            text: 'Ongoing food drives and practical care for households in need across Faial Island.',
+          },
+          {
+            title: 'Mission in the Azores',
+            text: 'Partnership with the Azorean Baptist Association and local discipleship initiatives.',
+          },
+        ],
+        ctaWhatsApp: 'Request details on WhatsApp',
+        ctaEmail: 'Contact via Email',
+        whatsappMessage:
+          'Hello! I would like to ask how to contribute an offering to Igreja Evangélica Baptista da Horta.',
+        mailSubject: 'Offering & Contribution Information — IEB Horta',
+      },
     },
     visit: {
-      kicker: 'Location & First Visit',
+      kicker: 'Contact & First Visit',
       heading: 'Plan your first visit',
       intro:
         'It will be a joy to welcome you in person in Horta. Check our locations and let us know when you plan to visit so we can greet you.',
@@ -1301,7 +2010,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     footer: {
       summary:
         'For 51 years on Faial Island, a Christian community dedicated to loving God, serving people, and sharing the Gospel with simplicity.',
-      navigationTitle: 'Navigation',
+      navigationTitle: 'Navigation & Sections',
+      cooperationTitle: 'Baptist Cooperation',
       channelsTitle: 'Follow & Contact Us',
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
@@ -1322,7 +2032,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Église Évangélique Baptiste de Horta',
       description:
-        'Un lieu de foi, de famille et de nouveaux départs sur l’île de Faial, Açores. Horaires des cultes, ministères, communauté @iebhorta et informations pour planifier votre visite.',
+        'Un lieu de foi, de famille et de nouveaux départs sur l’île de Faial, Açores. Horaires des cultes, confession de foi, ministères, communauté @iebhorta et informations pour planifier votre visite.',
       skipToContent: 'Aller au contenu principal',
     },
     nav: {
@@ -1332,10 +2042,18 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       languageMenuTitle: 'Langue',
       links: {
         schedule: 'Horaires',
-        essence: 'Notre Foi',
+        essence: 'À propos',
         ministries: 'Ministères',
-        community: 'Communauté',
-        visit: 'Visiter',
+        community: 'Contenus',
+        visit: 'Contacts',
+      },
+      subLinks: {
+        churchHistory: 'L’Église (51 Ans)',
+        whatWeBelieve: 'Ce Que Nous Croyons',
+        cooperation: 'Coopération Baptiste',
+        instagramFeed: 'Moments @iebhorta',
+        archivesEvents: 'Archives & Événements',
+        offeringsMission: 'Offrandes & Mission',
       },
       ctaVisit: 'Je Visite',
       ctaVisitDrawer: 'Planifier votre première visite',
@@ -1354,6 +2072,39 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Soutenus par l’amour de Dieu sur l’île de Faial. Une église chrétienne aux portes ouvertes pour marcher avec vous et votre famille dans la Parole et la communion.',
       ctaVisit: 'Planifier votre visite',
       ctaInstagram: 'Suivre @iebhorta',
+      watchYouTube: 'Cultes sur YouTube',
+      prevSlide: 'Temps fort précédent',
+      nextSlide: 'Temps fort suivant',
+      slideLabelPrefix: 'Temps fort',
+      slides: {
+        welcome: {
+          kicker: '51 Ans à Horta, Açores',
+          headline: 'Un lieu de foi, de famille et de nouveaux départs.',
+          subheadline:
+            'Soutenus par l’amour de Dieu sur l’île de Faial. Une église chrétienne aux portes ouvertes pour marcher avec vous et votre famille dans la Parole et la communion.',
+          ctaLabel: 'Planifier votre visite',
+          imageAlt:
+            'Intérieur lumineux de l’église baigné par la lumière du matin avec la communauté réunie',
+        },
+        'sunday-worship': {
+          kicker: 'Av. Marginal, 17 · Tous les Dimanches',
+          headline: 'Adoration, enseignement biblique et communion à Horta.',
+          subheadline:
+            'Nous nous réunissons le dimanche à 10h00 pour l’École Biblique (ou à 16h00 à Angústias) et à 11h15 pour le Culte de Célébration.',
+          ctaLabel: 'Voir les Horaires',
+          imageAlt:
+            'Intérieur du temple de l’Igreja Evangélica Baptista da Horta sur l’Avenida Marginal',
+        },
+        'church-family': {
+          kicker: 'Affiliée à la Convention Baptiste Portugaise',
+          headline: 'Une famille spirituelle pour toutes les générations à Faial.',
+          subheadline:
+            'Enfants, jeunes, couples et aînés unis par l’Évangile de Jésus-Christ, au service de notre ville avec espérance.',
+          ctaLabel: 'Découvrir l’Église',
+          imageAlt:
+            'Membres et enfants de l’Igreja Evangélica Baptista da Horta réunis en famille',
+        },
+      },
       nextSundayAria: 'Prochain culte du dimanche',
       thisSundayToday: 'Ce Dimanche (Aujourd’hui)',
       nextSundayLabel: 'Dimanche prochain',
@@ -1388,6 +2139,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
       calendarSaved: 'Événement enregistré (.ics)',
       calendarSave: 'Enregistrer au calendrier',
+      watchYouTube: 'Voir sur YouTube',
       confirmVisit: 'Confirmer une visite',
       items: {
         celebracao: {
@@ -1433,9 +2185,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Intérieur du temple de l’IEB Horta sur l’Avenida Marginal avec bancs en bois et croix',
       sanctuaryFallback: 'Temple Av. Marginal, 17',
       sanctuaryCaption: 'Culte au temple · Av. Marginal, 17.',
-      kicker: 'Notre Essence',
+      kicker: 'À propos de l’Église',
       heading: 'Aimer Dieu, servir les personnes et vivre l’Évangile sur l’île.',
       sealAlt: 'Sceau officiel Igreja Evangélica Baptista da Horta',
+      tabsAria: 'Explorer histoire, foi et coopération',
+      tabs: {
+        history: 'L’Église',
+        beliefs: 'Ce Que Nous Croyons',
+        cooperation: 'Coopération',
+      },
       paragraph1:
         'Depuis 51 ans sur l’île de Faial, l’Igreja Evangélica Baptista da Horta, affiliée à la Convention Baptiste Portugaise, marche comme une famille spirituelle où chacun est accueilli par son nom et encouragé à grandir dans la foi en Jésus-Christ.',
       paragraph2:
@@ -1462,13 +2220,90 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Nous vivons l’Évangile au-delà des murs du temple grâce aux collectes alimentaires solidaires et à un accueil attentif.',
         },
       },
+      beliefsIntro:
+        'Nous nous appuyons sur la Sainte Bible et les convictions historiques de la foi baptiste : l’autorité des Écritures, le salut par la grâce en Jésus-Christ, l’autonomie de l’église locale et le service fraternel.',
+      beliefsItems: {
+        scriptures: {
+          title: 'Les Saintes Écritures',
+          summary:
+            'Nous croyons que la Bible est la Parole inspirée de Dieu, digne de confiance et règle souveraine de foi et de vie chrétienne.',
+        },
+        'triune-god': {
+          title: 'Dieu Père, Fils et Saint-Esprit',
+          summary:
+            'Nous croyons en un seul Dieu vivant et vrai, éternellement subsistant en trois personnes : le Père créateur, le Fils Jésus-Christ notre Sauveur, et le Saint-Esprit.',
+        },
+        salvation: {
+          title: 'Le Salut par la Grâce',
+          summary:
+            'Le salut est un don gratuit de Dieu offert à tous par la repentance et la foi personnelle en Jésus-Christ, mort sur la croix et ressuscité.',
+        },
+        'local-church': {
+          title: 'L’Église Locale',
+          summary:
+            'L’église est une communauté de croyants baptisés unis dans la communion de l’Évangile sous l’autorité du Christ pour adorer et témoigner.',
+        },
+        ordinances: {
+          title: 'Baptême et Sainte-Cène',
+          summary:
+            'Nous pratiquons le baptême par immersion comme témoignage public d’une vie nouvelle en Christ et la Sainte-Cène en mémoire de Lui.',
+        },
+        'kingdom-mission': {
+          title: 'Mission, Service et Espérance',
+          summary:
+            'Chaque chrétien est appelé à aimer son prochain, annoncer l’Évangile aux Açores et dans le monde, et attendre avec espérance le Royaume de Dieu.',
+        },
+      },
+      cooperationIntro:
+        'L’Igreja Evangélica Baptista da Horta chemine en communion et en coopération missionnaire et théologique avec les églises sœurs aux Açores, au Portugal continental et dans le monde.',
+      cooperationVisitLink: 'Visiter le site',
+      cooperationItems: {
+        cbp: {
+          name: 'Convention Baptiste Portugaise',
+          scope: 'Niveau National',
+          description:
+            'Affiliation et coopération fraternelle avec les églises baptistes de tout le Portugal pour l’évangélisation et le service.',
+        },
+        aba: {
+          name: 'Association Baptiste Açoréenne',
+          scope: 'Archipel des Açores',
+          description:
+            'Communion régionale entre les églises baptistes des îles des Açores lors d’assemblées et de camps.',
+        },
+        aep: {
+          name: 'Alliance Évangélique Portugaise',
+          scope: 'Unité Évangélique',
+          description:
+            'Coopération interconfessionnelle autour de l’Évangile, de la liberté religieuse et du témoignage chrétien.',
+        },
+        stb: {
+          name: 'Séminaire Théologique Baptiste',
+          scope: 'Formation Biblique',
+          description:
+            'Soutien à la formation biblique et pastorale des responsables et serviteurs des églises au Portugal.',
+        },
+        ebf: {
+          name: 'Fédération Baptiste Européenne',
+          scope: 'Réseau Européen',
+          description:
+            'Partenariat missionnaire et solidaire reliant les unions baptistes à travers l’Europe et le Moyen-Orient.',
+        },
+        bwa: {
+          name: 'Alliance Baptiste Mondiale',
+          scope: 'Famille Mondiale',
+          description:
+            'Prière, mission et entraide humanitaire unissant des millions de chrétiens baptistes dans le monde.',
+        },
+      },
     },
     ministries: {
       kicker: 'S’engager',
       heading: 'Des ministères pour marcher ensemble',
       intro:
-        'Il y a toujours une place pour votre étape de vie. Touchez un ministère pour découvrir les horaires, des photos réelles et contacter l’équipe.',
+        'Il y a toujours une place pour votre étape de vie. Choisissez un ministère pour découvrir les horaires, des photos réelles et contacter l’équipe.',
       ctaJoin: 'Je veux participer',
+      scheduleLabel: 'Horaire',
+      audienceLabel: 'Public',
       items: {
         jovens: {
           title: 'Jeunes & Adolescents',
@@ -1488,6 +2323,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Des initiatives comme la Journée de la Famille au Parque da Salgueirinha, des ateliers parents-enfants et les rencontres féminines Plenas em Cristo.',
           imageAlt:
             'Femmes réunies chantant avec guitare lors de la rencontre Plenas em Cristo',
+        },
+        'infantil-ebd': {
+          title: 'École Biblique & Enfants',
+          summary: 'Salles adaptées pour enfants, adolescents et adultes.',
+          schedule: 'Dimanches à 10h00 et à 16h00',
+          audience: 'Tous les âges',
+          description:
+            'Un enseignement biblique adapté à chaque âge — avec des salles pour enfants, adolescents et adultes, ainsi que des ateliers créatifs en famille.',
+          imageAlt:
+            'Bible ouverte avec les horaires de l’École Biblique du Dimanche de l’IEB Horta',
         },
         'acao-social': {
           title: 'Action Sociale',
@@ -1511,9 +2356,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
     },
     gallery: {
-      kickerPrefix: 'En direct d’Instagram',
-      heading: 'Suivez le quotidien de notre famille',
+      kickerPrefix: 'Contenus & Communauté',
+      heading: 'Vie communautaire, archives et mission',
       followCta: 'Suivre @iebhorta sur Instagram',
+      tabsAria: 'Choisir une section de contenus',
+      tabs: {
+        photos: 'Moments @iebhorta',
+        archives: 'Archives & Événements',
+        giving: 'Offrandes & Mission',
+      },
       filterAria: 'Filtrer les publications',
       filters: {
         allPrefix: 'Toutes',
@@ -1575,9 +2426,77 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Thessaloniciens 5:18',
         },
       },
+      archivesIntro:
+        'Des contenus pour édifier votre foi : prédications des Écritures, rétrospective des 51 ans à Faial et temps forts de la communauté.',
+      archivesYouTubeCta: 'Ouvrir la chaîne YouTube',
+      archivesItems: {
+        'archive-palavra': {
+          category: 'Prédication & Parole',
+          dateLabel: '1 Corinthiens 10:31',
+          title: 'Temps de la Parole · Pasteur Luiz Eduardo Júnior',
+          summary:
+            'Partage biblique fidèle pour vivre l’Évangile en famille et au quotidien. Retrouvez nos cultes sur place et sur YouTube.',
+          actionLabel: 'Regarder sur YouTube',
+          imageAlt: 'Le pasteur Luiz Eduardo Júnior prêchant au temple de l’IEB Horta',
+        },
+        'archive-51anos': {
+          category: 'Jubilé',
+          dateLabel: '51 Ans · Romains 5:8',
+          title: '51e Anniversaire — Soutenus par l’Amour de Dieu',
+          summary:
+            'Plus d’un demi-siècle de présence baptiste à Horta, rassemblant toutes les générations dans la reconnaissance envers Dieu.',
+          actionLabel: 'Voir sur @iebhorta',
+          imageAlt: 'Affiche du 51e anniversaire de l’IEB Horta',
+        },
+        'archive-familia': {
+          category: 'Événement Communautaire',
+          dateLabel: 'Parque da Salgueirinha',
+          title: 'Journée de la Famille en plein air à Feteira',
+          summary:
+            'Rencontre annuelle avec culte en plein air, repas partagé et moments fraternels pour les familles et visiteurs sur l’île.',
+          actionLabel: 'Participer à la prochaine',
+          imageAlt: 'Invitation officielle à la Journée de la Famille à Feteira',
+        },
+        'archive-gracas': {
+          category: 'Célébration Spéciale',
+          dateLabel: '1 Thessaloniciens 5:18',
+          title: 'Week-end d’Action de grâces aux Açores',
+          summary:
+            'Des cultes dédiés à la louange, au partage de témoignages et à la gratitude pour la fidélité de Dieu tout au long de l’année.',
+          actionLabel: 'Découvrir sur Instagram',
+          imageAlt: 'Annonce du Week-end d’Action de grâces de l’IEB Horta',
+        },
+      },
+      giving: {
+        kicker: 'Générosité & Soutien',
+        heading: 'Soutenir la mission et l’entraide locale à Faial',
+        paragraph1:
+          'L’Igreja Evangélica Baptista da Horta soutient son ministère spirituel et social uniquement grâce aux dons et offrandes volontaires de ses membres et amis.',
+        paragraph2:
+          'Chaque contribution permet d’entretenir les lieux de culte et d’École Biblique, l’enseignement pour les enfants et les jeunes, la mission et l’aide alimentaire à Horta.',
+        pillars: [
+          {
+            title: 'Enseignement & Culte Public',
+            text: 'Soutien des salles d’École Biblique, de l’accueil des visiteurs et du partage de la Parole.',
+          },
+          {
+            title: 'Action Sociale Locale',
+            text: 'Collecte régulière de denrées et soutien concret aux foyers dans le besoin sur l’île de Faial.',
+          },
+          {
+            title: 'Mission aux Açores',
+            text: 'Coopération avec l’Association Baptiste Açoréenne et projets locaux de discipulat.',
+          },
+        ],
+        ctaWhatsApp: 'Demander les informations via WhatsApp',
+        ctaEmail: 'Contacter par e-mail',
+        whatsappMessage:
+          'Bonjour ! Je souhaiterais obtenir les informations pour faire un don à l’Igreja Evangélica Baptista da Horta.',
+        mailSubject: 'Informations sur les dons et offrandes — IEB Horta',
+      },
     },
     visit: {
-      kicker: 'Localisation & Première Visite',
+      kicker: 'Contacts & Première Visite',
       heading: 'Planifiez votre première visite',
       intro:
         'Ce sera une joie de vous accueillir en personne à Horta. Consultez nos lieux de rencontre et prévenez-nous du jour de votre venue.',
@@ -1649,7 +2568,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     footer: {
       summary:
         'Depuis 51 ans sur l’île de Faial, une communauté chrétienne dédiée à aimer Dieu, servir les personnes et annoncer l’Évangile avec simplicité.',
-      navigationTitle: 'Navigation',
+      navigationTitle: 'Navigation & Sections',
+      cooperationTitle: 'Coopération Baptiste',
       channelsTitle: 'Suivre & Nous Contacter',
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
@@ -1670,7 +2590,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Iglesia Evangélica Bautista de Horta',
       description:
-        'Un lugar de fe, familia y nuevos comienzos en la Isla de Faial, Azores. Horarios de cultos, ministerios, comunidad @iebhorta e información para planificar tu visita.',
+        'Un lugar de fe, familia y nuevos comienzos en la Isla de Faial, Azores. Horarios de cultos, confesión de fe, ministerios, comunidad @iebhorta e información para planificar tu visita.',
       skipToContent: 'Saltar al contenido principal',
     },
     nav: {
@@ -1680,10 +2600,18 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       languageMenuTitle: 'Idioma',
       links: {
         schedule: 'Horarios',
-        essence: 'Esencia',
+        essence: 'Sobre Nosotros',
         ministries: 'Ministerios',
-        community: 'Comunidad',
-        visit: 'Visítanos',
+        community: 'Contenidos',
+        visit: 'Contactos',
+      },
+      subLinks: {
+        churchHistory: 'La Iglesia (51 Años)',
+        whatWeBelieve: 'Lo Que Creemos',
+        cooperation: 'Cooperación Bautista',
+        instagramFeed: 'Momentos @iebhorta',
+        archivesEvents: 'Archivos & Eventos',
+        offeringsMission: 'Ofrendas & Misión',
       },
       ctaVisit: 'Quiero Visitar',
       ctaVisitDrawer: 'Planifica tu Primera Visita',
@@ -1702,6 +2630,39 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Sostenidos por el amor de Dios en la Isla de Faial. Una iglesia cristiana de puertas abiertas para caminar contigo y tu familia en la Palabra y la comunión.',
       ctaVisit: 'Planifica tu Visita',
       ctaInstagram: 'Sigue a @iebhorta',
+      watchYouTube: 'Cultos en YouTube',
+      prevSlide: 'Destacado anterior',
+      nextSlide: 'Siguiente destacado',
+      slideLabelPrefix: 'Destacado',
+      slides: {
+        welcome: {
+          kicker: '51 Años en Horta, Azores',
+          headline: 'Un lugar de fe, familia y nuevos comienzos.',
+          subheadline:
+            'Sostenidos por el amor de Dios en la Isla de Faial. Una iglesia cristiana de puertas abiertas para caminar contigo y tu familia en la Palabra y la comunión.',
+          ctaLabel: 'Planifica tu Visita',
+          imageAlt:
+            'Interior luminoso de la iglesia con luz natural de la mañana y comunidad reunida',
+        },
+        'sunday-worship': {
+          kicker: 'Av. Marginal, n.º 17 · Todos los Domingos',
+          headline: 'Adoración, enseñanza bíblica y comunión en Horta.',
+          subheadline:
+            'Nos reunimos los domingos a las 10:00 en la Escuela Bíblica Dominical (o a las 16:00 en Angústias) y a las 11:15 en el Culto de Celebración.',
+          ctaLabel: 'Ver Horarios',
+          imageAlt:
+            'Interior del templo de la Igreja Evangélica Baptista da Horta en Avenida Marginal',
+        },
+        'church-family': {
+          kicker: 'Afiliada a la Convención Bautista Portuguesa',
+          headline: 'Una familia espiritual para todas las generaciones en Faial.',
+          subheadline:
+            'Niños, jóvenes, matrimonios y mayores unidos por el Evangelio de Jesucristo, sirviendo a nuestra ciudad con sencillez.',
+          ctaLabel: 'Conocer la Iglesia',
+          imageAlt:
+            'Miembros y niños de la Igreja Evangélica Baptista da Horta reunidos en familia',
+        },
+      },
       nextSundayAria: 'Próximo encuentro dominical',
       thisSundayToday: 'Este Domingo (Hoy)',
       nextSundayLabel: 'Próximo Domingo',
@@ -1736,6 +2697,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
       calendarSaved: 'Evento guardado (.ics)',
       calendarSave: 'Guardar culto en el calendario',
+      watchYouTube: 'Ver en YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
         celebracao: {
@@ -1781,9 +2743,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         'Interior del templo de la IEB Horta en Avenida Marginal con bancos de madera y cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
       sanctuaryCaption: 'Culto en el templo · Av. Marginal, 17.',
-      kicker: 'Nuestra Esencia',
+      kicker: 'Sobre la Iglesia',
       heading: 'Amar a Dios, servir a las personas y vivir el Evangelio en la isla.',
       sealAlt: 'Sello oficial Igreja Evangélica Baptista da Horta',
+      tabsAria: 'Explorar historia, fe y cooperación',
+      tabs: {
+        history: 'La Iglesia',
+        beliefs: 'Lo Que Creemos',
+        cooperation: 'Cooperación',
+      },
       paragraph1:
         'Desde hace 51 años en la Isla de Faial, la Igreja Evangélica Baptista da Horta, afiliada a la Convención Bautista Portuguesa, camina como una familia espiritual donde cada persona es recibida por su nombre y animada a crecer en la fe en Jesucristo.',
       paragraph2:
@@ -1810,13 +2778,90 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Vivimos el Evangelio más allá de las paredes del templo mediante campañas solidarias, apoyo alimentario y acogida cercana.',
         },
       },
+      beliefsIntro:
+        'Nos guiamos por la Santa Biblia y los principios históricos de la fe bautista: la autoridad de las Escrituras, la salvación por gracia mediante la fe en Cristo, la autonomía de la iglesia local y el servicio fraterno.',
+      beliefsItems: {
+        scriptures: {
+          title: 'Las Sagradas Escrituras',
+          summary:
+            'Creemos que la Biblia es la Palabra inspirada por Dios, digna de confianza y regla suprema de fe, doctrina y conducta cristiana.',
+        },
+        'triune-god': {
+          title: 'Dios Padre, Hijo y Espíritu Santo',
+          summary:
+            'Creemos en un solo Dios vivo y verdadero que subsiste eternamente en tres personas: el Padre creador, el Hijo Jesucristo, nuestro Salvador, y el Espíritu Santo.',
+        },
+        salvation: {
+          title: 'La Salvación por Gracia',
+          summary:
+            'La salvación es don gratuito de Dios ofrecido a todos mediante el arrepentimiento y la fe personal en Jesucristo, quien murió en la cruz y resucitó.',
+        },
+        'local-church': {
+          title: 'La Iglesia Local',
+          summary:
+            'La iglesia es una congregación de creyentes bautizados unidos en la comunión del Evangelio bajo el señorío de Cristo para adorar y testificar.',
+        },
+        ordinances: {
+          title: 'Bautismo y Cena del Señor',
+          summary:
+            'Practicamos el bautismo por inmersión como testimonio público de nueva vida en Cristo y celebramos la Cena del Señor en memoria de Él.',
+        },
+        'kingdom-mission': {
+          title: 'Misión, Servicio y Esperanza',
+          summary:
+            'Cada creyente está llamado a amar al prójimo, compartir las buenas nuevas en las Azores y en el mundo y esperar con fe el Reino de Dios.',
+        },
+      },
+      cooperationIntro:
+        'La Igreja Evangélica Baptista da Horta camina en comunión y cooperación misionera, teológica y social con iglesias hermanas en las Azores, Portugal continental y en todo el mundo.',
+      cooperationVisitLink: 'Visitar página',
+      cooperationItems: {
+        cbp: {
+          name: 'Convención Bautista Portuguesa',
+          scope: 'Ámbito Nacional',
+          description:
+            'Afiliación y cooperación fraterna con las iglesias bautistas de Portugal para la evangelización y el servicio.',
+        },
+        aba: {
+          name: 'Asociación Bautista Azoreana',
+          scope: 'Archipiélago de las Azores',
+          description:
+            'Comunión regional entre las iglesias bautistas de las islas de las Azores en asambleas y campamentos.',
+        },
+        aep: {
+          name: 'Alianza Evangélica Portuguesa',
+          scope: 'Unidad Evangélica',
+          description:
+            'Cooperación interdenominacional en torno al Evangelio, la libertad religiosa y el testimonio cristiano.',
+        },
+        stb: {
+          name: 'Seminario Teológico Bautista',
+          scope: 'Formación Bíblica',
+          description:
+            'Apoyo a la capacitación bíblica y ministerial de pastores, maestros y líderes en Portugal.',
+        },
+        ebf: {
+          name: 'Federación Bautista Europea',
+          scope: 'Red Europea',
+          description:
+            'Vínculo solidario y misionero con las uniones e iglesias bautistas en toda Europa y Oriente Medio.',
+        },
+        bwa: {
+          name: 'Alianza Bautista Mundial',
+          scope: 'Familia Global',
+          description:
+            'Oración, misión y ayuda humanitaria compartida con millones de creyentes bautistas en todo el mundo.',
+        },
+      },
     },
     ministries: {
       kicker: 'Involúcrate',
       heading: 'Ministerios para caminar juntos',
       intro:
-        'Siempre hay un lugar para tu etapa de vida. Toca un ministerio para ver los horarios, fotografías reales y contactar con el equipo.',
+        'Siempre hay un lugar para tu etapa de vida. Elige un ministerio para consultar los horarios, ver fotografías reales y contactar con el equipo.',
       ctaJoin: 'Quiero participar',
+      scheduleLabel: 'Horario',
+      audienceLabel: 'Público',
       items: {
         jovens: {
           title: 'Jóvenes & Adolescentes',
@@ -1836,6 +2881,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
             'Iniciativas como el Día de la Familia en el Parque da Salgueirinha, talleres con niños y el encuentro femenino Plenas em Cristo.',
           imageAlt:
             'Mujeres reunidas cantando con guitarra durante el encuentro Plenas em Cristo',
+        },
+        'infantil-ebd': {
+          title: 'Escuela Bíblica & Infantil',
+          summary: 'Aulas separadas para niños, adolescentes y adultos.',
+          schedule: 'Domingos a las 10:00 y a las 16:00',
+          audience: 'Todas las edades',
+          description:
+            'Enseñanza bíblica adaptada a cada edad — con aulas dedicadas para niños, adolescentes y adultos, además de talleres creativos en familia.',
+          imageAlt:
+            'Biblia abierta con los horarios de la Escuela Bíblica Dominical de la IEB Horta',
         },
         'acao-social': {
           title: 'Acción Social',
@@ -1859,9 +2914,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       },
     },
     gallery: {
-      kickerPrefix: 'Directamente desde Instagram',
-      heading: 'Sigue el día a día de nuestra familia',
+      kickerPrefix: 'Contenidos & Comunidad',
+      heading: 'Vida comunitaria, archivos y misión',
       followCta: 'Seguir a @iebhorta en Instagram',
+      tabsAria: 'Seleccionar sección de contenidos',
+      tabs: {
+        photos: 'Momentos @iebhorta',
+        archives: 'Archivos & Eventos',
+        giving: 'Ofrendas & Misión',
+      },
       filterAria: 'Filtrar publicaciones de la comunidad',
       filters: {
         allPrefix: 'Todas',
@@ -1923,9 +2984,77 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Tesalonicenses 5:18',
         },
       },
+      archivesIntro:
+        'Contenidos que edifican tu vida espiritual: predicaciones de la Palabra, hitos de los 51 años en Faial y encuentros especiales abiertos a la ciudad.',
+      archivesYouTubeCta: 'Abrir canal en YouTube',
+      archivesItems: {
+        'archive-palavra': {
+          category: 'Predicación & Palabra',
+          dateLabel: '1 Corintios 10:31',
+          title: 'Momento de la Palabra · Pr. Luiz Eduardo Júnior',
+          summary:
+            'Exposición fiel de las Escrituras para aplicar el Evangelio en la familia y la vida cotidiana. Sigue los cultos en el templo y en nuestro YouTube.',
+          actionLabel: 'Ver en YouTube',
+          imageAlt: 'Pr. Luiz Eduardo Júnior predicando en el templo de la IEB Horta',
+        },
+        'archive-51anos': {
+          category: 'Hito Histórico',
+          dateLabel: '51 Años · Romanos 5:8',
+          title: '51.º Aniversario — Sostenidos por el Amor de Dios',
+          summary:
+            'Más de medio siglo de testimonio evangélico bautista en Horta, reuniendo a generaciones en gratitud por la fidelidad de Dios.',
+          actionLabel: 'Ver en @iebhorta',
+          imageAlt: 'Cartel del 51.º aniversario de la IEB Horta',
+        },
+        'archive-familia': {
+          category: 'Evento Comunitario',
+          dateLabel: 'Parque da Salgueirinha',
+          title: 'Día de la Familia al aire libre en Feteira',
+          summary:
+            'Encuentro anual con culto al aire libre, almuerzo comunitario y convivencia para miembros, niños y amigos visitantes en la isla.',
+          actionLabel: 'Confirmar asistencia',
+          imageAlt: 'Cartel oficial del Día de la Familia en el Parque da Salgueirinha',
+        },
+        'archive-gracas': {
+          category: 'Celebración Especial',
+          dateLabel: '1 Tesalonicenses 5:18',
+          title: 'Fin de Semana de Acción de Gracias en las Azores',
+          summary:
+            'Momentos dedicados a alabar a Dios en unidad, compartir testimonios y agradecer por las bendiciones recibidas durante el año.',
+          actionLabel: 'Explorar en Instagram',
+          imageAlt: 'Publicación de Fin de Semana de Acción de Gracias de IEB Horta',
+        },
+      },
+      giving: {
+        kicker: 'Generosidad & Sostén',
+        heading: 'Contribuye a la misión y la acción local en Faial',
+        paragraph1:
+          'La Igreja Evangélica Baptista da Horta sostiene su labor espiritual y social únicamente mediante las ofrendas y diezmos voluntarios de sus miembros y amigos.',
+        paragraph2:
+          'Cada aporte respalda el mantenimiento de los espacios de culto y EBD, la enseñanza bíblica para niños y jóvenes, la misión y las campañas solidarias de alimentos en Faial.',
+        pillars: [
+          {
+            title: 'Enseñanza & Culto Público',
+            text: 'Sostén de las aulas de Escuela Bíblica Dominical, acogida de visitantes y predicación bíblica.',
+          },
+          {
+            title: 'Acción Social Local',
+            text: 'Recogida continua de alimentos y apoyo directo a hogares necesitados en la Isla de Faial.',
+          },
+          {
+            title: 'Misión en las Azores',
+            text: 'Cooperación con la Asociación Bautista Azoreana y proyectos locales de discipulado.',
+          },
+        ],
+        ctaWhatsApp: 'Solicitar datos por WhatsApp',
+        ctaEmail: 'Contactar por correo',
+        whatsappMessage:
+          '¡Hola! Me gustaría recibir información sobre cómo contribuir con ofrendas para la Igreja Evangélica Baptista da Horta.',
+        mailSubject: 'Información sobre Ofrendas y Donativos — IEB Horta',
+      },
     },
     visit: {
-      kicker: 'Ubicación & Primera Visita',
+      kicker: 'Contactos & Primera Visita',
       heading: 'Planifica tu primera visita',
       intro:
         'Será una alegría recibirte en persona en Horta. Consulta nuestros espacios y avísanos qué día planeas venir para esperarte.',
@@ -1997,7 +3126,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     footer: {
       summary:
         'Desde hace 51 años en la Isla de Faial, una comunidad cristiana dedicada a amar a Dios, servir a las personas y anunciar el Evangelio con sencillez.',
-      navigationTitle: 'Navegación',
+      navigationTitle: 'Navegación & Secciones',
+      cooperationTitle: 'Cooperación Bautista',
       channelsTitle: 'Síguenos y Contáctanos',
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',

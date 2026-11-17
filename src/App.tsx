@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { AboutSection } from './components/AboutSection';
+import { AboutSection, type AboutTabId } from './components/AboutSection';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
-import { InstagramGallery } from './components/InstagramGallery';
+import {
+  InstagramGallery,
+  type CommunityTabId,
+} from './components/InstagramGallery';
 import { MinistriesSection } from './components/MinistriesSection';
 import { MobileQuickBar } from './components/MobileQuickBar';
 import { Navbar } from './components/Navbar';
@@ -12,7 +15,17 @@ import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 
 function AppContent() {
   const [selectedMinistryId, setSelectedMinistryId] = useState('');
+  const [aboutTab, setAboutTab] = useState<AboutTabId>('historia');
+  const [communityTab, setCommunityTab] = useState<CommunityTabId>('fotos');
   const { t } = useLanguage();
+
+  const handleNavigateToAboutTab = (tab: AboutTabId) => {
+    setAboutTab(tab);
+  };
+
+  const handleNavigateToCommunityTab = (tab: CommunityTabId) => {
+    setCommunityTab(tab);
+  };
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#FAF8F4] text-[#172226]">
@@ -23,21 +36,30 @@ function AppContent() {
         {t.meta.skipToContent}
       </a>
 
-      <Navbar />
+      <Navbar
+        onSelectAboutTab={handleNavigateToAboutTab}
+        onSelectCommunityTab={handleNavigateToCommunityTab}
+      />
 
       <main id="conteudo-principal">
-        <Hero />
+        <Hero onSelectAboutTab={handleNavigateToAboutTab} />
         <ScheduleSection />
-        <AboutSection />
+        <AboutSection activeTab={aboutTab} onTabChange={setAboutTab} />
         <MinistriesSection onSelectMinistry={setSelectedMinistryId} />
-        <InstagramGallery />
+        <InstagramGallery
+          activeTab={communityTab}
+          onTabChange={setCommunityTab}
+        />
         <VisitLocationSection
           selectedMinistryId={selectedMinistryId}
           onClearMinistry={() => setSelectedMinistryId('')}
         />
       </main>
 
-      <Footer />
+      <Footer
+        onSelectAboutTab={handleNavigateToAboutTab}
+        onSelectCommunityTab={handleNavigateToCommunityTab}
+      />
       <MobileQuickBar />
     </div>
   );

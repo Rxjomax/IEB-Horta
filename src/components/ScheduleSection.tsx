@@ -7,8 +7,13 @@ import {
   Home,
   Smile,
   Sun,
+  Youtube,
 } from 'lucide-react';
-import { WEEKLY_SCHEDULE, type ScheduleItem } from '../data/churchConfig';
+import {
+  CHURCH_INFO,
+  WEEKLY_SCHEDULE,
+  type ScheduleItem,
+} from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
 import { downloadSundayWorshipIcs } from '../utils/calendar';
 import { Reveal } from './Reveal';
@@ -52,7 +57,7 @@ export function ScheduleSection() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* Coluna Esquerda: Contexto, Filtros e Calendário */}
+          {/* Coluna Esquerda: Contexto, Filtros e Ações */}
           <Reveal className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
               <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
@@ -98,11 +103,11 @@ export function ScheduleSection() {
                 })}
               </div>
 
-              <div className="mt-7 flex flex-col gap-3 border-t border-[#DDD7CE] pt-6 sm:flex-row sm:items-center sm:gap-5">
+              <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#DDD7CE] pt-6">
                 <button
                   type="button"
                   onClick={handleSaveCalendar}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[#195963] bg-white px-4 py-2.5 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#195963] bg-white px-4 py-2.5 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
                 >
                   {calendarSaved ? (
                     <>
@@ -120,6 +125,21 @@ export function ScheduleSection() {
                   )}
                 </button>
 
+                <a
+                  href={CHURCH_INFO.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                >
+                  <Youtube
+                    className="h-4 w-4 shrink-0 text-[#9C412A]"
+                    aria-hidden="true"
+                  />
+                  <span>{t.schedule.watchYouTube}</span>
+                </a>
+              </div>
+
+              <div className="mt-4">
                 <a
                   href="#visita"
                   className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#9C412A] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A]"

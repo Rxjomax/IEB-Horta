@@ -7,6 +7,13 @@
  * ============================================================================
  */
 
+export interface HeroSlide {
+  id: string;
+  image: string;
+  targetHref: string;
+  aboutTab?: 'historia' | 'cremos' | 'cooperacao';
+}
+
 export interface ScheduleItem {
   id: string;
   category: 'domingo' | 'semana';
@@ -22,6 +29,17 @@ export interface EssencePillar {
   number: string;
   title: string;
   description: string;
+}
+
+export interface BeliefArticle {
+  id: string;
+  number: string;
+  references: string;
+}
+
+export interface CooperationPartner {
+  id: string;
+  url: string;
 }
 
 export interface MinistryItem {
@@ -45,6 +63,12 @@ export interface GalleryPost {
   dateLabel: string;
   caption: string;
   scripture?: string;
+}
+
+export interface ArchiveFeatureItem {
+  id: string;
+  image: string;
+  actionType: 'youtube' | 'instagram' | 'visit';
 }
 
 export interface ChurchLocation {
@@ -93,6 +117,85 @@ export const CHURCH_INFO = {
     aboutSanctuary: '/assets/instagram/templo_culto_real.jpg',
   },
 };
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'welcome',
+    image: '/src/assets/images/hero_sanctuary_light_1794848338268.jpg',
+    targetHref: '#visita',
+  },
+  {
+    id: 'sunday-worship',
+    image: '/assets/instagram/templo_culto_real.jpg',
+    targetHref: '#horarios',
+  },
+  {
+    id: 'church-family',
+    image: '/assets/instagram/familia_iebhorta.jpg',
+    targetHref: '#essencia',
+    aboutTab: 'historia',
+  },
+];
+
+export const BELIEF_ARTICLES: BeliefArticle[] = [
+  {
+    id: 'scriptures',
+    number: '01',
+    references: '2 Timóteo 3:16-17 · Salmos 119:105',
+  },
+  {
+    id: 'triune-god',
+    number: '02',
+    references: 'Mateus 28:19 · João 1:1-14 · Romanos 5:8',
+  },
+  {
+    id: 'salvation',
+    number: '03',
+    references: 'Efésios 2:8-9 · João 3:16 · Romanos 10:9',
+  },
+  {
+    id: 'local-church',
+    number: '04',
+    references: 'Atos 2:41-47 · 1 Coríntios 12:12-27',
+  },
+  {
+    id: 'ordinances',
+    number: '05',
+    references: 'Romanos 6:3-4 · 1 Coríntios 11:23-26',
+  },
+  {
+    id: 'kingdom-mission',
+    number: '06',
+    references: 'Mateus 28:18-20 · 1 Tessalonicenses 5:18',
+  },
+];
+
+export const COOPERATION_PARTNERS: CooperationPartner[] = [
+  {
+    id: 'cbp',
+    url: 'https://www.convencaobaptista.pt/',
+  },
+  {
+    id: 'aba',
+    url: 'https://www.instagram.com/iebhorta/',
+  },
+  {
+    id: 'aep',
+    url: 'https://www.aliancaevangelica.pt/',
+  },
+  {
+    id: 'stb',
+    url: 'https://www.seminariobaptista.pt/',
+  },
+  {
+    id: 'ebf',
+    url: 'https://www.ebf.org/',
+  },
+  {
+    id: 'bwa',
+    url: 'https://www.baptistworld.org/',
+  },
+];
 
 export const CHURCH_LOCATIONS: ChurchLocation[] = [
   {
@@ -195,7 +298,7 @@ export const ESSENCE_PILLARS: EssencePillar[] = [
 ];
 
 /**
- * MINISTÉRIOS (EXIBIDOS EM ACORDEÃO INTERATIVO COM FOTOS REAIS)
+ * MINISTÉRIOS (EXIBIDOS COM NAVEGAÇÃO POR ABAS NO DESKTOP E ACORDEÃO NO MOBILE)
  */
 export const MINISTRIES: MinistryItem[] = [
   {
@@ -223,8 +326,20 @@ export const MINISTRIES: MinistryItem[] = [
     imageAlt: 'Mulheres reunidas a cantar com viola durante o encontro Plenas em Cristo',
   },
   {
-    id: 'acao-social',
+    id: 'infantil-ebd',
     number: '03',
+    title: 'Escola Bíblica & Infantil',
+    summary: 'Salas separadas para crianças, adolescentes e adultos.',
+    schedule: 'Domingos às 10h00 e às 16h00',
+    audience: 'Todas as idades',
+    description:
+      'Ensino bíblico adequado a cada faixa etária — com salas para crianças, adolescentes e adultos, além de atividades criativas para pais e filhos.',
+    image: '/assets/instagram/horarios_ebd_celebracao.jpg',
+    imageAlt: 'Bíblia aberta sobre mesa com horários da Escola Bíblica Dominical da IEB Horta',
+  },
+  {
+    id: 'acao-social',
+    number: '04',
     title: 'Ação Social',
     summary: 'Recolha e partilha solidária de alimentos no Faial.',
     schedule: 'Campanhas contínuas de apoio local',
@@ -236,7 +351,7 @@ export const MINISTRIES: MinistryItem[] = [
   },
   {
     id: 'batismo-discipulado',
-    number: '04',
+    number: '05',
     title: 'Batismo & Discipulado',
     summary: 'Primeiros passos na fé cristã e acompanhamento pastoral.',
     schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior',
@@ -245,6 +360,32 @@ export const MINISTRIES: MinistryItem[] = [
       'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, esclarecer dúvidas, preparar para o batismo e integrar a igreja.',
     image: '/assets/instagram/pr_luiz_pregacao.jpg',
     imageAlt: 'Pr. Luiz Eduardo Júnior a ministrar as Escrituras no templo',
+  },
+];
+
+/**
+ * DESTAQUES DE ARQUIVOS & EVENTOS (INSPIRADO NA SECÇÃO ARQUIVOS/EVENTOS)
+ */
+export const COMMUNITY_ARCHIVES: ArchiveFeatureItem[] = [
+  {
+    id: 'archive-palavra',
+    image: '/assets/instagram/pr_luiz_pregacao.jpg',
+    actionType: 'youtube',
+  },
+  {
+    id: 'archive-51anos',
+    image: '/assets/instagram/aniversario_51_anos.jpg',
+    actionType: 'instagram',
+  },
+  {
+    id: 'archive-familia',
+    image: '/assets/instagram/dia_da_familia.jpg',
+    actionType: 'visit',
+  },
+  {
+    id: 'archive-gracas',
+    image: '/assets/instagram/dai_gracas_acores.jpg',
+    actionType: 'instagram',
   },
 ];
 
