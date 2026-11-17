@@ -68,22 +68,22 @@ export function NovemberBulletinSection({
     <section
       id="agenda-novembro"
       aria-labelledby="agenda-novembro-heading"
-      className="border-b border-[#DDD7CE] bg-[#EFECE5] py-16 sm:py-20 lg:py-24"
+      className="border-b border-[#D6DEE6] bg-[#EEF2F6] py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="flex flex-col gap-6 border-b border-[#DDD7CE] pb-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-6 border-b border-[#D6DEE6] pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
+              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
                 {t.bulletin.kicker}
               </p>
               <h2
                 id="agenda-novembro-heading"
-                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
+                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#0F1E2E] [text-wrap:balance] sm:text-4xl"
               >
                 {t.bulletin.heading}
               </h2>
-              <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-[#46585E]">
+              <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-[#47596B]">
                 {t.bulletin.intro}
               </p>
             </div>
@@ -91,9 +91,9 @@ export function NovemberBulletinSection({
             <button
               type="button"
               onClick={handleOpenPrint}
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-xl border border-[#DDD7CE] bg-white px-5 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] lg:self-auto print:hidden"
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-xl border border-[#D6DEE6] bg-white px-5 py-2.5 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] lg:self-auto print:hidden"
             >
-              <Printer className="h-4 w-4 text-[#195963]" aria-hidden="true" />
+              <Printer className="h-4 w-4 text-[#143A61]" aria-hidden="true" />
               <span>{t.bulletin.downloadPdf}</span>
             </button>
           </div>
@@ -103,7 +103,7 @@ export function NovemberBulletinSection({
             <div
               role="tablist"
               aria-label={t.bulletin.tabsAria}
-              className="inline-flex max-w-full flex-wrap gap-1.5 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] p-1"
+              className="inline-flex max-w-full flex-wrap gap-1.5 rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] p-1"
             >
               {tabs.map((tab) => {
                 const selected = activeTab === tab.id;
@@ -116,10 +116,10 @@ export function NovemberBulletinSection({
                     aria-selected={selected}
                     aria-controls={`bulletin-panel-${tab.id}`}
                     onClick={() => onTabChange(tab.id)}
-                    className={`min-h-[44px] whitespace-nowrap rounded-lg px-4 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] sm:text-sm ${
+                    className={`min-h-[44px] whitespace-nowrap rounded-lg px-4 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] sm:text-sm ${
                       selected
-                        ? 'bg-[#195963] text-white'
-                        : 'text-[#46585E] hover:text-[#172226]'
+                        ? 'bg-[#143A61] text-white'
+                        : 'text-[#47596B] hover:text-[#0F1E2E]'
                     }`}
                   >
                     {tab.label}
@@ -139,8 +139,8 @@ export function NovemberBulletinSection({
             className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12"
           >
             {/* Lista Cronológica de Novembro */}
-            <div className="overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white lg:col-span-7">
-              <div className="divide-y divide-[#DDD7CE]">
+            <div className="overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white lg:col-span-7">
+              <div className="divide-y divide-[#D6DEE6]">
                 {NOVEMBER_AGENDA.map((item) => {
                   const localized = t.bulletin.agendaItems[item.id];
                   return (
@@ -148,8 +148,8 @@ export function NovemberBulletinSection({
                       key={item.id}
                       className={`flex flex-col gap-3 p-5 transition-colors sm:flex-row sm:items-start sm:gap-6 sm:p-6 ${
                         item.isHighlight
-                          ? 'bg-[#FAF8F4]'
-                          : 'bg-white hover:bg-[#FAF8F4]/60'
+                          ? 'bg-[#F8FAFC]'
+                          : 'bg-white hover:bg-[#F8FAFC]/60'
                       }`}
                     >
                       <div className="shrink-0 sm:w-20">
@@ -157,8 +157,8 @@ export function NovemberBulletinSection({
                           dateTime={item.isoDate}
                           className={`font-display text-2xl font-semibold tabular-nums ${
                             item.isHighlight
-                              ? 'text-[#9C412A]'
-                              : 'text-[#195963]'
+                              ? 'text-[#8F5B18]'
+                              : 'text-[#143A61]'
                           }`}
                         >
                           {item.dayMonth}
@@ -166,13 +166,13 @@ export function NovemberBulletinSection({
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs font-semibold tracking-wide text-[#46585E]">
+                        <p className="text-xs font-semibold tracking-wide text-[#47596B]">
                           {localized.weekday}
                         </p>
-                        <h3 className="mt-1 font-display text-lg font-semibold text-[#172226] sm:text-xl">
+                        <h3 className="mt-1 font-display text-lg font-semibold text-[#0F1E2E] sm:text-xl">
                           {localized.title}
                         </h3>
-                        <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
+                        <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#47596B]">
                           {localized.detail}
                         </p>
                       </div>
@@ -184,38 +184,38 @@ export function NovemberBulletinSection({
 
             {/* Coluna Direita: Ritmo Semanal + Destaque Jantar 27/11 */}
             <div className="flex flex-col gap-6 lg:col-span-5">
-              <div className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-7">
-                <p className="text-xs font-semibold tracking-wide text-[#9C412A]">
+              <div className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-7">
+                <p className="text-xs font-semibold tracking-wide text-[#8F5B18]">
                   {t.bulletin.activitiesCard.kicker}
                 </p>
-                <h3 className="mt-1.5 font-display text-xl font-semibold text-[#172226]">
+                <h3 className="mt-1.5 font-display text-xl font-semibold text-[#0F1E2E]">
                   {t.bulletin.activitiesCard.heading}
                 </h3>
 
-                <ul className="mt-5 divide-y divide-[#DDD7CE] border-y border-[#DDD7CE]">
+                <ul className="mt-5 divide-y divide-[#D6DEE6] border-y border-[#D6DEE6]">
                   {t.bulletin.activitiesCard.rows.map((row) => (
                     <li
                       key={`${row.day}-${row.label}`}
                       className="flex items-baseline justify-between gap-4 py-3.5"
                     >
                       <div>
-                        <p className="text-xs font-semibold text-[#46585E]">
+                        <p className="text-xs font-semibold text-[#47596B]">
                           {row.day}
                         </p>
-                        <p className="text-sm font-medium text-[#172226]">
+                        <p className="text-sm font-medium text-[#0F1E2E]">
                           {row.label}
                         </p>
                       </div>
-                      <span className="shrink-0 font-display text-base font-semibold tabular-nums text-[#195963]">
+                      <span className="shrink-0 font-display text-base font-semibold tabular-nums text-[#143A61]">
                         {row.time}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-4 flex items-start gap-2.5 text-sm leading-relaxed text-[#46585E]">
+                <div className="mt-4 flex items-start gap-2.5 text-sm leading-relaxed text-[#47596B]">
                   <MapPin
-                    className="mt-0.5 h-4 w-4 shrink-0 text-[#9C412A]"
+                    className="mt-0.5 h-4 w-4 shrink-0 text-[#8F5B18]"
                     aria-hidden="true"
                   />
                   <span>{t.bulletin.activitiesCard.venueNote}</span>
@@ -223,28 +223,28 @@ export function NovemberBulletinSection({
 
                 <a
                   href="#visita"
-                  className="mt-5 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#195963] bg-white px-4 py-2.5 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="mt-5 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#143A61] bg-white px-4 py-2.5 text-sm font-semibold text-[#143A61] transition-colors hover:bg-[#143A61] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <span>{t.bulletin.activitiesCard.cta}</span>
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
               </div>
 
-              <div className="rounded-2xl border border-[#195963] bg-[#12434B] p-6 text-white sm:p-7">
-                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#E7A693]">
+              <div className="rounded-2xl border border-[#143A61] bg-[#0E2A47] p-6 text-white sm:p-7">
+                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#E2B86B]">
                   <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{t.bulletin.thanksgivingDinner.dateShort}</span>
                 </div>
                 <h3 className="mt-2 font-display text-2xl font-semibold text-white">
                   {t.bulletin.thanksgivingDinner.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#FAF8F4]/90">
+                <p className="mt-2 text-sm leading-relaxed text-[#F8FAFC]/90">
                   {t.bulletin.thanksgivingDinner.summary}
                 </p>
                 <button
                   type="button"
                   onClick={() => onTabChange('anuncios')}
-                  className="mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#9C412A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#8F5B18] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#734710] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <span>{t.bulletin.thanksgivingDinner.seeDetails}</span>
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -264,22 +264,22 @@ export function NovemberBulletinSection({
           >
             {/* Coluna Esquerda: Mudança de Local + Campanha Juntos */}
             <div className="flex flex-col gap-6 lg:col-span-7">
-              <article className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-wide text-[#9C412A]">
+              <article className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
+                <p className="text-xs font-semibold tracking-wide text-[#8F5B18]">
                   {t.bulletin.venueAnnouncement.kicker}
                 </p>
-                <h3 className="mt-2 font-display text-2xl font-semibold text-[#172226] sm:text-3xl">
+                <h3 className="mt-2 font-display text-2xl font-semibold text-[#0F1E2E] sm:text-3xl">
                   {t.bulletin.venueAnnouncement.title}
                 </h3>
-                <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.venueAnnouncement.body1}
                 </p>
 
-                <ul className="mt-5 divide-y divide-[#DDD7CE] rounded-xl border border-[#DDD7CE] bg-[#FAF8F4]">
+                <ul className="mt-5 divide-y divide-[#D6DEE6] rounded-xl border border-[#D6DEE6] bg-[#F8FAFC]">
                   {t.bulletin.venueAnnouncement.times.map((timeItem) => (
                     <li
                       key={timeItem}
-                      className="flex items-center gap-3 px-4 py-3.5 font-display text-base font-semibold text-[#195963] sm:text-lg"
+                      className="flex items-center gap-3 px-4 py-3.5 font-display text-base font-semibold text-[#143A61] sm:text-lg"
                     >
                       <Clock className="h-4 w-4 shrink-0" aria-hidden="true" />
                       <span className="tabular-nums">{timeItem}</span>
@@ -287,14 +287,14 @@ export function NovemberBulletinSection({
                   ))}
                 </ul>
 
-                <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.venueAnnouncement.body2}
                 </p>
 
                 <div className="mt-6">
                   <a
                     href="#visita"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#195963] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#143A61] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                   >
                     <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
                     <span>{t.bulletin.venueAnnouncement.cta}</span>
@@ -302,31 +302,31 @@ export function NovemberBulletinSection({
                 </div>
               </article>
 
-              <article className="rounded-2xl border border-[#DDD7CE] bg-[#FAF8F4] p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-wide text-[#9C412A]">
+              <article className="rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] p-6 sm:p-8">
+                <p className="text-xs font-semibold tracking-wide text-[#8F5B18]">
                   {t.bulletin.juntosCampaign.kicker}
                 </p>
-                <h3 className="mt-1.5 font-display text-xl font-semibold text-[#172226] sm:text-2xl">
+                <h3 className="mt-1.5 font-display text-xl font-semibold text-[#0F1E2E] sm:text-2xl">
                   {t.bulletin.juntosCampaign.title}
                 </h3>
-                <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-2.5 max-w-[60ch] text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.juntosCampaign.description}
                 </p>
 
-                <div className="mt-5 grid grid-cols-1 divide-y divide-[#DDD7CE] overflow-hidden rounded-xl border border-[#DDD7CE] bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                <div className="mt-5 grid grid-cols-1 divide-y divide-[#D6DEE6] overflow-hidden rounded-xl border border-[#D6DEE6] bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0">
                   <div className="p-4 sm:p-5">
-                    <p className="text-xs font-semibold text-[#195963]">
+                    <p className="text-xs font-semibold text-[#143A61]">
                       {t.bulletin.juntosCampaign.tier1Title}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#172226]">
+                    <p className="mt-1.5 text-sm font-medium text-[#0F1E2E]">
                       {t.bulletin.juntosCampaign.tier1Items}
                     </p>
                   </div>
                   <div className="p-4 sm:p-5">
-                    <p className="text-xs font-semibold text-[#46585E]">
+                    <p className="text-xs font-semibold text-[#47596B]">
                       {t.bulletin.juntosCampaign.tier2Title}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium text-[#172226]">
+                    <p className="mt-1.5 text-sm font-medium text-[#0F1E2E]">
                       {t.bulletin.juntosCampaign.tier2Items}
                     </p>
                   </div>
@@ -336,27 +336,27 @@ export function NovemberBulletinSection({
 
             {/* Coluna Direita: Jantar de Ação de Graças + Celeiro Cabaz de Natal */}
             <div className="flex flex-col gap-6 lg:col-span-5">
-              <article className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-wide text-[#9C412A]">
+              <article className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
+                <p className="text-xs font-semibold tracking-wide text-[#8F5B18]">
                   {t.bulletin.thanksgivingDinner.dateShort}
                 </p>
-                <h3 className="mt-1.5 font-display text-2xl font-semibold text-[#172226]">
+                <h3 className="mt-1.5 font-display text-2xl font-semibold text-[#0F1E2E]">
                   {t.bulletin.thanksgivingDinner.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-[#46585E]">
+                <p className="mt-3 text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.thanksgivingDinner.description}
                 </p>
 
-                <dl className="mt-5 divide-y divide-[#DDD7CE] border-y border-[#DDD7CE]">
+                <dl className="mt-5 divide-y divide-[#D6DEE6] border-y border-[#D6DEE6]">
                   {t.bulletin.thanksgivingDinner.details.map((row) => (
                     <div
                       key={row.label}
                       className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
                     >
-                      <dt className="text-xs font-semibold text-[#46585E]">
+                      <dt className="text-xs font-semibold text-[#47596B]">
                         {row.label}
                       </dt>
-                      <dd className="text-sm font-semibold text-[#172226] sm:text-right">
+                      <dd className="text-sm font-semibold text-[#0F1E2E] sm:text-right">
                         {row.value}
                       </dd>
                     </div>
@@ -367,32 +367,32 @@ export function NovemberBulletinSection({
                   href={dinnerWhatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-[#9C412A] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A] focus-visible:ring-offset-2"
+                  className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-[#8F5B18] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#734710] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5B18] focus-visible:ring-offset-2"
                 >
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{t.bulletin.thanksgivingDinner.cta}</span>
                 </a>
               </article>
 
-              <article className="rounded-2xl border border-[#DDD7CE] bg-[#FAF8F4] p-6 sm:p-7">
-                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#9C412A]">
+              <article className="rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] p-6 sm:p-7">
+                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#8F5B18]">
                   <HeartHandshake
                     className="h-4 w-4 shrink-0"
                     aria-hidden="true"
                   />
                   <span>{t.bulletin.celeiro.kicker}</span>
                 </div>
-                <h3 className="mt-2 font-display text-xl font-semibold text-[#172226]">
+                <h3 className="mt-2 font-display text-xl font-semibold text-[#0F1E2E]">
                   {t.bulletin.celeiro.title}
                 </h3>
-                <p className="mt-2.5 text-base leading-relaxed text-[#46585E]">
+                <p className="mt-2.5 text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.celeiro.description}
                 </p>
 
                 <a
                   href="#comunidade"
                   onClick={() => onSelectCommunityTab?.('ofertas')}
-                  className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#195963] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#143A61] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <span>{t.bulletin.celeiro.cta}</span>
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -410,29 +410,29 @@ export function NovemberBulletinSection({
             aria-labelledby="bulletin-tab-oracao"
             className="mt-8"
           >
-            <div className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8 lg:p-10">
-              <div className="flex flex-col gap-5 border-b border-[#DDD7CE] pb-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="max-w-[64ch] text-base leading-relaxed text-[#46585E]">
+            <div className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8 lg:p-10">
+              <div className="flex flex-col gap-5 border-b border-[#D6DEE6] pb-6 sm:flex-row sm:items-center sm:justify-between">
+                <p className="max-w-[64ch] text-base leading-relaxed text-[#47596B]">
                   {t.bulletin.prayerIntro}
                 </p>
                 <a
                   href={prayerWhatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#143A61] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{t.bulletin.prayerCta}</span>
                 </a>
               </div>
 
-              <ol className="mt-6 grid grid-cols-1 divide-y divide-[#DDD7CE] md:grid-cols-2 md:gap-x-10">
+              <ol className="mt-6 grid grid-cols-1 divide-y divide-[#D6DEE6] md:grid-cols-2 md:gap-x-10">
                 {NOVEMBER_PRAYER_IDS.map((id, idx) => (
                   <li key={id} className="flex items-start gap-4 py-4">
-                    <span className="mt-0.5 shrink-0 font-display text-sm font-semibold tabular-nums text-[#9C412A]">
+                    <span className="mt-0.5 shrink-0 font-display text-sm font-semibold tabular-nums text-[#8F5B18]">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    <p className="text-base leading-relaxed text-[#172226]">
+                    <p className="text-base leading-relaxed text-[#0F1E2E]">
                       {t.bulletin.prayerRequests[id]}
                     </p>
                   </li>
@@ -451,12 +451,12 @@ export function NovemberBulletinSection({
             className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12"
           >
             {/* Testemunho Miqueias, Lorena e Eva */}
-            <article className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8 lg:col-span-8">
-              <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#9C412A]">
+            <article className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8 lg:col-span-8">
+              <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#8F5B18]">
                 <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{t.bulletin.gratitude.kicker}</span>
               </div>
-              <h3 className="mt-2 font-display text-2xl font-semibold text-[#172226] sm:text-3xl">
+              <h3 className="mt-2 font-display text-2xl font-semibold text-[#0F1E2E] sm:text-3xl">
                 {t.bulletin.gratitude.title}
               </h3>
 
@@ -464,46 +464,46 @@ export function NovemberBulletinSection({
                 {t.bulletin.gratitude.paragraphs.map((paragraph, index) => (
                   <p
                     key={index}
-                    className="max-w-[64ch] text-base leading-relaxed text-[#46585E]"
+                    className="max-w-[64ch] text-base leading-relaxed text-[#47596B]"
                   >
                     {paragraph}
                   </p>
                 ))}
               </div>
 
-              <div className="mt-7 border-t border-[#DDD7CE] pt-6">
-                <p className="font-display text-base font-semibold text-[#195963]">
+              <div className="mt-7 border-t border-[#D6DEE6] pt-6">
+                <p className="font-display text-base font-semibold text-[#143A61]">
                   {t.bulletin.gratitude.signature}
                 </p>
-                <blockquote className="mt-3 max-w-[62ch] font-display text-lg font-medium leading-snug text-[#172226]">
+                <blockquote className="mt-3 max-w-[62ch] font-display text-lg font-medium leading-snug text-[#0F1E2E]">
                   {t.bulletin.gratitude.verse}
                 </blockquote>
               </div>
             </article>
 
             {/* Aniversariantes do Mês */}
-            <aside className="flex flex-col justify-between rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-7 lg:col-span-4">
+            <aside className="flex flex-col justify-between rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-7 lg:col-span-4">
               <div>
-                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#9C412A]">
+                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#8F5B18]">
                   <Cake className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{t.bulletin.birthdays.kicker}</span>
                 </div>
-                <h3 className="mt-2 font-display text-2xl font-semibold text-[#172226]">
+                <h3 className="mt-2 font-display text-2xl font-semibold text-[#0F1E2E]">
                   {t.bulletin.birthdays.title}
                 </h3>
 
-                <div className="mt-5 divide-y divide-[#DDD7CE] border-y border-[#DDD7CE]">
+                <div className="mt-5 divide-y divide-[#D6DEE6] border-y border-[#D6DEE6]">
                   <div className="flex items-baseline justify-between gap-4 py-4">
-                    <span className="font-display text-lg font-semibold text-[#172226]">
+                    <span className="font-display text-lg font-semibold text-[#0F1E2E]">
                       Cristiane Lima
                     </span>
-                    <span className="shrink-0 font-display text-lg font-semibold tabular-nums text-[#195963]">
+                    <span className="shrink-0 font-display text-lg font-semibold tabular-nums text-[#143A61]">
                       09/11
                     </span>
                   </div>
                 </div>
 
-                <p className="mt-5 text-sm leading-relaxed text-[#46585E]">
+                <p className="mt-5 text-sm leading-relaxed text-[#47596B]">
                   {t.bulletin.birthdays.updateNote}
                 </p>
               </div>
@@ -512,7 +512,7 @@ export function NovemberBulletinSection({
                 href={birthdayWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-[#195963] bg-[#FAF8F4] px-5 py-3 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-[#143A61] bg-[#F8FAFC] px-5 py-3 text-sm font-semibold text-[#143A61] transition-colors hover:bg-[#143A61] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
               >
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{t.bulletin.birthdays.cta}</span>

@@ -148,10 +148,10 @@ export function Navbar({
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full border-t-[3px] border-t-[#195963] transition-colors duration-200 ${
+        className={`sticky top-0 z-40 w-full border-t-[3px] border-t-[#143A61] transition-colors duration-200 ${
           scrolled
-            ? 'border-b border-[#DDD7CE] bg-[#FAF8F4]/95 backdrop-blur-md'
-            : 'border-b border-[#DDD7CE]/80 bg-[#FAF8F4]'
+            ? 'border-b border-[#D6DEE6] bg-[#F8FAFC]/95 backdrop-blur-md'
+            : 'border-b border-[#D6DEE6]/80 bg-[#F8FAFC]'
         }`}
       >
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-1.5 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-4 lg:px-8 xl:gap-8">
@@ -159,7 +159,7 @@ export function Navbar({
           <a
             href="#inicio"
             aria-label={CHURCH_INFO.fullName}
-            className="flex shrink-0 items-center rounded-md py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4]"
+            className="flex shrink-0 items-center rounded-md py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8FAFC]"
           >
             <img
               src={CHURCH_INFO.logos.horizontal}
@@ -168,7 +168,7 @@ export function Navbar({
             />
           </a>
 
-          {/* Zona 2: Links de Navegação Desktop com Sub-abas Dropdown (inspiração IEBC) */}
+          {/* Zona 2: Links de Navegação Desktop com Sub-abas Dropdown */}
           <nav
             aria-label={t.nav.ariaMain}
             className="hidden items-center gap-3.5 lg:flex xl:gap-5"
@@ -186,10 +186,10 @@ export function Navbar({
                     key={link.href}
                     href={link.href}
                     aria-current={isActive ? 'location' : undefined}
-                    className={`relative shrink-0 whitespace-nowrap py-2 text-sm font-medium transition-colors after:absolute after:bottom-1 after:left-0 after:h-[1.5px] after:bg-[#195963] after:transition-all after:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
+                    className={`relative shrink-0 whitespace-nowrap py-2 text-sm font-medium transition-colors after:absolute after:bottom-1 after:left-0 after:h-[1.5px] after:bg-[#143A61] after:transition-all after:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 ${
                       isActive
-                        ? 'text-[#195963] after:w-full'
-                        : 'text-[#172226]/85 hover:text-[#195963] after:w-0 hover:after:w-full'
+                        ? 'text-[#143A61] after:w-full'
+                        : 'text-[#0F1E2E]/85 hover:text-[#143A61] after:w-0 hover:after:w-full'
                     }`}
                   >
                     {link.label}
@@ -222,16 +222,16 @@ export function Navbar({
                               | 'comunidade')
                       )
                     }
-                    className={`relative inline-flex shrink-0 items-center gap-1 whitespace-nowrap py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
+                    className={`relative inline-flex shrink-0 items-center gap-1 whitespace-nowrap py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 ${
                       isActive
-                        ? 'text-[#195963]'
-                        : 'text-[#172226]/85 hover:text-[#195963]'
+                        ? 'text-[#143A61]'
+                        : 'text-[#0F1E2E]/85 hover:text-[#143A61]'
                     }`}
                   >
                     <span>{link.label}</span>
                     <ChevronDown
                       className={`h-3.5 w-3.5 transition-transform duration-150 ${
-                        isDropdownOpen ? 'rotate-180 text-[#195963]' : ''
+                        isDropdownOpen ? 'rotate-180 text-[#143A61]' : ''
                       }`}
                       aria-hidden="true"
                     />
@@ -239,7 +239,7 @@ export function Navbar({
 
                   {isDropdownOpen && (
                     <div className="absolute left-0 top-full z-50 w-60 pt-1">
-                      <div className="overflow-hidden rounded-xl border border-[#DDD7CE] bg-white py-1.5 shadow-lg">
+                      <div className="overflow-hidden rounded-xl border border-[#D6DEE6] bg-white py-1.5 shadow-lg">
                         {link.id === 'agenda-novembro' &&
                           bulletinSubLinks.map((sub) => (
                             <a
@@ -249,7 +249,7 @@ export function Navbar({
                                 onSelectBulletinTab(sub.tab);
                                 setOpenDropdown(null);
                               }}
-                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#0F1E2E] transition-colors hover:bg-[#F8FAFC] hover:text-[#143A61]"
                             >
                               {sub.label}
                             </a>
@@ -263,7 +263,7 @@ export function Navbar({
                                 onSelectAboutTab(sub.tab);
                                 setOpenDropdown(null);
                               }}
-                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#0F1E2E] transition-colors hover:bg-[#F8FAFC] hover:text-[#143A61]"
                             >
                               {sub.label}
                             </a>
@@ -277,7 +277,7 @@ export function Navbar({
                                 onSelectCommunityTab(sub.tab);
                                 setOpenDropdown(null);
                               }}
-                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#0F1E2E] transition-colors hover:bg-[#F8FAFC] hover:text-[#143A61]"
                             >
                               {sub.label}
                             </a>
@@ -297,14 +297,14 @@ export function Navbar({
               onClick={onOpenSearch}
               aria-label={t.search.buttonAria}
               title={t.search.buttonAria}
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#DDD7CE] bg-white text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4]"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#D6DEE6] bg-white text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8FAFC]"
             >
               <Search className="h-4 w-4 shrink-0" aria-hidden="true" />
             </button>
 
             <a
               href="#visita"
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#195963] px-2.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] sm:px-5 sm:text-sm"
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#143A61] px-2.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8FAFC] sm:px-5 sm:text-sm"
             >
               {t.nav.ctaVisit}
             </a>
@@ -317,7 +317,7 @@ export function Navbar({
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
               aria-label={mobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-[#172226] transition-colors hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-[#0F1E2E] transition-colors hover:bg-[#EEF2F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] lg:hidden"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
@@ -331,7 +331,7 @@ export function Navbar({
         {/* Barra de progresso de leitura discreta */}
         <div
           aria-hidden="true"
-          className="h-[2px] w-full origin-left bg-[#9C412A]/85 transition-transform duration-100"
+          className="h-[2px] w-full origin-left bg-[#8F5B18]/85 transition-transform duration-100"
           style={{ transform: `scaleX(${scrollProgress})` }}
         />
       </header>
@@ -340,13 +340,13 @@ export function Navbar({
       <div
         id="mobile-navigation-drawer"
         aria-hidden={!mobileMenuOpen}
-        className={`fixed inset-0 z-50 flex flex-col bg-[#FAF8F4] transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-50 flex flex-col bg-[#F8FAFC] transition-all duration-300 lg:hidden ${
           mobileMenuOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
-        <div className="flex h-14 items-center justify-between border-b border-[#DDD7CE] border-t-[3px] border-t-[#195963] px-4 sm:px-6">
+        <div className="flex h-14 items-center justify-between border-b border-[#D6DEE6] border-t-[3px] border-t-[#143A61] px-4 sm:px-6">
           <a
             href="#inicio"
             onClick={handleNavClick}
@@ -363,7 +363,7 @@ export function Navbar({
             type="button"
             onClick={() => setMobileMenuOpen(false)}
             aria-label={t.nav.closeNavDrawer}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg text-[#172226] hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-lg text-[#0F1E2E] hover:bg-[#EEF2F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
           >
             <X className="h-6 w-6" aria-hidden="true" />
           </button>
@@ -378,10 +378,10 @@ export function Navbar({
                 onOpenSearch();
               }}
               aria-label={t.search.buttonAria}
-              className="mb-4 flex min-h-[48px] w-full items-center gap-3 rounded-xl border border-[#DDD7CE] bg-white px-4 py-3 text-left text-base text-[#46585E] transition-colors hover:border-[#195963] hover:text-[#172226] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+              className="mb-4 flex min-h-[48px] w-full items-center gap-3 rounded-xl border border-[#D6DEE6] bg-white px-4 py-3 text-left text-base text-[#47596B] transition-colors hover:border-[#143A61] hover:text-[#0F1E2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
             >
               <Search
-                className="h-5 w-5 shrink-0 text-[#195963]"
+                className="h-5 w-5 shrink-0 text-[#143A61]"
                 aria-hidden="true"
               />
               <span>{t.search.drawerButtonLabel}</span>
@@ -389,17 +389,17 @@ export function Navbar({
 
             <nav
               aria-label={t.nav.ariaMobile}
-              className="flex flex-col divide-y divide-[#DDD7CE]"
+              className="flex flex-col divide-y divide-[#D6DEE6]"
             >
             {navLinks.map((link, index) => (
               <div key={link.href} className="py-1">
                 <a
                   href={link.href}
                   onClick={handleNavClick}
-                  className="flex min-h-[52px] items-center justify-between py-2 font-display text-xl font-semibold text-[#172226] transition-colors hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="flex min-h-[52px] items-center justify-between py-2 font-display text-xl font-semibold text-[#0F1E2E] transition-colors hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <span>{link.label}</span>
-                  <span className="text-xs font-medium tabular-nums text-[#46585E]">
+                  <span className="font-sans text-xs font-medium tabular-nums text-[#47596B]">
                     0{index + 1}
                   </span>
                 </a>
@@ -414,7 +414,7 @@ export function Navbar({
                           onSelectBulletinTab(sub.tab);
                           handleNavClick();
                         }}
-                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#143A61] underline-offset-4 hover:underline"
                       >
                         {sub.label}
                       </a>
@@ -432,7 +432,7 @@ export function Navbar({
                           onSelectAboutTab(sub.tab);
                           handleNavClick();
                         }}
-                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#143A61] underline-offset-4 hover:underline"
                       >
                         {sub.label}
                       </a>
@@ -450,7 +450,7 @@ export function Navbar({
                           onSelectCommunityTab(sub.tab);
                           handleNavClick();
                         }}
-                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#143A61] underline-offset-4 hover:underline"
                       >
                         {sub.label}
                       </a>
@@ -462,7 +462,7 @@ export function Navbar({
           </nav>
           </div>
 
-          <div className="mt-8 space-y-4 border-t border-[#DDD7CE] pt-6">
+          <div className="mt-8 space-y-4 border-t border-[#D6DEE6] pt-6">
             <div className="flex items-center gap-4">
               <img
                 src={CHURCH_INFO.logos.circularSeal}
@@ -470,10 +470,10 @@ export function Navbar({
                 className="h-14 w-14 shrink-0 object-contain mix-blend-multiply"
               />
               <div>
-                <p className="font-display text-sm font-semibold text-[#195963]">
+                <p className="font-display text-sm font-semibold text-[#143A61]">
                   {CHURCH_INFO.fullName}
                 </p>
-                <p className="text-sm text-[#46585E]">
+                <p className="text-sm text-[#47596B]">
                   {t.nav.drawerSummary}
                 </p>
               </div>
@@ -483,7 +483,7 @@ export function Navbar({
               <a
                 href="#visita"
                 onClick={handleNavClick}
-                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-[#803320]"
+                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#143A61] px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-[#0E2A47]"
               >
                 {t.nav.ctaVisitDrawer}
               </a>
@@ -492,15 +492,15 @@ export function Navbar({
                   href={CHURCH_INFO.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#D6DEE6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61]"
                 >
                   <Instagram
-                    className="h-4 w-4 text-[#195963]"
+                    className="h-4 w-4 text-[#143A61]"
                     aria-hidden="true"
                   />
                   <span>@iebhorta</span>
                   <ArrowUpRight
-                    className="h-3.5 w-3.5 text-[#46585E]"
+                    className="h-3.5 w-3.5 text-[#47596B]"
                     aria-hidden="true"
                   />
                 </a>
@@ -508,10 +508,10 @@ export function Navbar({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#D6DEE6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61]"
                 >
                   <MessageCircle
-                    className="h-4 w-4 text-[#195963]"
+                    className="h-4 w-4 text-[#143A61]"
                     aria-hidden="true"
                   />
                   <span>{t.nav.whatsapp}</span>

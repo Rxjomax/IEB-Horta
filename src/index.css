@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, ui-serif, serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
-  /* Paleta extraída diretamente do feed @iebhorta */
-  --color-canvas: #FAF8F4;
+  /* Paleta Atlântico & Calcário Açoriano */
+  --color-canvas: #F8FAFC;
   --color-surface: #FFFFFF;
-  --color-surface-warm: #EFECE5;
-  --color-hairline: #DDD7CE;
-  --color-teal: #195963;
-  --color-teal-hover: #12434B;
-  --color-atlantic: #285984;
-  --color-terracotta: #9C412A;
-  --color-terracotta-hover: #803320;
-  --color-ink: #172226;
-  --color-ink-muted: #46585E;
+  --color-surface-mineral: #EEF2F6;
+  --color-hairline: #D6DEE6;
+  --color-atlantic: #143A61;
+  --color-atlantic-hover: #0E2A47;
+  --color-bronze: #8F5B18;
+  --color-bronze-hover: #734710;
+  --color-ink: #0F1E2E;
+  --color-ink-muted: #47596B;
 }
 
 @layer base {
@@ -79,7 +78,7 @@
   html,
   body {
     background: #ffffff !important;
-    color: #172226 !important;
+    color: #0F1E2E !important;
     height: auto !important;
     overflow: visible !important;
   }

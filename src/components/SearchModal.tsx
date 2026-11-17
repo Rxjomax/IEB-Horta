@@ -123,18 +123,18 @@ export function SearchModal({
       role="dialog"
       aria-modal="true"
       aria-label={t.search.modalTitle}
-      className="fixed inset-0 z-50 flex items-start justify-center bg-[#172226]/65 p-3 pt-6 backdrop-blur-sm sm:p-6 sm:pt-16"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-[#091B30]/70 p-3 pt-6 backdrop-blur-sm sm:p-6 sm:pt-16"
       onClick={onClose}
     >
       <div
-        className="flex max-h-[85dvh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white shadow-xl"
+        className="flex max-h-[85dvh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Apenas o campo de pesquisa com lupa e botão de fechar */}
         <div className="flex items-center gap-2 p-2.5 sm:p-3">
           <div className="relative flex flex-1 items-center">
             <Search
-              className="pointer-events-none absolute left-3.5 h-5 w-5 text-[#195963]"
+              className="pointer-events-none absolute left-3.5 h-5 w-5 text-[#143A61]"
               aria-hidden="true"
             />
             <input
@@ -144,7 +144,7 @@ export function SearchModal({
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t.search.inputPlaceholder}
               aria-label={t.search.inputPlaceholder}
-              className="min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] pl-11 pr-11 text-base text-[#172226] placeholder:text-[#46585E]/75 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
+              className="min-h-[48px] w-full rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] pl-11 pr-11 text-base text-[#0F1E2E] placeholder:text-[#47596B]/75 focus:border-[#143A61] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#143A61]/20"
             />
             {hasQuery && (
               <button
@@ -154,7 +154,7 @@ export function SearchModal({
                   inputRef.current?.focus();
                 }}
                 aria-label={t.search.clearInput}
-                className="absolute right-1 inline-flex h-10 w-10 items-center justify-center rounded-lg text-[#46585E] transition-colors hover:bg-[#EFECE5] hover:text-[#172226] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                className="absolute right-1 inline-flex h-10 w-10 items-center justify-center rounded-lg text-[#47596B] transition-colors hover:bg-[#EEF2F6] hover:text-[#0F1E2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
               </button>
@@ -165,7 +165,7 @@ export function SearchModal({
             type="button"
             onClick={onClose}
             aria-label={t.search.closeModal}
-            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] text-[#46585E] transition-colors hover:border-[#195963] hover:text-[#172226] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] text-[#47596B] transition-colors hover:border-[#143A61] hover:text-[#0F1E2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -173,9 +173,9 @@ export function SearchModal({
 
         {/* Resultados aparecem apenas quando o utilizador escreve no campo */}
         {hasQuery && (
-          <div className="flex-1 overflow-y-auto border-t border-[#DDD7CE] bg-[#FAF8F4] p-3 sm:p-4">
+          <div className="flex-1 overflow-y-auto border-t border-[#D6DEE6] bg-[#F8FAFC] p-3 sm:p-4">
             {results.length > 0 ? (
-              <ul className="divide-y divide-[#DDD7CE] overflow-hidden rounded-xl border border-[#DDD7CE] bg-white">
+              <ul className="divide-y divide-[#D6DEE6] overflow-hidden rounded-xl border border-[#D6DEE6] bg-white">
                 {results.map((item, idx) => {
                   const isHighlighted = idx === activeIndex;
                   return (
@@ -184,13 +184,13 @@ export function SearchModal({
                         type="button"
                         onClick={() => handleNavigate(item)}
                         onMouseEnter={() => setActiveIndex(idx)}
-                        className={`flex min-h-[56px] w-full items-center justify-between gap-4 px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#195963] ${
-                          isHighlighted ? 'bg-[#FAF8F4]' : 'bg-white'
+                        className={`flex min-h-[56px] w-full items-center justify-between gap-4 px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#143A61] ${
+                          isHighlighted ? 'bg-[#F8FAFC]' : 'bg-white'
                         }`}
                       >
                         <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-[#46585E]">
-                            <span className="font-semibold text-[#9C412A]">
+                          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-[#47596B]">
+                            <span className="font-semibold text-[#8F5B18]">
                               {item.sectionLabel}
                             </span>
                             {item.subLabel && (
@@ -200,10 +200,10 @@ export function SearchModal({
                               </>
                             )}
                           </div>
-                          <p className="mt-1 font-display text-base font-semibold text-[#172226]">
+                          <p className="mt-1 font-display text-base font-semibold text-[#0F1E2E]">
                             {item.title}
                           </p>
-                          <p className="mt-0.5 line-clamp-2 text-sm leading-relaxed text-[#46585E]">
+                          <p className="mt-0.5 line-clamp-2 text-sm leading-relaxed text-[#47596B]">
                             {item.snippet}
                           </p>
                         </div>
@@ -212,8 +212,8 @@ export function SearchModal({
                           aria-hidden="true"
                           className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors ${
                             isHighlighted
-                              ? 'border-[#195963] bg-[#195963] text-white'
-                              : 'border-[#DDD7CE] bg-[#FAF8F4] text-[#195963]'
+                              ? 'border-[#143A61] bg-[#143A61] text-white'
+                              : 'border-[#D6DEE6] bg-[#F8FAFC] text-[#143A61]'
                           }`}
                         >
                           <ArrowRight className="h-4 w-4" />
@@ -224,11 +224,11 @@ export function SearchModal({
                 })}
               </ul>
             ) : (
-              <div className="rounded-xl border border-[#DDD7CE] bg-white px-6 py-8 text-center">
-                <p className="font-display text-base font-semibold text-[#172226]">
+              <div className="rounded-xl border border-[#D6DEE6] bg-white px-6 py-8 text-center">
+                <p className="font-display text-base font-semibold text-[#0F1E2E]">
                   {t.search.emptyTitle}
                 </p>
-                <p className="mx-auto mt-1 max-w-[44ch] text-sm leading-relaxed text-[#46585E]">
+                <p className="mx-auto mt-1 max-w-[44ch] text-sm leading-relaxed text-[#47596B]">
                   {t.search.emptyHint}
                 </p>
               </div>

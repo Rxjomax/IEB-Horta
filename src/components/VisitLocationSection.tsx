@@ -126,20 +126,20 @@ export function VisitLocationSection({
     <section
       id="visita"
       aria-labelledby="visita-heading"
-      className="bg-[#FAF8F4] py-16 sm:py-20 lg:py-24"
+      className="bg-[#F8FAFC] py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
+          <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
             {t.visit.kicker}
           </p>
           <h2
             id="visita-heading"
-            className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
+            className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#0F1E2E] [text-wrap:balance] sm:text-4xl"
           >
             {t.visit.heading}
           </h2>
-          <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
+          <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#47596B]">
             {t.visit.intro}
           </p>
         </Reveal>
@@ -147,13 +147,13 @@ export function VisitLocationSection({
         <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
           {/* Coluna Esquerda: Seletor de Localização e Rotas */}
           <Reveal className="lg:col-span-5">
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8">
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
               <div>
                 {/* Seletor entre Templo Principal e Salas da EBD 16h */}
                 <div
                   role="tablist"
                   aria-label={t.visit.spaceTabsAria}
-                  className="grid grid-cols-2 gap-1.5 rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1"
+                  className="grid grid-cols-2 gap-1.5 rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] p-1"
                 >
                   {CHURCH_LOCATIONS.map((loc) => {
                     const selected = loc.id === activeLocationId;
@@ -166,8 +166,8 @@ export function VisitLocationSection({
                         onClick={() => setActiveLocationId(loc.id)}
                         className={`min-h-[44px] truncate rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
                           selected
-                            ? 'bg-white text-[#195963] shadow-xs'
-                            : 'text-[#46585E] hover:text-[#172226]'
+                            ? 'bg-white text-[#143A61] shadow-xs'
+                            : 'text-[#47596B] hover:text-[#0F1E2E]'
                         }`}
                       >
                         {t.visit.locations[loc.id].label}
@@ -177,23 +177,23 @@ export function VisitLocationSection({
                 </div>
 
                 <div className="mt-6 flex items-start gap-3.5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#DDD7CE] bg-[#FAF8F4]">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6DEE6] bg-[#F8FAFC]">
                     <MapPin
-                      className="h-5 w-5 text-[#195963]"
+                      className="h-5 w-5 text-[#143A61]"
                       aria-hidden="true"
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-lg font-semibold text-[#172226]">
+                    <h3 className="font-display text-lg font-semibold text-[#0F1E2E]">
                       {localizedLocation.title}
                     </h3>
-                    <p className="mt-1 text-base font-medium text-[#195963]">
+                    <p className="mt-1 text-base font-medium text-[#143A61]">
                       {activeLocation.address}
                     </p>
-                    <p className="mt-0.5 text-sm text-[#46585E]">
+                    <p className="mt-0.5 text-sm text-[#47596B]">
                       {localizedLocation.region}
                     </p>
-                    <p className="mt-2 text-xs leading-relaxed text-[#46585E]">
+                    <p className="mt-2 text-xs leading-relaxed text-[#47596B]">
                       {localizedLocation.note}
                     </p>
 
@@ -201,12 +201,12 @@ export function VisitLocationSection({
                       <button
                         type="button"
                         onClick={handleCopyAddress}
-                        className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#DDD7CE] bg-[#FAF8F4] px-3 py-2 text-xs font-semibold text-[#172226] transition-colors hover:border-[#195963]"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#D6DEE6] bg-[#F8FAFC] px-3 py-2 text-xs font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61]"
                       >
                         {copiedAddress ? (
                           <>
                             <Check
-                              className="h-3.5 w-3.5 text-[#195963]"
+                              className="h-3.5 w-3.5 text-[#143A61]"
                               aria-hidden="true"
                             />
                             <span>{t.visit.copiedAddress}</span>
@@ -221,7 +221,7 @@ export function VisitLocationSection({
 
                       <a
                         href={`tel:+${CHURCH_INFO.whatsappNumber}`}
-                        className="inline-flex min-h-[44px] items-center gap-1.5 px-2 text-xs font-semibold tabular-nums text-[#195963] underline-offset-2 hover:underline"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-2 text-xs font-semibold tabular-nums text-[#143A61] underline-offset-2 hover:underline"
                       >
                         <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>
@@ -231,7 +231,7 @@ export function VisitLocationSection({
 
                       <a
                         href={`mailto:${CHURCH_INFO.email}`}
-                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-semibold text-[#195963] underline-offset-2 hover:underline"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-semibold text-[#143A61] underline-offset-2 hover:underline"
                       >
                         <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>{CHURCH_INFO.email}</span>
@@ -239,7 +239,7 @@ export function VisitLocationSection({
 
                       <a
                         href={`mailto:${CHURCH_INFO.pastorEmail}`}
-                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-medium text-[#46585E] underline-offset-2 hover:text-[#195963] hover:underline"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-medium text-[#47596B] underline-offset-2 hover:text-[#143A61] hover:underline"
                       >
                         <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>{CHURCH_INFO.pastorEmail}</span>
@@ -249,14 +249,14 @@ export function VisitLocationSection({
                 </div>
 
                 {/* Lista de hospitalidade separada por hairlines */}
-                <ul className="mt-6 divide-y divide-[#DDD7CE] border-t border-[#DDD7CE]">
+                <ul className="mt-6 divide-y divide-[#D6DEE6] border-t border-[#D6DEE6]">
                   {t.visit.visitorNotes.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 py-3 text-sm leading-relaxed text-[#172226]/85"
+                      className="flex items-start gap-3 py-3 text-sm leading-relaxed text-[#0F1E2E]/85"
                     >
                       <CheckCircle2
-                        className="mt-0.5 h-4 w-4 shrink-0 text-[#195963]"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-[#143A61]"
                         aria-hidden="true"
                       />
                       <span>{item}</span>
@@ -271,7 +271,7 @@ export function VisitLocationSection({
                   href={activeLocation.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#143A61] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{t.visit.googleMaps}</span>
@@ -280,10 +280,10 @@ export function VisitLocationSection({
                   href={activeLocation.wazeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-3 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-4 py-3 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <Navigation
-                    className="h-4 w-4 shrink-0 text-[#195963]"
+                    className="h-4 w-4 shrink-0 text-[#143A61]"
                     aria-hidden="true"
                   />
                   <span>{t.visit.openWaze}</span>
@@ -294,14 +294,14 @@ export function VisitLocationSection({
 
           {/* Coluna Direita: Formulário de Visita Completo com Múltiplos Canais */}
           <Reveal delayMs={80} className="lg:col-span-7">
-            <div className="rounded-2xl border border-[#DDD7CE] bg-white p-6 sm:p-8">
+            <div className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
               {!submitted ? (
                 <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   <div>
-                    <h3 className="font-display text-xl font-semibold text-[#172226]">
+                    <h3 className="font-display text-xl font-semibold text-[#0F1E2E]">
                       {t.visit.formTitle}
                     </h3>
-                    <p className="mt-1 text-sm text-[#46585E]">
+                    <p className="mt-1 text-sm text-[#47596B]">
                       {t.visit.formSubtitle}
                     </p>
                   </div>
@@ -310,7 +310,7 @@ export function VisitLocationSection({
                     <div>
                       <label
                         htmlFor="visitor-name"
-                        className="block text-sm font-medium text-[#172226]"
+                        className="block text-sm font-medium text-[#0F1E2E]"
                       >
                         {t.visit.nameLabel}
                       </label>
@@ -323,14 +323,14 @@ export function VisitLocationSection({
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder={t.visit.namePlaceholder}
-                        className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2.5 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
+                        className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-4 py-2.5 text-base text-[#0F1E2E] placeholder:text-[#47596B]/60 focus:border-[#143A61] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#143A61]/20"
                       />
                     </div>
 
                     <div>
                       <label
                         htmlFor="visitor-whatsapp"
-                        className="block text-sm font-medium text-[#172226]"
+                        className="block text-sm font-medium text-[#0F1E2E]"
                       >
                         {t.visit.phoneLabel}
                       </label>
@@ -346,13 +346,13 @@ export function VisitLocationSection({
                           setWhatsapp(formatPhoneInput(e.target.value))
                         }
                         placeholder={t.visit.phonePlaceholder}
-                        className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2.5 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
+                        className="mt-1.5 block min-h-[48px] w-full rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-4 py-2.5 text-base text-[#0F1E2E] placeholder:text-[#47596B]/60 focus:border-[#143A61] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#143A61]/20"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <span className="block text-sm font-medium text-[#172226]">
+                    <span className="block text-sm font-medium text-[#0F1E2E]">
                       {t.visit.dayQuestion}
                     </span>
                     <div
@@ -369,10 +369,10 @@ export function VisitLocationSection({
                             role="radio"
                             aria-checked={selected}
                             onClick={() => setVisitDayIndex(index)}
-                            className={`flex min-h-[48px] items-center justify-start rounded-xl border px-4 py-2.5 text-left text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] ${
+                            className={`flex min-h-[48px] items-center justify-start rounded-xl border px-4 py-2.5 text-left text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] ${
                               selected
-                                ? 'border-[#195963] bg-[#195963] text-white'
-                                : 'border-[#DDD7CE] bg-[#FAF8F4] text-[#172226] hover:border-[#195963]/50'
+                                ? 'border-[#143A61] bg-[#143A61] text-white'
+                                : 'border-[#D6DEE6] bg-[#F8FAFC] text-[#0F1E2E] hover:border-[#143A61]/50'
                             }`}
                           >
                             {option}
@@ -384,7 +384,7 @@ export function VisitLocationSection({
 
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <span className="block text-sm font-medium text-[#172226]">
+                      <span className="block text-sm font-medium text-[#0F1E2E]">
                         {t.visit.groupQuestion}
                       </span>
                       <div
@@ -403,8 +403,8 @@ export function VisitLocationSection({
                               onClick={() => setGroupSizeIndex(index)}
                               className={`min-h-[44px] rounded-xl border px-2.5 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                                 active
-                                  ? 'border-[#195963] bg-[#195963] text-white'
-                                  : 'border-[#DDD7CE] bg-[#FAF8F4] text-[#172226] hover:border-[#195963]/50'
+                                  ? 'border-[#143A61] bg-[#143A61] text-white'
+                                  : 'border-[#D6DEE6] bg-[#F8FAFC] text-[#0F1E2E] hover:border-[#143A61]/50'
                               }`}
                             >
                               {opt}
@@ -417,7 +417,7 @@ export function VisitLocationSection({
                     <div>
                       <label
                         htmlFor="visitor-note"
-                        className="block text-sm font-medium text-[#172226]"
+                        className="block text-sm font-medium text-[#0F1E2E]"
                       >
                         {t.visit.noteLabel}
                       </label>
@@ -428,23 +428,23 @@ export function VisitLocationSection({
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder={t.visit.notePlaceholder}
-                        className="mt-2 block min-h-[44px] w-full rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-2 text-base text-[#172226] placeholder:text-[#46585E]/60 focus:border-[#195963] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#195963]/20"
+                        className="mt-2 block min-h-[44px] w-full rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-4 py-2 text-base text-[#0F1E2E] placeholder:text-[#47596B]/60 focus:border-[#143A61] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#143A61]/20"
                       />
                     </div>
                   </div>
 
                   {interestLabel && (
-                    <div className="flex items-center justify-between gap-3 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-4 py-3 text-sm">
+                    <div className="flex items-center justify-between gap-3 rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-4 py-3 text-sm">
                       <span>
                         {t.visit.interestSelected}{' '}
-                        <strong className="font-semibold text-[#195963]">
+                        <strong className="font-semibold text-[#143A61]">
                           {interestLabel}
                         </strong>
                       </span>
                       <button
                         type="button"
                         onClick={onClearMinistry}
-                        className="min-h-[44px] shrink-0 text-xs font-semibold text-[#46585E] underline hover:text-[#172226]"
+                        className="min-h-[44px] shrink-0 text-xs font-semibold text-[#47596B] underline hover:text-[#0F1E2E]"
                       >
                         {t.visit.removeInterest}
                       </button>
@@ -454,7 +454,7 @@ export function VisitLocationSection({
                   {errorMsg && (
                     <p
                       role="alert"
-                      className="rounded-xl border border-[#9C412A]/35 bg-[#9C412A]/10 px-4 py-3 text-sm font-medium text-[#803320]"
+                      className="rounded-xl border border-[#8F5B18]/35 bg-[#8F5B18]/10 px-4 py-3 text-sm font-medium text-[#734710]"
                     >
                       {errorMsg}
                     </p>
@@ -462,7 +462,7 @@ export function VisitLocationSection({
 
                   <button
                     type="submit"
-                    className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#9C412A] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#803320] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A] focus-visible:ring-offset-2"
+                    className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#8F5B18] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#734710] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5B18] focus-visible:ring-offset-2"
                   >
                     {t.visit.submitCta}
                   </button>
@@ -470,19 +470,19 @@ export function VisitLocationSection({
               ) : (
                 /* Estado de Confirmação Visual Imediato */
                 <div role="status" aria-live="polite" className="py-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#195963]/15 text-[#195963]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#143A61]/15 text-[#143A61]">
                     <CheckCircle2 className="h-6 w-6" aria-hidden="true" />
                   </div>
 
-                  <h3 className="mt-4 font-display text-2xl font-semibold text-[#172226]">
+                  <h3 className="mt-4 font-display text-2xl font-semibold text-[#0F1E2E]">
                     {t.visit.successTitlePrefix}
                     {name.trim()}
                     {t.visit.successTitleSuffix}
                   </h3>
-                  <p className="mt-2 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
+                  <p className="mt-2 max-w-[54ch] text-base leading-relaxed text-[#47596B]">
                     {t.visit.successBodyPrefix} ({groupSize}){' '}
                     {t.visit.successBodyFor}{' '}
-                    <strong className="font-semibold text-[#172226]">
+                    <strong className="font-semibold text-[#0F1E2E]">
                       {visitDay}
                     </strong>
                     {interestLabel
@@ -494,7 +494,7 @@ export function VisitLocationSection({
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                     <a
                       href={confirmMailtoUrl}
-                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#195963] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B]"
+                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#143A61] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47]"
                     >
                       <Mail className="h-4 w-4" aria-hidden="true" />
                       <span>{t.visit.sendEmail}</span>
@@ -504,7 +504,7 @@ export function VisitLocationSection({
                       href={confirmWhatsAppUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#195963] bg-white px-5 py-3 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#FAF8F4]"
+                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#143A61] bg-white px-5 py-3 text-sm font-semibold text-[#143A61] transition-colors hover:bg-[#F8FAFC]"
                     >
                       <MessageCircle className="h-4 w-4" aria-hidden="true" />
                       <span>{t.visit.sendWhatsApp}</span>
@@ -513,7 +513,7 @@ export function VisitLocationSection({
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-[#FAF8F4] px-5 py-3 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963]"
+                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] px-5 py-3 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61]"
                     >
                       <RotateCcw className="h-4 w-4" aria-hidden="true" />
                       <span>{t.visit.newRegistration}</span>

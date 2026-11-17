@@ -52,15 +52,15 @@ export function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`${t.nav.ariaLanguage}: ${languageOption.label}`}
-        className={`inline-flex min-h-[44px] items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border border-[#DDD7CE] bg-white font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F4] ${
+        className={`inline-flex min-h-[44px] items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border border-[#D6DEE6] bg-white font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8FAFC] ${
           compact ? 'px-2.5 py-2 text-xs' : 'px-2.5 py-2 text-xs sm:px-3 sm:text-sm'
         }`}
       >
-        <Globe className="h-4 w-4 shrink-0 text-[#195963]" aria-hidden="true" />
+        <Globe className="h-4 w-4 shrink-0 text-[#143A61]" aria-hidden="true" />
         <span className="sm:hidden">{languageOption.compactCode}</span>
         <span className="hidden sm:inline">{languageOption.shortCode}</span>
         <ChevronDown
-          className={`h-3.5 w-3.5 shrink-0 text-[#46585E] transition-transform duration-150 ${
+          className={`h-3.5 w-3.5 shrink-0 text-[#47596B] transition-transform duration-150 ${
             open ? 'rotate-180' : ''
           }`}
           aria-hidden="true"
@@ -71,12 +71,12 @@ export function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
         <div
           role="listbox"
           aria-label={t.nav.languageMenuTitle}
-          className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-[#DDD7CE] bg-white py-1.5 shadow-lg"
+          className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-[#D6DEE6] bg-white py-1.5 shadow-lg"
         >
-          <p className="border-b border-[#DDD7CE] px-3.5 pb-2 pt-1.5 text-[11px] font-semibold tracking-wide text-[#46585E]">
+          <p className="border-b border-[#D6DEE6] px-3.5 pb-2 pt-1.5 text-[11px] font-semibold tracking-wide text-[#47596B]">
             {t.nav.languageMenuTitle}
           </p>
-          <div className="divide-y divide-[#EFECE5]">
+          <div className="divide-y divide-[#EEF2F6]">
             {LANGUAGE_OPTIONS.map((option) => {
               const isSelected = option.code === language;
               return (
@@ -86,21 +86,21 @@ export function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleSelect(option.code)}
-                  className={`flex min-h-[44px] w-full items-center justify-between gap-3 px-3.5 py-2 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#195963] ${
+                  className={`flex min-h-[44px] w-full items-center justify-between gap-3 px-3.5 py-2 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#143A61] ${
                     isSelected
-                      ? 'bg-[#FAF8F4] font-semibold text-[#195963]'
-                      : 'text-[#172226] hover:bg-[#FAF8F4]'
+                      ? 'bg-[#F8FAFC] font-semibold text-[#143A61]'
+                      : 'text-[#0F1E2E] hover:bg-[#F8FAFC]'
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <span className="inline-block w-11 shrink-0 font-display text-xs font-semibold tracking-wide text-[#9C412A]">
+                    <span className="inline-block w-11 shrink-0 font-sans text-xs font-semibold tracking-wide text-[#8F5B18]">
                       {option.shortCode}
                     </span>
                     <span className="truncate">{option.label}</span>
                   </span>
                   {isSelected && (
                     <Check
-                      className="h-4 w-4 shrink-0 text-[#195963]"
+                      className="h-4 w-4 shrink-0 text-[#143A61]"
                       aria-hidden="true"
                     />
                   )}

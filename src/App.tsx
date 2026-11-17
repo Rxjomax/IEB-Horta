@@ -69,10 +69,10 @@ function AppContent() {
 
   return (
     <>
-      <div className="no-print min-h-screen overflow-x-hidden bg-[#FAF8F4] text-[#172226]">
+      <div className="no-print min-h-screen overflow-x-hidden bg-[#F8FAFC] text-[#0F1E2E]">
         <a
           href="#conteudo-principal"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[#195963] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[#143A61] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
         >
           {t.meta.skipToContent}
         </a>

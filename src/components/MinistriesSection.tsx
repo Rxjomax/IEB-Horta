@@ -41,21 +41,21 @@ export function MinistriesSection({
     <section
       id="ministerios"
       aria-labelledby="ministerios-heading"
-      className="border-b border-[#DDD7CE] bg-[#FAF8F4] py-16 sm:py-20 lg:py-24"
+      className="border-b border-[#D6DEE6] bg-[#F8FAFC] py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
+            <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
               {t.ministries.kicker}
             </p>
             <h2
               id="ministerios-heading"
-              className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
+              className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#0F1E2E] [text-wrap:balance] sm:text-4xl"
             >
               {t.ministries.heading}
             </h2>
-            <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
+            <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#47596B]">
               {t.ministries.intro}
             </p>
           </div>
@@ -67,7 +67,7 @@ export function MinistriesSection({
             role="tablist"
             aria-orientation="vertical"
             aria-label={t.ministries.heading}
-            className="col-span-5 flex flex-col divide-y divide-[#DDD7CE] overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white"
+            className="col-span-5 flex flex-col divide-y divide-[#D6DEE6] overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white"
           >
             {MINISTRIES.map((ministry) => {
               const selected = activeDesktopId === ministry.id;
@@ -80,15 +80,15 @@ export function MinistriesSection({
                   role="tab"
                   aria-selected={selected}
                   onClick={() => setActiveDesktopId(ministry.id)}
-                  className={`flex items-baseline gap-4 px-6 py-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#195963] ${
+                  className={`flex items-baseline gap-4 px-6 py-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#143A61] ${
                     selected
-                      ? 'bg-[#195963] text-white'
-                      : 'bg-white text-[#172226] hover:bg-[#FAF8F4]'
+                      ? 'bg-[#143A61] text-white'
+                      : 'bg-white text-[#0F1E2E] hover:bg-[#F8FAFC]'
                   }`}
                 >
                   <span
                     className={`font-display text-sm font-semibold tabular-nums ${
-                      selected ? 'text-[#E7A693]' : 'text-[#9C412A]'
+                      selected ? 'text-[#E2B86B]' : 'text-[#8F5B18]'
                     }`}
                   >
                     {ministry.number}
@@ -99,7 +99,7 @@ export function MinistriesSection({
                     </span>
                     <span
                       className={`mt-1 block text-sm ${
-                        selected ? 'text-[#FAF8F4]/85' : 'text-[#46585E]'
+                        selected ? 'text-[#F8FAFC]/85' : 'text-[#47596B]'
                       }`}
                     >
                       {localized.summary}
@@ -112,10 +112,10 @@ export function MinistriesSection({
 
           <div
             role="tabpanel"
-            className="col-span-7 flex flex-col overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white"
+            className="col-span-7 flex flex-col overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white"
           >
             {!activeHasFailed && (
-              <div className="aspect-[16/9] w-full overflow-hidden border-b border-[#DDD7CE] bg-[#EFECE5]">
+              <div className="aspect-[16/9] w-full overflow-hidden border-b border-[#D6DEE6] bg-[#EEF2F6]">
                 <img
                   src={activeMinistry.image}
                   alt={activeLocalized.imageAlt}
@@ -133,8 +133,8 @@ export function MinistriesSection({
 
             <div className="flex flex-1 flex-col justify-between p-8">
               <div>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#46585E]">
-                  <span className="font-semibold text-[#195963]">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#47596B]">
+                  <span className="font-semibold text-[#143A61]">
                     {t.ministries.scheduleLabel}: {activeLocalized.schedule}
                   </span>
                   <span aria-hidden="true">·</span>
@@ -143,20 +143,20 @@ export function MinistriesSection({
                   </span>
                 </div>
 
-                <h3 className="mt-3 font-display text-2xl font-semibold text-[#172226]">
+                <h3 className="mt-3 font-display text-2xl font-semibold text-[#0F1E2E]">
                   {activeLocalized.title}
                 </h3>
 
-                <p className="mt-3 max-w-[56ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-3 max-w-[56ch] text-base leading-relaxed text-[#47596B]">
                   {activeLocalized.description}
                 </p>
               </div>
 
-              <div className="mt-6 border-t border-[#DDD7CE] pt-5">
+              <div className="mt-6 border-t border-[#D6DEE6] pt-5">
                 <a
                   href="#visita"
                   onClick={() => onSelectMinistry(activeMinistry.id)}
-                  className="inline-flex min-h-[48px] items-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[48px] items-center gap-2 whitespace-nowrap rounded-xl bg-[#143A61] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <span>{t.ministries.ctaJoin}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -167,7 +167,7 @@ export function MinistriesSection({
         </div>
 
         {/* MOBILE / TABLET: Acordeão Interativo com Foto Real */}
-        <div className="mt-8 divide-y divide-[#DDD7CE] border-y border-[#DDD7CE] lg:hidden">
+        <div className="mt-8 divide-y divide-[#D6DEE6] border-y border-[#D6DEE6] lg:hidden">
           {MINISTRIES.map((ministry) => {
             const isOpen = openMobileId === ministry.id;
             const panelId = `ministry-panel-${ministry.id}`;
@@ -184,17 +184,17 @@ export function MinistriesSection({
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => toggleMobileItem(ministry.id)}
-                    className="flex min-h-[64px] w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#195963]"
+                    className="flex min-h-[64px] w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#143A61]"
                   >
                     <div className="flex items-baseline gap-4 pr-2">
-                      <span className="font-display text-sm font-semibold tabular-nums text-[#9C412A]">
+                      <span className="font-display text-sm font-semibold tabular-nums text-[#8F5B18]">
                         {ministry.number}
                       </span>
                       <div>
-                        <span className="block font-display text-xl font-semibold text-[#172226]">
+                        <span className="block font-display text-xl font-semibold text-[#0F1E2E]">
                           {localized.title}
                         </span>
-                        <span className="mt-1 block text-sm font-normal text-[#46585E]">
+                        <span className="mt-1 block text-sm font-normal text-[#47596B]">
                           {localized.summary}
                         </span>
                       </div>
@@ -204,8 +204,8 @@ export function MinistriesSection({
                       aria-hidden="true"
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-transform duration-200 ${
                         isOpen
-                          ? 'rotate-180 border-[#195963] bg-[#195963] text-white'
-                          : 'border-[#DDD7CE] bg-white text-[#195963]'
+                          ? 'rotate-180 border-[#143A61] bg-[#143A61] text-white'
+                          : 'border-[#D6DEE6] bg-white text-[#143A61]'
                       }`}
                     >
                       <ChevronDown className="h-5 w-5" />
@@ -220,9 +220,9 @@ export function MinistriesSection({
                   hidden={!isOpen}
                   className="pb-6 pl-2 sm:pl-8"
                 >
-                  <div className="flex flex-col gap-5 rounded-xl border border-[#DDD7CE] bg-white p-5 sm:flex-row sm:items-center sm:p-6">
+                  <div className="flex flex-col gap-5 rounded-xl border border-[#D6DEE6] bg-white p-5 sm:flex-row sm:items-center sm:p-6">
                     {!hasFailed && (
-                      <div className="aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg border border-[#DDD7CE] bg-[#EFECE5] sm:aspect-[4/5] sm:w-36">
+                      <div className="aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg border border-[#D6DEE6] bg-[#EEF2F6] sm:aspect-[4/5] sm:w-36">
                         <img
                           src={ministry.image}
                           alt={localized.imageAlt}
@@ -239,15 +239,15 @@ export function MinistriesSection({
                     )}
 
                     <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#46585E]">
-                        <span className="font-semibold text-[#195963]">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#47596B]">
+                        <span className="font-semibold text-[#143A61]">
                           {localized.schedule}
                         </span>
                         <span aria-hidden="true">·</span>
                         <span>{localized.audience}</span>
                       </div>
 
-                      <p className="mt-2.5 max-w-[54ch] text-base leading-relaxed text-[#172226]/85">
+                      <p className="mt-2.5 max-w-[54ch] text-base leading-relaxed text-[#0F1E2E]/85">
                         {localized.description}
                       </p>
 
@@ -255,7 +255,7 @@ export function MinistriesSection({
                         <a
                           href="#visita"
                           onClick={() => onSelectMinistry(ministry.id)}
-                          className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[#195963] px-4 py-2 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                          className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[#143A61] px-4 py-2 text-sm font-semibold text-[#143A61] transition-colors hover:bg-[#143A61] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                         >
                           <span>{t.ministries.ctaJoin}</span>
                           <ArrowRight className="h-4 w-4" aria-hidden="true" />

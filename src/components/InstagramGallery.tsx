@@ -96,18 +96,18 @@ export function InstagramGallery({
     <section
       id="comunidade"
       aria-labelledby="comunidade-heading"
-      className="border-b border-[#DDD7CE] bg-white py-16 sm:py-20 lg:py-24"
+      className="border-b border-[#D6DEE6] bg-white py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="flex flex-col gap-6 border-b border-[#DDD7CE] pb-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-6 border-b border-[#D6DEE6] pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
+              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
                 {t.gallery.kickerPrefix} · {CHURCH_INFO.handle}
               </p>
               <h2
                 id="comunidade-heading"
-                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
+                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#0F1E2E] [text-wrap:balance] sm:text-4xl"
               >
                 {t.gallery.heading}
               </h2>
@@ -117,7 +117,7 @@ export function InstagramGallery({
             <div
               role="tablist"
               aria-label={t.gallery.tabsAria}
-              className="inline-flex flex-wrap gap-1.5 self-start rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1 lg:self-auto"
+              className="inline-flex flex-wrap gap-1.5 self-start rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] p-1 lg:self-auto"
             >
               {communityTabs.map((tab) => {
                 const selected = activeTab === tab.id;
@@ -130,8 +130,8 @@ export function InstagramGallery({
                     onClick={() => onTabChange(tab.id)}
                     className={`min-h-[44px] whitespace-nowrap rounded-lg px-4 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                       selected
-                        ? 'bg-white text-[#195963] shadow-xs'
-                        : 'text-[#46585E] hover:text-[#172226]'
+                        ? 'bg-white text-[#143A61] shadow-xs'
+                        : 'text-[#47596B] hover:text-[#0F1E2E]'
                     }`}
                   >
                     {tab.label}
@@ -149,7 +149,7 @@ export function InstagramGallery({
               <div
                 role="group"
                 aria-label={t.gallery.filterAria}
-                className="inline-flex flex-wrap gap-1.5 self-start rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1"
+                className="inline-flex flex-wrap gap-1.5 self-start rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] p-1"
               >
                 {[
                   {
@@ -175,8 +175,8 @@ export function InstagramGallery({
                       aria-pressed={active}
                       className={`min-h-[44px] whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
                         active
-                          ? 'bg-white text-[#195963] shadow-xs'
-                          : 'text-[#46585E] hover:text-[#172226]'
+                          ? 'bg-white text-[#143A61] shadow-xs'
+                          : 'text-[#47596B] hover:text-[#0F1E2E]'
                       }`}
                     >
                       {tab.label}
@@ -189,7 +189,7 @@ export function InstagramGallery({
                 href={CHURCH_INFO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#12434B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2"
+                className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#143A61] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61] focus-visible:ring-offset-2"
               >
                 <Instagram className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{t.gallery.followCta}</span>
@@ -205,7 +205,7 @@ export function InstagramGallery({
                 return (
                   <figure
                     key={post.id}
-                    className="group relative aspect-[4/5] overflow-hidden rounded-xl border border-[#DDD7CE] bg-[#EFECE5] sm:rounded-2xl"
+                    className="group relative aspect-[4/5] overflow-hidden rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] sm:rounded-2xl"
                   >
                     {!hasFailed ? (
                       <img
@@ -223,10 +223,10 @@ export function InstagramGallery({
                     ) : (
                       <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center">
                         <Instagram
-                          className="h-6 w-6 text-[#195963]"
+                          className="h-6 w-6 text-[#143A61]"
                           aria-hidden="true"
                         />
-                        <span className="mt-2 text-xs font-medium text-[#46585E]">
+                        <span className="mt-2 text-xs font-medium text-[#47596B]">
                           {localized.category}
                         </span>
                       </div>
@@ -240,15 +240,15 @@ export function InstagramGallery({
                     >
                       <div
                         aria-hidden="true"
-                        className="absolute inset-0 bg-gradient-to-t from-[#0D3238]/92 via-[#0D3238]/30 to-transparent opacity-80 sm:opacity-100"
+                        className="absolute inset-0 bg-gradient-to-t from-[#0B223C]/92 via-[#0B223C]/30 to-transparent opacity-80 sm:opacity-100"
                       />
                       <div className="relative z-10 hidden justify-end sm:flex">
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#172226]">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#0F1E2E]">
                           <Maximize2 className="h-4 w-4" aria-hidden="true" />
                         </span>
                       </div>
                       <div className="relative z-10 mt-auto text-white">
-                        <p className="text-[11px] font-medium tracking-wide text-[#FAF8F4]/90 sm:text-xs">
+                        <p className="text-[11px] font-medium tracking-wide text-[#F8FAFC]/90 sm:text-xs">
                           {localized.category} · {localized.dateLabel}
                         </p>
                         <p className="mt-1 line-clamp-2 text-xs leading-snug text-white sm:text-sm">
@@ -261,7 +261,7 @@ export function InstagramGallery({
               })}
             </div>
 
-            <p className="mt-4 text-xs text-[#46585E]">{t.gallery.tapHint}</p>
+            <p className="mt-4 text-xs text-[#47596B]">{t.gallery.tapHint}</p>
           </div>
         )}
 
@@ -269,7 +269,7 @@ export function InstagramGallery({
         {activeTab === 'arquivos' && (
           <div role="tabpanel" className="pt-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-[64ch] text-base leading-relaxed text-[#46585E]">
+              <p className="max-w-[64ch] text-base leading-relaxed text-[#47596B]">
                 {t.gallery.archivesIntro}
               </p>
 
@@ -277,7 +277,7 @@ export function InstagramGallery({
                 href={CHURCH_INFO.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#195963] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#12434B]"
+                className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#143A61] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47]"
               >
                 <Youtube className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{t.gallery.archivesYouTubeCta}</span>
@@ -303,9 +303,9 @@ export function InstagramGallery({
                 return (
                   <article
                     key={item.id}
-                    className="flex flex-col overflow-hidden rounded-2xl border border-[#DDD7CE] bg-[#FAF8F4] sm:flex-row"
+                    className="flex flex-col overflow-hidden rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] sm:flex-row"
                   >
-                    <div className="aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#EFECE5] sm:aspect-auto sm:w-44">
+                    <div className="aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#EEF2F6] sm:aspect-auto sm:w-44">
                       <img
                         src={item.image}
                         alt={localized.imageAlt}
@@ -316,8 +316,8 @@ export function InstagramGallery({
 
                     <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
                       <div>
-                        <p className="text-xs font-medium text-[#46585E]">
-                          <span className="font-semibold text-[#9C412A]">
+                        <p className="text-xs font-medium text-[#47596B]">
+                          <span className="font-semibold text-[#8F5B18]">
                             {localized.category}
                           </span>
                           <span aria-hidden="true" className="mx-1.5">
@@ -325,10 +325,10 @@ export function InstagramGallery({
                           </span>
                           <span>{localized.dateLabel}</span>
                         </p>
-                        <h3 className="mt-1.5 font-display text-lg font-semibold text-[#172226] sm:text-xl">
+                        <h3 className="mt-1.5 font-display text-lg font-semibold text-[#0F1E2E] sm:text-xl">
                           {localized.title}
                         </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-[#46585E]">
+                        <p className="mt-2 text-sm leading-relaxed text-[#47596B]">
                           {localized.summary}
                         </p>
                       </div>
@@ -343,7 +343,7 @@ export function InstagramGallery({
                           }
                           target={isExternal ? '_blank' : undefined}
                           rel={isExternal ? 'noopener noreferrer' : undefined}
-                          className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-[#195963] underline-offset-4 hover:underline"
+                          className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-[#143A61] underline-offset-4 hover:underline"
                         >
                           <span>{localized.actionLabel}</span>
                           {isExternal ? (
@@ -370,19 +370,19 @@ export function InstagramGallery({
         {/* ABA 3: OFERTAS & MISSÃO (INSPIRADO EM DONATIVOS DA IEBC) */}
         {activeTab === 'ofertas' && (
           <div role="tabpanel" className="pt-8">
-            <div className="grid grid-cols-1 gap-8 rounded-2xl border border-[#DDD7CE] bg-[#FAF8F4] p-6 sm:p-8 lg:grid-cols-12 lg:p-10">
+            <div className="grid grid-cols-1 gap-8 rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] p-6 sm:p-8 lg:grid-cols-12 lg:p-10">
               <div className="lg:col-span-6">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#9C412A]">
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#8F5B18]">
                   <HeartHandshake className="h-4 w-4" aria-hidden="true" />
                   <span>{t.gallery.giving.kicker}</span>
                 </div>
-                <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-[#172226] sm:text-3xl">
+                <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-[#0F1E2E] sm:text-3xl">
                   {t.gallery.giving.heading}
                 </h3>
-                <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-[#47596B]">
                   {t.gallery.giving.paragraph1}
                 </p>
-                <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#46585E]">
+                <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-[#47596B]">
                   {t.gallery.giving.paragraph2}
                 </p>
 
@@ -391,31 +391,31 @@ export function InstagramGallery({
                     href={givingWhatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#195963] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#12434B]"
+                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#143A61] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A47]"
                   >
                     <MessageCircle className="h-4 w-4" aria-hidden="true" />
                     <span>{t.gallery.giving.ctaWhatsApp}</span>
                   </a>
                   <a
                     href={givingMailtoUrl}
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#DDD7CE] bg-white px-5 py-3 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963]"
+                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#D6DEE6] bg-white px-5 py-3 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:text-[#143A61]"
                   >
-                    <Mail className="h-4 w-4 text-[#195963]" aria-hidden="true" />
+                    <Mail className="h-4 w-4 text-[#143A61]" aria-hidden="true" />
                     <span>{t.gallery.giving.ctaEmail}</span>
                   </a>
                 </div>
               </div>
 
-              <div className="divide-y divide-[#DDD7CE] rounded-xl border border-[#DDD7CE] bg-white lg:col-span-6">
+              <div className="divide-y divide-[#D6DEE6] rounded-xl border border-[#D6DEE6] bg-white lg:col-span-6">
                 {t.gallery.giving.pillars.map((pillar, idx) => (
                   <div key={pillar.title} className="p-5 sm:p-6">
-                    <span className="font-display text-xs font-semibold tabular-nums text-[#9C412A]">
+                    <span className="font-display text-xs font-semibold tabular-nums text-[#8F5B18]">
                       0{idx + 1}
                     </span>
-                    <h4 className="mt-1 font-display text-lg font-semibold text-[#172226]">
+                    <h4 className="mt-1 font-display text-lg font-semibold text-[#0F1E2E]">
                       {pillar.title}
                     </h4>
-                    <p className="mt-1.5 text-sm leading-relaxed text-[#46585E]">
+                    <p className="mt-1.5 text-sm leading-relaxed text-[#47596B]">
                       {pillar.text}
                     </p>
                   </div>
@@ -434,29 +434,29 @@ export function InstagramGallery({
             role="dialog"
             aria-modal="true"
             aria-labelledby="lightbox-title"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B2A30]/80 p-4 backdrop-blur-xs"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#091B30]/80 p-4 backdrop-blur-xs"
             onClick={() => setSelectedPostId(null)}
           >
             <div
-              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-[#DDD7CE] bg-[#FAF8F4] text-[#172226]"
+              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] text-[#0F1E2E]"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between border-b border-[#DDD7CE] px-5 py-3.5">
-                <p className="text-xs font-semibold tracking-wide text-[#9C412A]">
+              <div className="flex items-center justify-between border-b border-[#D6DEE6] px-5 py-3.5">
+                <p className="text-xs font-semibold tracking-wide text-[#8F5B18]">
                   {localizedSelected.category} · {localizedSelected.dateLabel}
                 </p>
                 <button
                   type="button"
                   onClick={() => setSelectedPostId(null)}
                   aria-label={t.gallery.closeLightbox}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-[#172226] hover:bg-[#EFECE5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-[#0F1E2E] hover:bg-[#EEF2F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <X className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
 
               <div className="grid grid-cols-1 gap-6 p-5 sm:grid-cols-12 sm:items-center sm:p-6">
-                <div className="mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-xl border border-[#DDD7CE] bg-[#EFECE5] sm:col-span-5">
+                <div className="mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] sm:col-span-5">
                   <img
                     src={selectedPost.image}
                     alt={localizedSelected.alt}
@@ -469,28 +469,28 @@ export function InstagramGallery({
                   <div>
                     <h3
                       id="lightbox-title"
-                      className="font-display text-2xl font-semibold text-[#172226]"
+                      className="font-display text-2xl font-semibold text-[#0F1E2E]"
                     >
                       {localizedSelected.category}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-[#46585E]">
+                    <p className="mt-3 text-base leading-relaxed text-[#47596B]">
                       {localizedSelected.caption}
                     </p>
                     {localizedSelected.scripture && (
-                      <p className="mt-3 text-sm font-semibold text-[#195963]">
+                      <p className="mt-3 text-sm font-semibold text-[#143A61]">
                         {t.gallery.referenceLabel}:{' '}
                         {localizedSelected.scripture}
                       </p>
                     )}
                   </div>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#DDD7CE] pt-4">
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#D6DEE6] pt-4">
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => navigateModal(-1)}
                         aria-label={t.gallery.prevPost}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#DDD7CE] bg-white text-[#172226] hover:border-[#195963]"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#D6DEE6] bg-white text-[#0F1E2E] hover:border-[#143A61]"
                       >
                         <ChevronLeft className="h-5 w-5" aria-hidden="true" />
                       </button>
@@ -498,7 +498,7 @@ export function InstagramGallery({
                         type="button"
                         onClick={() => navigateModal(1)}
                         aria-label={t.gallery.nextPost}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#DDD7CE] bg-white text-[#172226] hover:border-[#195963]"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#D6DEE6] bg-white text-[#0F1E2E] hover:border-[#143A61]"
                       >
                         <ChevronRight className="h-5 w-5" aria-hidden="true" />
                       </button>
@@ -508,7 +508,7 @@ export function InstagramGallery({
                       href={CHURCH_INFO.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#195963] px-4 py-2 text-sm font-semibold text-white hover:bg-[#12434B]"
+                      className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#143A61] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0E2A47]"
                     >
                       <Instagram className="h-4 w-4" aria-hidden="true" />
                       <span>{t.gallery.viewOnInstagram}</span>

@@ -21,7 +21,7 @@ import { Reveal } from './Reveal';
 type ScheduleFilter = 'todos' | 'domingo' | 'semana';
 
 function renderScheduleIcon(icon: ScheduleItem['icon']) {
-  const iconClass = 'h-5 w-5 text-[#195963]';
+  const iconClass = 'h-5 w-5 text-[#143A61]';
   switch (icon) {
     case 'sun':
       return <Sun className={iconClass} aria-hidden="true" />;
@@ -53,23 +53,23 @@ export function ScheduleSection() {
     <section
       id="horarios"
       aria-labelledby="horarios-heading"
-      className="border-b border-[#DDD7CE] bg-[#FAF8F4] py-16 sm:py-20 lg:py-24"
+      className="border-b border-[#D6DEE6] bg-[#F8FAFC] py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Coluna Esquerda: Contexto, Filtros e Ações */}
           <Reveal className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <p className="text-sm font-semibold tracking-wide text-[#9C412A]">
+              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
                 {t.schedule.kicker}
               </p>
               <h2
                 id="horarios-heading"
-                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#172226] [text-wrap:balance] sm:text-4xl"
+                className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#0F1E2E] [text-wrap:balance] sm:text-4xl"
               >
                 {t.schedule.heading}
               </h2>
-              <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-[#46585E]">
+              <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-[#47596B]">
                 {t.schedule.intro}
               </p>
 
@@ -77,7 +77,7 @@ export function ScheduleSection() {
               <div
                 role="group"
                 aria-label={t.schedule.filterAria}
-                className="mt-6 inline-flex flex-wrap gap-1.5 rounded-xl border border-[#DDD7CE] bg-[#EFECE5] p-1"
+                className="mt-6 inline-flex flex-wrap gap-1.5 rounded-xl border border-[#D6DEE6] bg-[#EEF2F6] p-1"
               >
                 {[
                   { id: 'todos' as const, label: t.schedule.filters.all },
@@ -93,8 +93,8 @@ export function ScheduleSection() {
                       aria-pressed={active}
                       className={`min-h-[44px] whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
                         active
-                          ? 'bg-white text-[#195963] shadow-xs'
-                          : 'text-[#46585E] hover:text-[#172226]'
+                          ? 'bg-white text-[#143A61] shadow-xs'
+                          : 'text-[#47596B] hover:text-[#0F1E2E]'
                       }`}
                     >
                       {tab.label}
@@ -103,11 +103,11 @@ export function ScheduleSection() {
                 })}
               </div>
 
-              <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#DDD7CE] pt-6">
+              <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#D6DEE6] pt-6">
                 <button
                   type="button"
                   onClick={handleSaveCalendar}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#195963] bg-white px-4 py-2.5 text-sm font-semibold text-[#195963] transition-colors hover:bg-[#195963] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#143A61] bg-white px-4 py-2.5 text-sm font-semibold text-[#143A61] transition-colors hover:bg-[#143A61] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   {calendarSaved ? (
                     <>
@@ -129,10 +129,10 @@ export function ScheduleSection() {
                   href={CHURCH_INFO.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#DDD7CE] bg-white px-4 py-2.5 text-sm font-semibold text-[#172226] transition-colors hover:border-[#195963] hover:text-[#195963] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#D6DEE6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0F1E2E] transition-colors hover:border-[#143A61] hover:text-[#143A61] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#143A61]"
                 >
                   <Youtube
-                    className="h-4 w-4 shrink-0 text-[#9C412A]"
+                    className="h-4 w-4 shrink-0 text-[#8F5B18]"
                     aria-hidden="true"
                   />
                   <span>{t.schedule.watchYouTube}</span>
@@ -142,7 +142,7 @@ export function ScheduleSection() {
               <div className="mt-4">
                 <a
                   href="#visita"
-                  className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#9C412A] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9C412A]"
+                  className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[#8F5B18] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5B18]"
                 >
                   <span>{t.schedule.confirmVisit}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -153,28 +153,28 @@ export function ScheduleSection() {
 
           {/* Coluna Direita: Lista Editorial Estruturada */}
           <div className="lg:col-span-7">
-            <div className="divide-y divide-[#DDD7CE] overflow-hidden rounded-2xl border border-[#DDD7CE] bg-white">
+            <div className="divide-y divide-[#D6DEE6] overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white">
               {visibleItems.map((item) => {
                 const localized = t.schedule.items[item.id];
                 return (
                   <article
                     key={item.id}
-                    className="flex flex-col gap-4 p-5 transition-colors hover:bg-[#FAF8F4]/60 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
+                    className="flex flex-col gap-4 p-5 transition-colors hover:bg-[#F8FAFC]/60 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#DDD7CE] bg-[#FAF8F4]">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6DEE6] bg-[#F8FAFC]">
                         {renderScheduleIcon(item.icon)}
                       </div>
                       <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-[#46585E]">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-[#47596B]">
                           <span>{localized.day}</span>
                           <span aria-hidden="true">·</span>
                           <span>{localized.location}</span>
                         </div>
-                        <h3 className="mt-1 font-display text-lg font-semibold text-[#172226] sm:text-xl">
+                        <h3 className="mt-1 font-display text-lg font-semibold text-[#0F1E2E] sm:text-xl">
                           {localized.title}
                         </h3>
-                        <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#46585E]">
+                        <p className="mt-1.5 max-w-[54ch] text-base leading-relaxed text-[#47596B]">
                           {localized.description}
                         </p>
                       </div>
@@ -184,7 +184,7 @@ export function ScheduleSection() {
                       {localized.times.map((time) => (
                         <span
                           key={time}
-                          className="font-display text-lg font-semibold tabular-nums text-[#195963] sm:text-xl"
+                          className="font-display text-lg font-semibold tabular-nums text-[#143A61] sm:text-xl"
                         >
                           {time}
                         </span>
