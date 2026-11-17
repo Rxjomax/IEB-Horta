@@ -689,7 +689,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           weekday: 'Sexta-feira · 19h30',
           title: 'Jantar de Ação de Graças',
           detail:
-            'Convívio comunitário nas instalações da Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família).',
+            'Convívio comunitário nas instalações da Assembleia de Deus do Faial (1,00€ por pessoa + 1 prato por família).',
         },
         'nov-29': {
           weekday: 'Domingo',
@@ -740,13 +740,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         dateShort: '27 de Novembro · 19h30',
         title: 'Jantar de Ação de Graças',
         summary:
-          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 3,00€ por pessoa + 1 prato por família.',
+          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 1,00€ por pessoa + 1 prato por família.',
         seeDetails: 'Ver condições e inscrição',
         description:
           'Venha agradecer e celebrar em família no nosso Jantar de Ação de Graças comunitário nas instalações da Assembleia de Deus do Faial.',
         details: [
           { label: 'Data e hora', value: '27 nov. · 19h30' },
-          { label: 'Participação', value: '3,00€ por pessoa + 1 prato por família' },
+          { label: 'Participação', value: '1,00€ por pessoa + 1 prato por família' },
           { label: 'Inscrições e pagamento', value: 'Até 22 de novembro' },
           { label: 'Local', value: 'Assembleia de Deus do Faial' },
         ],
@@ -1100,7 +1100,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '27 nov. · 19h30',
           title: 'Jantar Comunitário de Ação de Graças',
           summary:
-            'Encontro na Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
+            'Encontro na Assembleia de Deus do Faial (1,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
           actionLabel: 'Confirmar participação',
           imageAlt: 'Publicação de Ação de Graças da IEB Horta',
         },
@@ -1482,7 +1482,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           weekday: 'Sexta-feira · 19h30',
           title: 'Jantar de Ação de Graças',
           detail:
-            'Confraternização comunitária nas instalações da Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família).',
+            'Confraternização comunitária nas instalações da Assembleia de Deus do Faial (1,00€ por pessoa + 1 prato por família).',
         },
         'nov-29': {
           weekday: 'Domingo',
@@ -1533,13 +1533,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         dateShort: '27 de Novembro · 19h30',
         title: 'Jantar de Ação de Graças',
         summary:
-          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 3,00€ por pessoa + 1 prato por família.',
+          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 1,00€ por pessoa + 1 prato por família.',
         seeDetails: 'Ver detalhes e inscrição',
         description:
           'Venha agradecer e celebrar em família no nosso Jantar de Ação de Graças comunitário nas instalações da Assembleia de Deus do Faial.',
         details: [
           { label: 'Data e hora', value: '27 nov. · 19h30' },
-          { label: 'Participação', value: '3,00€ por pessoa + 1 prato por família' },
+          { label: 'Participação', value: '1,00€ por pessoa + 1 prato por família' },
           { label: 'Inscrições e pagamento', value: 'Até 22 de novembro' },
           { label: 'Local', value: 'Assembleia de Deus do Faial' },
         ],
@@ -1893,7 +1893,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '27 nov. · 19h30',
           title: 'Jantar Comunitário de Ação de Graças',
           summary:
-            'Encontro na Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
+            'Encontro na Assembleia de Deus do Faial (1,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
           actionLabel: 'Confirmar presença',
           imageAlt: 'Publicação de Ação de Graças da IEB Horta',
         },
@@ -2274,7 +2274,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           weekday: 'Friday · 19:30',
           title: 'Thanksgiving Dinner',
           detail:
-            'Community fellowship dinner at Assembleia de Deus do Faial (€3.00 per person + 1 dish per family).',
+            'Community fellowship dinner at Assembleia de Deus do Faial (€1.00 per person + 1 dish per family).',
         },
         'nov-29': {
           weekday: 'Sunday',
@@ -2317,13 +2317,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         dateShort: 'November 27 · 19:30',
         title: 'Thanksgiving Dinner',
         summary:
-          'Friday at 19:30 at Assembleia de Deus do Faial. €3.00 per person + 1 dish per family.',
+          'Friday at 19:30 at Assembleia de Deus do Faial. €1.00 per person + 1 dish per family.',
         seeDetails: 'See details & sign up',
         description:
           'Join us for our community Thanksgiving Dinner at the Assembleia de Deus do Faial facilities as we give thanks together.',
         details: [
           { label: 'Date & time', value: 'Nov 27 · 19:30' },
-          { label: 'Contribution', value: '€3.00 per person + 1 dish per family' },
+          { label: 'Contribution', value: '€1.00 per person + 1 dish per family' },
           { label: 'Sign-ups & payment', value: 'By November 22' },
           { label: 'Venue', value: 'Assembleia de Deus do Faial' },
         ],
@@ -2676,7 +2676,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: 'Nov 27 · 19:30',
           title: 'Community Thanksgiving Dinner',
           summary:
-            'Fellowship dinner at Assembleia de Deus do Faial (€3.00 per person + 1 dish per family). Sign-ups & payment by November 22.',
+            'Fellowship dinner at Assembleia de Deus do Faial (€1.00 per person + 1 dish per family). Sign-ups & payment by November 22.',
           actionLabel: 'Confirm attendance',
           imageAlt: 'Thanksgiving announcement by IEB Horta',
         },
@@ -3057,7 +3057,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           weekday: 'Vendredi · 19h30',
           title: 'Dîner d’Action de grâces',
           detail:
-            'Repas fraternel dans les locaux de l’Assembleia de Deus do Faial (3,00€ par personne + 1 plat par famille).',
+            'Repas fraternel dans les locaux de l’Assembleia de Deus do Faial (1,00€ par personne + 1 plat par famille).',
         },
         'nov-29': {
           weekday: 'Dimanche',
@@ -3112,7 +3112,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         dateShort: '27 Novembre · 19h30',
         title: 'Dîner d’Action de grâces',
         summary:
-          'Vendredi à 19h30 dans les locaux de l’Assembleia de Deus do Faial. 3,00€ par personne + 1 plat par famille.',
+          'Vendredi à 19h30 dans les locaux de l’Assembleia de Deus do Faial. 1,00€ par personne + 1 plat par famille.',
         seeDetails: 'Voir modalités et inscription',
         description:
           'Venez rendre grâce et célébrer en famille lors de notre Dîner communautaire d’Action de grâces à l’Assembleia de Deus do Faial.',
@@ -3120,7 +3120,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           { label: 'Date et heure', value: '27 nov. · 19h30' },
           {
             label: 'Participation',
-            value: '3,00€ par personne + 1 plat par famille',
+            value: '1,00€ par personne + 1 plat par famille',
           },
           { label: 'Inscriptions', value: 'Jusqu’au 22 novembre' },
           { label: 'Lieu', value: 'Assembleia de Deus do Faial' },
@@ -3476,7 +3476,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '27 nov. · 19h30',
           title: 'Dîner communautaire d’Action de grâces',
           summary:
-            'Repas fraternel à l’Assembleia de Deus do Faial (3,00€ par personne + 1 plat par famille). Inscriptions jusqu’au 22 novembre.',
+            'Repas fraternel à l’Assembleia de Deus do Faial (1,00€ par personne + 1 plat par famille). Inscriptions jusqu’au 22 novembre.',
           actionLabel: 'Confirmer votre présence',
           imageAlt: 'Annonce d’Action de grâces de l’IEB Horta',
         },
@@ -3857,7 +3857,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           weekday: 'Viernes · 19:30',
           title: 'Cena de Acción de Gracias',
           detail:
-            'Convivencia comunitaria en la Assembleia de Deus do Faial (3,00€ por persona + 1 plato por familia).',
+            'Convivencia comunitaria en la Assembleia de Deus do Faial (1,00€ por persona + 1 plato por familia).',
         },
         'nov-29': {
           weekday: 'Domingo',
@@ -3912,7 +3912,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         dateShort: '27 de Noviembre · 19:30',
         title: 'Cena de Acción de Gracias',
         summary:
-          'Viernes a las 19:30 en la Assembleia de Deus do Faial. 3,00€ por persona + 1 plato por familia.',
+          'Viernes a las 19:30 en la Assembleia de Deus do Faial. 1,00€ por persona + 1 plato por familia.',
         seeDetails: 'Ver detalles e inscripción',
         description:
           'Ven a dar gracias y celebrar en familia nuestra Cena comunitaria de Acción de Gracias en las instalaciones de la Assembleia de Deus do Faial.',
@@ -3920,7 +3920,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           { label: 'Fecha y hora', value: '27 nov. · 19:30' },
           {
             label: 'Participación',
-            value: '3,00€ por persona + 1 plato por familia',
+            value: '1,00€ por persona + 1 plato por familia',
           },
           { label: 'Inscripciones y pago', value: 'Hasta el 22 de noviembre' },
           { label: 'Lugar', value: 'Assembleia de Deus do Faial' },
@@ -4275,7 +4275,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '27 nov. · 19:30',
           title: 'Cena Comunitaria de Acción de Gracias',
           summary:
-            'Encuentro fraterno en la Assembleia de Deus do Faial (3,00€ por persona + 1 plato por familia). Inscripciones hasta el 22 de noviembre.',
+            'Encuentro fraterno en la Assembleia de Deus do Faial (1,00€ por persona + 1 plato por familia). Inscripciones hasta el 22 de noviembre.',
           actionLabel: 'Confirmar asistencia',
           imageAlt: 'Publicación de Acción de Gracias de IEB Horta',
         },

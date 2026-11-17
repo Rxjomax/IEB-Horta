@@ -108,7 +108,7 @@ export function buildSiteSearchIndex(t: SiteTranslations): SearchableItem[] {
     snippet: `${t.bulletin.thanksgivingDinner.summary} ${t.bulletin.thanksgivingDinner.details
       .map((d) => `${d.label}: ${d.value}`)
       .join(' · ')}`,
-    keywords: `${t.bulletin.thanksgivingDinner.description} 27/11 19h30 3,00€ ${CHURCH_INFO.worshipVenueName}`,
+    keywords: `${t.bulletin.thanksgivingDinner.description} 27/11 19h30 1,00€ 1€ ${CHURCH_INFO.worshipVenueName}`,
     targetHref: '#agenda-novembro',
     bulletinTab: 'anuncios',
   });
