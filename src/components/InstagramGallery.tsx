@@ -20,6 +20,7 @@ import {
 } from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Reveal } from './Reveal';
+import type { BulletinTabId } from './NovemberBulletinSection';
 
 export type CommunityTabId = 'fotos' | 'arquivos' | 'ofertas';
 type GalleryFilter = 'todos' | GalleryPost['filterGroup'];
@@ -27,11 +28,13 @@ type GalleryFilter = 'todos' | GalleryPost['filterGroup'];
 interface InstagramGalleryProps {
   activeTab: CommunityTabId;
   onTabChange: (tab: CommunityTabId) => void;
+  onSelectBulletinTab?: (tab: BulletinTabId) => void;
 }
 
 export function InstagramGallery({
   activeTab,
   onTabChange,
+  onSelectBulletinTab,
 }: InstagramGalleryProps) {
   const { t } = useLanguage();
   const [filter, setFilter] = useState<GalleryFilter>('todos');
@@ -290,8 +293,12 @@ export function InstagramGallery({
                     ? CHURCH_INFO.youtubeUrl
                     : item.actionType === 'instagram'
                       ? CHURCH_INFO.instagramUrl
-                      : '#visita';
-                const isExternal = item.actionType !== 'visit';
+                      : item.actionType === 'bulletin'
+                        ? '#agenda-novembro'
+                        : '#visita';
+                const isExternal =
+                  item.actionType === 'youtube' ||
+                  item.actionType === 'instagram';
 
                 return (
                   <article
@@ -329,6 +336,11 @@ export function InstagramGallery({
                       <div className="mt-4 pt-2">
                         <a
                           href={href}
+                          onClick={
+                            item.actionType === 'bulletin'
+                              ? () => onSelectBulletinTab?.('agenda')
+                              : undefined
+                          }
                           target={isExternal ? '_blank' : undefined}
                           rel={isExternal ? 'noopener noreferrer' : undefined}
                           className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-[#195963] underline-offset-4 hover:underline"

@@ -1,12 +1,14 @@
 import type {
   ArchiveFeatureItem,
   BeliefArticle,
+  BulletinAgendaItem,
   ChurchLocation,
   CooperationPartner,
   EssencePillar,
   GalleryPost,
   HeroSlide,
   MinistryItem,
+  NOVEMBER_PRAYER_IDS,
   ScheduleItem,
 } from '../data/churchConfig';
 
@@ -80,6 +82,12 @@ export interface LocalizedScheduleText {
   description: string;
 }
 
+export interface LocalizedBulletinAgendaText {
+  weekday: string;
+  title: string;
+  detail: string;
+}
+
 export interface LocalizedPillarText {
   title: string;
   description: string;
@@ -129,6 +137,8 @@ export interface LocalizedLocationText {
   note: string;
 }
 
+type PrayerId = (typeof NOVEMBER_PRAYER_IDS)[number];
+
 export interface SiteTranslations {
   meta: {
     title: string;
@@ -142,12 +152,17 @@ export interface SiteTranslations {
     languageMenuTitle: string;
     links: {
       schedule: string;
+      novemberAgenda: string;
       essence: string;
       ministries: string;
       community: string;
       visit: string;
     };
     subLinks: {
+      novemberAgenda: string;
+      novemberAnnouncements: string;
+      novemberPrayer: string;
+      novemberGratitude: string;
       churchHistory: string;
       whatWeBelieve: string;
       cooperation: string;
@@ -209,6 +224,78 @@ export interface SiteTranslations {
     watchYouTube: string;
     confirmVisit: string;
     items: Record<ScheduleItem['id'], LocalizedScheduleText>;
+  };
+  bulletin: {
+    kicker: string;
+    heading: string;
+    intro: string;
+    downloadPdf: string;
+    tabsAria: string;
+    tabs: {
+      agenda: string;
+      announcements: string;
+      prayer: string;
+      gratitude: string;
+    };
+    agendaItems: Record<BulletinAgendaItem['id'], LocalizedBulletinAgendaText>;
+    activitiesCard: {
+      kicker: string;
+      heading: string;
+      rows: Array<{ day: string; time: string; label: string }>;
+      venueNote: string;
+      cta: string;
+    };
+    venueAnnouncement: {
+      kicker: string;
+      title: string;
+      body1: string;
+      times: string[];
+      body2: string;
+      cta: string;
+    };
+    thanksgivingDinner: {
+      dateShort: string;
+      title: string;
+      summary: string;
+      seeDetails: string;
+      description: string;
+      details: Array<{ label: string; value: string }>;
+      cta: string;
+      whatsappMessage: string;
+    };
+    juntosCampaign: {
+      kicker: string;
+      title: string;
+      description: string;
+      tier1Title: string;
+      tier1Items: string;
+      tier2Title: string;
+      tier2Items: string;
+    };
+    celeiro: {
+      kicker: string;
+      title: string;
+      description: string;
+      cta: string;
+    };
+    prayerIntro: string;
+    prayerCta: string;
+    prayerWhatsappMessage: string;
+    prayerRequests: Record<PrayerId, string>;
+    gratitude: {
+      kicker: string;
+      title: string;
+      paragraphs: string[];
+      signature: string;
+      verse: string;
+    };
+    birthdays: {
+      kicker: string;
+      title: string;
+      updateNote: string;
+      cta: string;
+      whatsappMessage: string;
+    };
   };
   about: {
     familyAlt: string;
@@ -358,7 +445,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Igreja Evangélica Baptista da Horta',
       description:
-        'Um lugar de fé, família e novos começos na Ilha do Faial. Horários de cultos, confissão de fé, ministérios, comunidade @iebhorta e planeie a sua visita à Igreja Evangélica Baptista da Horta.',
+        'Um lugar de fé, família e novos começos na Ilha do Faial. Agenda de novembro, novos horários de domingo (16h00 EBD e 17h15 Culto), ministérios e visita à IEB Horta.',
       skipToContent: 'Saltar para o conteúdo principal',
     },
     nav: {
@@ -367,13 +454,18 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       ariaLanguage: 'Alterar idioma do site',
       languageMenuTitle: 'Idioma',
       links: {
-        schedule: 'Programação',
+        schedule: 'Horários',
+        novemberAgenda: 'Agenda Novembro',
         essence: 'Sobre',
         ministries: 'Ministérios',
         community: 'Conteúdos',
         visit: 'Contactos',
       },
       subLinks: {
+        novemberAgenda: 'Agenda do Mês',
+        novemberAnnouncements: 'Anúncios & Jantar (27/11)',
+        novemberPrayer: 'Motivos de Oração',
+        novemberGratitude: 'Gratidão & Aniversários',
         churchHistory: 'A Igreja (51 Anos)',
         whatWeBelieve: 'Em Que Cremos',
         cooperation: 'Cooperação Baptista',
@@ -386,16 +478,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       openMenu: 'Abrir menu',
       closeMenu: 'Fechar menu',
       closeNavDrawer: 'Fechar menu de navegação',
-      drawerSummary: 'Domingos às 10h00 (EBD) e 11h15 (Celebração).',
+      drawerSummary: 'Domingos às 16h00 (EBD) e 17h15 (Culto) · AD Faial.',
       whatsapp: 'WhatsApp',
     },
     hero: {
       imageAlt:
         'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
-      kickerYears: '51 Anos na Horta, Açores',
+      kickerYears: 'Boletim Novembro 2026 · 51 Anos no Faial',
       headline: 'Um lugar de fé, família e novos começos.',
       subheadline:
-        'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar consigo e com a sua família na Palavra e na comunhão.',
+        'Sustentados pelo amor de Deus na Ilha do Faial. A partir de 8 de novembro, os nossos cultos realizam-se nas instalações da Assembleia de Deus do Faial: domingos às 16h00 (EBD) e 17h15 (Culto).',
       ctaVisit: 'Planeie a sua Visita',
       ctaInstagram: 'Siga @iebhorta',
       watchYouTube: 'Cultos no YouTube',
@@ -404,22 +496,22 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       slideLabelPrefix: 'Destaque',
       slides: {
         welcome: {
-          kicker: '51 Anos na Horta, Açores',
+          kicker: 'Boletim de Novembro 2026 · 51 Anos no Faial',
           headline: 'Um lugar de fé, família e novos começos.',
           subheadline:
-            'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar consigo e com a sua família na Palavra e na comunhão.',
-          ctaLabel: 'Planeie a sua Visita',
+            'Sustentados pelo amor de Deus na Ilha do Faial. Consulte a Agenda de Novembro e os nossos horários dominicais (16h00 EBD · 17h15 Celebração).',
+          ctaLabel: 'Ver Agenda Novembro',
           imageAlt:
             'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
         },
         'sunday-worship': {
-          kicker: 'Av. Marginal, n.º 17 · Todos os Domingos',
-          headline: 'Adoração, ensino bíblico e comunhão no coração da Horta.',
+          kicker: 'Assembleia de Deus do Faial · Desde 8 de Novembro',
+          headline: 'Novos horários de domingo: 16h00 EBD e 17h15 Celebração.',
           subheadline:
-            'Reunimo-nos aos domingos às 10h00 na Escola Bíblica Dominical (ou às 16h00 nas Angústias) e às 11h15 no Culto de Celebração.',
+            'Reunimo-nos também às quartas-feiras às 19h00 para o Culto de Oração e Estudo da Palavra. Portas abertas para toda a família.',
           ctaLabel: 'Ver Programação',
           imageAlt:
-            'Interior do templo da Igreja Evangélica Baptista da Horta na Avenida Marginal',
+            'Interior do templo da Igreja Evangélica Baptista da Horta',
         },
         'church-family': {
           kicker: 'Filiada à Convenção Baptista Portuguesa',
@@ -439,8 +531,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       doorsOpenNote: 'Portas abertas a toda a família.',
       calendarSaved: 'Convite (.ics) guardado',
       calendarSave: 'Adicionar domingo à agenda',
-      ebdStripTextBefore: 'EBD às',
-      ebdStripTextAfter: 'na Rua do Pasteleiro, n.º 12-D (Angústias)',
+      ebdStripTextBefore: 'Quartas às',
+      ebdStripTextAfter: '— Culto de Oração e Estudo da Palavra',
       pastorLabel: 'Pastorado:',
       whatsappMessage:
         'Olá! Gostava de saber mais sobre os cultos da Igreja Evangélica Baptista da Horta e planear a minha visita.',
@@ -449,57 +541,239 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       prodId: '-//IEB Horta//Agenda Dominical//PT',
       summary: 'Culto de Celebração — IEB Horta',
       description:
-        'Escola Bíblica Dominical às 10h00 e Culto de Celebração na Igreja Evangélica Baptista da Horta. Portas abertas!',
+        'Escola Bíblica Dominical às 16h00 e Culto de Celebração às 17h15 nas instalações da Assembleia de Deus do Faial (Horta). Portas abertas!',
       fileName: 'culto-ieb-horta.ics',
     },
     schedule: {
-      kicker: 'Programação Semanal',
+      kicker: 'Atividades e Horários · Novembro 2026',
       heading: 'Horários para nos reunirmos em família',
       intro:
-        'Aos domingos, reunimo-nos para estudar as Escrituras na Escola Bíblica Dominical e celebrar juntos no culto da manhã. Caso seja a sua primeira visita, será muito bem-vindo.',
+        'A partir de 8 de novembro, os nossos cultos de domingo passam a realizar-se nas instalações da Igreja Assembleia de Deus do Faial com novos horários de tarde, além da reunião semanal de quarta-feira.',
       filterAria: 'Filtrar programação',
       filters: {
         all: 'Toda a agenda',
         sunday: 'Domingos',
-        week: 'Semana & Famílias',
+        week: 'Semana & Louvor',
       },
       calendarSaved: 'Evento guardado (.ics)',
       calendarSave: 'Guardar culto no calendário',
       watchYouTube: 'Ver no YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
-        celebracao: {
-          title: 'Culto de Celebração',
-          day: 'Domingos',
-          times: ['11h15'],
-          location: 'Av. Marginal, n.º 17 — Horta',
-          description:
-            'Culto dominical de louvor, comunhão e exposição bíblica. Nos meses de verão (julho e agosto), tem início às 11h00.',
-        },
         ebd: {
           title: 'Escola Bíblica Dominical (EBD)',
           day: 'Domingos',
-          times: ['10h00', '16h00'],
-          location: 'Adultos, Adolescentes e Crianças',
+          times: ['16h00'],
+          location: 'Instalações da Assembleia de Deus do Faial',
           description:
-            'Estudo bíblico por idades às 10h00 na Av. Marginal, n.º 17, ou às 16h00 na Rua do Pasteleiro, n.º 12-D (Angústias).',
+            'Estudo bíblico comunitário aos domingos às 16h00 com salas e ensino para adultos, adolescentes e crianças.',
+        },
+        celebracao: {
+          title: 'Culto de Louvor e Pregação da Palavra',
+          day: 'Domingos',
+          times: ['17h15'],
+          location: 'Instalações da Assembleia de Deus do Faial',
+          description:
+            'Culto dominical de celebração, louvor, comunhão e exposição das Escrituras com início às 17h15.',
         },
         'oracao-lares': {
-          title: 'Oração, Ensino e Pequenos Grupos',
-          day: 'Durante a semana',
-          times: ['Agenda @iebhorta'],
-          location: 'Templo e lares no Faial',
+          title: 'Culto de Oração e Estudo da Palavra',
+          day: 'Quartas-feiras',
+          times: ['19h00'],
+          location: 'Encontro semanal de oração',
           description:
-            'Encontros semanais de oração, leitura das Escrituras e comunhão nos lares. Confirme os horários atualizados connosco.',
+            'Tempo de oração intercessora pela igreja, pelas famílias, pelo país e pela igreja perseguida, com estudo bíblico.',
         },
         'kids-familia': {
-          title: 'Crianças, Pais & Famílias',
-          day: 'Domingos e eventos',
-          times: ['Programação familiar'],
-          location: 'EBD Infantil e Parque da Salgueirinha',
+          title: 'Ensaio do Grupo de Louvor & Famílias',
+          day: 'Sextas ou Sábados',
+          times: ['A confirmar'],
+          location: 'Equipa de Louvor · Eventos do Mês',
           description:
-            'Ensino bíblico criativo para crianças na EBD, oficinas em família na cidade e o tradicional Dia da Família ao ar livre.',
+            'Ensaio semanal do grupo de louvor (sexta/sábado) e encontros especiais de família, como o Jantar de Ação de Graças em novembro.',
         },
+      },
+    },
+    bulletin: {
+      kicker: 'Boletim Mensal · Novembro 2026',
+      heading: 'Agenda de Novembro, anúncios e vida da igreja',
+      intro:
+        'Acompanhe a agenda oficial do mês de novembro, a transição para as instalações da Assembleia de Deus do Faial, os motivos de oração da nossa comunidade e o momento de gratidão.',
+      downloadPdf: 'Imprimir Boletim',
+      tabsAria: 'Selecionar secção do Boletim de Novembro',
+      tabs: {
+        agenda: 'Agenda do Mês',
+        announcements: 'Anúncios & Ações',
+        prayer: 'Motivos de Oração',
+        gratitude: 'Gratidão & Aniversariantes',
+      },
+      agendaItems: {
+        'nov-01': {
+          weekday: 'Domingo',
+          title: 'Culto com celebração da Ceia e Baptismo',
+          detail:
+            'Culto especial do primeiro domingo do mês com celebração da Ceia do Senhor e batismo.',
+        },
+        'nov-07': {
+          weekday: 'Sábado',
+          title: 'Tempo de oração pela igreja perseguida',
+          detail:
+            'Momento congregacional dedicado a orar pelos cristãos e missionários perseguidos em todo o mundo.',
+        },
+        'nov-08': {
+          weekday: 'Domingo · Nova Etapa',
+          title: 'Culto com celebração de Missões Nacionais',
+          detail:
+            'Início dos cultos nas instalações da Assembleia de Deus do Faial, com novos horários: 16h00 EBD e 17h15 Culto de Celebração.',
+        },
+        'nov-15': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração da Reforma Protestante',
+          detail:
+            'Celebração dominical recordando os princípios bíblicos da Reforma Protestante (prazo inicial das encomendas Juntos).',
+        },
+        'nov-22': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração ao Senhor',
+          detail:
+            'Escola Bíblica Dominical às 16h00 e Culto às 17h15. Último dia de inscrições e pagamento para o Jantar de Ação de Graças.',
+        },
+        'nov-27': {
+          weekday: 'Sexta-feira · 19h30',
+          title: 'Jantar de Ação de Graças',
+          detail:
+            'Convívio comunitário nas instalações da Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família).',
+        },
+        'nov-29': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração ao Senhor',
+          detail:
+            'Encerramento do mês de novembro às 16h00 (EBD) e às 17h15 (Culto de Louvor e Pregação da Palavra).',
+        },
+      },
+      activitiesCard: {
+        kicker: 'Atividades e Horários',
+        heading: 'Ritmo semanal em novembro',
+        rows: [
+          { day: 'Domingo', time: '16h00', label: 'Escola Bíblica Dominical' },
+          {
+            day: 'Domingo',
+            time: '17h15',
+            label: 'Culto de Louvor e Pregação',
+          },
+          {
+            day: 'Quarta-feira',
+            time: '19h00',
+            label: 'Culto de Oração e Estudo',
+          },
+          {
+            day: 'Sexta / Sábado',
+            time: 'Semanal',
+            label: 'Ensaio do grupo de Louvor',
+          },
+        ],
+        venueNote:
+          'Local dos cultos desde 8 de novembro: Instalações da Igreja Assembleia de Deus do Faial.',
+        cta: 'Como chegar e confirmar presença',
+      },
+      venueAnnouncement: {
+        kicker: 'Anúncio Principal',
+        title: 'Novo local e horários desde 8 de novembro',
+        body1:
+          'É com alegria que partilhamos convosco que, a partir do dia 8 de novembro, os nossos cultos passaram a realizar-se nas instalações da Igreja Assembleia de Deus do Faial.',
+        times: [
+          '16h00 — Escola Bíblica Dominical',
+          '17h15 — Culto de Celebração',
+        ],
+        body2:
+          'Queremos continuar a caminhar juntos, unidos na fé, no amor e na oração, confiando que Deus está a conduzir todas as coisas segundo a Sua vontade.',
+        cta: 'Ver morada e contactos',
+      },
+      thanksgivingDinner: {
+        dateShort: '27 de Novembro · 19h30',
+        title: 'Jantar de Ação de Graças',
+        summary:
+          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 3,00€ por pessoa + 1 prato por família.',
+        seeDetails: 'Ver condições e inscrição',
+        description:
+          'Venha agradecer e celebrar em família no nosso Jantar de Ação de Graças comunitário nas instalações da Assembleia de Deus do Faial.',
+        details: [
+          { label: 'Data e hora', value: '27 nov. · 19h30' },
+          { label: 'Participação', value: '3,00€ por pessoa + 1 prato por família' },
+          { label: 'Inscrições e pagamento', value: 'Até 22 de novembro' },
+          { label: 'Local', value: 'Assembleia de Deus do Faial' },
+        ],
+        cta: 'Inscrever-se via WhatsApp',
+        whatsappMessage:
+          'Olá! Gostava de fazer a inscrição para o Jantar de Ação de Graças da IEB Horta no dia 27 de novembro.',
+      },
+      juntosCampaign: {
+        kicker: 'Campanha de Oração',
+        title: 'Kit de Oração & Devocional Juntos Kids',
+        description:
+          'Materiais devocionais da campanha Juntos para fortalecer a vida de oração em casa com adultos e crianças.',
+        tier1Title: 'Encomendas até 15 nov.',
+        tier1Items: 'Kit de Oração: 4€ · Devocional Juntos Kids: 2€',
+        tier2Title: 'Encomendas após 15 nov.',
+        tier2Items: 'Kit de Oração: 5€ · Devocional Juntos Kids: 2,50€',
+      },
+      celeiro: {
+        kicker: 'Celeiro de Novembro',
+        title: 'Apoio ao Cabaz de Natal',
+        description:
+          'Este mês, o ministério Celeiro conta com o vosso apoio solidário para preparar os Cabazes de Natal destinados a famílias apoiadas, através de um donativo monetário.',
+        cta: 'Saber como contribuir em Ofertas & Missão',
+      },
+      prayerIntro:
+        'Junte-se a nós em intercessão ao longo de todo o mês de novembro pelos pedidos reais da nossa igreja, das ilhas dos Açores, de Portugal e das missões:',
+      prayerCta: 'Enviar pedido de oração',
+      prayerWhatsappMessage:
+        'Olá! Gostava de partilhar um pedido de oração com a IEB Horta.',
+      prayerRequests: {
+        families:
+          'Pelas nossas famílias, crianças, jovens, adultos e pelas nossas irmãs grávidas.',
+        'new-decisions':
+          'Pelos nossos irmãos que recentemente tomaram a decisão por Jesus e pelas suas famílias.',
+        'jean-lima':
+          'Pelo nosso irmão Jean Lima, que tomou a decisão de ser batizado.',
+        'church-future':
+          'Pelo futuro da nossa igreja e pelos desafios desta nova etapa.',
+        'sao-jorge':
+          'Pela Irmã Bernadete e família, pelo David, Bruna e família e pela missão na ilha de São Jorge.',
+        health:
+          'Pelos nossos irmãos doentes e pelos que estão em recuperação de saúde.',
+        relatives:
+          'Pelos nossos familiares, amigos e vizinhos que ainda não entregaram as suas vidas a Jesus.',
+        country:
+          'Pelo nosso País, pelas nossas autoridades e governantes.',
+        persecuted:
+          'Pelas igrejas e pelos nossos irmãos missionários que estão a ser perseguidos por amor a Jesus.',
+        disasters:
+          'Pelos países que estão a sofrer com catástrofes e pelos irmãos que foram vítimas desses acontecimentos.',
+        'convention-aba':
+          'Pela Direção da Convenção Baptista Portuguesa, pela ABA e por mais obreiros para a igreja em Portugal.',
+      },
+      gratitude: {
+        kicker: 'Momento de Gratidão',
+        title: 'Testemunho da família Miqueias, Lorena e Eva',
+        paragraphs: [
+          'Há momentos na vida em que as palavras parecem pequenas para expressar a grandeza daquilo que Deus faz por nós. Hoje, como família, queremos elevar a nossa gratidão ao Senhor, reconhecendo que, em cada etapa da nossa caminhada, a Sua mão nos sustentou, a Sua graça nos alcançou e a Sua fidelidade nunca nos faltou.',
+          'Somos gratos não apenas pelas bênçãos que recebemos, mas também por tudo aquilo que Deus tem feito em nós ao longo do caminho — nos dias de alegria e nos dias de dificuldade, nas orações respondidas e nos tempos de espera.',
+          'Neste tempo tão especial, os nossos corações transbordam de gratidão pela vida da nossa pequena Eva, que ainda está no ventre, mas já ocupa um lugar imenso nas nossas vidas. Antes mesmo de a segurarmos nos braços, reconhecemos a mão do Criador sobre a sua vida e pedimos que ela cresça a conhecer, amar e servir Aquele que a formou.',
+          'Ao Senhor entregamos o nosso presente, o nosso futuro e a vida da nossa filha, confiando que Jesus é o nosso maior tesouro.',
+        ],
+        signature: 'Com o coração profundamente grato — Miqueias, Lorena e Eva',
+        verse:
+          '“Grandes coisas fez o Senhor por nós, e por isso estamos alegres.” — Salmos 126:3',
+      },
+      birthdays: {
+        kicker: 'Aniversariantes do Mês',
+        title: 'Celebramos a vida em novembro',
+        updateNote:
+          '*Ajude-nos a atualizar a nossa lista de aniversariantes da igreja partilhando a sua data.',
+        cta: 'Enviar data de aniversário',
+        whatsappMessage:
+          'Olá! Gostava de atualizar a minha data de aniversário na lista da IEB Horta.',
       },
     },
     about: {
@@ -510,7 +784,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       sanctuaryAlt:
         'Interior do templo da IEB Horta na Avenida Marginal com bancos de madeira e cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
-      sanctuaryCaption: 'Culto no templo · Av. Marginal, 17.',
+      sanctuaryCaption: 'Sede oficial · Av. Marginal, n.º 17.',
       kicker: 'Sobre a Igreja',
       heading: 'Amar a Deus, servir pessoas e viver o Evangelho na ilha.',
       sealAlt: 'Selo oficial Igreja Evangélica Baptista da Horta',
@@ -543,7 +817,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         '03': {
           title: 'Serviço',
           description:
-            'Vivemos o Evangelho além das paredes do templo através de campanhas solidárias, apoio alimentar e acolhimento próximo.',
+            'Vivemos o Evangelho além das paredes do templo através de campanhas solidárias, apoio alimentar do Celeiro e acolhimento próximo.',
         },
       },
       beliefsIntro:
@@ -594,7 +868,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           name: 'Associação Baptista Açoreana',
           scope: 'Arquipélago dos Açores',
           description:
-            'Comunhão regional entre as igrejas baptistas das ilhas dos Açores em assembleias, acampamentos e missão local.',
+            'Comunhão regional entre as igrejas baptistas das ilhas dos Açores em assembleias, acampamentos e missão em ilhas como São Jorge.',
         },
         aep: {
           name: 'Aliança Evangélica Portuguesa',
@@ -634,7 +908,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         jovens: {
           title: 'Jovens & Adolescentes',
           summary: 'Salas dedicadas na EBD, comunhão e diálogo bíblico.',
-          schedule: 'Domingos na EBD · Encontros semanais',
+          schedule: 'Domingos às 16h00 na EBD · Encontros semanais',
           audience: 'Adolescentes e jovens adultos',
           description:
             'Espaço para construir amizades verdadeiras, conversar abertamente sobre fé e o dia a dia e servir em conjunto na comunidade.',
@@ -643,37 +917,37 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         casais: {
           title: 'Famílias & Mulheres',
           summary: 'Dia da Família, oficinas e encontros Plenas em Cristo.',
-          schedule: 'Encontros periódicos e retiros',
+          schedule: 'Encontros periódicos e celebrações',
           audience: 'Famílias, casais e mulheres',
           description:
-            'Iniciativas como o Dia da Família no Parque da Salgueirinha, oficinas com crianças e o encontro de mulheres Plenas em Cristo.',
+            'Iniciativas como o Dia da Família no Parque da Salgueirinha, o Jantar de Ação de Graças e o encontro de mulheres Plenas em Cristo.',
           imageAlt:
             'Mulheres reunidas a cantar com viola durante o encontro Plenas em Cristo',
         },
         'infantil-ebd': {
           title: 'Escola Bíblica & Infantil',
           summary: 'Salas separadas para crianças, adolescentes e adultos.',
-          schedule: 'Domingos às 10h00 e às 16h00',
+          schedule: 'Domingos às 16h00',
           audience: 'Todas as idades',
           description:
-            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além de oficinas criativas em família.',
+            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além do Devocional Juntos Kids.',
           imageAlt:
             'Bíblia aberta sobre mesa com horários da Escola Bíblica Dominical da IEB Horta',
         },
         'acao-social': {
-          title: 'Ação Social',
-          summary: 'Recolha e partilha solidária de alimentos no Faial.',
-          schedule: 'Campanhas contínuas de apoio local',
+          title: 'Ação Social · Celeiro',
+          summary: 'Campanha do Cabaz de Natal e partilha solidária no Faial.',
+          schedule: 'Campanhas mensais de apoio local',
           audience: 'Aberto a todos os voluntários',
           description:
-            'Mobilização de membros e amigos para recolher alimentos e apoiar famílias em necessidade na cidade da Horta.',
+            'Através do projeto Celeiro, mobilizamos membros e amigos para apoiar famílias na cidade da Horta, incluindo o Cabaz de Natal em novembro.',
           imageAlt:
             'Compras solidárias e alimentos recolhidos pela Ação Social da IEB Horta',
         },
         'batismo-discipulado': {
           title: 'Batismo & Discipulado',
           summary: 'Primeiros passos na fé cristã e acompanhamento pastoral.',
-          schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior',
+          schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior (933 855 290)',
           audience: 'Visitantes e novos membros',
           description:
             'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, esclarecer dúvidas, preparar para o batismo e integrar a igreja.',
@@ -715,15 +989,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Coríntios 10:31',
         },
         'post-schedule': {
-          alt: 'Publicação oficial de horários do @iebhorta: 10h00 Escola Bíblica Dominical e 11h15 Celebração na Av. Marginal, 17',
-          category: 'Domingos',
-          dateLabel: '10h00 & 11h15',
+          alt: 'Registo histórico de divulgação da Escola Bíblica e Culto de Celebração no @iebhorta',
+          category: 'Arquivo @iebhorta',
+          dateLabel: 'EBD & Culto',
           caption:
-            'Todos os domingos na Av. Marginal, n.º 17 — Horta: às 10h00 Escola Bíblica Dominical e às 11h15 Culto de Celebração.',
+            'Arquivo dos nossos domingos de Escola Bíblica e Celebração. A partir de 8 de novembro de 2026: 16h00 EBD e 17h15 Culto na Assembleia de Deus do Faial.',
         },
         'post-social': {
           alt: 'Bagageira de viatura repleta de sacos de compras e leite recolhidos pela ação social da IEB Horta',
-          category: 'Ação Social',
+          category: 'Ação Social · Celeiro',
           dateLabel: 'Serviço',
           caption:
             'Gratidão por cada família que contribuiu para a partilha solidária de alimentos e bens essenciais na Ilha do Faial.',
@@ -748,12 +1022,12 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           category: 'Ação de Graças',
           dateLabel: '1 Ts 5:18',
           caption:
-            'Fim de Semana de Ação de Graças: “Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.”',
+            'Ação de Graças: “Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.”',
           scripture: '1 Tessalonicenses 5:18',
         },
       },
       archivesIntro:
-        'Conteúdos que edificam a sua vida espiritual: pregações da Palavra, marcos dos 51 anos no Faial e encontros especiais abertos à cidade.',
+        'Conteúdos que edificam a sua vida espiritual: pregações da Palavra, Boletim Mensal de Novembro 2026, celebrações e encontros abertos à cidade.',
       archivesYouTubeCta: 'Abrir canal no YouTube',
       archivesItems: {
         'archive-palavra': {
@@ -761,78 +1035,78 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '1 Coríntios 10:31',
           title: 'Momento da Palavra · Pr. Luiz Eduardo Júnior',
           summary:
-            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens no templo e no nosso YouTube.',
+            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens nos cultos e no nosso YouTube.',
           actionLabel: 'Assistir no YouTube',
           imageAlt: 'Pr. Luiz Eduardo Júnior a pregar no púlpito da IEB Horta',
         },
         'archive-51anos': {
-          category: 'Marco Histórico',
-          dateLabel: '51 Anos · Romanos 5:8',
-          title: 'Aniversário IEB Horta — Sustentados pelo Amor de Deus',
+          category: 'Boletim Mensal',
+          dateLabel: 'Novembro 2026 · 51 Anos',
+          title: 'Boletim de Novembro — 51 Anos & Nova Etapa',
           summary:
-            'Mais de meio século de testemunho evangélico baptista na cidade da Horta, reunindo gerações em gratidão pela fidelidade de Deus.',
-          actionLabel: 'Ver registos no @iebhorta',
+            'Agenda completa de novembro, motivos de oração, testemunho de gratidão e transição dos cultos de domingo para as instalações da Assembleia de Deus do Faial.',
+          actionLabel: 'Ver Agenda de Novembro',
           imageAlt: 'Cartaz dos 51 anos da Igreja Evangélica Baptista da Horta',
         },
+        'archive-gracas': {
+          category: 'Evento de Novembro',
+          dateLabel: '27 nov. · 19h30',
+          title: 'Jantar Comunitário de Ação de Graças',
+          summary:
+            'Encontro na Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
+          actionLabel: 'Confirmar participação',
+          imageAlt: 'Publicação de Ação de Graças da IEB Horta',
+        },
         'archive-familia': {
-          category: 'Evento Comunitário',
+          category: 'Comunidade no Faial',
           dateLabel: 'Parque da Salgueirinha',
           title: 'Dia da Família ao ar livre na Feteira',
           summary:
-            'Encontro anual com tempo de culto, almoço comunitário e convívio fraterno para membros, crianças e amigos visitantes na ilha.',
-          actionLabel: 'Confirmar presença no próximo',
+            'Registo do nosso encontro anual com tempo de culto, almoço comunitário e convívio fraterno para membros, crianças e amigos visitantes na ilha.',
+          actionLabel: 'Explorar no @iebhorta',
           imageAlt: 'Cartaz oficial do Dia da Família no Parque da Salgueirinha',
-        },
-        'archive-gracas': {
-          category: 'Celebração Especial',
-          dateLabel: '1 Tessalonicenses 5:18',
-          title: 'Fim de Semana de Ação de Graças nos Açores',
-          summary:
-            'Momentos dedicados a louvar a Deus em unidade, partilhar testemunhos e agradecer pelas bênçãos recebidas ao longo do ano.',
-          actionLabel: 'Explorar no Instagram',
-          imageAlt: 'Publicação de Fim de Semana de Ação de Graças da IEB Horta',
         },
       },
       giving: {
-        kicker: 'Sustento & Generosidade',
-        heading: 'Contribua para a missão e a ação local no Faial',
+        kicker: 'Sustento & Generosidade · Celeiro',
+        heading: 'Contribua para a missão e para o Cabaz de Natal no Faial',
         paragraph1:
           'A Igreja Evangélica Baptista da Horta mantém a sua obra espiritual e social exclusivamente através das ofertas e dízimos voluntários dos seus membros, congregados e simpatizantes.',
         paragraph2:
-          'Cada contributo apoia a manutenção dos espaços de culto e EBD, o ensino bíblico para crianças e jovens, a cooperação missionária e as campanhas de apoio alimentar a famílias no Faial.',
+          'Em novembro, o nosso ministério Celeiro conta também com o seu donativo monetário para preparar o Cabaz de Natal destinado às famílias acompanhadas na ilha.',
         pillars: [
           {
-            title: 'Ensino & Culto Público',
-            text: 'Sustento das salas da Escola Bíblica Dominical, receção a visitantes e transmissão da Palavra.',
+            title: 'Celeiro · Cabaz de Natal',
+            text: 'Donativos monetários ao longo de novembro para compor os Cabazes de Natal solidários no Faial.',
           },
           {
-            title: 'Ação Social Local',
-            text: 'Recolha contínua de alimentos e apoio direto a lares carenciados na Ilha do Faial.',
+            title: 'Ensino & Culto Público',
+            text: 'Sustento das atividades dominicais (16h00 EBD e 17h15 Culto), materiais bíblicos e acolhimento.',
           },
           {
             title: 'Missão nos Açores',
-            text: 'Cooperação com a Associação Baptista Açoreana e projetos de evangelização e discipulado.',
+            text: 'Cooperação com a Associação Baptista Açoreana e apoio à missão na ilha de São Jorge.',
           },
         ],
         ctaWhatsApp: 'Pedir dados via WhatsApp',
         ctaEmail: 'Contactar por e-mail',
         whatsappMessage:
-          'Olá! Gostava de receber informações sobre como contribuir com ofertas para a Igreja Evangélica Baptista da Horta.',
-        mailSubject: 'Informações sobre Ofertas e Contribuições — IEB Horta',
+          'Olá! Gostava de receber informações sobre como contribuir com ofertas ou com o Cabaz de Natal do Celeiro na IEB Horta.',
+        mailSubject: 'Informações sobre Ofertas e Celeiro — IEB Horta',
       },
     },
     visit: {
       kicker: 'Contactos & Primeira Visita',
       heading: 'Planeie a sua primeira visita',
       intro:
-        'Será uma alegria recebê-lo pessoalmente na Horta. Confira os nossos espaços e avise-nos em que dia pretende vir para aguardarmos por si.',
+        'Será uma alegria recebê-lo pessoalmente na Horta. Desde 8 de novembro reunimo-nos nas instalações da Igreja Assembleia de Deus do Faial (mantendo a Av. Marginal, n.º 17 como sede oficial).',
       spaceTabsAria: 'Selecionar espaço da igreja',
       copyAddress: 'Copiar morada',
       copiedAddress: 'Morada copiada',
       visitorNotes: [
-        'Localização central junto à baía da Horta na Av. Marginal, n.º 17.',
-        'Venha tal como está — o nosso ambiente é acolhedor e familiar.',
-        'Salas da Escola Bíblica Dominical para adultos, adolescentes e crianças.',
+        'Cultos desde 08/11 nas instalações da Igreja Assembleia de Deus do Faial.',
+        'Domingos às 16h00 (Escola Bíblica) e 17h15 (Culto de Celebração).',
+        'Quartas-feiras às 19h00 — Culto de Oração e Estudo da Palavra.',
       ],
       googleMaps: 'Google Maps',
       openWaze: 'Abrir no Waze',
@@ -843,13 +1117,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       namePlaceholder: 'Ex.: Maria Clara',
       phoneLabel: 'WhatsApp / Telemóvel',
       phonePlaceholder: '+351 9XX XXX XXX',
-      dayQuestion: 'Em que dia pretende visitar-nos?',
-      dayAria: 'Dia pretendido para a visita',
+      dayQuestion: 'Em que encontro pretende visitar-nos?',
+      dayAria: 'Encontro pretendido para a visita',
       dayOptions: [
-        'Domingo · 10h00 (Escola Bíblica)',
-        'Domingo · 11h15 (Culto de Celebração)',
-        'Domingo · 16h00 (EBD R. do Pasteleiro)',
-        'Confirmar os horários da semana',
+        'Domingo · 16h00 (Escola Bíblica Dominical)',
+        'Domingo · 17h15 (Culto de Celebração)',
+        'Quarta-feira · 19h00 (Oração e Estudo)',
+        '27 nov. · 19h30 (Jantar Ação de Graças)',
       ],
       groupQuestion: 'Quantas pessoas vêm?',
       groupAria: 'Quantidade de visitantes',
@@ -877,17 +1151,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       summaryNotePrefix: 'Observação:',
       contactLabel: 'Contacto:',
       locations: {
-        templo: {
-          label: 'Templo Principal',
-          title: 'Culto de Celebração & EBD (10h00)',
-          region: 'Matriz · Ilha do Faial, Açores, Portugal',
-          note: 'Em frente à baía da Horta, com acesso fácil e receção acolhedora.',
-        },
         ebd: {
-          label: 'Salas EBD (16h00)',
-          title: 'Escola Bíblica Dominical (Domingo 16h00)',
-          region: '9900 Horta · Ilha do Faial, Açores',
-          note: 'Espaço temporário com salas separadas para Adultos, Adolescentes e Crianças.',
+          label: 'Local dos Cultos',
+          title: 'Cultos Dominicais & Oração (desde 08/11)',
+          region: 'Horta · Ilha do Faial, Açores',
+          note: 'Onde decorrem os nossos cultos: domingos 16h00 (EBD) e 17h15 (Celebração), e quartas às 19h00.',
+        },
+        templo: {
+          label: 'Sede Oficial',
+          title: 'Igreja Evangélica Baptista da Horta (Sede)',
+          region: '9900-121 Horta · Ilha do Faial, Açores, Portugal',
+          note: 'Morada oficial e postal da igreja na Avenida Marginal, n.º 17.',
         },
       },
     },
@@ -900,9 +1174,9 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
       youtubeLabel: 'YouTube IEB Horta',
-      whatsappLabel: 'WhatsApp da Igreja',
+      whatsappLabel: 'WhatsApp Pastorado (933 855 290)',
       rightsReserved: 'Todos os direitos reservados.',
-      sundayLine: 'Domingos · 10h00 Escola Bíblica · 11h15 Celebração',
+      sundayLine: 'Domingos · 16h00 EBD · 17h15 Culto de Celebração',
     },
     mobileBar: {
       ariaLabel: 'Ações rápidas de navegação e contacto',
@@ -916,7 +1190,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Igreja Evangélica Baptista da Horta',
       description:
-        'Um lugar de fé, família e novos começos na Ilha do Faial, Açores. Horários de cultos, confissão de fé, ministérios, comunidade @iebhorta e planeje sua visita à Igreja Evangélica Baptista da Horta.',
+        'Um lugar de fé, família e novos começos na Ilha do Faial, Açores. Agenda de novembro, novos horários de domingo (16h00 EBD e 17h15 Culto), ministérios e visita à IEB Horta.',
       skipToContent: 'Pular para o conteúdo principal',
     },
     nav: {
@@ -925,13 +1199,18 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       ariaLanguage: 'Alterar idioma do site',
       languageMenuTitle: 'Idioma',
       links: {
-        schedule: 'Programação',
+        schedule: 'Horários',
+        novemberAgenda: 'Agenda Novembro',
         essence: 'Sobre',
         ministries: 'Ministérios',
         community: 'Conteúdos',
         visit: 'Contatos',
       },
       subLinks: {
+        novemberAgenda: 'Agenda do Mês',
+        novemberAnnouncements: 'Anúncios & Jantar (27/11)',
+        novemberPrayer: 'Motivos de Oração',
+        novemberGratitude: 'Gratidão & Aniversários',
         churchHistory: 'A Igreja (51 Anos)',
         whatWeBelieve: 'Em Que Cremos',
         cooperation: 'Cooperação Batista',
@@ -944,16 +1223,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       openMenu: 'Abrir menu',
       closeMenu: 'Fechar menu',
       closeNavDrawer: 'Fechar menu de navegação',
-      drawerSummary: 'Domingos às 10h00 (EBD) e 11h15 (Celebração).',
+      drawerSummary: 'Domingos às 16h00 (EBD) e 17h15 (Culto) · AD Faial.',
       whatsapp: 'WhatsApp',
     },
     hero: {
       imageAlt:
         'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
-      kickerYears: '51 Anos na Horta, Açores',
+      kickerYears: 'Boletim Novembro 2026 · 51 Anos no Faial',
       headline: 'Um lugar de fé, família e novos começos.',
       subheadline:
-        'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar com você e sua família na Palavra e na comunhão.',
+        'Sustentados pelo amor de Deus na Ilha do Faial. A partir de 8 de novembro, nossos cultos acontecem nas instalações da Assembleia de Deus do Faial: domingos às 16h00 (EBD) e 17h15 (Culto).',
       ctaVisit: 'Planeje sua Visita',
       ctaInstagram: 'Acompanhe @iebhorta',
       watchYouTube: 'Cultos no YouTube',
@@ -962,22 +1241,22 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       slideLabelPrefix: 'Destaque',
       slides: {
         welcome: {
-          kicker: '51 Anos na Horta, Açores',
+          kicker: 'Boletim de Novembro 2026 · 51 Anos no Faial',
           headline: 'Um lugar de fé, família e novos começos.',
           subheadline:
-            'Sustentados pelo amor de Deus na Ilha do Faial. Uma igreja cristã de portas abertas para caminhar com você e sua família na Palavra e na comunhão.',
-          ctaLabel: 'Planeje sua Visita',
+            'Sustentados pelo amor de Deus na Ilha do Faial. Confira a Agenda de Novembro e nossos horários dominicais (16h00 EBD · 17h15 Celebração).',
+          ctaLabel: 'Ver Agenda Novembro',
           imageAlt:
             'Interior iluminado da igreja com luz natural da manhã e comunidade reunida',
         },
         'sunday-worship': {
-          kicker: 'Av. Marginal, n.º 17 · Todos os Domingos',
-          headline: 'Adoração, ensino bíblico e comunhão no coração da Horta.',
+          kicker: 'Assembleia de Deus do Faial · Desde 8 de Novembro',
+          headline: 'Novos horários de domingo: 16h00 EBD e 17h15 Celebração.',
           subheadline:
-            'Nos reunimos aos domingos às 10h00 na Escola Bíblica Dominical (ou às 16h00 nas Angústias) e às 11h15 no Culto de Celebração.',
+            'Também nos reunimos às quartas-feiras às 19h00 para o Culto de Oração e Estudo da Palavra. Portas abertas para toda a família.',
           ctaLabel: 'Ver Programação',
           imageAlt:
-            'Interior do templo da Igreja Evangélica Baptista da Horta na Avenida Marginal',
+            'Interior do templo da Igreja Evangélica Baptista da Horta',
         },
         'church-family': {
           kicker: 'Filiada à Convenção Baptista Portuguesa',
@@ -997,8 +1276,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       doorsOpenNote: 'Portas abertas para toda a família.',
       calendarSaved: 'Convite (.ics) salvo',
       calendarSave: 'Adicionar domingo à agenda',
-      ebdStripTextBefore: 'EBD às',
-      ebdStripTextAfter: 'na Rua do Pasteleiro, n.º 12-D (Angústias)',
+      ebdStripTextBefore: 'Quartas às',
+      ebdStripTextAfter: '— Culto de Oração e Estudo da Palavra',
       pastorLabel: 'Pastorado:',
       whatsappMessage:
         'Olá! Gostaria de saber mais sobre os cultos da Igreja Evangélica Baptista da Horta e planejar uma visita.',
@@ -1007,57 +1286,239 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       prodId: '-//IEB Horta//Agenda Dominical//PT-BR',
       summary: 'Culto de Celebração — IEB Horta',
       description:
-        'Escola Bíblica Dominical às 10h00 e Culto de Celebração na Igreja Evangélica Baptista da Horta. Portas abertas!',
+        'Escola Bíblica Dominical às 16h00 e Culto de Celebração às 17h15 nas instalações da Assembleia de Deus do Faial (Horta). Portas abertas!',
       fileName: 'culto-ieb-horta.ics',
     },
     schedule: {
-      kicker: 'Programação Semanal',
+      kicker: 'Atividades e Horários · Novembro 2026',
       heading: 'Horários para nos reunirmos em família',
       intro:
-        'Aos domingos, nos reunimos para estudar as Escrituras na Escola Bíblica Dominical e celebrar juntos no culto da manhã. Se for a sua primeira visita, você será muito bem-vindo.',
+        'A partir de 8 de novembro, nossos cultos de domingo passam a ser realizados nas instalações da Igreja Assembleia de Deus do Faial em novo horário vespertino, além do encontro semanal de quarta-feira.',
       filterAria: 'Filtrar programação',
       filters: {
         all: 'Toda a agenda',
         sunday: 'Domingos',
-        week: 'Semana & Famílias',
+        week: 'Semana & Louvor',
       },
       calendarSaved: 'Evento salvo (.ics)',
       calendarSave: 'Salvar culto no calendário',
       watchYouTube: 'Assistir no YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
-        celebracao: {
-          title: 'Culto de Celebração',
-          day: 'Domingos',
-          times: ['11h15'],
-          location: 'Av. Marginal, n.º 17 — Horta',
-          description:
-            'Culto dominical de louvor, comunhão e exposição bíblica. Nos meses de verão (julho e agosto), começa às 11h00.',
-        },
         ebd: {
           title: 'Escola Bíblica Dominical (EBD)',
           day: 'Domingos',
-          times: ['10h00', '16h00'],
-          location: 'Adultos, Adolescentes e Crianças',
+          times: ['16h00'],
+          location: 'Instalações da Assembleia de Deus do Faial',
           description:
-            'Estudo bíblico por idades às 10h00 na Av. Marginal, n.º 17, ou às 16h00 na Rua do Pasteleiro, n.º 12-D (Angústias).',
+            'Estudo bíblico comunitário aos domingos às 16h00 com salas e ensino para adultos, adolescentes e crianças.',
+        },
+        celebracao: {
+          title: 'Culto de Louvor e Pregação da Palavra',
+          day: 'Domingos',
+          times: ['17h15'],
+          location: 'Instalações da Assembleia de Deus do Faial',
+          description:
+            'Culto dominical de celebração, louvor, comunhão e exposição das Escrituras com início às 17h15.',
         },
         'oracao-lares': {
-          title: 'Oração, Ensino e Pequenos Grupos',
-          day: 'Durante a semana',
-          times: ['Agenda @iebhorta'],
-          location: 'Templo e lares no Faial',
+          title: 'Culto de Oração e Estudo da Palavra',
+          day: 'Quartas-feiras',
+          times: ['19h00'],
+          location: 'Encontro semanal de oração',
           description:
-            'Encontros semanais de oração, leitura das Escrituras e comunhão nos lares. Confirme os horários atualizados conosco.',
+            'Momento semanal de intercessão pela igreja, pelas famílias, pelo país e pela igreja perseguida, com estudo bíblico.',
         },
         'kids-familia': {
-          title: 'Crianças, Pais & Famílias',
-          day: 'Domingos e eventos',
-          times: ['Programação familiar'],
-          location: 'EBD Infantil e Parque da Salgueirinha',
+          title: 'Ensaio do Grupo de Louvor & Famílias',
+          day: 'Sextas ou Sábados',
+          times: ['A confirmar'],
+          location: 'Equipe de Louvor · Eventos do Mês',
           description:
-            'Ensino bíblico criativo para crianças na EBD, oficinas em família na cidade e o tradicional Dia da Família ao ar livre.',
+            'Ensaio semanal do grupo de louvor (sexta/sábado) e encontros especiais em família, como o Jantar de Ação de Graças em novembro.',
         },
+      },
+    },
+    bulletin: {
+      kicker: 'Boletim Mensal · Novembro 2026',
+      heading: 'Agenda de Novembro, anúncios e vida da igreja',
+      intro:
+        'Acompanhe a agenda oficial do mês de novembro, a transição para as instalações da Assembleia de Deus do Faial, os motivos de oração da comunidade e o momento de gratidão.',
+      downloadPdf: 'Imprimir Boletim',
+      tabsAria: 'Selecionar seção do Boletim de Novembro',
+      tabs: {
+        agenda: 'Agenda do Mês',
+        announcements: 'Anúncios & Ações',
+        prayer: 'Motivos de Oração',
+        gratitude: 'Gratidão & Aniversariantes',
+      },
+      agendaItems: {
+        'nov-01': {
+          weekday: 'Domingo',
+          title: 'Culto com celebração da Ceia e Batismo',
+          detail:
+            'Culto especial do primeiro domingo do mês com celebração da Ceia do Senhor e batismo.',
+        },
+        'nov-07': {
+          weekday: 'Sábado',
+          title: 'Tempo de oração pela igreja perseguida',
+          detail:
+            'Encontro congregacional dedicado a orar pelos cristãos e missionários perseguidos ao redor do mundo.',
+        },
+        'nov-08': {
+          weekday: 'Domingo · Nova Etapa',
+          title: 'Culto com celebração de Missões Nacionais',
+          detail:
+            'Início dos cultos nas instalações da Assembleia de Deus do Faial, com novos horários: 16h00 EBD e 17h15 Culto de Celebração.',
+        },
+        'nov-15': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração da Reforma Protestante',
+          detail:
+            'Celebração dominical relembrando os princípios bíblicos da Reforma Protestante (prazo inicial das encomendas Juntos).',
+        },
+        'nov-22': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração ao Senhor',
+          detail:
+            'Escola Bíblica Dominical às 16h00 e Culto às 17h15. Último dia de inscrições e pagamento para o Jantar de Ação de Graças.',
+        },
+        'nov-27': {
+          weekday: 'Sexta-feira · 19h30',
+          title: 'Jantar de Ação de Graças',
+          detail:
+            'Confraternização comunitária nas instalações da Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família).',
+        },
+        'nov-29': {
+          weekday: 'Domingo',
+          title: 'Culto de celebração ao Senhor',
+          detail:
+            'Encerramento do mês de novembro às 16h00 (EBD) e às 17h15 (Culto de Louvor e Pregação da Palavra).',
+        },
+      },
+      activitiesCard: {
+        kicker: 'Atividades e Horários',
+        heading: 'Ritmo semanal em novembro',
+        rows: [
+          { day: 'Domingo', time: '16h00', label: 'Escola Bíblica Dominical' },
+          {
+            day: 'Domingo',
+            time: '17h15',
+            label: 'Culto de Louvor e Pregação',
+          },
+          {
+            day: 'Quarta-feira',
+            time: '19h00',
+            label: 'Culto de Oração e Estudo',
+          },
+          {
+            day: 'Sexta / Sábado',
+            time: 'Semanal',
+            label: 'Ensaio do grupo de Louvor',
+          },
+        ],
+        venueNote:
+          'Local dos cultos desde 8 de novembro: Instalações da Igreja Assembleia de Deus do Faial.',
+        cta: 'Como chegar e confirmar presença',
+      },
+      venueAnnouncement: {
+        kicker: 'Anúncio Principal',
+        title: 'Novo local e horários desde 8 de novembro',
+        body1:
+          'É com alegria que compartilhamos com vocês que, a partir do dia 8 de novembro, nossos cultos passaram a ser realizados nas instalações da Igreja Assembleia de Deus do Faial.',
+        times: [
+          '16h00 — Escola Bíblica Dominical',
+          '17h15 — Culto de Celebração',
+        ],
+        body2:
+          'Queremos continuar caminhando juntos, unidos na fé, no amor e na oração, confiando que Deus está conduzindo todas as coisas segundo a Sua vontade.',
+        cta: 'Ver endereço e contatos',
+      },
+      thanksgivingDinner: {
+        dateShort: '27 de Novembro · 19h30',
+        title: 'Jantar de Ação de Graças',
+        summary:
+          'Sexta-feira às 19h30 nas instalações da Assembleia de Deus do Faial. 3,00€ por pessoa + 1 prato por família.',
+        seeDetails: 'Ver detalhes e inscrição',
+        description:
+          'Venha agradecer e celebrar em família no nosso Jantar de Ação de Graças comunitário nas instalações da Assembleia de Deus do Faial.',
+        details: [
+          { label: 'Data e hora', value: '27 nov. · 19h30' },
+          { label: 'Participação', value: '3,00€ por pessoa + 1 prato por família' },
+          { label: 'Inscrições e pagamento', value: 'Até 22 de novembro' },
+          { label: 'Local', value: 'Assembleia de Deus do Faial' },
+        ],
+        cta: 'Inscrever-se via WhatsApp',
+        whatsappMessage:
+          'Olá! Gostaria de fazer a inscrição para o Jantar de Ação de Graças da IEB Horta no dia 27 de novembro.',
+      },
+      juntosCampaign: {
+        kicker: 'Campanha de Oração',
+        title: 'Kit de Oração & Devocional Juntos Kids',
+        description:
+          'Materiais devocionais da campanha Juntos para fortalecer a vida de oração em casa com adultos e crianças.',
+        tier1Title: 'Encomendas até 15 nov.',
+        tier1Items: 'Kit de Oração: 4€ · Devocional Juntos Kids: 2€',
+        tier2Title: 'Encomendas após 15 nov.',
+        tier2Items: 'Kit de Oração: 5€ · Devocional Juntos Kids: 2,50€',
+      },
+      celeiro: {
+        kicker: 'Celeiro de Novembro',
+        title: 'Apoio à Cesta de Natal (Cabaz)',
+        description:
+          'Neste mês, o ministério Celeiro conta com o seu apoio solidário para montar os Cabazes de Natal destinados às famílias atendidas, por meio de contribuição financeira.',
+        cta: 'Saber como contribuir em Ofertas & Missão',
+      },
+      prayerIntro:
+        'Una-se a nós em intercessão durante todo o mês de novembro pelos pedidos reais da nossa igreja, das ilhas dos Açores, de Portugal e das missões:',
+      prayerCta: 'Enviar pedido de oração',
+      prayerWhatsappMessage:
+        'Olá! Gostaria de compartilhar um pedido de oração com a IEB Horta.',
+      prayerRequests: {
+        families:
+          'Pelas nossas famílias, crianças, jovens, adultos e pelas nossas irmãs grávidas.',
+        'new-decisions':
+          'Pelos nossos irmãos que recentemente tomaram a decisão por Jesus e pelas suas famílias.',
+        'jean-lima':
+          'Pelo nosso irmão Jean Lima, que tomou a decisão de ser batizado.',
+        'church-future':
+          'Pelo futuro da nossa igreja e pelos desafios desta nova etapa.',
+        'sao-jorge':
+          'Pela Irmã Bernadete e família, pelo David, Bruna e família e pela missão na ilha de São Jorge.',
+        health:
+          'Pelos nossos irmãos doentes e pelos que estão em recuperação de saúde.',
+        relatives:
+          'Pelos nossos familiares, amigos e vizinhos que ainda não entregaram suas vidas a Jesus.',
+        country:
+          'Pelo nosso País, pelas nossas autoridades e governantes.',
+        persecuted:
+          'Pelas igrejas e pelos nossos irmãos missionários que estão sendo perseguidos por amor a Jesus.',
+        disasters:
+          'Pelos países que estão sofrendo com catástrofes e pelos irmãos que foram vítimas desses acontecimentos.',
+        'convention-aba':
+          'Pela Direção da Convenção Baptista Portuguesa, pela ABA e por mais obreiros para a igreja em Portugal.',
+      },
+      gratitude: {
+        kicker: 'Momento de Gratidão',
+        title: 'Testemunho da família Miqueias, Lorena e Eva',
+        paragraphs: [
+          'Há momentos na vida em que as palavras parecem pequenas para expressar a grandeza daquilo que Deus faz por nós. Hoje, como família, queremos elevar nossa gratidão ao Senhor, reconhecendo que, em cada etapa da nossa caminhada, a Sua mão nos sustentou, a Sua graça nos alcançou e a Sua fidelidade nunca nos faltou.',
+          'Somos gratos não apenas pelas bênçãos que recebemos, mas também por tudo o que Deus tem feito em nós ao longo do caminho — nos dias de alegria e nos dias de dificuldade, nas orações respondidas e nos tempos de espera.',
+          'Neste tempo tão especial, nossos corações transbordam de gratidão pela vida da nossa pequena Eva, que ainda está no ventre, mas já ocupa um lugar imenso em nossas vidas. Antes mesmo de segurá-la nos braços, reconhecemos a mão do Criador sobre a sua vida e pedimos que ela cresça conhecendo, amando e servindo Aquele que a formou.',
+          'Ao Senhor entregamos o nosso presente, o nosso futuro e a vida da nossa filha, confiando que Jesus é o nosso maior tesouro.',
+        ],
+        signature: 'Com o coração profundamente grato — Miqueias, Lorena e Eva',
+        verse:
+          '“Grandes coisas fez o Senhor por nós, e por isso estamos alegres.” — Salmos 126:3',
+      },
+      birthdays: {
+        kicker: 'Aniversariantes do Mês',
+        title: 'Celebramos a vida em novembro',
+        updateNote:
+          '*Ajude-nos a atualizar a nossa lista de aniversariantes da igreja compartilhando a sua data.',
+        cta: 'Enviar data de aniversário',
+        whatsappMessage:
+          'Olá! Gostaria de atualizar minha data de aniversário na lista da IEB Horta.',
       },
     },
     about: {
@@ -1068,7 +1529,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       sanctuaryAlt:
         'Interior do templo da IEB Horta na Avenida Marginal com bancos de madeira e cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
-      sanctuaryCaption: 'Culto no templo · Av. Marginal, 17.',
+      sanctuaryCaption: 'Sede oficial · Av. Marginal, n.º 17.',
       kicker: 'Sobre a Igreja',
       heading: 'Amar a Deus, servir pessoas e viver o Evangelho na ilha.',
       sealAlt: 'Selo oficial Igreja Evangélica Baptista da Horta',
@@ -1101,7 +1562,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         '03': {
           title: 'Serviço',
           description:
-            'Vivemos o Evangelho além das paredes do templo por meio de campanhas solidárias, apoio alimentar e acolhimento próximo.',
+            'Vivemos o Evangelho além das paredes do templo por meio de campanhas solidárias, apoio alimentar do Celeiro e acolhimento próximo.',
         },
       },
       beliefsIntro:
@@ -1152,7 +1613,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           name: 'Associação Baptista Açoreana',
           scope: 'Arquipélago dos Açores',
           description:
-            'Comunhão regional entre as igrejas batistas das ilhas dos Açores em assembleias, acampamentos e missão local.',
+            'Comunhão regional entre as igrejas batistas das ilhas dos Açores em assembleias, acampamentos e missão em ilhas como São Jorge.',
         },
         aep: {
           name: 'Aliança Evangélica Portuguesa',
@@ -1192,7 +1653,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         jovens: {
           title: 'Jovens & Adolescentes',
           summary: 'Salas dedicadas na EBD, comunhão e diálogo bíblico.',
-          schedule: 'Domingos na EBD · Encontros semanais',
+          schedule: 'Domingos às 16h00 na EBD · Encontros semanais',
           audience: 'Adolescentes e jovens adultos',
           description:
             'Espaço para construir amizades verdadeiras, conversar abertamente sobre fé e o dia a dia e servir juntos na comunidade.',
@@ -1201,37 +1662,37 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         casais: {
           title: 'Famílias & Mulheres',
           summary: 'Dia da Família, oficinas e encontros Plenas em Cristo.',
-          schedule: 'Programações periódicas e retiros',
+          schedule: 'Programações periódicas e celebrações',
           audience: 'Famílias, casais e mulheres',
           description:
-            'Iniciativas como o Dia da Família no Parque da Salgueirinha, oficinas com crianças e o encontro de mulheres Plenas em Cristo.',
+            'Iniciativas como o Dia da Família no Parque da Salgueirinha, o Jantar de Ação de Graças e o encontro de mulheres Plenas em Cristo.',
           imageAlt:
             'Mulheres reunidas cantando com violão durante o encontro Plenas em Cristo',
         },
         'infantil-ebd': {
           title: 'Escola Bíblica & Infantil',
           summary: 'Salas separadas para crianças, adolescentes e adultos.',
-          schedule: 'Domingos às 10h00 e às 16h00',
+          schedule: 'Domingos às 16h00',
           audience: 'Todas as idades',
           description:
-            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além de oficinas criativas em família.',
+            'Ensino bíblico adequado a cada faixa etária — com salas dedicadas para crianças, adolescentes e adultos, além do Devocional Juntos Kids.',
           imageAlt:
             'Bíblia aberta sobre mesa com horários da Escola Bíblica Dominical da IEB Horta',
         },
         'acao-social': {
-          title: 'Ação Social',
-          summary: 'Arrecadação e partilha solidária de alimentos no Faial.',
-          schedule: 'Campanhas contínuas de apoio local',
+          title: 'Ação Social · Celeiro',
+          summary: 'Campanha do Cabaz de Natal e partilha solidária no Faial.',
+          schedule: 'Campanhas mensais de apoio local',
           audience: 'Aberto a todos os voluntários',
           description:
-            'Mobilização de membros e amigos para arrecadar alimentos e apoiar famílias em necessidade na cidade da Horta.',
+            'Por meio do projeto Celeiro, mobilizamos membros e amigos para apoiar famílias na cidade da Horta, incluindo o Cabaz de Natal em novembro.',
           imageAlt:
             'Compras solidárias e alimentos arrecadados pela Ação Social da IEB Horta',
         },
         'batismo-discipulado': {
           title: 'Batismo & Discipulado',
           summary: 'Primeiros passos na fé cristã e acompanhamento pastoral.',
-          schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior',
+          schedule: 'Acompanhamento com o Pr. Luiz Eduardo Júnior (933 855 290)',
           audience: 'Visitantes e novos membros',
           description:
             'Estudo bíblico próximo para conhecer os fundamentos do Evangelho, tirar dúvidas, preparar para o batismo e integrar a igreja.',
@@ -1273,15 +1734,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Coríntios 10:31',
         },
         'post-schedule': {
-          alt: 'Publicação oficial de horários do @iebhorta: 10h00 Escola Bíblica Dominical e 11h15 Celebração na Av. Marginal, 17',
-          category: 'Domingos',
-          dateLabel: '10h00 & 11h15',
+          alt: 'Registro histórico de divulgação da Escola Bíblica e Culto de Celebração no @iebhorta',
+          category: 'Arquivo @iebhorta',
+          dateLabel: 'EBD & Culto',
           caption:
-            'Todos os domingos na Av. Marginal, n.º 17 — Horta: às 10h00 Escola Bíblica Dominical e às 11h15 Culto de Celebração.',
+            'Arquivo dos nossos domingos de Escola Bíblica e Celebração. A partir de 8 de novembro de 2026: 16h00 EBD e 17h15 Culto na Assembleia de Deus do Faial.',
         },
         'post-social': {
           alt: 'Porta-malas de carro cheio de sacolas de compras e leite arrecadados pela ação social da IEB Horta',
-          category: 'Ação Social',
+          category: 'Ação Social · Celeiro',
           dateLabel: 'Serviço',
           caption:
             'Gratidão por cada família que contribuiu com a partilha solidária de alimentos e itens essenciais na Ilha do Faial.',
@@ -1306,12 +1767,12 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           category: 'Ação de Graças',
           dateLabel: '1 Ts 5:18',
           caption:
-            'Fim de Semana de Ação de Graças: “Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.”',
+            'Ação de Graças: “Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.”',
           scripture: '1 Tessalonicenses 5:18',
         },
       },
       archivesIntro:
-        'Conteúdos que edificam sua vida espiritual: pregações da Palavra, marcos dos 51 anos no Faial e encontros especiais abertos à cidade.',
+        'Conteúdos que edificam sua vida espiritual: pregações da Palavra, Boletim Mensal de Novembro 2026, celebrações e encontros abertos à cidade.',
       archivesYouTubeCta: 'Abrir canal no YouTube',
       archivesItems: {
         'archive-palavra': {
@@ -1319,78 +1780,78 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '1 Coríntios 10:31',
           title: 'Momento da Palavra · Pr. Luiz Eduardo Júnior',
           summary:
-            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens no templo e no nosso YouTube.',
+            'Exposição fiel das Escrituras para aplicar o Evangelho na família, no trabalho e no dia a dia. Acompanhe as mensagens nos cultos e no nosso YouTube.',
           actionLabel: 'Assistir no YouTube',
           imageAlt: 'Pr. Luiz Eduardo Júnior pregando no púlpito da IEB Horta',
         },
         'archive-51anos': {
-          category: 'Marco Histórico',
-          dateLabel: '51 Anos · Romanos 5:8',
-          title: 'Aniversário IEB Horta — Sustentados pelo Amor de Deus',
+          category: 'Boletim Mensal',
+          dateLabel: 'Novembro 2026 · 51 Anos',
+          title: 'Boletim de Novembro — 51 Anos & Nova Etapa',
           summary:
-            'Mais de meio século de testemunho evangélico batista na cidade da Horta, reunindo gerações em gratidão pela fidelidade de Deus.',
-          actionLabel: 'Ver registros no @iebhorta',
+            'Agenda completa de novembro, motivos de oração, testemunho de gratidão e transição dos cultos de domingo para as instalações da Assembleia de Deus do Faial.',
+          actionLabel: 'Ver Agenda de Novembro',
           imageAlt: 'Cartaz dos 51 anos da Igreja Evangélica Baptista da Horta',
         },
+        'archive-gracas': {
+          category: 'Evento de Novembro',
+          dateLabel: '27 nov. · 19h30',
+          title: 'Jantar Comunitário de Ação de Graças',
+          summary:
+            'Encontro na Assembleia de Deus do Faial (3,00€ por pessoa + 1 prato por família). Inscrições e pagamento até 22 de novembro.',
+          actionLabel: 'Confirmar presença',
+          imageAlt: 'Publicação de Ação de Graças da IEB Horta',
+        },
         'archive-familia': {
-          category: 'Evento Comunitário',
+          category: 'Comunidade no Faial',
           dateLabel: 'Parque da Salgueirinha',
           title: 'Dia da Família ao ar livre na Feteira',
           summary:
-            'Encontro anual com tempo de culto, almoço comunitário e comunhão fraterna para membros, crianças e amigos visitantes na ilha.',
-          actionLabel: 'Confirmar presença no próximo',
+            'Registro do nosso encontro anual com tempo de culto, almoço comunitário e comunhão fraterna para membros, crianças e amigos visitantes na ilha.',
+          actionLabel: 'Explorar no @iebhorta',
           imageAlt: 'Cartaz oficial do Dia da Família no Parque da Salgueirinha',
-        },
-        'archive-gracas': {
-          category: 'Celebração Especial',
-          dateLabel: '1 Tessalonicenses 5:18',
-          title: 'Fim de Semana de Ação de Graças nos Açores',
-          summary:
-            'Momentos dedicados a louvar a Deus em unidade, compartilhar testemunhos e agradecer pelas bênçãos recebidas ao longo do ano.',
-          actionLabel: 'Explorar no Instagram',
-          imageAlt: 'Publicação de Fim de Semana de Ação de Graças da IEB Horta',
         },
       },
       giving: {
-        kicker: 'Sustento & Generosidade',
-        heading: 'Contribua para a missão e a ação local no Faial',
+        kicker: 'Sustento & Generosidade · Celeiro',
+        heading: 'Contribua para a missão e para o Cabaz de Natal no Faial',
         paragraph1:
           'A Igreja Evangélica Baptista da Horta mantém sua obra espiritual e social exclusivamente por meio das ofertas e dízimos voluntários de seus membros, congregados e simpatizantes.',
         paragraph2:
-          'Cada contribuição apoia a manutenção dos espaços de culto e EBD, o ensino bíblico para crianças e jovens, a cooperação missionária e as campanhas de apoio alimentar a famílias no Faial.',
+          'Em novembro, o nosso ministério Celeiro conta também com a sua oferta financeira para montar os Cabazes de Natal destinados às famílias atendidas na ilha.',
         pillars: [
           {
-            title: 'Ensino & Culto Público',
-            text: 'Sustento das salas da Escola Bíblica Dominical, recepção de visitantes e transmissão da Palavra.',
+            title: 'Celeiro · Cabaz de Natal',
+            text: 'Doações financeiras ao longo de novembro para preparar os Cabazes de Natal solidários no Faial.',
           },
           {
-            title: 'Ação Social Local',
-            text: 'Arrecadação contínua de alimentos e apoio direto a lares necessitados na Ilha do Faial.',
+            title: 'Ensino & Culto Público',
+            text: 'Sustento das atividades dominicais (16h00 EBD e 17h15 Culto), materiais bíblicos e acolhimento.',
           },
           {
             title: 'Missão nos Açores',
-            text: 'Cooperação com a Associação Baptista Açoreana e projetos de evangelização e discipulado.',
+            text: 'Cooperação com a Associação Baptista Açoreana e apoio à missão na ilha de São Jorge.',
           },
         ],
         ctaWhatsApp: 'Pedir dados via WhatsApp',
         ctaEmail: 'Contatar por e-mail',
         whatsappMessage:
-          'Olá! Gostaria de receber informações sobre como contribuir com ofertas para a Igreja Evangélica Baptista da Horta.',
-        mailSubject: 'Informações sobre Ofertas e Contribuições — IEB Horta',
+          'Olá! Gostaria de receber informações sobre como contribuir com ofertas ou com o Cabaz de Natal do Celeiro na IEB Horta.',
+        mailSubject: 'Informações sobre Ofertas e Celeiro — IEB Horta',
       },
     },
     visit: {
       kicker: 'Contatos & Primeira Visita',
       heading: 'Planeje sua primeira visita',
       intro:
-        'Será uma alegria receber você pessoalmente na Horta. Confira nossos espaços e avise em que dia pretende vir para aguardarmos por você.',
+        'Será uma alegria receber você pessoalmente na Horta. Desde 8 de novembro nos reunimos nas instalações da Igreja Assembleia de Deus do Faial (mantendo a Av. Marginal, n.º 17 como sede oficial).',
       spaceTabsAria: 'Selecionar espaço da igreja',
       copyAddress: 'Copiar endereço',
       copiedAddress: 'Endereço copiado',
       visitorNotes: [
-        'Localização central junto à baía da Horta na Av. Marginal, n.º 17.',
-        'Venha como estiver — nosso ambiente é acolhedor e familiar.',
-        'Salas da Escola Bíblica Dominical para adultos, adolescentes e crianças.',
+        'Cultos desde 08/11 nas instalações da Igreja Assembleia de Deus do Faial.',
+        'Domingos às 16h00 (Escola Bíblica) e 17h15 (Culto de Celebração).',
+        'Quartas-feiras às 19h00 — Culto de Oração e Estudo da Palavra.',
       ],
       googleMaps: 'Google Maps',
       openWaze: 'Abrir no Waze',
@@ -1401,13 +1862,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       namePlaceholder: 'Ex.: Maria Clara',
       phoneLabel: 'WhatsApp / Celular',
       phonePlaceholder: '+351 9XX XXX XXX',
-      dayQuestion: 'Em qual dia pretende nos visitar?',
-      dayAria: 'Dia desejado para a visita',
+      dayQuestion: 'Em qual encontro pretende nos visitar?',
+      dayAria: 'Encontro desejado para a visita',
       dayOptions: [
-        'Domingo · 10h00 (Escola Bíblica)',
-        'Domingo · 11h15 (Culto de Celebração)',
-        'Domingo · 16h00 (EBD R. do Pasteleiro)',
-        'Quero confirmar horários da semana',
+        'Domingo · 16h00 (Escola Bíblica Dominical)',
+        'Domingo · 17h15 (Culto de Celebração)',
+        'Quarta-feira · 19h00 (Oração e Estudo)',
+        '27 nov. · 19h30 (Jantar Ação de Graças)',
       ],
       groupQuestion: 'Quantas pessoas vão?',
       groupAria: 'Quantidade de visitantes',
@@ -1435,17 +1896,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       summaryNotePrefix: 'Observação:',
       contactLabel: 'Contato:',
       locations: {
-        templo: {
-          label: 'Templo Principal',
-          title: 'Culto de Celebração & EBD (10h00)',
-          region: 'Matriz · Ilha do Faial, Açores, Portugal',
-          note: 'Em frente à baía da Horta, com acesso fácil e recepção acolhedora.',
-        },
         ebd: {
-          label: 'Salas EBD (16h00)',
-          title: 'Escola Bíblica Dominical (Domingo 16h00)',
-          region: '9900 Horta · Ilha do Faial, Açores',
-          note: 'Espaço temporário com salas separadas para Adultos, Adolescentes e Crianças.',
+          label: 'Local dos Cultos',
+          title: 'Cultos Dominicais & Oração (desde 08/11)',
+          region: 'Horta · Ilha do Faial, Açores',
+          note: 'Onde ocorrem os nossos cultos: domingos 16h00 (EBD) e 17h15 (Celebração), e quartas às 19h00.',
+        },
+        templo: {
+          label: 'Sede Oficial',
+          title: 'Igreja Evangélica Baptista da Horta (Sede)',
+          region: '9900-121 Horta · Ilha do Faial, Açores, Portugal',
+          note: 'Endereço oficial e postal da igreja na Avenida Marginal, n.º 17.',
         },
       },
     },
@@ -1458,9 +1919,9 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
       youtubeLabel: 'YouTube IEB Horta',
-      whatsappLabel: 'WhatsApp da Igreja',
+      whatsappLabel: 'WhatsApp Pastorado (933 855 290)',
       rightsReserved: 'Todos os direitos reservados.',
-      sundayLine: 'Domingos · 10h00 Escola Bíblica · 11h15 Celebração',
+      sundayLine: 'Domingos · 16h00 EBD · 17h15 Culto de Celebração',
     },
     mobileBar: {
       ariaLabel: 'Ações rápidas de navegação e contato',
@@ -1474,7 +1935,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Evangelical Baptist Church of Horta',
       description:
-        'A place of faith, family, and new beginnings on Faial Island, Azores. Service times, statement of faith, ministries, @iebhorta community, and plan your visit to Igreja Evangélica Baptista da Horta.',
+        'A place of faith, family, and new beginnings on Faial Island, Azores. November 2026 agenda, new Sunday times (16:00 Sunday School, 17:15 Worship), ministries, and visit planning.',
       skipToContent: 'Skip to main content',
     },
     nav: {
@@ -1484,12 +1945,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       languageMenuTitle: 'Language',
       links: {
         schedule: 'Schedule',
+        novemberAgenda: 'November Agenda',
         essence: 'About',
         ministries: 'Ministries',
         community: 'Resources',
         visit: 'Contact',
       },
       subLinks: {
+        novemberAgenda: 'Monthly Agenda',
+        novemberAnnouncements: 'Announcements & Dinner (27/11)',
+        novemberPrayer: 'Prayer Requests',
+        novemberGratitude: 'Gratitude & Birthdays',
         churchHistory: 'The Church (51 Years)',
         whatWeBelieve: 'What We Believe',
         cooperation: 'Baptist Cooperation',
@@ -1502,16 +1968,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
       closeNavDrawer: 'Close navigation menu',
-      drawerSummary: 'Sundays at 10:00 (Sunday School) and 11:15 (Worship).',
+      drawerSummary: 'Sundays at 16:00 (EBD) and 17:15 (Worship) · AD Faial.',
       whatsapp: 'WhatsApp',
     },
     hero: {
       imageAlt:
         'Sunlit sanctuary interior with morning light and gathered congregation',
-      kickerYears: '51 Years in Horta, Azores',
+      kickerYears: 'November 2026 Bulletin · 51 Years on Faial',
       headline: 'A place of faith, family, and new beginnings.',
       subheadline:
-        'Sustained by the love of God on Faial Island. An open-door Christian church walking alongside you and your family in Scripture and fellowship.',
+        'Sustained by the love of God on Faial Island. Beginning November 8, our services gather at Assembleia de Deus do Faial: Sundays at 16:00 (Sunday School) and 17:15 (Worship Service).',
       ctaVisit: 'Plan Your Visit',
       ctaInstagram: 'Follow @iebhorta',
       watchYouTube: 'Watch on YouTube',
@@ -1520,22 +1986,21 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       slideLabelPrefix: 'Highlight',
       slides: {
         welcome: {
-          kicker: '51 Years in Horta, Azores',
+          kicker: 'November 2026 Bulletin · 51 Years on Faial',
           headline: 'A place of faith, family, and new beginnings.',
           subheadline:
-            'Sustained by the love of God on Faial Island. An open-door Christian church walking alongside you and your family in Scripture and fellowship.',
-          ctaLabel: 'Plan Your Visit',
+            'Sustained by the love of God on Faial Island. Explore our November Agenda, new Sunday times (16:00 EBD · 17:15 Worship), and monthly church life.',
+          ctaLabel: 'See November Agenda',
           imageAlt:
             'Sunlit sanctuary interior with morning light and gathered congregation',
         },
         'sunday-worship': {
-          kicker: 'Av. Marginal, 17 · Every Sunday',
-          headline: 'Worship, biblical teaching, and fellowship in central Horta.',
+          kicker: 'Assembleia de Deus do Faial · From November 8',
+          headline: 'New Sunday hours: 16:00 Sunday School & 17:15 Worship.',
           subheadline:
-            'Join us on Sundays at 10:00 for Sunday Bible School (or 16:00 in Angústias) and at 11:15 for our Celebration Service.',
+            'We also meet Wednesdays at 19:00 for Prayer & Bible Study. Open doors for the entire family.',
           ctaLabel: 'See Schedule',
-          imageAlt:
-            'Sanctuary interior of Igreja Evangélica Baptista da Horta on Avenida Marginal',
+          imageAlt: 'Interior of Igreja Evangélica Baptista da Horta',
         },
         'church-family': {
           kicker: 'Affiliated with the Portuguese Baptist Convention',
@@ -1555,8 +2020,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       doorsOpenNote: 'Open doors for the whole family.',
       calendarSaved: 'Invite (.ics) saved',
       calendarSave: 'Add Sunday to calendar',
-      ebdStripTextBefore: 'Sunday School at',
-      ebdStripTextAfter: 'at Rua do Pasteleiro, 12-D (Angústias)',
+      ebdStripTextBefore: 'Wednesdays at',
+      ebdStripTextAfter: '— Prayer & Bible Study Service',
       pastorLabel: 'Pastor:',
       whatsappMessage:
         'Hello! I would love to learn more about the services at Igreja Evangélica Baptista da Horta and plan a visit.',
@@ -1565,57 +2030,231 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       prodId: '-//IEB Horta//Sunday Schedule//EN',
       summary: 'Sunday Celebration Service — IEB Horta',
       description:
-        'Sunday Bible School at 10:00 and Worship Service at Igreja Evangélica Baptista da Horta. All are welcome!',
+        'Sunday Bible School at 16:00 and Celebration Service at 17:15 at Assembleia de Deus do Faial facilities (Horta). All are welcome!',
       fileName: 'ieb-horta-sunday-service.ics',
     },
     schedule: {
-      kicker: 'Weekly Schedule',
+      kicker: 'Activities & Times · November 2026',
       heading: 'Times to gather together as a family',
       intro:
-        'Every Sunday we gather to study Scripture in Sunday Bible School and worship together at our morning service. If this is your first visit, you will be warmly welcomed.',
+        'Starting November 8, our Sunday gatherings meet at the Assembleia de Deus do Faial facilities with new afternoon times, alongside our Wednesday evening prayer and Bible study.',
       filterAria: 'Filter schedule',
       filters: {
         all: 'Full schedule',
         sunday: 'Sundays',
-        week: 'Midweek & Families',
+        week: 'Midweek & Worship Team',
       },
       calendarSaved: 'Event saved (.ics)',
       calendarSave: 'Save service to calendar',
       watchYouTube: 'Watch on YouTube',
       confirmVisit: 'Confirm visit',
       items: {
-        celebracao: {
-          title: 'Celebration Service',
-          day: 'Sundays',
-          times: ['11:15'],
-          location: 'Av. Marginal, 17 — Horta',
-          description:
-            'Sunday gathering of worship, fellowship, and biblical preaching. During summer (July and August), service begins at 11:00.',
-        },
         ebd: {
           title: 'Sunday Bible School (EBD)',
           day: 'Sundays',
-          times: ['10:00', '16:00'],
-          location: 'Adults, Youth & Children',
+          times: ['16:00'],
+          location: 'Assembleia de Deus do Faial Facilities',
           description:
-            'Age-grouped Bible study at 10:00 at Av. Marginal, 17, or at 16:00 at Rua do Pasteleiro, 12-D (Angústias).',
+            'Age-grouped Bible study on Sundays at 16:00 with classes and teaching for adults, teens, and children.',
+        },
+        celebracao: {
+          title: 'Worship & Preaching Service',
+          day: 'Sundays',
+          times: ['17:15'],
+          location: 'Assembleia de Deus do Faial Facilities',
+          description:
+            'Sunday celebration gathering of worship, fellowship, and biblical preaching starting at 17:15.',
         },
         'oracao-lares': {
-          title: 'Prayer, Teaching & Small Groups',
-          day: 'Midweek',
-          times: ['@iebhorta Agenda'],
-          location: 'Sanctuary & homes across Faial',
+          title: 'Prayer & Word Study Service',
+          day: 'Wednesdays',
+          times: ['19:00'],
+          location: 'Weekly prayer meeting',
           description:
-            'Weekly gatherings for prayer, Scripture reading, and home fellowship. Reach out to confirm this week’s times.',
+            'Weekly intercession for our church family, our nation, and the persecuted church, paired with Scripture study.',
         },
         'kids-familia': {
-          title: 'Children, Parents & Families',
-          day: 'Sundays & Events',
-          times: ['Family schedule'],
-          location: 'Kids EBD & Parque da Salgueirinha',
+          title: 'Worship Team Rehearsal & Families',
+          day: 'Fridays or Saturdays',
+          times: ['To be confirmed'],
+          location: 'Worship Team · Monthly Events',
           description:
-            'Creative Bible teaching for children, family workshops in town, and our annual outdoor Family Day.',
+            'Weekly worship team rehearsal (Friday/Saturday) and special family gatherings, including our November Thanksgiving Dinner.',
         },
+      },
+    },
+    bulletin: {
+      kicker: 'Monthly Bulletin · November 2026',
+      heading: 'November Agenda, announcements & church life',
+      intro:
+        'Follow our official November 2026 church calendar, transition to the Assembleia de Deus do Faial facilities, community prayer requests, and family gratitude.',
+      downloadPdf: 'Print Bulletin',
+      tabsAria: 'Select November Bulletin section',
+      tabs: {
+        agenda: 'Monthly Agenda',
+        announcements: 'Announcements & Initiatives',
+        prayer: 'Prayer Requests',
+        gratitude: 'Gratitude & Birthdays',
+      },
+      agendaItems: {
+        'nov-01': {
+          weekday: 'Sunday',
+          title: 'Worship Service with Lord’s Supper & Baptism',
+          detail:
+            'First-Sunday service celebrating Communion and believer’s baptism.',
+        },
+        'nov-07': {
+          weekday: 'Saturday',
+          title: 'Prayer Time for the Persecuted Church',
+          detail:
+            'Dedicated congregation prayer time lifting up persecuted Christians and missionaries worldwide.',
+        },
+        'nov-08': {
+          weekday: 'Sunday · New Season',
+          title: 'National Missions Celebration Service',
+          detail:
+            'First Sunday gathering at Assembleia de Deus do Faial with new times: 16:00 Sunday School and 17:15 Celebration Service.',
+        },
+        'nov-15': {
+          weekday: 'Sunday',
+          title: 'Protestant Reformation Celebration Service',
+          detail:
+            'Sunday celebration reflecting on the biblical heritage of the Reformation (early order deadline for Juntos resources).',
+        },
+        'nov-22': {
+          weekday: 'Sunday',
+          title: 'Worship Service unto the Lord',
+          detail:
+            'Sunday School at 16:00 and Worship at 17:15. Final day for Thanksgiving Dinner sign-ups and payment.',
+        },
+        'nov-27': {
+          weekday: 'Friday · 19:30',
+          title: 'Thanksgiving Dinner',
+          detail:
+            'Community fellowship dinner at Assembleia de Deus do Faial (€3.00 per person + 1 dish per family).',
+        },
+        'nov-29': {
+          weekday: 'Sunday',
+          title: 'Worship Service unto the Lord',
+          detail:
+            'Closing November together at 16:00 (Sunday School) and 17:15 (Worship & Preaching of the Word).',
+        },
+      },
+      activitiesCard: {
+        kicker: 'Activities & Hours',
+        heading: 'Weekly rhythm in November',
+        rows: [
+          { day: 'Sunday', time: '16:00', label: 'Sunday Bible School' },
+          { day: 'Sunday', time: '17:15', label: 'Worship & Preaching' },
+          { day: 'Wednesday', time: '19:00', label: 'Prayer & Bible Study' },
+          {
+            day: 'Fri / Sat',
+            time: 'Weekly',
+            label: 'Worship Team Rehearsal',
+          },
+        ],
+        venueNote:
+          'Service venue from November 8: Igreja Assembleia de Deus do Faial facilities.',
+        cta: 'Directions & visit confirmation',
+      },
+      venueAnnouncement: {
+        kicker: 'Key Announcement',
+        title: 'New venue & service hours from November 8',
+        body1:
+          'We joyfully share that starting November 8, our worship services are held at the Igreja Assembleia de Deus do Faial facilities.',
+        times: [
+          '16:00 — Sunday Bible School',
+          '17:15 — Celebration Service',
+        ],
+        body2:
+          'We want to keep walking together—united in faith, love, and prayer—trusting that God is guiding every step according to His will.',
+        cta: 'View address & contacts',
+      },
+      thanksgivingDinner: {
+        dateShort: 'November 27 · 19:30',
+        title: 'Thanksgiving Dinner',
+        summary:
+          'Friday at 19:30 at Assembleia de Deus do Faial. €3.00 per person + 1 dish per family.',
+        seeDetails: 'See details & sign up',
+        description:
+          'Join us for our community Thanksgiving Dinner at the Assembleia de Deus do Faial facilities as we give thanks together.',
+        details: [
+          { label: 'Date & time', value: 'Nov 27 · 19:30' },
+          { label: 'Contribution', value: '€3.00 per person + 1 dish per family' },
+          { label: 'Sign-ups & payment', value: 'By November 22' },
+          { label: 'Venue', value: 'Assembleia de Deus do Faial' },
+        ],
+        cta: 'RSVP via WhatsApp',
+        whatsappMessage:
+          'Hello! I would like to register for the IEB Horta Thanksgiving Dinner on November 27.',
+      },
+      juntosCampaign: {
+        kicker: 'Prayer Campaign',
+        title: 'Prayer Kit & Juntos Kids Devotional',
+        description:
+          'Devotional booklets and prayer guides from the Juntos campaign to encourage family prayer for adults and children.',
+        tier1Title: 'Orders by Nov 15',
+        tier1Items: 'Prayer Kit: €4 · Juntos Kids Devotional: €2',
+        tier2Title: 'Orders after Nov 15',
+        tier2Items: 'Prayer Kit: €5 · Juntos Kids Devotional: €2.50',
+      },
+      celeiro: {
+        kicker: 'November Celeiro',
+        title: 'Christmas Hamper Support',
+        description:
+          'This month, our Celeiro outreach counts on your generous monetary gift to prepare Christmas hampers for families supported in Horta.',
+        cta: 'See how to give under Giving & Mission',
+      },
+      prayerIntro:
+        'Join us in prayer throughout November for these real requests across our church family, the Azores, Portugal, and global missions:',
+      prayerCta: 'Share a prayer request',
+      prayerWhatsappMessage:
+        'Hello! I would like to share a prayer request with IEB Horta.',
+      prayerRequests: {
+        families:
+          'For our families, children, youth, adults, and our expectant mothers.',
+        'new-decisions':
+          'For our brothers and sisters who recently gave their lives to Jesus and for their families.',
+        'jean-lima':
+          'For our brother Jean Lima, who has decided to be baptized.',
+        'church-future':
+          'For the future of our church and the opportunities of this new season.',
+        'sao-jorge':
+          'For Sister Bernadete and family, David, Bruna and family, and the mission work on São Jorge Island.',
+        health:
+          'For brothers and sisters who are ill or recovering in health.',
+        relatives:
+          'For our relatives, friends, and neighbors who have not yet surrendered their lives to Jesus.',
+        country:
+          'For our nation, public authorities, and government leaders.',
+        persecuted:
+          'For churches and missionary brothers and sisters facing persecution for Christ’s sake.',
+        disasters:
+          'For countries suffering from disasters and for all those affected by these events.',
+        'convention-aba':
+          'For the leadership of the Portuguese Baptist Convention, ABA, and more laborers for the church in Portugal.',
+      },
+      gratitude: {
+        kicker: 'Moment of Gratitude',
+        title: 'Testimony from Miqueias, Lorena & Eva',
+        paragraphs: [
+          'There are moments in life when words seem too small to express the greatness of what God does for us. Today, as a family, we lift up our gratitude to the Lord, recognizing that in every season His hand sustained us, His grace reached us, and His faithfulness never failed.',
+          'We are thankful not only for the blessings received, but for all God has worked inside us along the road—through days of joy and difficulty, answered prayers, and seasons of waiting.',
+          'In this special time, our hearts overflow with gratitude for the life of our little Eva, still in the womb yet already filling such an immense place in our lives. Even before holding her in our arms, we acknowledge the Creator’s hand over her and pray she grows to know, love, and serve Him.',
+          'To the Lord we entrust our present, our future, and our daughter’s life, trusting that Jesus is our greatest treasure.',
+        ],
+        signature: 'With deeply grateful hearts — Miqueias, Lorena & Eva',
+        verse:
+          '“The Lord has done great things for us, and we are filled with joy.” — Psalm 126:3',
+      },
+      birthdays: {
+        kicker: 'Monthly Birthdays',
+        title: 'Celebrating life in November',
+        updateNote:
+          '*Help us keep our church birthday list up to date by sharing your birthday with us.',
+        cta: 'Submit your birthday',
+        whatsappMessage:
+          'Hello! I would like to add or update my birthday on the IEB Horta list.',
       },
     },
     about: {
@@ -1626,7 +2265,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       sanctuaryAlt:
         'Sanctuary interior of IEB Horta on Avenida Marginal with wooden pews and cross',
       sanctuaryFallback: 'Sanctuary Av. Marginal, 17',
-      sanctuaryCaption: 'Sanctuary worship · Av. Marginal, 17.',
+      sanctuaryCaption: 'Official address · Av. Marginal, 17.',
       kicker: 'About Our Church',
       heading: 'Loving God, serving people, and living the Gospel on the island.',
       sealAlt: 'Official seal of Igreja Evangélica Baptista da Horta',
@@ -1659,7 +2298,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         '03': {
           title: 'Service',
           description:
-            'We live out the Gospel beyond the sanctuary walls through food drives, practical aid, and warm hospitality.',
+            'We live out the Gospel beyond church walls through Celeiro hampers, practical food aid, and warm hospitality.',
         },
       },
       beliefsIntro:
@@ -1710,7 +2349,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           name: 'Azorean Baptist Association',
           scope: 'Azores Archipelago',
           description:
-            'Regional fellowship uniting Baptist congregations across the Azorean islands through assemblies and camps.',
+            'Regional fellowship uniting Baptist congregations across the Azorean islands through assemblies, camps, and missions like São Jorge.',
         },
         aep: {
           name: 'Portuguese Evangelical Alliance',
@@ -1750,7 +2389,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         jovens: {
           title: 'Youth & Teens',
           summary: 'Dedicated Sunday School rooms, fellowship, and Bible dialogue.',
-          schedule: 'Sundays at EBD · Weekly gatherings',
+          schedule: 'Sundays at 16:00 (EBD) · Weekly gatherings',
           audience: 'Teens and young adults',
           description:
             'A welcoming space to build genuine friendships, talk openly about faith and everyday life, and serve together in the community.',
@@ -1758,38 +2397,37 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         },
         casais: {
           title: 'Families & Women',
-          summary: 'Family Day, workshops, and Plenas em Cristo gatherings.',
-          schedule: 'Periodic gatherings & retreats',
+          summary: 'Family Day, Thanksgiving Dinner & Plenas em Cristo.',
+          schedule: 'Periodic gatherings & celebrations',
           audience: 'Families, couples, and women',
           description:
-            'Gatherings such as Family Day at Parque da Salgueirinha, parent-child workshops, and the Plenas em Cristo women’s fellowship.',
+            'Gatherings such as Family Day at Parque da Salgueirinha, Thanksgiving community dinner, and the Plenas em Cristo women’s fellowship.',
           imageAlt:
             'Women gathered singing with acoustic guitar during Plenas em Cristo',
         },
         'infantil-ebd': {
           title: 'Sunday School & Children',
           summary: 'Age-grouped rooms for children, teens, and adults.',
-          schedule: 'Sundays at 10:00 & 16:00',
+          schedule: 'Sundays at 16:00',
           audience: 'All ages',
           description:
-            'Engaging biblical teaching tailored to every age group—with dedicated classrooms for kids, teens, and adults, plus creative family activities.',
-          imageAlt:
-            'Open Bible with Sunday Bible School times for IEB Horta',
+            'Engaging biblical teaching tailored to every age group—with classrooms for kids, teens, and adults, plus the Juntos Kids devotional.',
+          imageAlt: 'Open Bible with Sunday Bible School times for IEB Horta',
         },
         'acao-social': {
-          title: 'Social Outreach',
-          summary: 'Community food collection and support across Faial.',
-          schedule: 'Ongoing local outreach drives',
+          title: 'Social Outreach · Celeiro',
+          summary: 'Christmas hampers and community aid across Faial.',
+          schedule: 'Monthly outreach drives',
           audience: 'Open to all volunteers',
           description:
-            'Mobilizing members and friends to collect groceries and essentials to support families in need in Horta.',
+            'Through Celeiro, mobilizing members and friends to bless households in Horta, including our November Christmas Hamper campaign.',
           imageAlt:
             'Charity groceries and food supplies collected by IEB Horta Social Outreach',
         },
         'batismo-discipulado': {
           title: 'Baptism & Discipleship',
           summary: 'First steps in Christian faith and pastoral guidance.',
-          schedule: 'Guided by Pr. Luiz Eduardo Júnior',
+          schedule: 'Guided by Pr. Luiz Eduardo Júnior (933 855 290)',
           audience: 'Visitors and new believers',
           description:
             'Personal Bible study to explore the foundations of the Gospel, ask questions, prepare for baptism, and become part of the church.',
@@ -1831,15 +2469,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Corinthians 10:31',
         },
         'post-schedule': {
-          alt: 'Official @iebhorta schedule post: 10:00 Sunday Bible School and 11:15 Celebration at Av. Marginal, 17',
-          category: 'Sundays',
-          dateLabel: '10:00 & 11:15',
+          alt: 'Archival @iebhorta schedule post for Sunday Bible School and Celebration Service',
+          category: 'Archive @iebhorta',
+          dateLabel: 'EBD & Worship',
           caption:
-            'Every Sunday at Av. Marginal, 17 — Horta: 10:00 Sunday Bible School and 11:15 Celebration Service.',
+            'From our community archives. Starting November 8, 2026: Sundays at 16:00 EBD and 17:15 Celebration at Assembleia de Deus do Faial.',
         },
         'post-social': {
           alt: 'Car trunk filled with grocery bags and milk collected by IEB Horta outreach',
-          category: 'Social Outreach',
+          category: 'Outreach · Celeiro',
           dateLabel: 'Service',
           caption:
             'Grateful for every family who contributed groceries and essential supplies to bless neighbors on Faial Island.',
@@ -1864,12 +2502,12 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           category: 'Thanksgiving',
           dateLabel: '1 Thess 5:18',
           caption:
-            'Thanksgiving Weekend: “Give thanks in all circumstances; for this is God’s will for you in Christ Jesus.”',
+            'Thanksgiving: “Give thanks in all circumstances; for this is God’s will for you in Christ Jesus.”',
           scripture: '1 Thessalonians 5:18',
         },
       },
       archivesIntro:
-        'Resources to encourage your faith: Scripture preaching, 51st anniversary highlights on Faial Island, and special community gatherings.',
+        'Resources to encourage your faith: Scripture preaching, November 2026 Monthly Bulletin, special gatherings, and church milestones on Faial Island.',
       archivesYouTubeCta: 'Open YouTube Channel',
       archivesItems: {
         'archive-palavra': {
@@ -1882,73 +2520,73 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           imageAlt: 'Pr. Luiz Eduardo Júnior preaching in the IEB Horta sanctuary',
         },
         'archive-51anos': {
-          category: 'Church Milestone',
-          dateLabel: '51 Years · Romans 5:8',
-          title: '51st Anniversary — Sustained by God’s Love',
+          category: 'Monthly Bulletin',
+          dateLabel: 'November 2026 · 51 Years',
+          title: 'November Bulletin — 51 Years & New Season',
           summary:
-            'Over half a century of Baptist witness in Horta, gathering generations in gratitude for God’s faithfulness.',
-          actionLabel: 'See highlights on @iebhorta',
+            'Full November agenda, community prayer list, gratitude testimony, and transition of Sunday services to Assembleia de Deus do Faial.',
+          actionLabel: 'Open November Agenda',
           imageAlt: '51st anniversary poster for Igreja Evangélica Baptista da Horta',
         },
+        'archive-gracas': {
+          category: 'November Event',
+          dateLabel: 'Nov 27 · 19:30',
+          title: 'Community Thanksgiving Dinner',
+          summary:
+            'Fellowship dinner at Assembleia de Deus do Faial (€3.00 per person + 1 dish per family). Sign-ups & payment by November 22.',
+          actionLabel: 'Confirm attendance',
+          imageAlt: 'Thanksgiving announcement by IEB Horta',
+        },
         'archive-familia': {
-          category: 'Community Event',
+          category: 'Community Life',
           dateLabel: 'Parque da Salgueirinha',
           title: 'Outdoor Family Day in Feteira',
           summary:
-            'Annual outdoor gathering with worship, community lunch, and fellowship for members, children, and visiting friends.',
-          actionLabel: 'Join us next time',
+            'Highlights from our annual outdoor gathering with worship, community lunch, and fellowship for members, children, and visitors.',
+          actionLabel: 'Explore on @iebhorta',
           imageAlt: 'Official poster for Family Day at Parque da Salgueirinha',
-        },
-        'archive-gracas': {
-          category: 'Special Service',
-          dateLabel: '1 Thessalonians 5:18',
-          title: 'Thanksgiving Weekend in the Azores',
-          summary:
-            'Times dedicated to praising God together, sharing testimonies, and giving thanks for His provision throughout the year.',
-          actionLabel: 'Explore on Instagram',
-          imageAlt: 'Thanksgiving Weekend announcement by IEB Horta',
         },
       },
       giving: {
-        kicker: 'Stewardship & Generosity',
-        heading: 'Support the mission and local outreach on Faial',
+        kicker: 'Stewardship & Celeiro',
+        heading: 'Support the mission and the Christmas Hamper on Faial',
         paragraph1:
           'Igreja Evangélica Baptista da Horta sustains its spiritual and community work solely through the voluntary offerings and tithes of its members and friends.',
         paragraph2:
-          'Every gift supports our worship sanctuary and Sunday School classrooms, children and youth teaching, regional mission, and food relief for families in Horta.',
+          'In November, our Celeiro ministry also invites monetary donations to prepare Christmas hampers for families supported on the island.',
         pillars: [
           {
-            title: 'Teaching & Public Worship',
-            text: 'Maintaining our sanctuary, Sunday School classes, hospitality, and Gospel preaching.',
+            title: 'Celeiro · Christmas Hamper',
+            text: 'Monetary gifts throughout November to prepare Christmas hampers for local households.',
           },
           {
-            title: 'Local Social Outreach',
-            text: 'Ongoing food drives and practical care for households in need across Faial Island.',
+            title: 'Teaching & Public Worship',
+            text: 'Maintaining Sunday gatherings (16:00 EBD & 17:15 Worship), hospitality, and Gospel preaching.',
           },
           {
             title: 'Mission in the Azores',
-            text: 'Partnership with the Azorean Baptist Association and local discipleship initiatives.',
+            text: 'Partnership with the Azorean Baptist Association and support for mission work on São Jorge.',
           },
         ],
         ctaWhatsApp: 'Request details on WhatsApp',
         ctaEmail: 'Contact via Email',
         whatsappMessage:
-          'Hello! I would like to ask how to contribute an offering to Igreja Evangélica Baptista da Horta.',
-        mailSubject: 'Offering & Contribution Information — IEB Horta',
+          'Hello! I would like information on contributing to IEB Horta or supporting the Celeiro Christmas Hamper.',
+        mailSubject: 'Offering & Celeiro Information — IEB Horta',
       },
     },
     visit: {
       kicker: 'Contact & First Visit',
       heading: 'Plan your first visit',
       intro:
-        'It will be a joy to welcome you in person in Horta. Check our locations and let us know when you plan to visit so we can greet you.',
+        'It will be a joy to welcome you in person in Horta. Since November 8, services take place at the Assembleia de Deus do Faial facilities (with Av. Marginal, 17 kept as our official address).',
       spaceTabsAria: 'Select church location',
       copyAddress: 'Copy address',
       copiedAddress: 'Address copied',
       visitorNotes: [
-        'Central waterfront location facing Horta Bay on Av. Marginal, 17.',
-        'Come as you are — our atmosphere is warm and family-friendly.',
-        'Sunday Bible School classrooms for adults, teens, and children.',
+        'Services from Nov 8 at Igreja Assembleia de Deus do Faial facilities.',
+        'Sundays at 16:00 (Sunday Bible School) and 17:15 (Celebration Service).',
+        'Wednesdays at 19:00 — Prayer & Word Study Service.',
       ],
       googleMaps: 'Google Maps',
       openWaze: 'Open in Waze',
@@ -1959,13 +2597,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       namePlaceholder: 'e.g., Maria Clara',
       phoneLabel: 'WhatsApp / Phone',
       phonePlaceholder: '+351 9XX XXX XXX',
-      dayQuestion: 'Which day would you like to visit?',
-      dayAria: 'Preferred visit day',
+      dayQuestion: 'Which gathering would you like to visit?',
+      dayAria: 'Preferred visit gathering',
       dayOptions: [
-        'Sunday · 10:00 (Bible School)',
-        'Sunday · 11:15 (Celebration Service)',
-        'Sunday · 16:00 (EBD, R. do Pasteleiro)',
-        'Confirm midweek schedule',
+        'Sunday · 16:00 (Sunday Bible School)',
+        'Sunday · 17:15 (Celebration Service)',
+        'Wednesday · 19:00 (Prayer & Study)',
+        'Nov 27 · 19:30 (Thanksgiving Dinner)',
       ],
       groupQuestion: 'How many people?',
       groupAria: 'Group size',
@@ -1993,17 +2631,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       summaryNotePrefix: 'Note:',
       contactLabel: 'Contact:',
       locations: {
-        templo: {
-          label: 'Main Sanctuary',
-          title: 'Celebration Service & EBD (10:00)',
-          region: 'Matriz · Faial Island, Azores, Portugal',
-          note: 'Facing Horta Bay, with easy access and a warm welcome.',
-        },
         ebd: {
-          label: 'EBD Rooms (16:00)',
-          title: 'Sunday Bible School (Sunday 16:00)',
-          region: '9900 Horta · Faial Island, Azores',
-          note: 'Temporary facility with separate rooms for Adults, Teens, and Children.',
+          label: 'Worship Venue',
+          title: 'Sunday Services & Prayer (from Nov 8)',
+          region: 'Horta · Faial Island, Azores',
+          note: 'Where our church meets: Sundays 16:00 (EBD) & 17:15 (Worship), Wednesdays 19:00.',
+        },
+        templo: {
+          label: 'Official Address',
+          title: 'Igreja Evangélica Baptista da Horta (HQ)',
+          region: '9900-121 Horta · Faial Island, Azores, Portugal',
+          note: 'Official church mailing address at Avenida Marginal, 17.',
         },
       },
     },
@@ -2016,9 +2654,9 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
       youtubeLabel: 'YouTube IEB Horta',
-      whatsappLabel: 'Church WhatsApp',
+      whatsappLabel: 'Pastor WhatsApp (933 855 290)',
       rightsReserved: 'All rights reserved.',
-      sundayLine: 'Sundays · 10:00 Bible School · 11:15 Celebration Service',
+      sundayLine: 'Sundays · 16:00 Sunday School · 17:15 Celebration Service',
     },
     mobileBar: {
       ariaLabel: 'Quick navigation and contact actions',
@@ -2032,7 +2670,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Église Évangélique Baptiste de Horta',
       description:
-        'Un lieu de foi, de famille et de nouveaux départs sur l’île de Faial, Açores. Horaires des cultes, confession de foi, ministères, communauté @iebhorta et informations pour planifier votre visite.',
+        'Un lieu de foi, de famille et de nouveaux départs sur l’île de Faial, Açores. Agenda de novembre 2026, nouveaux horaires du dimanche (16h00 EBD, 17h15 Culte), ministères et accueil.',
       skipToContent: 'Aller au contenu principal',
     },
     nav: {
@@ -2042,12 +2680,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       languageMenuTitle: 'Langue',
       links: {
         schedule: 'Horaires',
+        novemberAgenda: 'Agenda Novembre',
         essence: 'À propos',
         ministries: 'Ministères',
         community: 'Contenus',
         visit: 'Contacts',
       },
       subLinks: {
+        novemberAgenda: 'Agenda du Mois',
+        novemberAnnouncements: 'Annonces & Repas (27/11)',
+        novemberPrayer: 'Sujets de Prière',
+        novemberGratitude: 'Reconnaissance & Anniversaires',
         churchHistory: 'L’Église (51 Ans)',
         whatWeBelieve: 'Ce Que Nous Croyons',
         cooperation: 'Coopération Baptiste',
@@ -2060,16 +2703,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       openMenu: 'Ouvrir le menu',
       closeMenu: 'Fermer le menu',
       closeNavDrawer: 'Fermer le menu de navigation',
-      drawerSummary: 'Dimanches à 10h00 (École Biblique) et 11h15 (Culte).',
+      drawerSummary: 'Dimanches à 16h00 (EBD) et 17h15 (Culte) · AD Faial.',
       whatsapp: 'WhatsApp',
     },
     hero: {
       imageAlt:
         'Intérieur lumineux de l’église baigné par la lumière du matin avec la communauté réunie',
-      kickerYears: '51 Ans à Horta, Açores',
+      kickerYears: 'Bulletin Novembre 2026 · 51 Ans à Faial',
       headline: 'Un lieu de foi, de famille et de nouveaux départs.',
       subheadline:
-        'Soutenus par l’amour de Dieu sur l’île de Faial. Une église chrétienne aux portes ouvertes pour marcher avec vous et votre famille dans la Parole et la communion.',
+        'Soutenus par l’amour de Dieu sur l’île de Faial. À partir du 8 novembre, nos cultes ont lieu dans les locaux de l’Assembleia de Deus do Faial : dimanches à 16h00 (EBD) et 17h15 (Culte).',
       ctaVisit: 'Planifier votre visite',
       ctaInstagram: 'Suivre @iebhorta',
       watchYouTube: 'Cultes sur YouTube',
@@ -2078,22 +2721,21 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       slideLabelPrefix: 'Temps fort',
       slides: {
         welcome: {
-          kicker: '51 Ans à Horta, Açores',
+          kicker: 'Bulletin de Novembre 2026 · 51 Ans à Faial',
           headline: 'Un lieu de foi, de famille et de nouveaux départs.',
           subheadline:
-            'Soutenus par l’amour de Dieu sur l’île de Faial. Une église chrétienne aux portes ouvertes pour marcher avec vous et votre famille dans la Parole et la communion.',
-          ctaLabel: 'Planifier votre visite',
+            'Soutenus par l’amour de Dieu sur l’île de Faial. Consultez l’Agenda de Novembre et nos horaires du dimanche (16h00 EBD · 17h15 Célébration).',
+          ctaLabel: 'Voir Agenda Novembre',
           imageAlt:
             'Intérieur lumineux de l’église baigné par la lumière du matin avec la communauté réunie',
         },
         'sunday-worship': {
-          kicker: 'Av. Marginal, 17 · Tous les Dimanches',
-          headline: 'Adoration, enseignement biblique et communion à Horta.',
+          kicker: 'Assembleia de Deus do Faial · Depuis le 8 Novembre',
+          headline: 'Nouveaux horaires du dimanche : 16h00 EBD et 17h15 Culte.',
           subheadline:
-            'Nous nous réunissons le dimanche à 10h00 pour l’École Biblique (ou à 16h00 à Angústias) et à 11h15 pour le Culte de Célébration.',
+            'Nous nous réunissons aussi le mercredi à 19h00 pour le Culte de Prière et l’Étude de la Parole. Portes ouvertes à toute la famille.',
           ctaLabel: 'Voir les Horaires',
-          imageAlt:
-            'Intérieur du temple de l’Igreja Evangélica Baptista da Horta sur l’Avenida Marginal',
+          imageAlt: 'Intérieur de l’Igreja Evangélica Baptista da Horta',
         },
         'church-family': {
           kicker: 'Affiliée à la Convention Baptiste Portugaise',
@@ -2113,8 +2755,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       doorsOpenNote: 'Portes ouvertes à toute la famille.',
       calendarSaved: 'Invitation (.ics) enregistrée',
       calendarSave: 'Ajouter dimanche à l’agenda',
-      ebdStripTextBefore: 'École biblique à',
-      ebdStripTextAfter: '— Rua do Pasteleiro, 12-D (Angústias)',
+      ebdStripTextBefore: 'Mercredi à',
+      ebdStripTextAfter: '— Culte de Prière et Étude de la Parole',
       pastorLabel: 'Pasteur :',
       whatsappMessage:
         'Bonjour ! Je souhaiterais en savoir plus sur les cultes de l’Igreja Evangélica Baptista da Horta et planifier une visite.',
@@ -2123,57 +2765,247 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       prodId: '-//IEB Horta//Agenda Dominical//FR',
       summary: 'Culte de Célébration — IEB Horta',
       description:
-        'École Biblique à 10h00 et Culte de Célébration à l’Igreja Evangélica Baptista da Horta. Bienvenue à tous !',
+        'École Biblique à 16h00 et Culte de Célébration à 17h15 dans les locaux de l’Assembleia de Deus do Faial (Horta). Bienvenue à tous !',
       fileName: 'culte-ieb-horta.ics',
     },
     schedule: {
-      kicker: 'Programme Hebdomadaire',
+      kicker: 'Activités et Horaires · Novembre 2026',
       heading: 'Nos rendez-vous en famille',
       intro:
-        'Chaque dimanche, nous nous réunissons pour étudier les Écritures à l’École Biblique et célébrer ensemble lors du culte du matin. Si c’est votre première visite, vous y serez chaleureusement accueilli(e).',
+        'À compter du 8 novembre, nos cultes du dimanche se tiennent dans les locaux de l’Igreja Assembleia de Deus do Faial aux nouveaux horaires de l’après-midi, en plus de notre rencontre du mercredi soir.',
       filterAria: 'Filtrer le programme',
       filters: {
         all: 'Tout le programme',
         sunday: 'Dimanches',
-        week: 'Semaine & Familles',
+        week: 'Semaine & Louange',
       },
       calendarSaved: 'Événement enregistré (.ics)',
       calendarSave: 'Enregistrer au calendrier',
       watchYouTube: 'Voir sur YouTube',
       confirmVisit: 'Confirmer une visite',
       items: {
-        celebracao: {
-          title: 'Culte de Célébration',
-          day: 'Dimanches',
-          times: ['11h15'],
-          location: 'Av. Marginal, 17 — Horta',
-          description:
-            'Culte dominical de louange, de communion fraternelle et d’enseignement biblique. En été (juillet et août), le culte débute à 11h00.',
-        },
         ebd: {
           title: 'École Biblique du Dimanche (EBD)',
           day: 'Dimanches',
-          times: ['10h00', '16h00'],
-          location: 'Adultes, adolescents et enfants',
+          times: ['16h00'],
+          location: 'Locaux de l’Assembleia de Deus do Faial',
           description:
-            'Étude biblique par tranches d’âge à 10h00, Av. Marginal, 17, ou à 16h00, Rua do Pasteleiro, 12-D (Angústias).',
+            'Étude biblique communautaire le dimanche à 16h00 avec des classes pour adultes, adolescents et enfants.',
+        },
+        celebracao: {
+          title: 'Culte de Louange et Prédication de la Parole',
+          day: 'Dimanches',
+          times: ['17h15'],
+          location: 'Locaux de l’Assembleia de Deus do Faial',
+          description:
+            'Culte dominical de célébration, de louange, de communion et d’enseignement biblique à 17h15.',
         },
         'oracao-lares': {
-          title: 'Prière, Enseignement & Groupes de Maison',
-          day: 'En semaine',
-          times: ['Agenda @iebhorta'],
-          location: 'Temple et foyers à Faial',
+          title: 'Culte de Prière et Étude de la Parole',
+          day: 'Mercredis',
+          times: ['19h00'],
+          location: 'Rencontre hebdomadaire de prière',
           description:
-            'Rencontres hebdomadaires de prière, lecture des Écritures et communion dans les foyers. Contactez-nous pour confirmer les horaires.',
+            'Temps d’intercession pour les familles, le pays et l’église persécutée, accompagné d’une étude biblique.',
         },
         'kids-familia': {
-          title: 'Enfants, Parents & Familles',
-          day: 'Dimanches et événements',
-          times: ['Programme familial'],
-          location: 'EBD Enfants et Parque da Salgueirinha',
+          title: 'Répétition de Louange & Familles',
+          day: 'Vendredis ou Samedis',
+          times: ['À confirmer'],
+          location: 'Équipe de Louange · Temps Forts',
           description:
-            'Enseignement biblique créatif pour les enfants, ateliers familiaux en ville et notre traditionnelle Journée de la Famille en plein air.',
+            'Répétition hebdomadaire du groupe de louange (vendredi/samedi) et rencontres familiales comme le Dîner d’Action de grâces en novembre.',
         },
+      },
+    },
+    bulletin: {
+      kicker: 'Bulletin Mensuel · Novembre 2026',
+      heading: 'Agenda de Novembre, annonces & vie d’église',
+      intro:
+        'Retrouvez le calendrier officiel de novembre 2026, le passage aux locaux de l’Assembleia de Deus do Faial, les sujets de prière et le témoignage de reconnaissance.',
+      downloadPdf: 'Imprimer le Bulletin',
+      tabsAria: 'Choisir une section du Bulletin de Novembre',
+      tabs: {
+        agenda: 'Agenda du Mois',
+        announcements: 'Annonces & Actions',
+        prayer: 'Sujets de Prière',
+        gratitude: 'Reconnaissance & Anniversaires',
+      },
+      agendaItems: {
+        'nov-01': {
+          weekday: 'Dimanche',
+          title: 'Culte avec célébration de la Cène et Baptême',
+          detail:
+            'Culte du premier dimanche du mois avec Sainte-Cène et baptême.',
+        },
+        'nov-07': {
+          weekday: 'Samedi',
+          title: 'Temps de prière pour l’église persécutée',
+          detail:
+            'Rencontre consacrée à la prière pour les chrétiens et missionnaires persécutés dans le monde.',
+        },
+        'nov-08': {
+          weekday: 'Dimanche · Nouvelle Étape',
+          title: 'Culte avec célébration des Missions Nationales',
+          detail:
+            'Début des cultes à l’Assembleia de Deus do Faial avec nouveaux horaires : 16h00 EBD et 17h15 Culte de Célébration.',
+        },
+        'nov-15': {
+          weekday: 'Dimanche',
+          title: 'Culte de célébration de la Réforme Protestante',
+          detail:
+            'Célébration dominicale rappelant les principes bibliques de la Réforme (échéance initiale des commandes Juntos).',
+        },
+        'nov-22': {
+          weekday: 'Dimanche',
+          title: 'Culte de célébration au Seigneur',
+          detail:
+            'École Biblique à 16h00 et Culte à 17h15. Dernier jour d’inscription et de paiement pour le Dîner d’Action de grâces.',
+        },
+        'nov-27': {
+          weekday: 'Vendredi · 19h30',
+          title: 'Dîner d’Action de grâces',
+          detail:
+            'Repas fraternel dans les locaux de l’Assembleia de Deus do Faial (3,00€ par personne + 1 plat par famille).',
+        },
+        'nov-29': {
+          weekday: 'Dimanche',
+          title: 'Culte de célébration au Seigneur',
+          detail:
+            'Clôture du mois de novembre à 16h00 (EBD) et à 17h15 (Culte de Louange et Prédication).',
+        },
+      },
+      activitiesCard: {
+        kicker: 'Activités et Horaires',
+        heading: 'Rythme hebdomadaire en novembre',
+        rows: [
+          {
+            day: 'Dimanche',
+            time: '16h00',
+            label: 'École Biblique du Dimanche',
+          },
+          {
+            day: 'Dimanche',
+            time: '17h15',
+            label: 'Culte de Louange & Prédication',
+          },
+          {
+            day: 'Mercredi',
+            time: '19h00',
+            label: 'Culte de Prière et Étude',
+          },
+          {
+            day: 'Ven / Sam',
+            time: 'Hebdo',
+            label: 'Répétition du groupe de Louange',
+          },
+        ],
+        venueNote:
+          'Lieu des cultes depuis le 8 novembre : Locaux de l’Igreja Assembleia de Deus do Faial.',
+        cta: 'Itinéraire et confirmation de venue',
+      },
+      venueAnnouncement: {
+        kicker: 'Annonce Principale',
+        title: 'Nouveau lieu et horaires depuis le 8 novembre',
+        body1:
+          'C’est avec joie que nous partageons avec vous qu’à partir du 8 novembre, nos cultes se déroulent dans les locaux de l’Igreja Assembleia de Deus do Faial.',
+        times: [
+          '16h00 — École Biblique du Dimanche',
+          '17h15 — Culte de Célébration',
+        ],
+        body2:
+          'Nous souhaitons continuer à marcher ensemble, unis dans la foi, l’amour et la prière, confiants que Dieu conduit toutes choses selon Sa volonté.',
+        cta: 'Voir adresse et contacts',
+      },
+      thanksgivingDinner: {
+        dateShort: '27 Novembre · 19h30',
+        title: 'Dîner d’Action de grâces',
+        summary:
+          'Vendredi à 19h30 dans les locaux de l’Assembleia de Deus do Faial. 3,00€ par personne + 1 plat par famille.',
+        seeDetails: 'Voir modalités et inscription',
+        description:
+          'Venez rendre grâce et célébrer en famille lors de notre Dîner communautaire d’Action de grâces à l’Assembleia de Deus do Faial.',
+        details: [
+          { label: 'Date et heure', value: '27 nov. · 19h30' },
+          {
+            label: 'Participation',
+            value: '3,00€ par personne + 1 plat par famille',
+          },
+          { label: 'Inscriptions', value: 'Jusqu’au 22 novembre' },
+          { label: 'Lieu', value: 'Assembleia de Deus do Faial' },
+        ],
+        cta: 'S’inscrire via WhatsApp',
+        whatsappMessage:
+          'Bonjour ! Je souhaiterais m’inscrire au Dîner d’Action de grâces de l’IEB Horta le 27 novembre.',
+      },
+      juntosCampaign: {
+        kicker: 'Campagne de Prière',
+        title: 'Kit de Prière & Dévotionnel Juntos Kids',
+        description:
+          'Supports de prière de la campagne Juntos pour nourrir la vie spirituelle en famille, pour adultes et enfants.',
+        tier1Title: 'Commandes jusqu’au 15 nov.',
+        tier1Items: 'Kit de Prière : 4€ · Dévotionnel Juntos Kids : 2€',
+        tier2Title: 'Commandes après le 15 nov.',
+        tier2Items: 'Kit de Prière : 5€ · Dévotionnel Juntos Kids : 2,50€',
+      },
+      celeiro: {
+        kicker: 'Celeiro de Novembre',
+        title: 'Soutien au Panier de Noël',
+        description:
+          'Ce mois-ci, le ministère Celeiro compte sur votre soutien pour préparer les Paniers de Noël des familles accompagnées, par un don financier.',
+        cta: 'Voir comment contribuer dans Offrandes & Mission',
+      },
+      prayerIntro:
+        'Unissez-vous à nous dans la prière tout au long du mois de novembre pour les sujets réels de notre église, des Açores, du Portugal et des missions :',
+      prayerCta: 'Envoyer un sujet de prière',
+      prayerWhatsappMessage:
+        'Bonjour ! Je souhaiterais partager un sujet de prière avec l’IEB Horta.',
+      prayerRequests: {
+        families:
+          'Pour nos familles, enfants, jeunes, adultes et nos sœurs enceintes.',
+        'new-decisions':
+          'Pour nos frères et sœurs qui ont récemment pris une décision pour Jésus et pour leurs familles.',
+        'jean-lima':
+          'Pour notre frère Jean Lima, qui a pris la décision d’être baptisé.',
+        'church-future':
+          'Pour l’avenir de notre église et les défis de cette nouvelle étape.',
+        'sao-jorge':
+          'Pour Sœur Bernadete et sa famille, pour David, Bruna et leur famille, ainsi que la mission sur l’île de São Jorge.',
+        health:
+          'Pour nos frères et sœurs malades et ceux qui sont en convalescence.',
+        relatives:
+          'Pour nos proches, amis et voisins qui n’ont pas encore confié leur vie à Jésus.',
+        country:
+          'Pour notre pays, nos autorités et nos dirigeants.',
+        persecuted:
+          'Pour les églises et nos frères missionnaires persécutés par amour pour Jésus.',
+        disasters:
+          'Pour les pays touchés par des catastrophes et les frères qui en ont été victimes.',
+        'convention-aba':
+          'Pour la direction de la Convention Baptiste Portugaise, l’ABA et davantage d’ouvriers au Portugal.',
+      },
+      gratitude: {
+        kicker: 'Moment de Reconnaissance',
+        title: 'Témoignage de la famille Miqueias, Lorena et Eva',
+        paragraphs: [
+          'Il y a des moments dans la vie où les mots semblent trop petits pour exprimer la grandeur de ce que Dieu fait pour nous. Aujourd’hui, en famille, nous voulons élever notre reconnaissance au Seigneur, sachant qu’à chaque étape Sa main nous a soutenus, Sa grâce nous a atteints et Sa fidélité ne nous a jamais manqué.',
+          'Nous sommes reconnaissants non seulement pour les bénédictions reçues, mais aussi pour tout ce que Dieu a accompli en nous en chemin — dans la joie comme dans l’épreuve.',
+          'En cette saison si particulière, nos cœurs débordent de gratitude pour la vie de notre petite Eva, encore dans le sein maternel mais occupant déjà une place immense dans nos vies. Avant même de la serrer dans nos bras, nous reconnaissons la main du Créateur sur elle.',
+          'Nous confions au Seigneur notre présent, notre avenir et la vie de notre fille, convaincus que Jésus est notre plus grand trésor.',
+        ],
+        signature:
+          'Avec un cœur profondément reconnaissant — Miqueias, Lorena et Eva',
+        verse:
+          '« L’Éternel a fait pour nous de grandes choses ; nous sommes dans la joie. » — Psaumes 126:3',
+      },
+      birthdays: {
+        kicker: 'Anniversaires du Mois',
+        title: 'Nous célébrons la vie en novembre',
+        updateNote:
+          '*Aidez-nous à mettre à jour la liste des anniversaires de l’église en partageant votre date.',
+        cta: 'Transmettre votre date',
+        whatsappMessage:
+          'Bonjour ! Je souhaiterais communiquer ma date d’anniversaire pour la liste de l’IEB Horta.',
       },
     },
     about: {
@@ -2184,7 +3016,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       sanctuaryAlt:
         'Intérieur du temple de l’IEB Horta sur l’Avenida Marginal avec bancs en bois et croix',
       sanctuaryFallback: 'Temple Av. Marginal, 17',
-      sanctuaryCaption: 'Culte au temple · Av. Marginal, 17.',
+      sanctuaryCaption: 'Siège officiel · Av. Marginal, 17.',
       kicker: 'À propos de l’Église',
       heading: 'Aimer Dieu, servir les personnes et vivre l’Évangile sur l’île.',
       sealAlt: 'Sceau officiel Igreja Evangélica Baptista da Horta',
@@ -2217,7 +3049,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         '03': {
           title: 'Service',
           description:
-            'Nous vivons l’Évangile au-delà des murs du temple grâce aux collectes alimentaires solidaires et à un accueil attentif.',
+            'Nous vivons l’Évangile au-delà des murs du temple grâce au projet Celeiro, aux collectes solidaires et à un accueil attentif.',
         },
       },
       beliefsIntro:
@@ -2268,7 +3100,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           name: 'Association Baptiste Açoréenne',
           scope: 'Archipel des Açores',
           description:
-            'Communion régionale entre les églises baptistes des îles des Açores lors d’assemblées et de camps.',
+            'Communion régionale entre les églises baptistes des îles des Açores, y compris la mission à São Jorge.',
         },
         aep: {
           name: 'Alliance Évangélique Portugaise',
@@ -2308,7 +3140,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         jovens: {
           title: 'Jeunes & Adolescents',
           summary: 'Salles dédiées à l’EBD, amitié et dialogue biblique.',
-          schedule: 'Dimanches à l’EBD · Rencontres hebdomadaires',
+          schedule: 'Dimanches à 16h00 (EBD) · Rencontres hebdomadaires',
           audience: 'Adolescents et jeunes adultes',
           description:
             'Un espace pour tisser de vraies amitiés, échanger librement sur la foi et le quotidien, et servir ensemble dans la communauté.',
@@ -2316,38 +3148,38 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         },
         casais: {
           title: 'Familles & Femmes',
-          summary: 'Journée de la Famille, ateliers et rencontres Plenas em Cristo.',
-          schedule: 'Rencontres périodiques et retraites',
+          summary: 'Journée de la Famille, Action de grâces et Plenas em Cristo.',
+          schedule: 'Rencontres périodiques et célébrations',
           audience: 'Familles, couples et femmes',
           description:
-            'Des initiatives comme la Journée de la Famille au Parque da Salgueirinha, des ateliers parents-enfants et les rencontres féminines Plenas em Cristo.',
+            'Des initiatives comme la Journée de la Famille au Parque da Salgueirinha, le Dîner d’Action de grâces et les rencontres féminines Plenas em Cristo.',
           imageAlt:
             'Femmes réunies chantant avec guitare lors de la rencontre Plenas em Cristo',
         },
         'infantil-ebd': {
           title: 'École Biblique & Enfants',
           summary: 'Salles adaptées pour enfants, adolescents et adultes.',
-          schedule: 'Dimanches à 10h00 et à 16h00',
+          schedule: 'Dimanches à 16h00',
           audience: 'Tous les âges',
           description:
-            'Un enseignement biblique adapté à chaque âge — avec des salles pour enfants, adolescents et adultes, ainsi que des ateliers créatifs en famille.',
+            'Un enseignement biblique adapté à chaque âge — avec des classes pour enfants, adolescents et adultes, ainsi que le livret Juntos Kids.',
           imageAlt:
             'Bible ouverte avec les horaires de l’École Biblique du Dimanche de l’IEB Horta',
         },
         'acao-social': {
-          title: 'Action Sociale',
-          summary: 'Collecte et partage solidaire de denrées à Faial.',
-          schedule: 'Campagnes continues d’entraide locale',
+          title: 'Action Sociale · Celeiro',
+          summary: 'Campagne du Panier de Noël et entraide solidaire à Faial.',
+          schedule: 'Campagnes mensuelles d’entraide',
           audience: 'Ouvert à tous les bénévoles',
           description:
-            'Mobilisation des membres et amis pour collecter des denrées alimentaires et soutenir les familles dans le besoin à Horta.',
+            'Avec le ministère Celeiro, mobilisation des membres et amis pour soutenir les foyers de Horta, y compris le Panier de Noël en novembre.',
           imageAlt:
             'Provisions solidaires collectées par l’Action Sociale de l’IEB Horta',
         },
         'batismo-discipulado': {
           title: 'Baptême & Discipulat',
           summary: 'Premiers pas dans la foi chrétienne et suivi pastoral.',
-          schedule: 'Accompagnement avec le Pasteur Luiz Eduardo Júnior',
+          schedule: 'Suivi avec le Pasteur Luiz Eduardo Júnior (933 855 290)',
           audience: 'Visiteurs et nouveaux membres',
           description:
             'Étude biblique de proximité pour découvrir les fondements de l’Évangile, poser vos questions et préparer le baptême.',
@@ -2389,15 +3221,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Corinthiens 10:31',
         },
         'post-schedule': {
-          alt: 'Publication officielle des horaires @iebhorta : 10h00 École Biblique et 11h15 Culte, Av. Marginal, 17',
-          category: 'Dimanches',
-          dateLabel: '10h00 & 11h15',
+          alt: 'Archive officielle @iebhorta sur l’École Biblique et le Culte',
+          category: 'Archive @iebhorta',
+          dateLabel: 'EBD & Culte',
           caption:
-            'Tous les dimanches, Av. Marginal, 17 — Horta : à 10h00 École Biblique du Dimanche et à 11h15 Culte de Célébration.',
+            'Archive de nos dimanches. À partir du 8 novembre 2026 : 16h00 EBD et 17h15 Culte de Célébration à l’Assembleia de Deus do Faial.',
         },
         'post-social': {
           alt: 'Coffre de voiture rempli de sacs de courses et de lait collectés par l’action sociale de l’IEB Horta',
-          category: 'Action Sociale',
+          category: 'Action Sociale · Celeiro',
           dateLabel: 'Service',
           caption:
             'Reconnaissance envers chaque famille qui a contribué à la collecte solidaire sur l’île de Faial.',
@@ -2422,12 +3254,12 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           category: 'Action de grâces',
           dateLabel: '1 Th 5:18',
           caption:
-            'Week-end d’Action de grâces : « Rendez grâces en toutes choses, car c’est à votre égard la volonté de Dieu en Jésus-Christ. »',
+            'Action de grâces : « Rendez grâces en toutes choses, car c’est à votre égard la volonté de Dieu en Jésus-Christ. »',
           scripture: '1 Thessaloniciens 5:18',
         },
       },
       archivesIntro:
-        'Des contenus pour édifier votre foi : prédications des Écritures, rétrospective des 51 ans à Faial et temps forts de la communauté.',
+        'Des contenus pour édifier votre foi : prédications des Écritures, Bulletin Mensuel de Novembre 2026, célébrations et temps forts à Faial.',
       archivesYouTubeCta: 'Ouvrir la chaîne YouTube',
       archivesItems: {
         'archive-palavra': {
@@ -2440,73 +3272,73 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           imageAlt: 'Le pasteur Luiz Eduardo Júnior prêchant au temple de l’IEB Horta',
         },
         'archive-51anos': {
-          category: 'Jubilé',
-          dateLabel: '51 Ans · Romains 5:8',
-          title: '51e Anniversaire — Soutenus par l’Amour de Dieu',
+          category: 'Bulletin Mensuel',
+          dateLabel: 'Novembre 2026 · 51 Ans',
+          title: 'Bulletin de Novembre — 51 Ans & Nouvelle Étape',
           summary:
-            'Plus d’un demi-siècle de présence baptiste à Horta, rassemblant toutes les générations dans la reconnaissance envers Dieu.',
-          actionLabel: 'Voir sur @iebhorta',
+            'Calendrier complet de novembre, sujets de prière, témoignage de reconnaissance et passage des cultes du dimanche à l’Assembleia de Deus do Faial.',
+          actionLabel: 'Voir Agenda Novembre',
           imageAlt: 'Affiche du 51e anniversaire de l’IEB Horta',
         },
+        'archive-gracas': {
+          category: 'Événement de Novembre',
+          dateLabel: '27 nov. · 19h30',
+          title: 'Dîner communautaire d’Action de grâces',
+          summary:
+            'Repas fraternel à l’Assembleia de Deus do Faial (3,00€ par personne + 1 plat par famille). Inscriptions jusqu’au 22 novembre.',
+          actionLabel: 'Confirmer votre présence',
+          imageAlt: 'Annonce d’Action de grâces de l’IEB Horta',
+        },
         'archive-familia': {
-          category: 'Événement Communautaire',
+          category: 'Vie d’Église',
           dateLabel: 'Parque da Salgueirinha',
           title: 'Journée de la Famille en plein air à Feteira',
           summary:
-            'Rencontre annuelle avec culte en plein air, repas partagé et moments fraternels pour les familles et visiteurs sur l’île.',
-          actionLabel: 'Participer à la prochaine',
+            'Souvenir de notre rencontre annuelle avec culte en plein air, repas partagé et moments fraternels pour les familles et visiteurs.',
+          actionLabel: 'Découvrir sur @iebhorta',
           imageAlt: 'Invitation officielle à la Journée de la Famille à Feteira',
-        },
-        'archive-gracas': {
-          category: 'Célébration Spéciale',
-          dateLabel: '1 Thessaloniciens 5:18',
-          title: 'Week-end d’Action de grâces aux Açores',
-          summary:
-            'Des cultes dédiés à la louange, au partage de témoignages et à la gratitude pour la fidélité de Dieu tout au long de l’année.',
-          actionLabel: 'Découvrir sur Instagram',
-          imageAlt: 'Annonce du Week-end d’Action de grâces de l’IEB Horta',
         },
       },
       giving: {
-        kicker: 'Générosité & Soutien',
-        heading: 'Soutenir la mission et l’entraide locale à Faial',
+        kicker: 'Générosité & Celeiro',
+        heading: 'Soutenir la mission et le Panier de Noël à Faial',
         paragraph1:
           'L’Igreja Evangélica Baptista da Horta soutient son ministère spirituel et social uniquement grâce aux dons et offrandes volontaires de ses membres et amis.',
         paragraph2:
-          'Chaque contribution permet d’entretenir les lieux de culte et d’École Biblique, l’enseignement pour les enfants et les jeunes, la mission et l’aide alimentaire à Horta.',
+          'En novembre, le ministère Celeiro compte aussi sur vos dons financiers pour composer les Paniers de Noël des familles accompagnées sur l’île.',
         pillars: [
           {
-            title: 'Enseignement & Culte Public',
-            text: 'Soutien des salles d’École Biblique, de l’accueil des visiteurs et du partage de la Parole.',
+            title: 'Celeiro · Panier de Noël',
+            text: 'Dons financiers en novembre pour préparer les Paniers de Noël solidaires à Faial.',
           },
           {
-            title: 'Action Sociale Locale',
-            text: 'Collecte régulière de denrées et soutien concret aux foyers dans le besoin sur l’île de Faial.',
+            title: 'Enseignement & Culte Public',
+            text: 'Soutien des cultes dominicaux (16h00 EBD et 17h15 Culte), de l’accueil et de l’enseignement.',
           },
           {
             title: 'Mission aux Açores',
-            text: 'Coopération avec l’Association Baptiste Açoréenne et projets locaux de discipulat.',
+            text: 'Coopération avec l’Association Baptiste Açoréenne et la mission sur l’île de São Jorge.',
           },
         ],
         ctaWhatsApp: 'Demander les informations via WhatsApp',
         ctaEmail: 'Contacter par e-mail',
         whatsappMessage:
-          'Bonjour ! Je souhaiterais obtenir les informations pour faire un don à l’Igreja Evangélica Baptista da Horta.',
-        mailSubject: 'Informations sur les dons et offrandes — IEB Horta',
+          'Bonjour ! Je souhaiterais obtenir les informations pour faire un don à l’IEB Horta ou soutenir le Panier de Noël du Celeiro.',
+        mailSubject: 'Informations sur les dons et Celeiro — IEB Horta',
       },
     },
     visit: {
       kicker: 'Contacts & Première Visite',
       heading: 'Planifiez votre première visite',
       intro:
-        'Ce sera une joie de vous accueillir en personne à Horta. Consultez nos lieux de rencontre et prévenez-nous du jour de votre venue.',
+        'Ce sera une joie de vous accueillir en personne à Horta. Depuis le 8 novembre, les cultes ont lieu dans les locaux de l’Igreja Assembleia de Deus do Faial (l’Av. Marginal, 17 reste le siège officiel).',
       spaceTabsAria: 'Choisir le lieu de l’église',
       copyAddress: 'Copier l’adresse',
       copiedAddress: 'Adresse copiée',
       visitorNotes: [
-        'Emplacement central face à la baie de Horta, Av. Marginal, 17.',
-        'Venez tel que vous êtes — notre ambiance est chaleureuse et familiale.',
-        'Salles d’École Biblique pour adultes, adolescents et enfants.',
+        'Cultes depuis le 08/11 dans les locaux de l’Igreja Assembleia de Deus do Faial.',
+        'Dimanches à 16h00 (École Biblique) et 17h15 (Culte de Célébration).',
+        'Mercredis à 19h00 — Culte de Prière et Étude de la Parole.',
       ],
       googleMaps: 'Google Maps',
       openWaze: 'Ouvrir dans Waze',
@@ -2517,13 +3349,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       namePlaceholder: 'Ex. : Maria Clara',
       phoneLabel: 'WhatsApp / Téléphone',
       phonePlaceholder: '+351 9XX XXX XXX',
-      dayQuestion: 'Quel jour souhaitez-vous nous rendre visite ?',
-      dayAria: 'Jour souhaité pour la visite',
+      dayQuestion: 'À quel rendez-vous souhaitez-vous venir ?',
+      dayAria: 'Rendez-vous souhaité pour la visite',
       dayOptions: [
-        'Dimanche · 10h00 (École Biblique)',
-        'Dimanche · 11h15 (Culte de Célébration)',
-        'Dimanche · 16h00 (EBD, R. do Pasteleiro)',
-        'Confirmer les horaires de la semaine',
+        'Dimanche · 16h00 (École Biblique)',
+        'Dimanche · 17h15 (Culte de Célébration)',
+        'Mercredi · 19h00 (Prière et Étude)',
+        '27 nov. · 19h30 (Dîner Action de grâces)',
       ],
       groupQuestion: 'Combien de personnes ?',
       groupAria: 'Nombre de visiteurs',
@@ -2551,17 +3383,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       summaryNotePrefix: 'Message :',
       contactLabel: 'Contact :',
       locations: {
-        templo: {
-          label: 'Temple Principal',
-          title: 'Culte de Célébration & EBD (10h00)',
-          region: 'Matriz · Île de Faial, Açores, Portugal',
-          note: 'Face à la baie de Horta, accès facile et accueil chaleureux.',
-        },
         ebd: {
-          label: 'Salles EBD (16h00)',
-          title: 'École Biblique du Dimanche (Dimanche 16h00)',
-          region: '9900 Horta · Île de Faial, Açores',
-          note: 'Espace temporaire avec salles séparées pour adultes, adolescents et enfants.',
+          label: 'Lieu des Cultes',
+          title: 'Cultes du Dimanche & Prière (depuis 08/11)',
+          region: 'Horta · Île de Faial, Açores',
+          note: 'Lieu de rencontre actuel : dimanches 16h00 (EBD) et 17h15 (Culte), mercredis 19h00.',
+        },
+        templo: {
+          label: 'Siège Officiel',
+          title: 'Igreja Evangélica Baptista da Horta (Siège)',
+          region: '9900-121 Horta · Île de Faial, Açores, Portugal',
+          note: 'Adresse officielle et postale de l’église, Avenida Marginal, 17.',
         },
       },
     },
@@ -2574,9 +3406,9 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
       youtubeLabel: 'YouTube IEB Horta',
-      whatsappLabel: 'WhatsApp de l’Église',
+      whatsappLabel: 'WhatsApp Pasteur (933 855 290)',
       rightsReserved: 'Tous droits réservés.',
-      sundayLine: 'Dimanches · 10h00 École Biblique · 11h15 Culte',
+      sundayLine: 'Dimanches · 16h00 École Biblique · 17h15 Culte',
     },
     mobileBar: {
       ariaLabel: 'Actions rapides de navigation et de contact',
@@ -2590,7 +3422,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
     meta: {
       title: 'IEB Horta — Iglesia Evangélica Bautista de Horta',
       description:
-        'Un lugar de fe, familia y nuevos comienzos en la Isla de Faial, Azores. Horarios de cultos, confesión de fe, ministerios, comunidad @iebhorta e información para planificar tu visita.',
+        'Un lugar de fe, familia y nuevos comienzos en la Isla de Faial, Azores. Agenda de noviembre 2026, nuevos horarios de domingo (16:00 EBD y 17:15 Culto), ministerios y visita.',
       skipToContent: 'Saltar al contenido principal',
     },
     nav: {
@@ -2600,12 +3432,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       languageMenuTitle: 'Idioma',
       links: {
         schedule: 'Horarios',
+        novemberAgenda: 'Agenda Noviembre',
         essence: 'Sobre Nosotros',
         ministries: 'Ministerios',
         community: 'Contenidos',
         visit: 'Contactos',
       },
       subLinks: {
+        novemberAgenda: 'Agenda del Mes',
+        novemberAnnouncements: 'Anuncios & Cena (27/11)',
+        novemberPrayer: 'Motivos de Oración',
+        novemberGratitude: 'Gratitud & Cumpleaños',
         churchHistory: 'La Iglesia (51 Años)',
         whatWeBelieve: 'Lo Que Creemos',
         cooperation: 'Cooperación Bautista',
@@ -2618,16 +3455,16 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       openMenu: 'Abrir menú',
       closeMenu: 'Cerrar menú',
       closeNavDrawer: 'Cerrar menú de navegación',
-      drawerSummary: 'Domingos a las 10:00 (EBD) y a las 11:15 (Celebración).',
+      drawerSummary: 'Domingos a las 16:00 (EBD) y 17:15 (Culto) · AD Faial.',
       whatsapp: 'WhatsApp',
     },
     hero: {
       imageAlt:
         'Interior luminoso de la iglesia con luz natural de la mañana y comunidad reunida',
-      kickerYears: '51 Años en Horta, Azores',
+      kickerYears: 'Boletín Noviembre 2026 · 51 Años en Faial',
       headline: 'Un lugar de fe, familia y nuevos comienzos.',
       subheadline:
-        'Sostenidos por el amor de Dios en la Isla de Faial. Una iglesia cristiana de puertas abiertas para caminar contigo y tu familia en la Palabra y la comunión.',
+        'Sostenidos por el amor de Dios en la Isla de Faial. Desde el 8 de noviembre nos reunimos en las instalaciones de la Assembleia de Deus do Faial: domingos a las 16:00 (EBD) y 17:15 (Culto).',
       ctaVisit: 'Planifica tu Visita',
       ctaInstagram: 'Sigue a @iebhorta',
       watchYouTube: 'Cultos en YouTube',
@@ -2636,22 +3473,21 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       slideLabelPrefix: 'Destacado',
       slides: {
         welcome: {
-          kicker: '51 Años en Horta, Azores',
+          kicker: 'Boletín de Noviembre 2026 · 51 Años en Faial',
           headline: 'Un lugar de fe, familia y nuevos comienzos.',
           subheadline:
-            'Sostenidos por el amor de Dios en la Isla de Faial. Una iglesia cristiana de puertas abiertas para caminar contigo y tu familia en la Palabra y la comunión.',
-          ctaLabel: 'Planifica tu Visita',
+            'Sostenidos por el amor de Dios en la Isla de Faial. Consulta nuestra Agenda de Noviembre y los horarios dominicales (16:00 EBD · 17:15 Celebración).',
+          ctaLabel: 'Ver Agenda Noviembre',
           imageAlt:
             'Interior luminoso de la iglesia con luz natural de la mañana y comunidad reunida',
         },
         'sunday-worship': {
-          kicker: 'Av. Marginal, n.º 17 · Todos los Domingos',
-          headline: 'Adoración, enseñanza bíblica y comunión en Horta.',
+          kicker: 'Assembleia de Deus do Faial · Desde el 8 de Noviembre',
+          headline: 'Nuevos horarios de domingo: 16:00 EBD y 17:15 Culto.',
           subheadline:
-            'Nos reunimos los domingos a las 10:00 en la Escuela Bíblica Dominical (o a las 16:00 en Angústias) y a las 11:15 en el Culto de Celebración.',
+            'También nos reunimos los miércoles a las 19:00 para el Culto de Oración y Estudio de la Palabra. Puertas abiertas para toda la familia.',
           ctaLabel: 'Ver Horarios',
-          imageAlt:
-            'Interior del templo de la Igreja Evangélica Baptista da Horta en Avenida Marginal',
+          imageAlt: 'Interior de la Igreja Evangélica Baptista da Horta',
         },
         'church-family': {
           kicker: 'Afiliada a la Convención Bautista Portuguesa',
@@ -2671,8 +3507,8 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       doorsOpenNote: 'Puertas abiertas para toda la familia.',
       calendarSaved: 'Invitación (.ics) guardada',
       calendarSave: 'Añadir domingo a la agenda',
-      ebdStripTextBefore: 'EBD a las',
-      ebdStripTextAfter: 'en Rua do Pasteleiro, n.º 12-D (Angústias)',
+      ebdStripTextBefore: 'Miércoles a las',
+      ebdStripTextAfter: '— Culto de Oración y Estudio de la Palabra',
       pastorLabel: 'Pastorado:',
       whatsappMessage:
         '¡Hola! Me gustaría saber más sobre los cultos de la Igreja Evangélica Baptista da Horta y planificar una visita.',
@@ -2681,57 +3517,246 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       prodId: '-//IEB Horta//Agenda Dominical//ES',
       summary: 'Culto de Celebración — IEB Horta',
       description:
-        'Escuela Bíblica Dominical a las 10:00 y Culto de Celebración en la Igreja Evangélica Baptista da Horta. ¡Puertas abiertas!',
+        'Escuela Bíblica Dominical a las 16:00 y Culto de Celebración a las 17:15 en las instalaciones de la Assembleia de Deus do Faial (Horta). ¡Puertas abiertas!',
       fileName: 'culto-ieb-horta.ics',
     },
     schedule: {
-      kicker: 'Programación Semanal',
+      kicker: 'Actividades y Horarios · Noviembre 2026',
       heading: 'Horarios para reunirnos en familia',
       intro:
-        'Cada domingo nos reunimos para estudiar las Escrituras en la Escuela Bíblica Dominical y celebrar juntos en el culto de la mañana. Si es tu primera visita, serás muy bienvenido.',
+        'Desde el 8 de noviembre, nuestros cultos dominicales se celebran en las instalaciones de la Igreja Assembleia de Deus do Faial en horario vespertino, junto con nuestra reunión semanal de los miércoles.',
       filterAria: 'Filtrar programación',
       filters: {
         all: 'Toda la agenda',
         sunday: 'Domingos',
-        week: 'Semana & Familias',
+        week: 'Semana & Alabanza',
       },
       calendarSaved: 'Evento guardado (.ics)',
       calendarSave: 'Guardar culto en el calendario',
       watchYouTube: 'Ver en YouTube',
       confirmVisit: 'Confirmar visita',
       items: {
-        celebracao: {
-          title: 'Culto de Celebración',
-          day: 'Domingos',
-          times: ['11:15'],
-          location: 'Av. Marginal, n.º 17 — Horta',
-          description:
-            'Culto dominical de alabanza, comunión y exposición bíblica. En los meses de verano (julio y agosto), comienza a las 11:00.',
-        },
         ebd: {
           title: 'Escuela Bíblica Dominical (EBD)',
           day: 'Domingos',
-          times: ['10:00', '16:00'],
-          location: 'Adultos, Adolescentes y Niños',
+          times: ['16:00'],
+          location: 'Instalaciones de la Assembleia de Deus do Faial',
           description:
-            'Estudio bíblico por edades a las 10:00 en Av. Marginal, n.º 17, o a las 16:00 en Rua do Pasteleiro, n.º 12-D (Angústias).',
+            'Estudio bíblico comunitario los domingos a las 16:00 con clases para adultos, adolescentes y niños.',
+        },
+        celebracao: {
+          title: 'Culto de Alabanza y Predicación de la Palabra',
+          day: 'Domingos',
+          times: ['17:15'],
+          location: 'Instalaciones de la Assembleia de Deus do Faial',
+          description:
+            'Culto dominical de celebración, alabanza, comunión y exposición de las Escrituras a las 17:15.',
         },
         'oracao-lares': {
-          title: 'Oración, Enseñanza y Grupos Pequeños',
-          day: 'Durante la semana',
-          times: ['Agenda @iebhorta'],
-          location: 'Templo y hogares en Faial',
+          title: 'Culto de Oración y Estudio de la Palabra',
+          day: 'Miércoles',
+          times: ['19:00'],
+          location: 'Reunión semanal de oración',
           description:
-            'Encuentros semanales de oración, lectura de las Escrituras y comunión en los hogares. Confirma los horarios actualizados con nosotros.',
+            'Tiempo de intercesión por las familias, nuestro país y la iglesia perseguida, junto con estudio bíblico.',
         },
         'kids-familia': {
-          title: 'Niños, Padres & Familias',
-          day: 'Domingos y eventos',
-          times: ['Horario familiar'],
-          location: 'EBD Infantil y Parque da Salgueirinha',
+          title: 'Ensayo del Grupo de Alabanza & Familias',
+          day: 'Viernes o Sábados',
+          times: ['A confirmar'],
+          location: 'Equipo de Alabanza · Eventos del Mes',
           description:
-            'Enseñanza bíblica creativa para niños en la EBD, talleres en familia en la ciudad y el tradicional Día de la Familia al aire libre.',
+            'Ensayo semanal del grupo de alabanza (viernes/sábado) y encuentros familiares como nuestra Cena de Acción de Gracias en noviembre.',
         },
+      },
+    },
+    bulletin: {
+      kicker: 'Boletín Mensual · Noviembre 2026',
+      heading: 'Agenda de Noviembre, anuncios y vida de iglesia',
+      intro:
+        'Consulta la agenda oficial de noviembre, el traslado de cultos a las instalaciones de la Assembleia de Deus do Faial, los motivos de oración y el testimonio de gratitud.',
+      downloadPdf: 'Imprimir Boletín',
+      tabsAria: 'Seleccionar sección del Boletín de Noviembre',
+      tabs: {
+        agenda: 'Agenda del Mes',
+        announcements: 'Anuncios & Acciones',
+        prayer: 'Motivos de Oración',
+        gratitude: 'Gratitud & Cumpleaños',
+      },
+      agendaItems: {
+        'nov-01': {
+          weekday: 'Domingo',
+          title: 'Culto con celebración de la Cena y Bautismo',
+          detail:
+            'Culto del primer domingo del mes con celebración de la Cena del Señor y bautismo.',
+        },
+        'nov-07': {
+          weekday: 'Sábado',
+          title: 'Tiempo de oración por la iglesia perseguida',
+          detail:
+            'Encuentro de oración dedicado a interceder por los cristianos y misioneros perseguidos en todo el mundo.',
+        },
+        'nov-08': {
+          weekday: 'Domingo · Nueva Etapa',
+          title: 'Culto con celebración de Misiones Nacionales',
+          detail:
+            'Inicio de los cultos en la Assembleia de Deus do Faial con nuevos horarios: 16:00 EBD y 17:15 Culto de Celebración.',
+        },
+        'nov-15': {
+          weekday: 'Domingo',
+          title: 'Culto de celebración de la Reforma Protestante',
+          detail:
+            'Celebración dominical recordando los principios bíblicos de la Reforma (fecha inicial para pedidos Juntos).',
+        },
+        'nov-22': {
+          weekday: 'Domingo',
+          title: 'Culto de celebración al Señor',
+          detail:
+            'Escuela Bíblica a las 16:00 y Culto a las 17:15. Último día de inscripciones y pago para la Cena de Acción de Gracias.',
+        },
+        'nov-27': {
+          weekday: 'Viernes · 19:30',
+          title: 'Cena de Acción de Gracias',
+          detail:
+            'Convivencia comunitaria en la Assembleia de Deus do Faial (3,00€ por persona + 1 plato por familia).',
+        },
+        'nov-29': {
+          weekday: 'Domingo',
+          title: 'Culto de celebración al Señor',
+          detail:
+            'Cierre del mes de noviembre a las 16:00 (EBD) y 17:15 (Culto de Alabanza y Predicación).',
+        },
+      },
+      activitiesCard: {
+        kicker: 'Actividades y Horarios',
+        heading: 'Ritmo semanal en noviembre',
+        rows: [
+          {
+            day: 'Domingo',
+            time: '16:00',
+            label: 'Escuela Bíblica Dominical',
+          },
+          {
+            day: 'Domingo',
+            time: '17:15',
+            label: 'Culto de Alabanza y Predicación',
+          },
+          {
+            day: 'Miércoles',
+            time: '19:00',
+            label: 'Culto de Oración y Estudio',
+          },
+          {
+            day: 'Vie / Sáb',
+            time: 'Semanal',
+            label: 'Ensayo del grupo de Alabanza',
+          },
+        ],
+        venueNote:
+          'Lugar de los cultos desde el 8 de noviembre: Instalaciones de la Igreja Assembleia de Deus do Faial.',
+        cta: 'Cómo llegar y confirmar visita',
+      },
+      venueAnnouncement: {
+        kicker: 'Anuncio Principal',
+        title: 'Nuevo lugar y horarios desde el 8 de noviembre',
+        body1:
+          'Con alegría compartimos con vosotros que, a partir del 8 de noviembre, nuestros cultos pasan a celebrarse en las instalaciones de la Igreja Assembleia de Deus do Faial.',
+        times: [
+          '16:00 — Escuela Bíblica Dominical',
+          '17:15 — Culto de Celebración',
+        ],
+        body2:
+          'Queremos seguir caminando juntos, unidos en la fe, el amor y la oración, confiando en que Dios guía cada paso según Su voluntad.',
+        cta: 'Ver dirección y contactos',
+      },
+      thanksgivingDinner: {
+        dateShort: '27 de Noviembre · 19:30',
+        title: 'Cena de Acción de Gracias',
+        summary:
+          'Viernes a las 19:30 en la Assembleia de Deus do Faial. 3,00€ por persona + 1 plato por familia.',
+        seeDetails: 'Ver detalles e inscripción',
+        description:
+          'Ven a dar gracias y celebrar en familia nuestra Cena comunitaria de Acción de Gracias en las instalaciones de la Assembleia de Deus do Faial.',
+        details: [
+          { label: 'Fecha y hora', value: '27 nov. · 19:30' },
+          {
+            label: 'Participación',
+            value: '3,00€ por persona + 1 plato por familia',
+          },
+          { label: 'Inscripciones y pago', value: 'Hasta el 22 de noviembre' },
+          { label: 'Lugar', value: 'Assembleia de Deus do Faial' },
+        ],
+        cta: 'Inscribirse por WhatsApp',
+        whatsappMessage:
+          '¡Hola! Me gustaría inscribirme en la Cena de Acción de Gracias de IEB Horta el 27 de noviembre.',
+      },
+      juntosCampaign: {
+        kicker: 'Campaña de Oración',
+        title: 'Kit de Oración & Devocional Juntos Kids',
+        description:
+          'Materiales devocionales de la campaña Juntos para fortalecer la vida de oración en casa con adultos y niños.',
+        tier1Title: 'Pedidos hasta el 15 nov.',
+        tier1Items: 'Kit de Oración: 4€ · Devocional Juntos Kids: 2€',
+        tier2Title: 'Pedidos después del 15 nov.',
+        tier2Items: 'Kit de Oración: 5€ · Devocional Juntos Kids: 2,50€',
+      },
+      celeiro: {
+        kicker: 'Celeiro de Noviembre',
+        title: 'Apoyo a la Cesta de Navidad',
+        description:
+          'Este mes, el ministerio Celeiro cuenta con vuestro apoyo solidario para preparar las Cestas de Navidad mediante donativo monetario.',
+        cta: 'Ver cómo colaborar en Ofrendas & Misión',
+      },
+      prayerIntro:
+        'Acompáñanos en oración durante todo el mes de noviembre por estos motivos reales de nuestra iglesia, las Azores, Portugal y las misiones:',
+      prayerCta: 'Enviar petición de oración',
+      prayerWhatsappMessage:
+        '¡Hola! Me gustaría compartir un motivo de oración con IEB Horta.',
+      prayerRequests: {
+        families:
+          'Por nuestras familias, niños, jóvenes, adultos y nuestras hermanas embarazadas.',
+        'new-decisions':
+          'Por nuestros hermanos que recientemente tomaron su decisión por Jesús y por sus familias.',
+        'jean-lima':
+          'Por nuestro hermano Jean Lima, que tomó la decisión de bautizarse.',
+        'church-future':
+          'Por el futuro de nuestra iglesia y los desafíos de esta nueva etapa.',
+        'sao-jorge':
+          'Por la Hermana Bernadete y familia, por David, Bruna y familia y la misión en la isla de São Jorge.',
+        health:
+          'Por nuestros hermanos enfermos y quienes están en recuperación de salud.',
+        relatives:
+          'Por nuestros familiares, amigos y vecinos que aún no han entregado su vida a Jesús.',
+        country:
+          'Por nuestro país, nuestras autoridades y gobernantes.',
+        persecuted:
+          'Por las iglesias y hermanos misioneros perseguidos por amor a Jesús.',
+        disasters:
+          'Por los países que sufren catástrofes y por las víctimas de estos acontecimientos.',
+        'convention-aba':
+          'Por la dirección de la Convención Bautista Portuguesa, la ABA y más obreros para la iglesia en Portugal.',
+      },
+      gratitude: {
+        kicker: 'Momento de Gratitud',
+        title: 'Testimonio de la familia Miqueias, Lorena y Eva',
+        paragraphs: [
+          'Hay momentos en la vida en que las palabras parecen pequeñas para expresar la grandeza de lo que Dios hace por nosotros. Hoy, como familia, elevamos nuestra gratitud al Señor, reconociendo que en cada etapa Su mano nos sostuvo, Su gracia nos alcanzó y Su fidelidad nunca nos faltó.',
+          'Estamos agradecidos no solo por las bendiciones recibidas, sino por todo lo que Dios ha obrado en nosotros a lo largo del camino — en los días de alegría y en los días de dificultad.',
+          'En este tiempo tan especial, nuestros corazones rebosan de gratitud por la vida de nuestra pequeña Eva, que aún está en el vientre pero ya ocupa un lugar inmenso en nuestras vidas. Antes siquiera de sostenerla en brazos, reconocemos la mano del Creador sobre ella.',
+          'Al Señor entregamos nuestro presente, nuestro futuro y la vida de nuestra hija, confiando en que Jesús es nuestro mayor tesoro.',
+        ],
+        signature: 'Con un corazón profundamente agradecido — Miqueias, Lorena y Eva',
+        verse:
+          '“Grandes cosas ha hecho Jehová con nosotros; estaremos alegres.” — Salmos 126:3',
+      },
+      birthdays: {
+        kicker: 'Cumpleaños del Mes',
+        title: 'Celebramos la vida en noviembre',
+        updateNote:
+          '*Ayúdanos a actualizar nuestra lista de cumpleaños de la iglesia compartiendo tu fecha.',
+        cta: 'Enviar fecha de cumpleaños',
+        whatsappMessage:
+          '¡Hola! Me gustaría añadir o actualizar mi fecha de cumpleaños en la lista de IEB Horta.',
       },
     },
     about: {
@@ -2742,7 +3767,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       sanctuaryAlt:
         'Interior del templo de la IEB Horta en Avenida Marginal con bancos de madera y cruz',
       sanctuaryFallback: 'Templo Av. Marginal, 17',
-      sanctuaryCaption: 'Culto en el templo · Av. Marginal, 17.',
+      sanctuaryCaption: 'Sede oficial · Av. Marginal, n.º 17.',
       kicker: 'Sobre la Iglesia',
       heading: 'Amar a Dios, servir a las personas y vivir el Evangelio en la isla.',
       sealAlt: 'Sello oficial Igreja Evangélica Baptista da Horta',
@@ -2775,7 +3800,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         '03': {
           title: 'Servicio',
           description:
-            'Vivimos el Evangelio más allá de las paredes del templo mediante campañas solidarias, apoyo alimentario y acogida cercana.',
+            'Vivimos el Evangelio más allá de las paredes del templo mediante el proyecto Celeiro, apoyo alimentario y acogida cercana.',
         },
       },
       beliefsIntro:
@@ -2794,7 +3819,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         salvation: {
           title: 'La Salvación por Gracia',
           summary:
-            'La salvación es don gratuito de Dios ofrecido a todos mediante el arrepentimiento y la fe personal en Jesucristo, quien murió en la cruz y resucitó.',
+            'La salvación es don gratuito de Dios ofrecido a todos mediante el arrepentimiento y la fe personal en Jesucristo, muerto en la cruz y resucitado.',
         },
         'local-church': {
           title: 'La Iglesia Local',
@@ -2826,7 +3851,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           name: 'Asociación Bautista Azoreana',
           scope: 'Archipiélago de las Azores',
           description:
-            'Comunión regional entre las iglesias bautistas de las islas de las Azores en asambleas y campamentos.',
+            'Comunión regional entre las iglesias bautistas de las Azores, incluyendo la misión en la isla de São Jorge.',
         },
         aep: {
           name: 'Alianza Evangélica Portuguesa',
@@ -2866,7 +3891,7 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         jovens: {
           title: 'Jóvenes & Adolescentes',
           summary: 'Aulas dedicadas en la EBD, comunión y diálogo bíblico.',
-          schedule: 'Domingos en la EBD · Encuentros semanales',
+          schedule: 'Domingos a las 16:00 (EBD) · Encuentros semanales',
           audience: 'Adolescentes y jóvenes adultos',
           description:
             'Espacio para construir amistades verdaderas, conversar abiertamente sobre la fe y el día a día, y servir juntos en la comunidad.',
@@ -2874,38 +3899,38 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
         },
         casais: {
           title: 'Familias & Mujeres',
-          summary: 'Día de la Familia, talleres y encuentros Plenas em Cristo.',
-          schedule: 'Encuentros periódicos y retiros',
+          summary: 'Día de la Familia, Acción de Gracias y Plenas em Cristo.',
+          schedule: 'Encuentros periódicos y celebraciones',
           audience: 'Familias, matrimonios y mujeres',
           description:
-            'Iniciativas como el Día de la Familia en el Parque da Salgueirinha, talleres con niños y el encuentro femenino Plenas em Cristo.',
+            'Iniciativas como el Día de la Familia en el Parque da Salgueirinha, la Cena de Acción de Gracias y el encuentro femenino Plenas em Cristo.',
           imageAlt:
             'Mujeres reunidas cantando con guitarra durante el encuentro Plenas em Cristo',
         },
         'infantil-ebd': {
           title: 'Escuela Bíblica & Infantil',
           summary: 'Aulas separadas para niños, adolescentes y adultos.',
-          schedule: 'Domingos a las 10:00 y a las 16:00',
+          schedule: 'Domingos a las 16:00',
           audience: 'Todas las edades',
           description:
-            'Enseñanza bíblica adaptada a cada edad — con aulas dedicadas para niños, adolescentes y adultos, además de talleres creativos en familia.',
+            'Enseñanza bíblica adaptada a cada edad — con aulas para niños, adolescentes y adultos, además del Devocional Juntos Kids.',
           imageAlt:
             'Biblia abierta con los horarios de la Escuela Bíblica Dominical de la IEB Horta',
         },
         'acao-social': {
-          title: 'Acción Social',
-          summary: 'Recogida y entrega solidaria de alimentos en Faial.',
-          schedule: 'Campañas continuas de apoyo local',
+          title: 'Acción Social · Celeiro',
+          summary: 'Campaña de Cesta de Navidad y ayuda solidaria en Faial.',
+          schedule: 'Campañas mensuales de apoyo local',
           audience: 'Abierto a todos los voluntarios',
           description:
-            'Movilización de miembros y amigos para recoger alimentos y apoyar a familias necesitadas en la ciudad de Horta.',
+            'A través de Celeiro, movilizamos a miembros y amigos para apoyar a familias en Horta, incluida la Cesta de Navidad en noviembre.',
           imageAlt:
             'Compras solidarias y alimentos recogidos por Acción Social de IEB Horta',
         },
         'batismo-discipulado': {
           title: 'Bautismo & Discipulado',
           summary: 'Primeros pasos en la fe cristiana y acompañamiento pastoral.',
-          schedule: 'Acompañamiento con el Pr. Luiz Eduardo Júnior',
+          schedule: 'Acompañamiento con Pr. Luiz Eduardo Júnior (933 855 290)',
           audience: 'Visitantes y nuevos miembros',
           description:
             'Estudio bíblico cercano para conocer los fundamentos del Evangelio, resolver dudas, prepararse para el bautismo e integrarse en la iglesia.',
@@ -2947,15 +3972,15 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           scripture: '1 Corintios 10:31',
         },
         'post-schedule': {
-          alt: 'Publicación oficial de horarios de @iebhorta: 10:00 Escuela Bíblica Dominical y 11:15 Celebración en Av. Marginal, 17',
-          category: 'Domingos',
-          dateLabel: '10:00 & 11:15',
+          alt: 'Archivo de horarios de @iebhorta sobre la Escuela Bíblica y Culto',
+          category: 'Archivo @iebhorta',
+          dateLabel: 'EBD & Culto',
           caption:
-            'Todos los domingos en Av. Marginal, n.º 17 — Horta: a las 10:00 Escuela Bíblica Dominical y a las 11:15 Culto de Celebración.',
+            'Registro de archivo. Desde el 8 de noviembre de 2026: domingos a las 16:00 EBD y 17:15 Celebración en la Assembleia de Deus do Faial.',
         },
         'post-social': {
           alt: 'Maletero de coche lleno de bolsas de compras y leche recogidas por la acción social de IEB Horta',
-          category: 'Acción Social',
+          category: 'Acción Social · Celeiro',
           dateLabel: 'Servicio',
           caption:
             'Gratitud por cada familia que contribuyó con alimentos y productos básicos para apoyar a hogares en la Isla de Faial.',
@@ -2980,12 +4005,12 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           category: 'Acción de Gracias',
           dateLabel: '1 Ts 5:18',
           caption:
-            'Fin de Semana de Acción de Gracias: “Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús.”',
+            'Acción de Gracias: “Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús.”',
           scripture: '1 Tesalonicenses 5:18',
         },
       },
       archivesIntro:
-        'Contenidos que edifican tu vida espiritual: predicaciones de la Palabra, hitos de los 51 años en Faial y encuentros especiales abiertos a la ciudad.',
+        'Contenidos que edifican tu vida espiritual: predicaciones de la Palabra, Boletín Mensual de Noviembre 2026, celebraciones e hitos en Faial.',
       archivesYouTubeCta: 'Abrir canal en YouTube',
       archivesItems: {
         'archive-palavra': {
@@ -2993,78 +4018,78 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
           dateLabel: '1 Corintios 10:31',
           title: 'Momento de la Palabra · Pr. Luiz Eduardo Júnior',
           summary:
-            'Exposición fiel de las Escrituras para aplicar el Evangelio en la familia y la vida cotidiana. Sigue los cultos en el templo y en nuestro YouTube.',
+            'Exposición fiel de las Escrituras para aplicar el Evangelio en la familia y la vida cotidiana. Sigue los cultos en persona y en YouTube.',
           actionLabel: 'Ver en YouTube',
           imageAlt: 'Pr. Luiz Eduardo Júnior predicando en el templo de la IEB Horta',
         },
         'archive-51anos': {
-          category: 'Hito Histórico',
-          dateLabel: '51 Años · Romanos 5:8',
-          title: '51.º Aniversario — Sostenidos por el Amor de Dios',
+          category: 'Boletín Mensual',
+          dateLabel: 'Noviembre 2026 · 51 Años',
+          title: 'Boletín de Noviembre — 51 Años & Nueva Etapa',
           summary:
-            'Más de medio siglo de testimonio evangélico bautista en Horta, reuniendo a generaciones en gratitud por la fidelidad de Dios.',
-          actionLabel: 'Ver en @iebhorta',
+            'Agenda completa de noviembre, lista de oración, testimonio de gratitud y traslado de los cultos dominicales a la Assembleia de Deus do Faial.',
+          actionLabel: 'Ver Agenda de Noviembre',
           imageAlt: 'Cartel del 51.º aniversario de la IEB Horta',
         },
+        'archive-gracas': {
+          category: 'Evento de Noviembre',
+          dateLabel: '27 nov. · 19:30',
+          title: 'Cena Comunitaria de Acción de Gracias',
+          summary:
+            'Encuentro fraterno en la Assembleia de Deus do Faial (3,00€ por persona + 1 plato por familia). Inscripciones hasta el 22 de noviembre.',
+          actionLabel: 'Confirmar asistencia',
+          imageAlt: 'Publicación de Acción de Gracias de IEB Horta',
+        },
         'archive-familia': {
-          category: 'Evento Comunitario',
+          category: 'Vida Comunitaria',
           dateLabel: 'Parque da Salgueirinha',
           title: 'Día de la Familia al aire libre en Feteira',
           summary:
-            'Encuentro anual con culto al aire libre, almuerzo comunitario y convivencia para miembros, niños y amigos visitantes en la isla.',
-          actionLabel: 'Confirmar asistencia',
+            'Recuerdo de nuestro encuentro anual con culto al aire libre, almuerzo comunitario y convivencia para miembros, niños y visitantes.',
+          actionLabel: 'Explorar en @iebhorta',
           imageAlt: 'Cartel oficial del Día de la Familia en el Parque da Salgueirinha',
-        },
-        'archive-gracas': {
-          category: 'Celebración Especial',
-          dateLabel: '1 Tesalonicenses 5:18',
-          title: 'Fin de Semana de Acción de Gracias en las Azores',
-          summary:
-            'Momentos dedicados a alabar a Dios en unidad, compartir testimonios y agradecer por las bendiciones recibidas durante el año.',
-          actionLabel: 'Explorar en Instagram',
-          imageAlt: 'Publicación de Fin de Semana de Acción de Gracias de IEB Horta',
         },
       },
       giving: {
-        kicker: 'Generosidad & Sostén',
-        heading: 'Contribuye a la misión y la acción local en Faial',
+        kicker: 'Generosidad & Celeiro',
+        heading: 'Contribuye a la misión y a la Cesta de Navidad en Faial',
         paragraph1:
           'La Igreja Evangélica Baptista da Horta sostiene su labor espiritual y social únicamente mediante las ofrendas y diezmos voluntarios de sus miembros y amigos.',
         paragraph2:
-          'Cada aporte respalda el mantenimiento de los espacios de culto y EBD, la enseñanza bíblica para niños y jóvenes, la misión y las campañas solidarias de alimentos en Faial.',
+          'En noviembre, el ministerio Celeiro agradece también tu donativo monetario para preparar la Cesta de Navidad destinada a las familias atendidas.',
         pillars: [
           {
-            title: 'Enseñanza & Culto Público',
-            text: 'Sostén de las aulas de Escuela Bíblica Dominical, acogida de visitantes y predicación bíblica.',
+            title: 'Celeiro · Cesta de Navidad',
+            text: 'Donativos monetarios durante noviembre para preparar las Cestas de Navidad solidarias en Faial.',
           },
           {
-            title: 'Acción Social Local',
-            text: 'Recogida continua de alimentos y apoyo directo a hogares necesitados en la Isla de Faial.',
+            title: 'Enseñanza & Culto Público',
+            text: 'Sostén de los cultos dominicales (16:00 EBD y 17:15 Celebración), acogida y enseñanza bíblica.',
           },
           {
             title: 'Misión en las Azores',
-            text: 'Cooperación con la Asociación Bautista Azoreana y proyectos locales de discipulado.',
+            text: 'Cooperación con la Asociación Bautista Azoreana y la misión en la isla de São Jorge.',
           },
         ],
         ctaWhatsApp: 'Solicitar datos por WhatsApp',
         ctaEmail: 'Contactar por correo',
         whatsappMessage:
-          '¡Hola! Me gustaría recibir información sobre cómo contribuir con ofrendas para la Igreja Evangélica Baptista da Horta.',
-        mailSubject: 'Información sobre Ofrendas y Donativos — IEB Horta',
+          '¡Hola! Me gustaría recibir información sobre cómo ofrendar en IEB Horta o apoyar la Cesta de Navidad de Celeiro.',
+        mailSubject: 'Información sobre Ofrendas y Celeiro — IEB Horta',
       },
     },
     visit: {
       kicker: 'Contactos & Primera Visita',
       heading: 'Planifica tu primera visita',
       intro:
-        'Será una alegría recibirte en persona en Horta. Consulta nuestros espacios y avísanos qué día planeas venir para esperarte.',
+        'Será una alegría recibirte en persona en Horta. Desde el 8 de noviembre nos reunimos en las instalaciones de la Igreja Assembleia de Deus do Faial (manteniendo Av. Marginal, n.º 17 como sede oficial).',
       spaceTabsAria: 'Seleccionar espacio de la iglesia',
       copyAddress: 'Copiar dirección',
       copiedAddress: 'Dirección copiada',
       visitorNotes: [
-        'Ubicación céntrica frente a la bahía de Horta en Av. Marginal, n.º 17.',
-        'Ven tal como estás — nuestro ambiente es acogedor y familiar.',
-        'Aulas de Escuela Bíblica Dominical para adultos, adolescentes y niños.',
+        'Cultos desde el 08/11 en las instalaciones de la Igreja Assembleia de Deus do Faial.',
+        'Domingos a las 16:00 (Escuela Bíblica) y 17:15 (Culto de Celebración).',
+        'Miércoles a las 19:00 — Culto de Oración y Estudio de la Palabra.',
       ],
       googleMaps: 'Google Maps',
       openWaze: 'Abrir en Waze',
@@ -3075,13 +4100,13 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       namePlaceholder: 'Ej.: María Clara',
       phoneLabel: 'WhatsApp / Teléfono',
       phonePlaceholder: '+351 9XX XXX XXX',
-      dayQuestion: '¿Qué día planeas visitarnos?',
-      dayAria: 'Día previsto para la visita',
+      dayQuestion: '¿A qué encuentro planeas visitarnos?',
+      dayAria: 'Encuentro previsto para la visita',
       dayOptions: [
-        'Domingo · 10:00 (Escuela Bíblica)',
-        'Domingo · 11:15 (Culto de Celebración)',
-        'Domingo · 16:00 (EBD, R. do Pasteleiro)',
-        'Confirmar horarios de la semana',
+        'Domingo · 16:00 (Escuela Bíblica)',
+        'Domingo · 17:15 (Culto de Celebración)',
+        'Miércoles · 19:00 (Oración y Estudio)',
+        '27 nov. · 19:30 (Cena Acción de Gracias)',
       ],
       groupQuestion: '¿Cuántas personas vienen?',
       groupAria: 'Cantidad de visitantes',
@@ -3109,17 +4134,17 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       summaryNotePrefix: 'Nota:',
       contactLabel: 'Contacto:',
       locations: {
-        templo: {
-          label: 'Templo Principal',
-          title: 'Culto de Celebración & EBD (10:00)',
-          region: 'Matriz · Isla de Faial, Azores, Portugal',
-          note: 'Frente a la bahía de Horta, con fácil acceso y cálida bienvenida.',
-        },
         ebd: {
-          label: 'Aulas EBD (16:00)',
-          title: 'Escuela Bíblica Dominical (Domingo 16:00)',
-          region: '9900 Horta · Isla de Faial, Azores',
-          note: 'Espacio temporal con aulas separadas para Adultos, Adolescentes y Niños.',
+          label: 'Lugar de Cultos',
+          title: 'Cultos Dominicales & Oración (desde 08/11)',
+          region: 'Horta · Isla de Faial, Azores',
+          note: 'Dónde nos reunimos ahora: domingos 16:00 (EBD) y 17:15 (Culto), miércoles 19:00.',
+        },
+        templo: {
+          label: 'Sede Oficial',
+          title: 'Igreja Evangélica Baptista da Horta (Sede)',
+          region: '9900-121 Horta · Isla de Faial, Azores, Portugal',
+          note: 'Dirección oficial y postal de la iglesia en Avenida Marginal, n.º 17.',
         },
       },
     },
@@ -3132,9 +4157,9 @@ export const TRANSLATIONS: Record<LanguageCode, SiteTranslations> = {
       instagramLabel: 'Instagram @iebhorta',
       facebookLabel: 'Facebook IEB Horta',
       youtubeLabel: 'YouTube IEB Horta',
-      whatsappLabel: 'WhatsApp de la Iglesia',
+      whatsappLabel: 'WhatsApp Pastorado (933 855 290)',
       rightsReserved: 'Todos los derechos reservados.',
-      sundayLine: 'Domingos · 10:00 Escuela Bíblica · 11:15 Celebración',
+      sundayLine: 'Domingos · 16:00 Escuela Bíblica · 17:15 Celebración',
     },
     mobileBar: {
       ariaLabel: 'Acciones rápidas de navegación y contacto',

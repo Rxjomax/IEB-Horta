@@ -7,6 +7,7 @@ import {
   MapPin,
   MessageCircle,
   Navigation,
+  Phone,
   RotateCcw,
 } from 'lucide-react';
 import { CHURCH_INFO, CHURCH_LOCATIONS } from '../data/churchConfig';
@@ -24,7 +25,7 @@ export function VisitLocationSection({
 }: VisitLocationSectionProps) {
   const { t } = useLanguage();
   const [activeLocationId, setActiveLocationId] = useState<'templo' | 'ebd'>(
-    'templo'
+    'ebd'
   );
   const [copiedAddress, setCopiedAddress] = useState(false);
 
@@ -163,7 +164,7 @@ export function VisitLocationSection({
                         role="tab"
                         aria-selected={selected}
                         onClick={() => setActiveLocationId(loc.id)}
-                        className={`min-h-[42px] truncate rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
+                        className={`min-h-[44px] truncate rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
                           selected
                             ? 'bg-white text-[#195963] shadow-xs'
                             : 'text-[#46585E] hover:text-[#172226]'
@@ -196,11 +197,11 @@ export function VisitLocationSection({
                       {localizedLocation.note}
                     </p>
 
-                    <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <div className="mt-3 flex flex-wrap items-center gap-2.5">
                       <button
                         type="button"
                         onClick={handleCopyAddress}
-                        className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-[#DDD7CE] bg-[#FAF8F4] px-3 py-1.5 text-xs font-semibold text-[#172226] transition-colors hover:border-[#195963]"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#DDD7CE] bg-[#FAF8F4] px-3 py-2 text-xs font-semibold text-[#172226] transition-colors hover:border-[#195963]"
                       >
                         {copiedAddress ? (
                           <>
@@ -219,11 +220,29 @@ export function VisitLocationSection({
                       </button>
 
                       <a
+                        href={`tel:+${CHURCH_INFO.whatsappNumber}`}
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-2 text-xs font-semibold tabular-nums text-[#195963] underline-offset-2 hover:underline"
+                      >
+                        <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>
+                          {CHURCH_INFO.pastor} · {CHURCH_INFO.pastorPhoneDisplay}
+                        </span>
+                      </a>
+
+                      <a
                         href={`mailto:${CHURCH_INFO.email}`}
-                        className="inline-flex min-h-[38px] items-center gap-1.5 text-xs font-semibold text-[#195963] underline-offset-2 hover:underline"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-semibold text-[#195963] underline-offset-2 hover:underline"
                       >
                         <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>{CHURCH_INFO.email}</span>
+                      </a>
+
+                      <a
+                        href={`mailto:${CHURCH_INFO.pastorEmail}`}
+                        className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-xs font-medium text-[#46585E] underline-offset-2 hover:text-[#195963] hover:underline"
+                      >
+                        <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>{CHURCH_INFO.pastorEmail}</span>
                       </a>
                     </div>
                   </div>
@@ -425,7 +444,7 @@ export function VisitLocationSection({
                       <button
                         type="button"
                         onClick={onClearMinistry}
-                        className="min-h-[36px] shrink-0 text-xs font-semibold text-[#46585E] underline hover:text-[#172226]"
+                        className="min-h-[44px] shrink-0 text-xs font-semibold text-[#46585E] underline hover:text-[#172226]"
                       >
                         {t.visit.removeInterest}
                       </button>

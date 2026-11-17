@@ -9,15 +9,24 @@ import {
 import { MinistriesSection } from './components/MinistriesSection';
 import { MobileQuickBar } from './components/MobileQuickBar';
 import { Navbar } from './components/Navbar';
+import {
+  NovemberBulletinSection,
+  type BulletinTabId,
+} from './components/NovemberBulletinSection';
 import { ScheduleSection } from './components/ScheduleSection';
 import { VisitLocationSection } from './components/VisitLocationSection';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 
 function AppContent() {
   const [selectedMinistryId, setSelectedMinistryId] = useState('');
+  const [bulletinTab, setBulletinTab] = useState<BulletinTabId>('agenda');
   const [aboutTab, setAboutTab] = useState<AboutTabId>('historia');
   const [communityTab, setCommunityTab] = useState<CommunityTabId>('fotos');
   const { t } = useLanguage();
+
+  const handleNavigateToBulletinTab = (tab: BulletinTabId) => {
+    setBulletinTab(tab);
+  };
 
   const handleNavigateToAboutTab = (tab: AboutTabId) => {
     setAboutTab(tab);
@@ -37,6 +46,7 @@ function AppContent() {
       </a>
 
       <Navbar
+        onSelectBulletinTab={handleNavigateToBulletinTab}
         onSelectAboutTab={handleNavigateToAboutTab}
         onSelectCommunityTab={handleNavigateToCommunityTab}
       />
@@ -44,11 +54,17 @@ function AppContent() {
       <main id="conteudo-principal">
         <Hero onSelectAboutTab={handleNavigateToAboutTab} />
         <ScheduleSection />
+        <NovemberBulletinSection
+          activeTab={bulletinTab}
+          onTabChange={setBulletinTab}
+          onSelectCommunityTab={handleNavigateToCommunityTab}
+        />
         <AboutSection activeTab={aboutTab} onTabChange={setAboutTab} />
         <MinistriesSection onSelectMinistry={setSelectedMinistryId} />
         <InstagramGallery
           activeTab={communityTab}
           onTabChange={setCommunityTab}
+          onSelectBulletinTab={handleNavigateToBulletinTab}
         />
         <VisitLocationSection
           selectedMinistryId={selectedMinistryId}
@@ -57,6 +73,7 @@ function AppContent() {
       </main>
 
       <Footer
+        onSelectBulletinTab={handleNavigateToBulletinTab}
         onSelectAboutTab={handleNavigateToAboutTab}
         onSelectCommunityTab={handleNavigateToCommunityTab}
       />

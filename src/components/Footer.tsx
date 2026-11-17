@@ -4,19 +4,23 @@ import {
   Instagram,
   Mail,
   MessageCircle,
+  Phone,
   Youtube,
 } from 'lucide-react';
 import { CHURCH_INFO, COOPERATION_PARTNERS } from '../data/churchConfig';
 import { useLanguage } from '../i18n/LanguageContext';
 import type { AboutTabId } from './AboutSection';
 import type { CommunityTabId } from './InstagramGallery';
+import type { BulletinTabId } from './NovemberBulletinSection';
 
 interface FooterProps {
+  onSelectBulletinTab: (tab: BulletinTabId) => void;
   onSelectAboutTab: (tab: AboutTabId) => void;
   onSelectCommunityTab: (tab: CommunityTabId) => void;
 }
 
 export function Footer({
+  onSelectBulletinTab,
   onSelectAboutTab,
   onSelectCommunityTab,
 }: FooterProps) {
@@ -32,6 +36,11 @@ export function Footer({
     onClick?: () => void;
   }> = [
     { label: t.nav.links.schedule, href: '#horarios' },
+    {
+      label: t.nav.links.novemberAgenda,
+      href: '#agenda-novembro',
+      onClick: () => onSelectBulletinTab('agenda'),
+    },
     {
       label: t.nav.subLinks.churchHistory,
       href: '#essencia',
@@ -76,22 +85,41 @@ export function Footer({
             <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-[#46585E]">
               {t.footer.summary}
             </p>
-            <div className="mt-4 space-y-1 text-sm">
+            <div className="mt-4 space-y-1.5 text-sm">
               <p className="font-medium text-[#195963]">
-                {CHURCH_INFO.address} · {t.visit.locations.templo.region}
+                {t.visit.locations.ebd.label}: {CHURCH_INFO.worshipVenueName}
               </p>
               <p className="text-[#46585E]">
-                {t.visit.locations.ebd.title} — Rua do Pasteleiro, n.º 12-D
+                {t.visit.locations.templo.label}: {CHURCH_INFO.address} ·{' '}
+                {t.visit.locations.templo.region}
               </p>
               <p className="pt-1">
                 <a
+                  href={`tel:+${CHURCH_INFO.whatsappNumber}`}
+                  className="inline-flex min-h-[44px] items-center gap-1.5 font-medium tabular-nums text-[#172226] hover:text-[#195963] hover:underline"
+                >
+                  <Phone className="h-3.5 w-3.5 text-[#195963]" aria-hidden="true" />
+                  <span>
+                    {CHURCH_INFO.pastor} · {CHURCH_INFO.pastorPhoneDisplay}
+                  </span>
+                </a>
+              </p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                <a
                   href={`mailto:${CHURCH_INFO.email}`}
-                  className="inline-flex items-center gap-1.5 font-medium text-[#172226] hover:text-[#195963] hover:underline"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 font-medium text-[#172226] hover:text-[#195963] hover:underline"
                 >
                   <Mail className="h-3.5 w-3.5 text-[#195963]" aria-hidden="true" />
                   <span>{CHURCH_INFO.email}</span>
                 </a>
-              </p>
+                <a
+                  href={`mailto:${CHURCH_INFO.pastorEmail}`}
+                  className="inline-flex min-h-[44px] items-center gap-1.5 font-medium text-[#46585E] hover:text-[#195963] hover:underline"
+                >
+                  <Mail className="h-3.5 w-3.5 text-[#195963]" aria-hidden="true" />
+                  <span>{CHURCH_INFO.pastorEmail}</span>
+                </a>
+              </div>
             </div>
           </div>
 

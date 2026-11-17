@@ -232,7 +232,7 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
                 aria-hidden="true"
               />
               <span>
-                {CHURCH_INFO.address} · {t.hero.doorsOpenNote}
+                {CHURCH_INFO.worshipVenueName} · {t.hero.doorsOpenNote}
               </span>
             </div>
 
@@ -262,7 +262,10 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
         {/* Faixa Operacional Discreta */}
         <div className="mt-6 border-t border-white/20 pt-5">
           <div className="flex flex-col gap-2 text-sm text-[#FAF8F4]/90 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
-            <p className="font-medium text-white">{CHURCH_INFO.address}</p>
+            <p className="font-medium text-white">
+              {CHURCH_INFO.worshipVenueName} · {t.visit.locations.templo.label}:{' '}
+              {CHURCH_INFO.address}
+            </p>
             <span aria-hidden="true" className="hidden text-white/40 sm:inline">
               /
             </span>
@@ -271,8 +274,8 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
               <span className="font-semibold tabular-nums text-white">
                 {languageOption.intlLocale.startsWith('pt') ||
                 languageOption.intlLocale.startsWith('fr')
-                  ? '16h00'
-                  : '16:00'}
+                  ? '19h00'
+                  : '19:00'}
               </span>{' '}
               {t.hero.ebdStripTextAfter}
             </p>
@@ -280,7 +283,11 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
               /
             </span>
             <p>
-              {t.hero.pastorLabel} {CHURCH_INFO.pastor}
+              {t.hero.pastorLabel} {CHURCH_INFO.pastor} (
+              <span className="tabular-nums">
+                {CHURCH_INFO.pastorPhoneDisplay}
+              </span>
+              )
             </p>
           </div>
         </div>

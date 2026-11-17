@@ -15,10 +15,10 @@ export function getNextSundayDate(referenceDate = new Date()): Date {
   const dayOfWeek = date.getDay(); // 0 = Domingo
   const daysToAdd = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
   date.setDate(date.getDate() + daysToAdd);
-  date.setHours(11, 15, 0, 0);
+  date.setHours(17, 15, 0, 0);
 
-  // Se for domingo e já passou das 12h30, aponta para o próximo domingo
-  if (dayOfWeek === 0 && referenceDate.getHours() >= 13) {
+  // Se for domingo e já passou das 19h00, aponta para o próximo domingo
+  if (dayOfWeek === 0 && referenceDate.getHours() >= 19) {
     date.setDate(date.getDate() + 7);
   }
 
@@ -28,19 +28,11 @@ export function getNextSundayDate(referenceDate = new Date()): Date {
 export function getNextSundayInfo(intlLocale = 'pt-PT'): NextSundayInfo {
   const now = new Date();
   const nextSunday = getNextSundayDate(now);
-  const month = nextSunday.getMonth(); // 0-indexed (6 = Julho, 7 = Agosto)
-  const isSummerSchedule = month === 6 || month === 7;
   const usesHNotation =
     intlLocale.startsWith('pt') || intlLocale.startsWith('fr');
 
-  const celebrationTime = isSummerSchedule
-    ? usesHNotation
-      ? '11h00'
-      : '11:00'
-    : usesHNotation
-      ? '11h15'
-      : '11:15';
-  const ebdTime = usesHNotation ? '10h00' : '10:00';
+  const celebrationTime = usesHNotation ? '17h15' : '17:15';
+  const ebdTime = usesHNotation ? '16h00' : '16:00';
 
   const isToday =
     now.getFullYear() === nextSunday.getFullYear() &&
@@ -61,7 +53,7 @@ export function getNextSundayInfo(intlLocale = 'pt-PT'): NextSundayInfo {
     isToday,
     celebrationTime,
     ebdTime,
-    isSummerSchedule,
+    isSummerSchedule: false,
   };
 }
 
@@ -87,7 +79,7 @@ const DEFAULT_ICS_TEXTS: CalendarIcsTexts = {
   prodId: '-//IEB Horta//Agenda Dominical//PT',
   summary: 'Culto de Celebração — IEB Horta',
   description:
-    'Escola Bíblica Dominical às 10h00 e Culto de Celebração na Igreja Evangélica Baptista da Horta. Portas abertas!',
+    'Escola Bíblica Dominical às 16h00 e Culto de Celebração às 17h15 nas instalações da Assembleia de Deus do Faial (Horta). Portas abertas!',
   fileName: 'culto-ieb-horta.ics',
 };
 
@@ -97,13 +89,8 @@ const DEFAULT_ICS_TEXTS: CalendarIcsTexts = {
 export function downloadSundayWorshipIcs(
   icsTexts: CalendarIcsTexts = DEFAULT_ICS_TEXTS
 ): void {
-  const info = getNextSundayInfo();
   const start = getNextSundayDate();
-  if (info.isSummerSchedule) {
-    start.setHours(11, 0, 0, 0);
-  } else {
-    start.setHours(11, 15, 0, 0);
-  }
+  start.setHours(17, 15, 0, 0);
 
   const end = new Date(start.getTime() + 90 * 60 * 1000);
   const dtStamp = formatIcsLocalDate(new Date());
@@ -120,7 +107,7 @@ export function downloadSundayWorshipIcs(
     `DTEND:${formatIcsLocalDate(end)}`,
     `SUMMARY:${icsTexts.summary}`,
     `DESCRIPTION:${icsTexts.description}`,
-    'LOCATION:Av. Marginal\\, n.º 17\\, 9900-114 Horta\\, Açores\\, Portugal',
+    'LOCATION:Instalações da Igreja Assembleia de Deus do Faial\\, Horta\\, Açores\\, Portugal',
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');

@@ -91,7 +91,7 @@ export function ScheduleSection() {
                       type="button"
                       onClick={() => setFilter(tab.id)}
                       aria-pressed={active}
-                      className={`min-h-[40px] whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
+                      className={`min-h-[44px] whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors sm:text-sm ${
                         active
                           ? 'bg-white text-[#195963] shadow-xs'
                           : 'text-[#46585E] hover:text-[#172226]'

@@ -12,9 +12,11 @@ import { useLanguage } from '../i18n/LanguageContext';
 import type { AboutTabId } from './AboutSection';
 import type { CommunityTabId } from './InstagramGallery';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import type { BulletinTabId } from './NovemberBulletinSection';
 
 const NAV_IDS = [
   'horarios',
+  'agenda-novembro',
   'essencia',
   'ministerios',
   'comunidade',
@@ -22,18 +24,20 @@ const NAV_IDS = [
 ] as const;
 
 interface NavbarProps {
+  onSelectBulletinTab: (tab: BulletinTabId) => void;
   onSelectAboutTab: (tab: AboutTabId) => void;
   onSelectCommunityTab: (tab: CommunityTabId) => void;
 }
 
 export function Navbar({
+  onSelectBulletinTab,
   onSelectAboutTab,
   onSelectCommunityTab,
 }: NavbarProps) {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<
-    null | 'essencia' | 'comunidade'
+    null | 'agenda-novembro' | 'essencia' | 'comunidade'
   >(null);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -41,10 +45,22 @@ export function Navbar({
 
   const navLinks = [
     { id: 'horarios', label: t.nav.links.schedule, href: '#horarios' },
+    {
+      id: 'agenda-novembro',
+      label: t.nav.links.novemberAgenda,
+      href: '#agenda-novembro',
+    },
     { id: 'essencia', label: t.nav.links.essence, href: '#essencia' },
     { id: 'ministerios', label: t.nav.links.ministries, href: '#ministerios' },
     { id: 'comunidade', label: t.nav.links.community, href: '#comunidade' },
     { id: 'visita', label: t.nav.links.visit, href: '#visita' },
+  ];
+
+  const bulletinSubLinks: Array<{ label: string; tab: BulletinTabId }> = [
+    { label: t.nav.subLinks.novemberAgenda, tab: 'agenda' },
+    { label: t.nav.subLinks.novemberAnnouncements, tab: 'anuncios' },
+    { label: t.nav.subLinks.novemberPrayer, tab: 'oracao' },
+    { label: t.nav.subLinks.novemberGratitude, tab: 'gratidao' },
   ];
 
   const aboutSubLinks: Array<{ label: string; tab: AboutTabId }> = [
@@ -135,7 +151,7 @@ export function Navbar({
             : 'border-b border-[#DDD7CE]/80 bg-[#FAF8F4]'
         }`}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-8 lg:px-8">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6 md:h-[4.25rem] lg:gap-4 lg:px-8 xl:gap-8">
           {/* Zona 1: Marca Oficial */}
           <a
             href="#inicio"
@@ -152,12 +168,14 @@ export function Navbar({
           {/* Zona 2: Links de Navegação Desktop com Sub-abas Dropdown (inspiração IEBC) */}
           <nav
             aria-label={t.nav.ariaMain}
-            className="hidden items-center gap-5 lg:flex xl:gap-6"
+            className="hidden items-center gap-3.5 lg:flex xl:gap-5"
           >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               const hasSubmenu =
-                link.id === 'essencia' || link.id === 'comunidade';
+                link.id === 'agenda-novembro' ||
+                link.id === 'essencia' ||
+                link.id === 'comunidade';
 
               if (!hasSubmenu) {
                 return (
@@ -182,7 +200,9 @@ export function Navbar({
                   key={link.href}
                   className="relative"
                   onMouseEnter={() =>
-                    setOpenDropdown(link.id as 'essencia' | 'comunidade')
+                    setOpenDropdown(
+                      link.id as 'agenda-novembro' | 'essencia' | 'comunidade'
+                    )
                   }
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
@@ -193,7 +213,10 @@ export function Navbar({
                       setOpenDropdown((prev) =>
                         prev === link.id
                           ? null
-                          : (link.id as 'essencia' | 'comunidade')
+                          : (link.id as
+                              | 'agenda-novembro'
+                              | 'essencia'
+                              | 'comunidade')
                       )
                     }
                     className={`relative inline-flex shrink-0 items-center gap-1 whitespace-nowrap py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#195963] focus-visible:ring-offset-2 ${
@@ -212,8 +235,22 @@ export function Navbar({
                   </button>
 
                   {isDropdownOpen && (
-                    <div className="absolute left-0 top-full z-50 w-56 pt-1">
+                    <div className="absolute left-0 top-full z-50 w-60 pt-1">
                       <div className="overflow-hidden rounded-xl border border-[#DDD7CE] bg-white py-1.5 shadow-lg">
+                        {link.id === 'agenda-novembro' &&
+                          bulletinSubLinks.map((sub) => (
+                            <a
+                              key={sub.tab}
+                              href="#agenda-novembro"
+                              onClick={() => {
+                                onSelectBulletinTab(sub.tab);
+                                setOpenDropdown(null);
+                              }}
+                              className="flex min-h-[44px] items-center whitespace-nowrap px-4 py-2 text-sm font-medium text-[#172226] transition-colors hover:bg-[#FAF8F4] hover:text-[#195963]"
+                            >
+                              {sub.label}
+                            </a>
+                          ))}
                         {link.id === 'essencia' &&
                           aboutSubLinks.map((sub) => (
                             <a
@@ -336,6 +373,24 @@ export function Navbar({
                     0{index + 1}
                   </span>
                 </a>
+
+                {link.id === 'agenda-novembro' && (
+                  <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 pl-1">
+                    {bulletinSubLinks.map((sub) => (
+                      <a
+                        key={sub.tab}
+                        href="#agenda-novembro"
+                        onClick={() => {
+                          onSelectBulletinTab(sub.tab);
+                          handleNavClick();
+                        }}
+                        className="inline-flex min-h-[44px] items-center text-sm font-medium text-[#195963] underline-offset-4 hover:underline"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
 
                 {link.id === 'essencia' && (
                   <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 pl-1">
