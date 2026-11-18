@@ -46,8 +46,12 @@ export function MinistriesSection({
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-              {t.ministries.kicker}
+            <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+              <span
+                aria-hidden="true"
+                className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+              />
+              <span>{t.ministries.kicker}</span>
             </p>
             <h2
               id="ministerios-heading"
@@ -112,7 +116,7 @@ export function MinistriesSection({
 
           <div
             role="tabpanel"
-            className="col-span-7 flex flex-col overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white"
+            className="col-span-7 flex flex-col overflow-hidden rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#143A61] bg-white shadow-xs"
           >
             {!activeHasFailed && (
               <div className="aspect-[16/9] w-full overflow-hidden border-b border-[#D6DEE6] bg-[#EEF2F6]">

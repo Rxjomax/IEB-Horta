@@ -130,8 +130,12 @@ export function VisitLocationSection({
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-            {t.visit.kicker}
+          <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+            <span
+              aria-hidden="true"
+              className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+            />
+            <span>{t.visit.kicker}</span>
           </p>
           <h2
             id="visita-heading"
@@ -147,7 +151,7 @@ export function VisitLocationSection({
         <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
           {/* Coluna Esquerda: Seletor de Localização e Rotas */}
           <Reveal className="lg:col-span-5">
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#143A61] bg-white p-6 shadow-xs sm:p-8">
               <div>
                 {/* Seletor entre Templo Principal e Salas da EBD 16h */}
                 <div
@@ -294,7 +298,7 @@ export function VisitLocationSection({
 
           {/* Coluna Direita: Formulário de Visita Completo com Múltiplos Canais */}
           <Reveal delayMs={80} className="lg:col-span-7">
-            <div className="rounded-2xl border border-[#D6DEE6] bg-white p-6 sm:p-8">
+            <div className="rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#8F5B18] bg-white p-6 shadow-xs sm:p-8">
               {!submitted ? (
                 <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   <div>

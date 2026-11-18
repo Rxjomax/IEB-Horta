@@ -37,15 +37,21 @@ export function AboutSection({ activeTab, onTabChange }: AboutSectionProps) {
         {/* Cabeçalho da Secção + Abas Inspiradas em Sobre (A Igreja / Cremos / Cooperação) */}
         <Reveal>
           <div className="flex flex-col gap-6 border-b border-[#D6DEE6] pb-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="flex items-start gap-4">
-              <img
-                src={CHURCH_INFO.logos.circularSeal}
-                alt={t.about.sealAlt}
-                className="hidden h-16 w-16 shrink-0 object-contain mix-blend-multiply sm:block"
-              />
+            <div className="flex items-center gap-4 sm:gap-5">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#D6DEE6] bg-[#F8FAFC] p-1.5 shadow-xs sm:h-20 sm:w-20">
+                <img
+                  src={CHURCH_INFO.logos.circularSeal}
+                  alt={t.about.sealAlt}
+                  className="h-full w-full object-contain mix-blend-multiply"
+                />
+              </div>
               <div>
-                <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-                  {t.about.kicker}
+                <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+                  />
+                  <span>{t.about.kicker}</span>
                 </p>
                 <h2
                   id="essencia-heading"
@@ -142,11 +148,11 @@ export function AboutSection({ activeTab, onTabChange }: AboutSectionProps) {
                 </div>
 
                 {/* Citação Editorial dos 51 Anos */}
-                <blockquote className="mt-6 border-y border-[#D6DEE6] py-5">
+                <blockquote className="mt-7 rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#8F5B18]/75 bg-[#F8FAFC] px-6 py-5">
                   <p className="font-display text-lg font-medium italic leading-relaxed text-[#0F1E2E] sm:text-xl">
                     {t.about.quote}
                   </p>
-                  <footer className="mt-2 text-xs font-semibold tracking-wide text-[#47596B]">
+                  <footer className="mt-2.5 text-xs font-semibold tracking-wide text-[#143A61]">
                     {t.about.quoteFooter}
                   </footer>
                 </blockquote>
@@ -170,7 +176,7 @@ export function AboutSection({ activeTab, onTabChange }: AboutSectionProps) {
                   return (
                     <div
                       key={pillar.number}
-                      className="w-[82vw] max-w-[320px] shrink-0 snap-start border-t border-[#143A61]/30 pt-5 md:w-auto md:max-w-none"
+                      className="w-[82vw] max-w-[320px] shrink-0 snap-start border-t-2 border-[#143A61]/25 pt-5 transition-colors hover:border-[#8F5B18] md:w-auto md:max-w-none"
                     >
                       <span className="font-display text-sm font-semibold tabular-nums text-[#8F5B18]">
                         {pillar.number}

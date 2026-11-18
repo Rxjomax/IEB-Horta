@@ -97,12 +97,16 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
         <div className="my-auto grid grid-cols-1 items-end gap-8 py-4 lg:grid-cols-12 lg:gap-10">
           {/* Bloco Editorial Principal com Navegação de Destaques */}
           <div className="lg:col-span-7 xl:col-span-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#E2B86B] sm:text-sm">
-              {CHURCH_INFO.fullName}
+            <p className="inline-flex flex-wrap items-center gap-y-1 text-xs font-semibold uppercase tracking-widest text-[#E2B86B] sm:text-sm">
+              <span
+                aria-hidden="true"
+                className="mr-2.5 inline-block h-[1.5px] w-7 bg-[#E2B86B]"
+              />
+              <span>{CHURCH_INFO.fullName}</span>
               <span aria-hidden="true" className="mx-2 text-white/35">
                 ·
               </span>
-              <span className="text-[#F8FAFC]/90 normal-case tracking-normal font-medium">
+              <span className="font-medium normal-case tracking-normal text-[#F8FAFC]/90">
                 {slideText.kicker}
               </span>
             </p>
@@ -194,20 +198,30 @@ export function Hero({ onSelectAboutTab }: HeroProps) {
             </div>
           </div>
 
-          {/* Cartão Editorial do Próximo Culto Dominical */}
+          {/* Cartão Editorial do Próximo Culto Dominical com Selo Oficial Dourado */}
           <aside
             aria-label={t.hero.nextSundayAria}
-            className="rounded-2xl border border-white/15 bg-[#091B30]/92 p-5 backdrop-blur-sm sm:p-6 lg:col-span-5 xl:col-span-4"
+            className="rounded-2xl border border-white/15 border-t-2 border-t-[#E2B86B]/80 bg-[#091B30]/94 p-5 shadow-xl backdrop-blur-sm sm:p-6 lg:col-span-5 xl:col-span-4"
           >
-            <p className="text-xs font-semibold tracking-wide text-[#E2B86B]">
-              {nextSunday.isToday
-                ? t.hero.thisSundayToday
-                : t.hero.nextSundayLabel}
-              <span aria-hidden="true" className="mx-1.5 text-white/35">
-                ·
-              </span>
-              <span className="text-white/90">{nextSunday.formattedDate}</span>
-            </p>
+            <div className="flex items-center gap-3.5">
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full border border-[#E2B86B]/50 bg-[#0C263D] p-0.5 shadow-xs">
+                <img
+                  src={CHURCH_INFO.logos.darkGoldSeal}
+                  alt={t.about.sealAlt}
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#E2B86B]">
+                  {nextSunday.isToday
+                    ? t.hero.thisSundayToday
+                    : t.hero.nextSundayLabel}
+                </p>
+                <p className="mt-0.5 font-display text-base font-semibold text-white">
+                  {nextSunday.formattedDate}
+                </p>
+              </div>
+            </div>
 
             <div className="mt-4 divide-y divide-white/15 border-y border-white/15">
               <div className="flex items-baseline justify-between gap-4 py-3">

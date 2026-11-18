@@ -90,10 +90,11 @@ export const CHURCH_INFO = {
   wazeUrl:
     'https://waze.com/ul?q=Assembleia%20de%20Deus%20do%20Faial%20Horta%20Acores&navigate=yes',
 
-  // Logos oficiais enviadas pela igreja
+  // Logos oficiais da igreja (versões coloridas Atlântico & Bronze)
   logos: {
-    horizontal: '/assets/aistudio/image_af8255b7.png',
-    circularSeal: '/assets/aistudio/image_818a1ea6.png',
+    horizontal: '/assets/logos/logo_horizontal_colored.png',
+    circularSeal: '/assets/logos/logo_seal_colored.png',
+    darkGoldSeal: '/assets/logos/logo_seal_dark_gold.png',
   },
 
   // Imagens reais do @iebhorta + imagem widescreen de capa

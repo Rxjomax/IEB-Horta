@@ -164,7 +164,7 @@ export function Navbar({
             <img
               src={CHURCH_INFO.logos.horizontal}
               alt={CHURCH_INFO.fullName}
-              className="h-6 w-auto object-contain mix-blend-multiply sm:h-9"
+              className="h-7 w-auto object-contain mix-blend-multiply sm:h-10"
             />
           </a>
 
@@ -356,7 +356,7 @@ export function Navbar({
             <img
               src={CHURCH_INFO.logos.horizontal}
               alt={CHURCH_INFO.fullName}
-              className="h-8 w-auto object-contain mix-blend-multiply"
+              className="h-9 w-auto object-contain mix-blend-multiply"
             />
           </a>
           <button
@@ -464,11 +464,13 @@ export function Navbar({
 
           <div className="mt-8 space-y-4 border-t border-[#D6DEE6] pt-6">
             <div className="flex items-center gap-4">
-              <img
-                src={CHURCH_INFO.logos.circularSeal}
-                alt={t.about.sealAlt}
-                className="h-14 w-14 shrink-0 object-contain mix-blend-multiply"
-              />
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#D6DEE6] bg-white p-1 shadow-xs">
+                <img
+                  src={CHURCH_INFO.logos.circularSeal}
+                  alt={t.about.sealAlt}
+                  className="h-full w-full object-contain mix-blend-multiply"
+                />
+              </div>
               <div>
                 <p className="font-display text-sm font-semibold text-[#143A61]">
                   {CHURCH_INFO.fullName}

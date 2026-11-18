@@ -27,7 +27,7 @@ export function PrintableBulletinContent({
           <img
             src={CHURCH_INFO.logos.circularSeal}
             alt={t.about.sealAlt}
-            className="h-14 w-14 shrink-0 object-contain"
+            className="h-16 w-16 shrink-0 object-contain"
           />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-[#8F5B18]">

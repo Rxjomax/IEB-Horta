@@ -102,8 +102,14 @@ export function InstagramGallery({
         <Reveal>
           <div className="flex flex-col gap-6 border-b border-[#D6DEE6] pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-                {t.gallery.kickerPrefix} · {CHURCH_INFO.handle}
+              <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+                />
+                <span>
+                  {t.gallery.kickerPrefix} · {CHURCH_INFO.handle}
+                </span>
               </p>
               <h2
                 id="comunidade-heading"
@@ -370,7 +376,7 @@ export function InstagramGallery({
         {/* ABA 3: OFERTAS & MISSÃO (INSPIRADO EM DONATIVOS DA IEBC) */}
         {activeTab === 'ofertas' && (
           <div role="tabpanel" className="pt-8">
-            <div className="grid grid-cols-1 gap-8 rounded-2xl border border-[#D6DEE6] bg-[#F8FAFC] p-6 sm:p-8 lg:grid-cols-12 lg:p-10">
+            <div className="grid grid-cols-1 gap-8 rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#143A61] bg-[#F8FAFC] p-6 shadow-xs sm:p-8 lg:grid-cols-12 lg:p-10">
               <div className="lg:col-span-6">
                 <div className="flex items-center gap-2 text-sm font-semibold text-[#8F5B18]">
                   <HeartHandshake className="h-4 w-4" aria-hidden="true" />

@@ -60,8 +60,12 @@ export function ScheduleSection() {
           {/* Coluna Esquerda: Contexto, Filtros e Ações */}
           <Reveal className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-                {t.schedule.kicker}
+              <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+                />
+                <span>{t.schedule.kicker}</span>
               </p>
               <h2
                 id="horarios-heading"
@@ -153,16 +157,16 @@ export function ScheduleSection() {
 
           {/* Coluna Direita: Lista Editorial Estruturada */}
           <div className="lg:col-span-7">
-            <div className="divide-y divide-[#D6DEE6] overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white">
+            <div className="divide-y divide-[#D6DEE6] overflow-hidden rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#143A61] bg-white shadow-xs">
               {visibleItems.map((item) => {
                 const localized = t.schedule.items[item.id];
                 return (
                   <article
                     key={item.id}
-                    className="flex flex-col gap-4 p-5 transition-colors hover:bg-[#F8FAFC]/60 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
+                    className="group flex flex-col gap-4 p-5 transition-colors hover:bg-[#F8FAFC]/80 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-7"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6DEE6] bg-[#F8FAFC]">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6DEE6] bg-[#F8FAFC] transition-colors group-hover:border-[#143A61]/40 group-hover:bg-white">
                         {renderScheduleIcon(item.icon)}
                       </div>
                       <div className="min-w-0">

@@ -74,8 +74,12 @@ export function NovemberBulletinSection({
         <Reveal>
           <div className="flex flex-col gap-6 border-b border-[#D6DEE6] pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold tracking-wide text-[#8F5B18]">
-                {t.bulletin.kicker}
+              <p className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-wide text-[#8F5B18]">
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-[1.5px] w-6 bg-[#8F5B18]"
+                />
+                <span>{t.bulletin.kicker}</span>
               </p>
               <h2
                 id="agenda-novembro-heading"
@@ -139,7 +143,7 @@ export function NovemberBulletinSection({
             className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12"
           >
             {/* Lista Cronológica de Novembro */}
-            <div className="overflow-hidden rounded-2xl border border-[#D6DEE6] bg-white lg:col-span-7">
+            <div className="overflow-hidden rounded-2xl border border-[#D6DEE6] border-t-2 border-t-[#143A61] bg-white shadow-xs lg:col-span-7">
               <div className="divide-y divide-[#D6DEE6]">
                 {NOVEMBER_AGENDA.map((item) => {
                   const localized = t.bulletin.agendaItems[item.id];
@@ -230,21 +234,33 @@ export function NovemberBulletinSection({
                 </a>
               </div>
 
-              <div className="rounded-2xl border border-[#143A61] bg-[#0E2A47] p-6 text-white sm:p-7">
-                <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#E2B86B]">
-                  <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{t.bulletin.thanksgivingDinner.dateShort}</span>
+              <div className="rounded-2xl border border-[#1E456B] border-t-2 border-t-[#E2B86B] bg-gradient-to-br from-[#091B30] via-[#0E2A47] to-[#143A61] p-6 text-white shadow-sm sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#E2B86B]">
+                      <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span>{t.bulletin.thanksgivingDinner.dateShort}</span>
+                    </div>
+                    <h3 className="mt-2 font-display text-2xl font-semibold text-white">
+                      {t.bulletin.thanksgivingDinner.title}
+                    </h3>
+                  </div>
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-[#E2B86B]/45 bg-[#0C263D] p-0.5">
+                    <img
+                      src={CHURCH_INFO.logos.darkGoldSeal}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  </div>
                 </div>
-                <h3 className="mt-2 font-display text-2xl font-semibold text-white">
-                  {t.bulletin.thanksgivingDinner.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#F8FAFC]/90">
+                <p className="mt-2.5 text-sm leading-relaxed text-[#F8FAFC]/90">
                   {t.bulletin.thanksgivingDinner.summary}
                 </p>
                 <button
                   type="button"
                   onClick={() => onTabChange('anuncios')}
-                  className="mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#8F5B18] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#734710] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#E2B86B] px-5 py-2.5 text-sm font-semibold text-[#091B30] transition-colors hover:bg-[#D3A653] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <span>{t.bulletin.thanksgivingDinner.seeDetails}</span>
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
